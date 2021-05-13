@@ -1,6 +1,7 @@
 import os
 import environ
-
+import sys
+import dj_database_url
 import environ
 
 env = environ.Env(
@@ -17,8 +18,6 @@ SECRET_KEY = env('SECRET_KEY')
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -79,18 +78,31 @@ WSGI_APPLICATION = 'webshop.wsgi.application'
 
 
 # Database
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': env("DB_NAME"),
+#     	'USER':	env("DB_USER"),
+#     	'PASSWORD': env("DB_PASSWORD"),
+#     	'HOST': env('DB_HOST'),
+#     	'PORT': env('DB_PORT'),
+#     }
+# }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': env("DB_NAME"),
-	'USER':	env("DB_USER"),
-	'PASSWORD': env("DB_PASSWORD"),
-	'HOST': env('DB_HOST'),
-	'PORT': env('DB_PORT'),
+if os.getenv("DEVELOPMENT_MODE", "False") == "True":
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+        }
     }
-}
-
+elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
+    if os.getenv("DATABASE_URL", None) is None:
+        raise Exception("DATABASE_URL environment variable not defined")
+    DATABASES = {
+        "default": dj_database_url.parse(os.environ.get("DATABASE_URL")),
+    }
 
 # Password validation
 
@@ -128,10 +140,9 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-STATIC_ROOT = 'static_root'
-# MEDIA_URL = '/media/'
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static_style')]
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "media_root"
+STATIC_ROOT = "static_root"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Authenticate the allauth backage for login and signup with db
 
