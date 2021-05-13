@@ -14,11 +14,10 @@ if READ_DOT_ENV_FILE:
     env_var = os.environ
 
 DEBUG = env('DEBUG')
-SECRET_KEY = env_var['SECRET_KEY']
+SECRET_KEY = env('SECRET_KEY')
 
 ALLOWED_HOSTS = []
 
-EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # Application definition
 
 INSTALLED_APPS = [
@@ -145,15 +144,15 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-# EMAIL_REQUIRED = True
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = "tmren613@gmail.com"
-# EMAIL_HOST_PASSWORD = "django607"
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
+EMAIL_REQUIRED = True
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = "smtp.gmail.com"
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = "tmren613@gmail.com"
+EMAIL_HOST_PASSWORD = "django607"
+EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
