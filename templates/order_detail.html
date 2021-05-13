@@ -1,0 +1,33 @@
+{% extends "base.html" %} 
+{% block content %}
+{% load filter_tags %}
+    <main class="pt-5">
+        <div class="container p-5" style="position: absolute; background-color: white; border-radius: 16px; left: 15%;">
+            <div class="row pt-5">
+                <div class="col-sm">
+                    <div><h1><span class="badge bg-dark">New Order</span></h1></div>
+                    <div><h4><span class="badge bg-dark">Name  </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.name}}</h4></div>
+                    <div><h4><span class="badge bg-dark">Order Date  </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.create}}</h4></div>
+                    <div><h4><span class="badge bg-dark">Delivery Time  </span>&nbsp; {{ object.delivery}}</h4></div>
+                    <div><h4><span class="badge bg-dark">Address  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ object.address}}</h4></div>
+                    <div><h4><span class="badge bg-dark">Phone  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.phone}}</span></h4></div>
+                    <div><h4><span class="badge bg-dark">Email  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.email}}</span></h4></div>
+                </div>
+                <div class="col-sm">
+                    <div><h1><span class="badge bg-danger">Order Descriptions</span></h1></div>
+
+                    {% with object.order|split:"-" as items %}
+                    {% for item in items %}
+                    <div class="card">
+                        <div class="card-body">
+                            <h4>{{ item }}</h4>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+    </main>
+
+{% endblock content %}

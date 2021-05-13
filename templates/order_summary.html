@@ -1,0 +1,91 @@
+{% extends "base.html" %} {% block content %}
+<main class="pt-5">
+  <div class="container w-50 mt-5 py-5" style="position: absolute; background-color: white; border-radius: 16px; left: 25%;">
+    <div class="table text-nowrap pt-5">
+      <h2>Ostoskori</h2>
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col" class="h6">Tuote</th>
+            <td></td>
+            <th scope="col" class="h6">Hinta</th>
+            <th scope="col" class="h6">Määrä</th>
+            <th scope="col" class="h6"></th>
+            <th scope="col" class="h6" class="px-4">Tuotteen kokonaishinta</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for order_product in object.products.all %}
+          <tr>
+            <td class="h6">{{ order_product.product.name }}</td>
+            <td></td>
+            <td class="h6">{{ order_product.price }}&nbsp;&euro;</td>
+            <td>
+              <a
+                href="{% url 'main:remove-single-item-from-cart' order_product.product.slug order_product.price %}"
+                ><i class="fas fa-minus mr-2"></i
+              ></a>
+              &nbsp;  
+
+              <span class="h6">{{ order_product.quantity }}</span> &nbsp;
+
+              &nbsp;
+              <a href="{% url 'main:add-to-cart' order_product.product.slug order_product.price %}"
+                ><i class="fas fa-plus"></i
+              ></a>
+              <td></td>
+              <td class="pl-5 h5">
+                {{ order_product.get_final_price }} &nbsp;&euro;
+              </td>
+            </td>
+              <td>
+              <a
+                style="color: red"
+                href="{% url 'main:remove-from-cart' order_product.product.slug %}"
+              >
+                <i class="fas fa-trash float-right"></i>
+              </a>
+            </td>
+          </tr>
+          {% empty %}
+          <tr>
+            <td colspan="5">Your cart is empty</td>
+          </tr>
+          <tr>
+            <!-- will redirect the client to the home page  -->
+            <td colspan="5">
+              <a class="btn btn-primary float-left" href="/"
+                >Jatka ostoksia</a
+              >
+            </td>
+          </tr>
+
+          {% endfor %}
+          <!-- It's a condition,  if there is a product, the client can proceed to checkout   -->
+          {% if object.get_total %}
+          <tr>
+            <td colspan="5" class="h5 pt-4"><b>Yhteensä</b></td>
+
+            <td colspan="5" class="px-5">
+              <div><h2><span class="badge bg-dark px-3">{{ object.get_total }}&nbsp;&euro;</span></h2></div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="6">
+              <a class="btn btn-warning float-right ml-2" href="/checkout/"
+                >Maksamaan</a
+              >
+              <a class="btn btn-primary float-right" href="/"
+                >Jatka ostoksia</a
+              >
+            </td>
+          </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+</main>
+{% endblock content %}

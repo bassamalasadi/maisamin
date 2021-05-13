@@ -1,0 +1,74 @@
+{% extends "base.html" %} {% block content %}
+{% load static %}
+<main role="main">
+    <div class="">
+      <img class="bgimg"
+       src="https://imagesvc.meredithcorp.io/v3/mm/image?url=https%3A%2F%2Fimg1.cookinglight.timeinc.net%2Fsites%2Fdefault%2Ffiles%2Fstyles%2Fmedium_2x%2Fpublic%2F1542062283%2Fchocolate-and-cream-layer-cake-1812-cover.jpg%3Fitok%3DrEWL7AIN" alt="">
+      <h1 class="maintext">MAISAMIN <br /> &nbsp;&nbsp; <span style="position: relative;left: 40%; top: 10%;"> HERKKU </span>
+      </h1>
+    </div>
+    <br />
+    <div class="container marketing">
+      <div class="row d-flex justify-content-center">
+        
+        <div class="col-lg-4">
+          <img src="{% static 'img/logo.png' %}" alt="Untitled" style="position: relative; width: 100%; opacity: 0.7;">
+          <br />
+          <img class="pb-2 mt-3" src="{% static 'img/divider.png' %}" alt="Generic placeholder image" width="190" height="20">
+          <br />
+          <br />
+          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
+        </div>
+        
+      </div>
+    </div>
+    
+        <!-- START THE FEATURETTES -->
+
+        <hr class="featurette-divider">
+
+        <div class="container">
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
+              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            <div class="col-md-5">
+              <img class="featurette-image img-fluid mx-auto" src="{% static 'img/cake2.png' %}" alt="Generic placeholder image">
+            </div>
+          </div>
+  
+          <hr class="featurette-divider">
+  
+          <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+              <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
+              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+              <img class="featurette-image img-fluid mx-auto" src="{% static 'img/cake4.png' %}" alt="Generic placeholder image">
+            </div>
+          </div>
+  
+          <hr class="featurette-divider">
+  
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
+              <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+            </div>
+            <div class="col-md-5">
+              <img class="featurette-image img-fluid mx-auto" src="{% static 'img/cake3.png' %}" alt="Generic placeholder image">
+            </div>
+          </div>
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        {% include "footer.html" %}
+
+
+</main>
+
+{% endblock content %}

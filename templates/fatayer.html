@@ -1,0 +1,82 @@
+{% extends "base.html" %} {% block content %}
+{% load static %}
+<main>
+  <br />
+  <br />
+  <br />
+  <div class="">
+    <img class="prodimg" src="{% static 'img/cake6.png' %}" alt="" width="1090" height="220">
+
+    </h1>
+  </div>
+  <div class="container pt-1 mt-1">
+    <section class="text-center mt-1">
+      <div class="row wow fadeIn">
+        {% for item in object_list %}
+        {% if item.category == 'pastry' %}
+        <div class="row">
+          <div class="column">
+            <a href="{{ item.get_absolute_url }}">
+            <div class="imgcard">
+              <img src="{{ item.image1.url }}" class="mainimg" />
+              <div class="overlay">
+                <div class="imgtext">
+                  <div class="h3">{{ item.name }}</div>
+                  <p></p>
+                  <div class="h4 pt-5">€ {{ item.price }}</div>
+                </div>
+              </div>
+            </div>
+          </a>
+          </div>
+        </div>  
+        {%  endif %}
+        {% endfor %}
+      </div>
+    </section>
+
+    <!--Handling multiple pages-->
+    {% if is_paginated %}
+    <nav class="d-flex justify-content-center wow fadeIn">
+      <ul class="pagination pg-blue">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.previous_page_number }}"
+            aria-label="Previous"
+          >
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Edellinen</span>
+          </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.number }}"
+            >{{ page_obj.number }}
+            <span class="sr-only">(Nykyinen)</span>
+          </a>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.next_page_number }}"
+            aria-label="Next"
+          >
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Seuraava</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+  <br>
+  {% include "footer.html" %}
+</main>
+
+{% endblock content %}

@@ -1,0 +1,40 @@
+{% extends "account/base.html" %} {% load i18n %} {% load crispy_forms_tags %}
+{% block content %}
+{% load static %}
+<main>
+  <div class="container pt-5">
+    <section class="pt-5">
+      <div class="row wow fadeIn pt-5">
+        <div class="col-lg ">
+          <img src="{% static 'img/Untitled.png' %}" alt="Untitled" style="position: relative; width: 150%;">
+        </div>
+        <div class="col-6 offset-3 bg-white p-5 rounded">
+          <h1>Kirjaudu sisään</h1>
+          <p>
+            Ole hyvä ja luo käyttäjätili, jos sinulla ei vielä ole sellaista. 
+          </p>
+
+          <form class="login" method="POST">
+            {% csrf_token %} 
+
+            {{ form|crispy }}
+            
+            {% if redirect_field_value %}
+            <input
+              type="hidden"
+              name="{{ redirect_field_name }}"
+              value="{{ redirect_field_value }}"
+            />
+            {% endif %}
+            <button class="btn btn-primary" type="submit">
+              Kirjaudu sisään
+            </button>
+          </form>
+          <a class="btn btn-default float-right text-white" href="{% url 'account_reset_password' %}"> Unohtuiko salasana?</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+{% endblock %}

@@ -1,0 +1,61 @@
+{% load cart_template_tags %}
+{% load static %}
+{% load static i18n %}
+<!-- Navbar -->
+<nav class="navbar fixed-top navbar-expand-md bg-muted navbar-light" style="background-color: rgb(253, 253, 253);" >
+
+
+  <a class="logo" href="{% url 'main:home' %}">
+    <img src="{% static 'img/brand.png' %}" alt="Untitled" style="position: relative; width: 80%;">
+  </a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav1"
+    aria-controls="basicExampleNav1" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="basicExampleNav1">
+
+  <ol class="navbar-nav">
+    <li class="nav-item pl-2 mb-1 mb-md-0"><a class="btn  btn-md btn-rounded waves-effect waves-ligh h2 disabled" href="{% url 'main:home' %}">Etusivu</a></li>
+    <li class="nav-item pl-2 mb-1 mb-md-0"><a class="btn  btn-md btn-rounded waves-effect waves-ligh h2 disabled" href="{% url 'main:cake' %}">Kakut</a></li>
+    <li class="nav-item pl-2 mb-1 mb-md-0"><a class="btn  btn-md btn-rounded waves-effect waves-ligh h2 disabled" href="{% url 'main:cheesecake' %}">Juustokakut</a></li>
+    <li class="nav-item pl-2 mb-1 mb-md-0"><a class="btn  btn-md btn-rounded waves-effect waves-ligh h2 disabled" href="{% url 'main:fatayer' %}">Fatayer</a></li>
+    <li class="nav-item pl-2 mb-1 mb-md-0"><a class="btn  btn-md btn-rounded waves-effect waves-ligh h2 disabled" href="{% url 'main:manakish' %}">Manakish</a></li>
+    <li class="nav-item pl-2 mb-1 mb-md-0"><a class="btn  btn-md btn-rounded waves-effect waves-ligh h2 disabled" href="{% url 'main:meze' %}">Alkuruoat ja salaatit</a></li>
+  </ol>
+    <ul class="navbar-nav ml-auto">
+      {% if user.is_authenticated %}
+      {% if user|cart_item_count > 0 %}
+        <li class="nav-item pl-2 mb-1 mb-md-0">
+            <a href="{% url 'main:order-summary' %}"  class="btn  btn-md btn-rounded waves-effect waves-light">
+              <span class="badge badge-pill red">{{ user|cart_item_count }}</span> &nbsp;
+              <i class="fas fa-shopping-cart pl-2"></i>
+            </a>
+          </li>
+        {% endif %}
+        <li class="nav-item pl-2 mb-1 mb-md-0">
+          <a href="{% url 'account_logout' %}" class="btn  btn-md btn-rounded waves-effect waves-light">
+            Kirjautua ulos
+          </a>
+        </li>
+        {% if user.is_superuser %}
+        <li class="nav-item pl-2 mb-1 mb-md-0">
+            <a href="{% url 'main:client-order' %}" class="btn  btn-md btn-rounded waves-effect waves-light">
+              Admin
+            </a>
+          </li>
+        {% endif %}
+      {% else %}
+          <li class="nav-item pl-2 mb-1 mb-md-0">
+            <a href="{% url 'account_login' %}"
+            class="btn  btn-md btn-rounded waves-effect waves-ligh disabled"> Kirjaudu sisään </a>
+          </li>
+          <li class="nav-item pl-2 mb-1 mb-md-0">
+            <a href="{% url 'account_signup' %}" type="button"
+            class="btn  btn-md btn-rounded waves-effect waves-light disabled">Kirjaudu</a>
+          </li>
+      {% endif %}
+    </ul>
+  </div>
+</nav>

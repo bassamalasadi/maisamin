@@ -1,0 +1,19 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+
+<main role="main" class="container pt-5 mt-5">
+  <div class="jumbotron">
+    <h1>Thank You</h1>
+    <p class="lead">You will be redirect to main page after 5 seconds in meanwhile you will get a email with delivery time and order discrption.</p>
+    <a class="btn btn-lg btn-primary" href="{% url 'main:home' %}" role="button">Home Page &raquo;</a>
+  </div>
+  <script>
+    function redirect(){
+      window.location.href = "{% url 'main:home' %}";
+    }
+
+    setTimeout(redirect, 5000);
+  </script>
+</main>
+
+{% endblock content %} 

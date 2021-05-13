@@ -1,0 +1,59 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+<main class="pt-5">
+  <div class="container wow fadeIn pt-5">
+    <div class="row pt-5">
+      <div class="col-md-8 mb-4 px-5 pt-5">
+        <div class="card">
+          <h2 class="my-2 h2 text-center my-5">Laskutustiedot</h2>
+          <hr>
+          <form method="POST" class="card-body">
+            {% csrf_token %}
+
+            {% for error in form.non_field_errors %}
+               <p class="help is-danger">{{  error }}</p>
+            {% endfor %}
+
+            {{ form.firstName | as_crispy_field }}
+            {{ form.lastName | as_crispy_field }}
+            {{ form.city | as_crispy_field }}
+            {{ form.street_address | as_crispy_field }}
+            {{ form.apartment_address | as_crispy_field }}
+            {{ form.postal | as_crispy_field }}
+            {{ form.email | as_crispy_field }}
+            {{ form.phone | as_crispy_field }}
+            {{ form.date | as_crispy_field }}
+            <p>Toimitamme</p>
+            <select name="delivery" id="delivery" class="browser-default custom-select">
+              <option value="0" id="0">Nouto</option>
+              <option value="1" id="1">Jämsä / Jämsänkoski / Kaipola / Himos  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Free shipping</option>
+              <option value="5.99" id="2">Halli / Koskenpää / Länkipohja / Korpilahti &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.99 &euro;</option>
+              <option value="9.99" id="3">Muurame / Jyväskylä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9.99 &euro;</option>
+            </select>
+            <hr />
+            <h3>Maksuvaihtoehdot</h3>
+
+            <div class="d-block my-3">
+              {% for value, name in form.fields.payment_option.choices %}
+              <div class="custom-control custom-radio">
+                <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+              </div>
+              {% endfor %}
+            </div>
+            <button class="btn btn-primary btn-lg btn-block" type="submit">
+              Lähetä Tilaus 
+            </button>
+          </form>
+        </div>
+      </div>
+      
+      <div class="col-md-4">
+        {% include "order_snippet.html" %}
+      </div>
+    </div>
+  </div>
+  <br>
+  {% include "footer.html" %}
+</main>
+{% endblock content %}
