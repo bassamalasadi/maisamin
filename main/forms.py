@@ -1,6 +1,5 @@
 from django import forms
 import datetime
-from localflavor.fi.forms import FISocialSecurityNumber, FIZipCodeField, FIMunicipalitySelect
 CITIES = (
     ('Jämsä', 'Jämsä'),
     ('Jämsänkoski', 'Jämsänkoski'),
