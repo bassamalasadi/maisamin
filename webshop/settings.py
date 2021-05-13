@@ -1,8 +1,7 @@
 import os
 import environ
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-
+import environ
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -11,10 +10,13 @@ env = environ.Env(
 READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
 if READ_DOT_ENV_FILE:
     environ.Env.read_env()
-    env_var = os.environ
 
 DEBUG = env('DEBUG')
 SECRET_KEY = env('SECRET_KEY')
+
+
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 
 ALLOWED_HOSTS = []
 
