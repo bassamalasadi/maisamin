@@ -36,4 +36,4 @@ Then go to:
 ```http://127.0.0.1:8000```
 or go as an admin to:
 ```http://127.0.0.1:8000/admin/```.
-The username `bassam` and password `badboy999` to login in Django administration
+The username `` and password `` to login in Django administration
