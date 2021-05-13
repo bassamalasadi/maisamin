@@ -13,7 +13,7 @@ if READ_DOT_ENV_FILE:
     environ.Env.read_env()
 
 DEBUG = env('DEBUG')
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
 
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
