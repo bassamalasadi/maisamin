@@ -136,9 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 
 # if DEBUG:
-LANGUAGE_CODE = 'en-us'
+#LANGUAGE_CODE = 'en-us'
 # else:
-#LANGUAGE_CODE = 'fi'
+LANGUAGE_CODE = 'fi'
 
 TIME_ZONE = 'UTC'
 
@@ -153,7 +153,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = "media_root"
-STATIC_ROOT = "static_root"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Authenticate the allauth backage for login and signup with db
 
