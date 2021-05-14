@@ -3,6 +3,7 @@ import environ
 import sys
 import dj_database_url
 import environ
+from django.core.management.utils import get_random_secret_key
 
 env = environ.Env(
     DEBUG=(bool, False)
@@ -12,9 +13,13 @@ READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
 if READ_DOT_ENV_FILE:
     environ.Env.read_env()
 
-DEBUG = env('DEBUG')
-SECRET_KEY = env('SECRET_KEY')
+# DEBUG = env('DEBUG')
+DEBUG = os.getenv("DEBUG", "False") == "True"
 
+# SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -81,8 +86,8 @@ WSGI_APPLICATION = 'webshop.wsgi.application'
 #
 # DATABASES = {
 #     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': env("DB_NAME"),
+#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#       'NAME': env("DB_NAME"),
 #     	'USER':	env("DB_USER"),
 #     	'PASSWORD': env("DB_PASSWORD"),
 #     	'HOST': env('DB_HOST'),
@@ -142,7 +147,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = "media_root"
-STATIC_ROOT = "static_root"
+# STATIC_ROOT = "static_root"
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Authenticate the allauth backage for login and signup with db
 
