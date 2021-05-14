@@ -17,7 +17,8 @@ if READ_DOT_ENV_FILE:
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
 # SECRET_KEY = env('SECRET_KEY')
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+#SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
+SECRET_KEY = 'd-etct4e1haf1o5ec@aaqy_b*m5bjr8!!sd3ekws5lq9b2vmzr'
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
@@ -95,11 +96,16 @@ WSGI_APPLICATION = 'webshop.wsgi.application'
 #     }
 # }
 
-if os.getenv("DEVELOPMENT_MODE", "False") == "True":
+# if os.getenv("DEVELOPMENT_MODE", "True") == "True":
+if True:
     DATABASES = {
         "default": {
-            "ENGINE": "django.db.backends.sqlite3",
-            "NAME": os.path.join(BASE_DIR, "db.sqlite3"),
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': env("DB_NAME"),
+        	'USER':	env("DB_USER"),
+        	'PASSWORD': env("DB_PASSWORD"),
+        	'HOST': env('DB_HOST'),
+        	'PORT': env('DB_PORT'),
         }
     }
 elif len(sys.argv) > 0 and sys.argv[1] != 'collectstatic':
@@ -147,7 +153,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = "media_root"
-STATIC_ROOT = "staticfiles"
+STATIC_ROOT = "static_root"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Authenticate the allauth backage for login and signup with db
 
