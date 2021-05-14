@@ -5,30 +5,30 @@ import dj_database_url
 import environ
 from django.core.management.utils import get_random_secret_key
 
-env = environ.Env(
-    DEBUG=(bool, False)
-)
-
-READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
-if READ_DOT_ENV_FILE:
-    environ.Env.read_env()
-
-# DEBUG = env('DEBUG')
-DEBUG = os.getenv("DEBUG", "False") == "True"
-
-# SECRET_KEY = env('SECRET_KEY')
-#SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", get_random_secret_key())
-SECRET_KEY = 'd-etct4e1haf1o5ec@aaqy_b*m5bjr8!!sd3ekws5lq9b2vmzr'
-
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# env = environ.Env(
+#     DEBUG=(bool, False)
+# )
+#
+# READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
+# if READ_DOT_ENV_FILE:
+#     environ.Env.read_env()
+#     env_var = os.environ
+#DEBUG = env('DEBUG')
+DEBUG = os.getenv("DEBUG", "False") == "True"
+
+#SECRET_KEY = env_var['SECRET_KEY']
+#SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
+
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 # Application definition
 
 INSTALLED_APPS = [
-    'whitenoise.runserver_nostatic',
     'main',
     'django.contrib.auth',
     'django.contrib.admin',
@@ -96,8 +96,8 @@ WSGI_APPLICATION = 'webshop.wsgi.application'
 #     }
 # }
 
-# if os.getenv("DEVELOPMENT_MODE", "True") == "True":
-if True:
+if os.getenv("DEVELOPMENT_MODE", "False") == "True":
+# if True:
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -135,10 +135,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 
-if DEBUG:
-    LANGUAGE_CODE = 'en-us'
-else:
-    LANGUAGE_CODE = 'fi'
+# if DEBUG:
+LANGUAGE_CODE = 'en-us'
+# else:
+#LANGUAGE_CODE = 'fi'
 
 TIME_ZONE = 'UTC'
 
