@@ -8,14 +8,14 @@ from django.core.management.utils import get_random_secret_key
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-# env = environ.Env(
-#     DEBUG=(bool, False)
-# )
-#
-# READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
-# if READ_DOT_ENV_FILE:
-#     environ.Env.read_env()
-#     env_var = os.environ
+env = environ.Env(
+    DEBUG=(bool, False)
+)
+
+READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
+if READ_DOT_ENV_FILE:
+    environ.Env.read_env()
+    env_var = os.environ
 #DEBUG = env('DEBUG')
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
@@ -23,7 +23,7 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 #SECRET_KEY = env('SECRET_KEY')
 SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost,maisamin-54jjw.ondigitalocean.app").split(",")
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 
 # Application definition
@@ -136,9 +136,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 
 # if DEBUG:
-#LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'en-us'
 # else:
-LANGUAGE_CODE = 'fi'
+#LANGUAGE_CODE = 'fi'
 
 TIME_ZONE = 'UTC'
 
@@ -148,11 +148,10 @@ USE_L10N = True
 
 USE_TZ = True
 
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000"]
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
-MEDIA_URL = '/media/'
-MEDIA_ROOT = "media_root"
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
 STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -168,37 +167,30 @@ ACCOUNT_EMAIL_REQUIRED = True
 
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
-# EMAIL_REQUIRED = True
-# EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-# EMAIL_HOST = "smtp.gmail.com"
-# EMAIL_USE_TLS = True
-# EMAIL_PORT = 587
-# EMAIL_HOST_USER = "tmren613@gmail.com"
-# EMAIL_HOST_PASSWORD = "django607"
-# EMAIL_USE_TLS = True
-# EMAIL_USE_SSL = False
+EMAIL_REQUIRED = True
 
-# if not DEBUG:
-#     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-#     SECURE_SSL_REDIRECT = True
-#     SESSION_COOKIE_SECURE = True
-#     CSRF_COOKIE_SECURE = True
-#     SECURE_BROWSER_XSS_FILTER = True
-#     SECURE_CONTENT_TYPE_NOSNIFF = True
-#     SECURE_HSTS_SECONDS = 31536000  # 1 year
-#     SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-#     SECURE_HSTS_PRELOAD = True
-#     X_FRAME_OPTIONS = "DENY"
-#
-#     ALLOWED_HOSTS = ["*"]
-    #
-    # EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    # EMAIL_HOST = env("EMAIL_HOST")
-    # EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-    # EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-    # EMAIL_USE_TLS = True
-    # EMAIL_PORT = env("EMAIL_PORT")
-    # DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    SECURE_SSL_REDIRECT = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_BROWSER_XSS_FILTER = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_HSTS_SECONDS = 31536000  # 1 year
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    X_FRAME_OPTIONS = "DENY"
+
+    ALLOWED_HOSTS = ["*"]
+
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_HOST = env("EMAIL_HOST")
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = env("EMAIL_PORT")
+    DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 
 
 # crispy-forms for (Login and SignUp forms)
