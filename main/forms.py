@@ -46,9 +46,11 @@ class CheckoutForm(forms.Form):
                             label='',
                             widget=forms.TextInput(attrs={'placeholder': 'Puhelin'}))
     date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
+                               required=True,
                                label='',
                                widget=forms.TextInput(attrs={'placeholder': 'Valitse noutopäivä',
-                                                             'start_date': x}))
+                                                             'start_date': x,
+                                                             'readonly':'readonly'}))
 
     payment_option = forms.ChoiceField(required=True,
                                        label='',

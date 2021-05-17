@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% block content %}
 <main class="pt-5">
-  <div class="container w-50 mt-5 py-5" style="position: absolute; background-color: white; border-radius: 16px; left: 25%;">
+  <div class="container w-50 mt-5 py-5" style="position: relative; background-color: white; border-radius: 16px;  ">
     <div class="table text-nowrap pt-5">
       <h2>Ostoskori</h2>
       <table class="table">
@@ -25,7 +25,7 @@
                 href="{% url 'main:remove-single-item-from-cart' order_product.product.slug order_product.price %}"
                 ><i class="fas fa-minus mr-2"></i
               ></a>
-              &nbsp;  
+              &nbsp;
 
               <span class="h6">{{ order_product.quantity }}</span> &nbsp;
 
@@ -85,7 +85,7 @@
       </table>
     </div>
   </div>
-
-
 </main>
+<br>
+<br><br><br><br><br>
 {% endblock content %}

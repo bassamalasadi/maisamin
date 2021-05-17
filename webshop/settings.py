@@ -82,22 +82,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webshop.wsgi.application'
 
-
-# Database
-#
-# DATABASES = {
-#     'default': {
-#       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#       'NAME': env("DB_NAME"),
-#     	'USER':	env("DB_USER"),
-#     	'PASSWORD': env("DB_PASSWORD"),
-#     	'HOST': env('DB_HOST'),
-#     	'PORT': env('DB_PORT'),
-#     }
-# }
-
 if os.getenv("DEVELOPMENT_MODE", "False") == "True":
-# if True:
     DATABASES = {
         "default": {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -136,9 +121,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 
 # if DEBUG:
-LANGUAGE_CODE = 'en-us'
+# LANGUAGE_CODE = 'en-us'
 # else:
-#LANGUAGE_CODE = 'fi'
+ANGUAGE_CODE = 'fi'
 
 TIME_ZONE = 'UTC'
 
@@ -164,11 +149,10 @@ AUTHENTICATION_BACKENDS = (
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
-
+# ACCOUNT_USER_MODEL_USERNAME_FIELD = None
 SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 EMAIL_REQUIRED = True
-
 
 if not DEBUG:
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -188,7 +172,8 @@ if not DEBUG:
     EMAIL_HOST = env("EMAIL_HOST")
     EMAIL_HOST_USER = env("EMAIL_HOST_USER")
     EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
-    EMAIL_USE_TLS = True
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = True
     EMAIL_PORT = env("EMAIL_PORT")
     DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
 

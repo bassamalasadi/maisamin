@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 
 <main>
-  <div class="container p-5 m-5" style="position: absolute; background-color: white; border-radius: 16px; left: 15%;">
+  <div class="container p-5 m-5" style="position: relative ; background-color: white; border-radius: 16px; left: 15%;">
     <div class="table-responsive text-nowrap pt-5">
       <h2>Orders</h2>
       <table class="table">
@@ -24,7 +24,7 @@
             <td class="h6">{{ object.address }}</td>
             <td class="h6">{{ object.create }}</td>
             <td class="h6">{{ object.delivery }}</td>
-            <td class="h6"> 
+            <td class="h6">
               <a
                 style="color: red"
                 href="{% url 'main:remove_from_order_page' object.pk %}"
@@ -41,6 +41,7 @@
   </div>
 
 </main>
+
 <script>
   var dt = new Date();
   document.getElementById("datetime").innerHTML = (("0"+(dt.getMonth()+1)).slice(-2)) +"/"+ (("0"+dt.getDate()).slice(-2)) +"/"+ (dt.getFullYear()) +" "+ (("0"+dt.getHours()+1).slice(-2)) +":"+ (("0"+dt.getMinutes()+1).slice(-2));

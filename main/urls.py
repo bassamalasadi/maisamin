@@ -15,7 +15,7 @@ from .views import (
     remove_from_cart,
     remove_single_item_from_cart,
     remove_from_order_page,
-
+    testView,
 )
 
 app_name = 'main'
@@ -40,6 +40,7 @@ urlpatterns = [
          name='remove-single-item-from-cart'),
     path('clientorder/', ClientOrder.as_view(), name="client-order"),
     path('order-detail/<int:pk>/', OrderDetail.as_view(), name="order-detail"),
+    path('test/', testView),
     path('remove_from_order_page/<int:pk>/',
          remove_from_order_page, name="remove_from_order_page"),
 ]

@@ -1,3 +1,5 @@
+import os
+
 from datetime import datetime, timedelta
 
 from django.core.mail import send_mail, EmailMessage
@@ -26,6 +28,8 @@ from django.utils.formats import sanitize_separators
 from .models import Product, OrderItem, Order, Request
 from .lasku import create_invoice
 
+from tabulate import tabulate
+
 
 class SuperUserCheck(UserPassesTestMixin, View):
     def test_func(self):
@@ -46,11 +50,10 @@ def modify_date(value):
 
 
 def is_valid_form(values):
-    valid = True
     for field in values:
-        if field == '':
-            valid = False
-    return valid
+        if field == '' or len(str(field)) < 3:
+            return False
+    return True
 
 
 def queryset_to_list(values):
@@ -99,19 +102,22 @@ class CheckoutView(View):
                 email = req.get('email')
                 address = str(city) + ' - ' + str(street_address) + \
                     ' - ' + str(apartment_address)
-                date = datetime(year, month, day) - timedelta(days=1)
+                date = datetime(year, month, day)
+                delivery_date = date - timedelta(days=2)
+                due_date = delivery_date.strftime('%Y-%m-%d')
                 delivery = req.get('delivery')
+                refrence = str(datetime.timestamp(
+                    datetime.now())).replace(".", "")
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(order_item.get_total()) + \
                         float(req.get('delivery'))
                 if req.get('payment_option') == 'Invoice':
                     pay = f"""
-                        Payee's IBAN :   \n
-                        Payment Reference:  \n
-                        Amount: {amount} \n
-                        Due date :
+                        Payee's IBAN : FI19 5091 0320 1303 46  \n
+                        Payment Reference: {refrence} \n
+                        Amount: {amount}0 EURO \n
+                        Due date : {due_date} \n
                     """
-
                 if is_valid_form([firstName, lastName, city, street_address,
                                   postal, phone, email, delivery,
                                   date, pay]):
@@ -129,35 +135,49 @@ class CheckoutView(View):
                     )
 
                     create_invoice(
-                        delivery_date=date.strftime('%Y-%m-%d'),
+                        delivery_date=due_date,
                         name=firstName + lastName,
                         address=address,
                         email=email,
                         store=product_order,
                         totel=amount,
+                        refrence=refrence,
                         delivery_way=delivery,
                     )
-                    subject = f'Welcome {firstName} {lastName} to Maysam Cake Shop'
+                    subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
                     message = f""" Moi, {lastName}  \n
-Your order request code{order_item.id} will be delivered in 72 hours {str(order_item.create)[0:16]} to your home address: {address} \n
-Your order: \n
-{order_list} \n
+Kiitos, että valitsit Maisamin Herkun. \n
+Tilauksesi numero : {order_item.id} \n
+Toimitetaan : {str(date)[0:10]} \n
+Osoitteeseen : {address} \n
+____________________________________________________________________________________________________ \n
+Tilaus: \n
 
-Thank you to choosing Maysam Cake Shop if You want to cancel your order send request order code : {order_item.id}  to this number (0403232323)
-or to this email (tmren613@gmail.com) \n
+{tabulate(product_order,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='rst', colalign=("right",))}
+
+____________________________________________________________________________________________________ \n
+Huom! Jos haluat peruuttaa tilauksesi, lähetä tilausnumero: {order_item.id}  tähän puhelinnumeroon: 0405177444
+tai sähköpostiosoitteeseen:  Info@maisaminherkku.fi  \n
+____________________________________________________________________________________________________ \n
 {pay}
-Thank you
-
+Kiitos
                     """
 
                     recepient = email
                     email = EmailMessage(
                         subject, message, settings.EMAIL_HOST_USER, [
-                            recepient, settings.EMAIL_HOST_USER]
+                            recepient, settings.EMAIL_HOST_USER],
                     )
                     email.attach_file(f'{firstName}{lastName}.pdf')
-                    email.send()
+                    email.send(fail_silently=False)
                     OrderItem.objects.filter(user=self.request.user).delete()
+                    try:
+                        os.remove(f'{firstName}{lastName}.pdf')
+                    except:
+                        pass
+                else:
+                    messages.warning(self.request, "Virheellinen muoto, kentän tulee sisältää enemmän kuin kaksi merkkiä eikä olla tyhjä")
+                    return redirect("main:checkout")
             else:
                 messages.warning(self.request, "Invalid form")
                 return redirect("main:checkout")
@@ -166,7 +186,7 @@ Thank you
             }
             return render(self.request, "message.html", context)
         except ObjectDoesNotExist:
-            messages.warning(self.request, "You do not have an active order")
+            messages.warning(self.request, "Sinulla ei ole tilausta")
             return redirect("main:order-summary")
 
 
@@ -405,3 +425,9 @@ def remove_from_order_page(request, pk):
     else:
         messages.info(request, 'You have no request to delete')
         return redirect("main:client-order")
+
+def testView(request):
+    current_user = request.user
+    context = {'username': current_user.username,
+               'current_user':current_user}
+    return render(request, 'test.html', context)

@@ -1,10 +1,14 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+{% extends "base.html" %} {% load crispy_forms_tags %}
+{% load static %}{% block content %}
+
 <main class="pt-5">
-  <div class="container wow fadeIn pt-5">
-    <div class="row pt-5">
-      <div class="col-md-8 mb-4 px-5 pt-5">
-        <div class="card">
-          <h2 class="my-2 h2 text-center my-5">Laskutustiedot</h2>
+  <img class="bgimg"
+   src="{% static 'img/666.jpg' %}" alt="" style="position:absolute; height:1126px;">
+  <div class="container wow fadeIn pt-5" >
+    <div class="row pt-5" >
+      <div class="col-md-8 mb-4 px-" >
+        <div class="card" style="opacity:0.9">
+          <h2 class="my-2 h1 text-center my-5"style="font-family: cursive;">Laskutustiedot</h2>
           <hr>
           <form method="POST" class="card-body">
             {% csrf_token %}
@@ -25,10 +29,17 @@
             <p>Toimitamme</p>
             <select name="delivery" id="delivery" class="browser-default custom-select">
               <option value="0" id="0">Nouto</option>
-              <option value="1" id="1">Jämsä / Jämsänkoski / Kaipola / Himos  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Free shipping</option>
-              <option value="5.99" id="2">Halli / Koskenpää / Länkipohja / Korpilahti &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 5.99 &euro;</option>
-              <option value="9.99" id="3">Muurame / Jyväskylä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 9.99 &euro;</option>
+              <option value="3.00" id="1">Jämsä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;3.00 &euro;</option>
+              <option value="5.00" id="2">Jämsänkoski / Kaipola /Himos   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;5.00 &euro;</option>
+              <option value="7.00" id="3">Halli / Koskenpää / Länkipohja / Korpilahti &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                7.00 &euro;</option>
             </select>
             <hr />
             <h3>Maksuvaihtoehdot</h3>
@@ -42,18 +53,17 @@
               {% endfor %}
             </div>
             <button class="btn btn-primary btn-lg btn-block" type="submit">
-              Lähetä Tilaus 
+              Lähetä Tilaus
             </button>
           </form>
         </div>
       </div>
-      
+
       <div class="col-md-4">
         {% include "order_snippet.html" %}
       </div>
     </div>
   </div>
   <br>
-  {% include "footer.html" %}
 </main>
 {% endblock content %}

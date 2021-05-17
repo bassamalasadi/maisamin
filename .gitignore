@@ -1,2 +1,4 @@
 env
+.env
+webshop/.env
 db.sqlite3

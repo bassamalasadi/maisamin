@@ -14,7 +14,7 @@
 
           <span class="h3 font-weight-bold" style="font-family: cursive;">{{product.name}} </span>
           {% if product.category == 'cake' or product.category == 'cheesecake' %}
-            <span class="float-right badge bg-dark" style="font-size: 2em;" ><span id="hinta">Hinta</span></span>
+            <span class="float-right badge bg-dark" style="font-size: 2em;" ><span id="hinta">Hinta</span>&nbsp;&euro;</span>
           {% else %}
           <span class="float-right badge bg-dark" style="font-size: 2em;" ><span id="hinta">{{ product.price }}</span></span>
           {% endif %}
@@ -36,7 +36,7 @@
                 </strong>
               </span>
             {% endif %}
-      
+
             {% if product.is_loctose_free %}
             <span class="float-right px-3 text-white rounded" style="background-color: #f10303a1">
                 <strong>
@@ -47,7 +47,7 @@
             <br>
             <hr>
           </div>
-                      
+
           {% endif %}
 
           <div class="">
@@ -55,15 +55,15 @@
 
           {% if product.category == 'cake' or product.category == 'cheesecake' %}
             {% if product.variation_set.all %}
-              
+
             <select class="browser-default custom-select custom-select-lg mb-3" name="price" id="price" onchange="myFunction()">
               <option value="" id="disableitem" disabled selected>KOKO</option>
-              {% for item in product.variation_set.all %}        
+              {% for item in product.variation_set.all %}
               <option value="{{item.price}}"> {{item.size}}</option>
               {% endfor %}
 
             </select>
-            
+
             {% endif %}
             <button class="btn bg-dark text-white btn-md my-0 p float-right" type="submit" disabled id="addtocart">Lisää ostoskoriin
               <i class="fas fa-shopping-cart ml-1"></i>
@@ -98,6 +98,5 @@
 }
   </script>
   <br>
-  {% include "footer.html" %}
 </main>
 {% endblock content %}
