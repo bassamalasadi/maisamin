@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+
+<br>
+<br><br><br><br><br>
+<div class="" id="app">
+  <div>
+    [[ message ]]
+  </div>
+</div>
+
+<script>
+  var app= new Vue({
+    delimiters: ["[[", "]]"],
+    el: '#app',
+    data: {
+      message: 'Hello!'
+    };
+  });
+
+</script>
+
+{% endblock %}

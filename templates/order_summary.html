@@ -2,7 +2,7 @@
 <main class="pt-5">
   <div class="container w-50 mt-5 py-5" style="position: relative; background-color: white; border-radius: 16px;  ">
     <div class="table text-nowrap pt-5">
-      <h2>Ostoskori</h2>
+      <h2 style="background-color:black ;color:#BF9000; display: inline-block; padding:2px 15px; border-radius:0px 20px 0px 20px; font-family: 'Prompt', sans-serif;">Ostoskori</h2>
       <table class="table">
         <thead>
           <tr>
@@ -15,7 +15,7 @@
           </tr>
         </thead>
         <tbody>
-          {% for order_product in object.products.all %}
+          {% for order_product in product %}
           <tr>
             <td class="h6">{{ order_product.product.name }}</td>
             <td></td>
@@ -23,9 +23,7 @@
             <td>
               <a
                 href="{% url 'main:remove-single-item-from-cart' order_product.product.slug order_product.price %}"
-                ><i class="fas fa-minus mr-2"></i
-              ></a>
-              &nbsp;
+                ><i class="fas fa-minus mr-2"></i></a> &nbsp;
 
               <span class="h6">{{ order_product.quantity }}</span> &nbsp;
 
@@ -67,15 +65,15 @@
             <td colspan="5" class="h5 pt-4"><b>Yhteensä</b></td>
 
             <td colspan="5" class="px-5">
-              <div><h2><span class="badge bg-dark px-3">{{ object.get_total }}&nbsp;&euro;</span></h2></div>
+              <div><h2><span class="badge px-3" style="background-color:black ;">{{ object.get_total }}&nbsp;&euro;</span></h2></div>
             </td>
           </tr>
           <tr>
             <td colspan="6">
-              <a class="btn btn-warning float-right ml-2" href="/checkout/"
+              <a class="btn float-right ml-2" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" href="/checkout/"
                 >Maksamaan</a
               >
-              <a class="btn btn-primary float-right" href="/"
+              <a class="btn float-right" style="background-color:black ;color:#BF9000; font-family: 'Prompt', sans-serif;" href="/"
                 >Jatka ostoksia</a
               >
             </td>

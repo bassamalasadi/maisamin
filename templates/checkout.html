@@ -7,8 +7,9 @@
   <div class="container wow fadeIn pt-5" >
     <div class="row pt-5" >
       <div class="col-md-8 mb-4 px-" >
-        <div class="card" style="opacity:0.9">
-          <h2 class="my-2 h1 text-center my-5"style="font-family: cursive;">Laskutustiedot</h2>
+        <div class="card" style="border-radius:24px">
+          <h2 class="my-2 h1 text-center my-5"style="font-family: Nosifer, cursive;">Laskutustiedot</h2>
+
           <hr>
           <form method="POST" class="card-body">
             {% csrf_token %}
@@ -52,8 +53,8 @@
               </div>
               {% endfor %}
             </div>
-            <button class="btn btn-primary btn-lg btn-block" type="submit">
-              Lähetä Tilaus
+            <button class="btn btn-lg btn-block w-50"  style="background-color:#BF9000 ;color:black;"  type="submit">
+             <b> Lähetä Tilaus</b>
             </button>
           </form>
         </div>

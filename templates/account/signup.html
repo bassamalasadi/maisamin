@@ -6,7 +6,7 @@
     <section class="pt-5">
       <div class="row wow fadeIn pt-5">
         <div class="col-lg mt-5">
-          <img src="{% static 'img/Untitled.png' %}" alt="Untitled" style="position: relative; width: 150%;">
+          <img src="{% static 'img/logo2.png' %}" alt="Untitled" style="position: relative; width: 150%;">
         </div>
         <div class="col-6 offset-3 bg-white p-5 rounded">
           <h1>{% trans "Kirjaudu" %}</h1>
@@ -23,7 +23,7 @@
               value="{{ redirect_field_value }}"
             />
             {% endif %}
-            <button class="btn btn-primary" type="submit">
+            <button class="btn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit">
               {% trans "Kirjaudu" %} &raquo;
             </button>
           </form>
@@ -31,6 +31,6 @@
       </div>
     </section>
   </div>
-
+  <br><br>
 </main>
 {% endblock %}

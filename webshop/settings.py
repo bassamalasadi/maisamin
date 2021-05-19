@@ -16,15 +16,12 @@ READ_DOT_ENV_FILE = env.bool('READ_DOT_ENV_FILE', default=False)
 if READ_DOT_ENV_FILE:
     environ.Env.read_env()
     env_var = os.environ
-#DEBUG = env('DEBUG')
+
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-#SECRET_KEY = env_var['SECRET_KEY']
-#SECRET_KEY = env('SECRET_KEY')
 SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
-# ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS", "127.0.0.1,localhost").split(",")
 
 # Application definition
 
@@ -82,6 +79,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'webshop.wsgi.application'
 
+
+# Database
+
 if os.getenv("DEVELOPMENT_MODE", "False") == "True":
     DATABASES = {
         "default": {
@@ -120,10 +120,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 
-# if DEBUG:
-# LANGUAGE_CODE = 'en-us'
-# else:
-ANGUAGE_CODE = 'fi'
+LANGUAGE_CODE = 'fi'
+
 
 TIME_ZONE = 'UTC'
 
@@ -133,7 +131,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:8000"]
+CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:44100"]
 
 # Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
@@ -147,6 +145,7 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend'
 )
 
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_EMAIL_VERIFICATION = "none"
 # ACCOUNT_USER_MODEL_USERNAME_FIELD = None
@@ -154,34 +153,34 @@ SITE_ID = 1
 LOGIN_REDIRECT_URL = '/'
 EMAIL_REQUIRED = True
 
-if not DEBUG:
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    SECURE_SSL_REDIRECT = True
-    SESSION_COOKIE_SECURE = True
-    CSRF_COOKIE_SECURE = True
-    SECURE_BROWSER_XSS_FILTER = True
-    SECURE_CONTENT_TYPE_NOSNIFF = True
-    SECURE_HSTS_SECONDS = 31536000  # 1 year
-    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
-    SECURE_HSTS_PRELOAD = True
-    X_FRAME_OPTIONS = "DENY"
 
-    ALLOWED_HOSTS = ["*"]
+if not DEBUG:
+
+    # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+    # SECURE_SSL_REDIRECT = True
+    # SESSION_COOKIE_SECURE = True
+    # CSRF_COOKIE_SECURE = True
+    # SECURE_BROWSER_XSS_FILTER = True
+    # SECURE_CONTENT_TYPE_NOSNIFF = True
+    # SECURE_HSTS_SECONDS = 31536000  # 1 year
+    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    # SECURE_HSTS_PRELOAD = True
+    # X_FRAME_OPTIONS = "DENY"
 
     EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
-    EMAIL_HOST = env("EMAIL_HOST")
-    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
-    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
+    EMAIL_HOST = os.getenv("EMAIL_HOST" , False) == True
+    EMAIL_HOST_USER = os.getenv("EMAIL_HOST_USER" , False) == True
+    EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD" , False) == True
     EMAIL_USE_TLS = False
     EMAIL_USE_SSL = True
-    EMAIL_PORT = env("EMAIL_PORT")
-    DEFAULT_FROM_EMAIL = env("DEFAULT_FROM_EMAIL")
+    EMAIL_PORT = os.getenv("EMAIL_PORT" , False) == True
+
 
 
 # crispy-forms for (Login and SignUp forms)
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
-CORS_ALLOWED_ORIGINS = [
-    'http://localhost:3000',
-]
+# CORS_ALLOWED_ORIGINS = [
+#     'http://localhost:3000',
+# ]

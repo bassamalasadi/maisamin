@@ -14,7 +14,7 @@
 
           <span class="h3 font-weight-bold" style="font-family: cursive;">{{product.name}} </span>
           {% if product.category == 'cake' or product.category == 'cheesecake' %}
-            <span class="float-right badge bg-dark" style="font-size: 2em;" ><span id="hinta">Hinta</span>&nbsp;&euro;</span>
+            <span class="float-right badge bg-dark" style="font-size: 2em;" ><span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
           {% else %}
           <span class="float-right badge bg-dark" style="font-size: 2em;" ><span id="hinta">{{ product.price }}</span></span>
           {% endif %}
@@ -59,17 +59,17 @@
             <select class="browser-default custom-select custom-select-lg mb-3" name="price" id="price" onchange="myFunction()">
               <option value="" id="disableitem" disabled selected>KOKO</option>
               {% for item in product.variation_set.all %}
-              <option value="{{item.price}}"> {{item.size}}</option>
+              <option value="{{item.price}}" > {{item.size}}</option>
               {% endfor %}
 
             </select>
 
             {% endif %}
-            <button class="btn bg-dark text-white btn-md my-0 p float-right" type="submit" disabled id="addtocart">Lisää ostoskoriin
+            <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
               <i class="fas fa-shopping-cart ml-1"></i>
             </button>
             {% else %}
-            <a href="{{ product.get_add_to_cart_url }}" class="btn bg-dark text-white btn-md my-0 p float-right">
+            <a href="{{ product.get_add_to_cart_url }}" class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;">
               Lisää ostoskoriin
               <i class="fas fa-shopping-cart ml-1"></i>
             </a>

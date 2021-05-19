@@ -75,12 +75,12 @@ class CheckoutView(View):
             }
             return render(self.request, "checkout.html", context)
         except ObjectDoesNotExist:
-            messages.info(self.request, _("You do not have an active order"))
+            messages.info(self.request, _("Sinulla ei ole aktiivista tilausta"))
             return redirect("main:home")
 
     def post(self, request, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
-        pay = 'You will pay when the order deliverd or picked up'
+        pay = 'Maksat, kun tilaus toimitetaan tai noudetaan '
         try:
             order_item = Order.objects.get(
                 user=self.request.user, ordered=False)
@@ -108,22 +108,29 @@ class CheckoutView(View):
                 delivery = req.get('delivery')
                 refrence = str(datetime.timestamp(
                     datetime.now())).replace(".", "")
+
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(order_item.get_total()) + \
                         float(req.get('delivery'))
+                vat = float(amount) * 0.24
+                final = amount + vat
+                final = "{:.2f}".format(final)
+                vat = "{:.2f}".format(vat)
+                amount = "{:.2f}".format(amount)
                 if req.get('payment_option') == 'Invoice':
                     pay = f"""
-                        Payee's IBAN : FI19 5091 0320 1303 46  \n
-                        Payment Reference: {refrence} \n
-                        Amount: {amount}0 EURO \n
-                        Due date : {due_date} \n
+                        Saajan IBAN: FI19 5091 0320 1303 46  \n
+                        Viitenumero: {refrence} \n
+                        Yhteensä: {final}0 EURO \n
+                        Eräpäivä: {due_date} \n
                     """
+                print(req)
                 if is_valid_form([firstName, lastName, city, street_address,
-                                  postal, phone, email, delivery,
+                                  postal, phone, email,
                                   date, pay]):
                     order_list = queryset_to_list(
                         list(order_item.products.all()))
-                    Request.objects.create(
+                    req = Request.objects.create(
                         name=firstName,
                         address=address,
                         phone=phone,
@@ -136,18 +143,21 @@ class CheckoutView(View):
 
                     create_invoice(
                         delivery_date=due_date,
-                        name=firstName + lastName,
+                        fname=firstName,
+                        lname= lastName,
                         address=address,
                         email=email,
                         store=product_order,
                         totel=amount,
                         refrence=refrence,
                         delivery_way=delivery,
+                        vat=vat,
+                        final=final
                     )
                     subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
                     message = f""" Moi, {lastName}  \n
 Kiitos, että valitsit Maisamin Herkun. \n
-Tilauksesi numero : {order_item.id} \n
+Tilauksesi numero : {req.id} \n
 Toimitetaan : {str(date)[0:10]} \n
 Osoitteeseen : {address} \n
 ____________________________________________________________________________________________________ \n
@@ -156,7 +166,7 @@ Tilaus: \n
 {tabulate(product_order,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='rst', colalign=("right",))}
 
 ____________________________________________________________________________________________________ \n
-Huom! Jos haluat peruuttaa tilauksesi, lähetä tilausnumero: {order_item.id}  tähän puhelinnumeroon: 0405177444
+Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {order_item.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
 tai sähköpostiosoitteeseen:  Info@maisaminherkku.fi  \n
 ____________________________________________________________________________________________________ \n
 {pay}
@@ -168,18 +178,19 @@ Kiitos
                         subject, message, settings.EMAIL_HOST_USER, [
                             recepient, settings.EMAIL_HOST_USER],
                     )
-                    email.attach_file(f'{firstName}{lastName}.pdf')
+                    email.attach_file(f'{firstName} {lastName}.pdf')
                     email.send(fail_silently=False)
-                    OrderItem.objects.filter(user=self.request.user).delete()
+
                     try:
-                        os.remove(f'{firstName}{lastName}.pdf')
+                        os.remove(f'{firstName} {lastName}.pdf')
+                        OrderItem.objects.filter(user=self.request.user).delete()
                     except:
                         pass
                 else:
                     messages.warning(self.request, "Virheellinen muoto, kentän tulee sisältää enemmän kuin kaksi merkkiä eikä olla tyhjä")
                     return redirect("main:checkout")
             else:
-                messages.warning(self.request, "Invalid form")
+                messages.warning(self.request, "Virheellinen lomake")
                 return redirect("main:checkout")
             context = {
                 'form': form
@@ -231,8 +242,10 @@ class OrderSummaryView(LoginRequiredMixin, View):
         try:
             order = Order.objects.get(
                 user=self.request.user, ordered=False)
+            print("##############" , order)
             context = {
-                'object': order
+                'object': order,
+                'product': order.products.all()
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
@@ -295,20 +308,18 @@ class ItemDetailView(View):
                     if order.products.filter(product__slug=product.slug, price=price).exists():
                         order_product.quantity += 1
                         order_product.save()
-                        messages.info(
-                            self.request, "This product quantity was updated.")
                         return redirect("main:order-summary")
                     else:
                         order.products.add(order_product)
                         messages.info(
-                            self.request, "This product was added to your cart.")
+                            self.request, "Tämä tuote lisättiin ostoskoriin")
                         return redirect("main:order-summary")
                 else:
                     order = Order.objects.create(
                         user=self.request.user)
                     order.products.add(order_product)
                     messages.info(
-                        self.request, "This product was added to your cart.")
+                        self.request, "Tämä tuote lisättiin ostoskoriin")
                     return redirect("main:order-summary")
             except:
                 HttpResponseBadRequest()
@@ -335,18 +346,17 @@ def add_to_cart(request, slug, **kwargs):
         if order.products.filter(product__slug=product.slug, price=price).exists():
             order_product.quantity += 1
             order_product.save()
-            messages.info(request, "This product quantity was updated.")
             return redirect("main:order-summary")
 
         else:
             order.products.add(order_product)
-            messages.info(request, "This product was added to your cart.")
+            messages.info(request, "Tämä tuote lisättiin ostoskoriin")
             return redirect("main:order-summary")
     else:
         order = Order.objects.create(
             user=request.user)
         order.products.add(order_product)
-        messages.info(request, "This product was added to your cart.")
+        messages.info(request, "Tämä tuote lisättiin ostoskoriin")
         return redirect("main:order-summary")
 
 
@@ -377,13 +387,12 @@ def remove_single_item_from_cart(request, slug, **kwargs):
                 order_product.save()
             else:
                 order.products.remove(order_product)
-            messages.info(request, "This product quantity was updated.")
             return redirect("main:order-summary")
         else:
-            messages.info(request, "This product was not in your cart")
+            messages.info(request, "Tätä tuotetta ei ollut ostoskorissa")
             return redirect("main:order-summary")
     else:
-        messages.info(request, "You do not have an active order")
+        messages.info(request, "Sinulla ei ole tilausta")
         return redirect("main:order-summary")
 
 
@@ -405,13 +414,13 @@ def remove_from_cart(request, slug):
             )[0]
             order.products.remove(order_product)
             order_product.delete()
-            messages.info(request, "This product was removed from your cart.")
+            messages.info(request, "Tämä tuote poistettiin ostoskorista")
             return redirect("main:order-summary")
         else:
-            messages.info(request, "This product was not in your cart")
+            messages.info(request, "Tätä tuotetta ei ollut ostoskorissa")
             return redirect("main:product", slug=slug)
     else:
-        messages.info(request, "You do not have an active order")
+        messages.info(request, "Sinulla ei ole tilausta")
         return redirect("main:product", slug=slug)
 
 
@@ -420,14 +429,8 @@ def remove_from_order_page(request, pk):
     order = get_object_or_404(Request, pk=pk)
     if order:
         order.delete()
-        messages.info(request, 'This product has been delete')
+        messages.info(request, 'Tämä tuote on poistettu')
         return redirect("main:client-order")
     else:
-        messages.info(request, 'You have no request to delete')
+        messages.info(request, 'Sinulla ei ole poistettavaa tuotetta ')
         return redirect("main:client-order")
-
-def testView(request):
-    current_user = request.user
-    context = {'username': current_user.username,
-               'current_user':current_user}
-    return render(request, 'test.html', context)
