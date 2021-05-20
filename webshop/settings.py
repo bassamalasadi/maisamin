@@ -143,7 +143,7 @@ USE_TZ = True
 
 # CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:44100"]
 
-Static files (CSS, JavaScript, Images)
+# Static files (CSS, JavaScript, Images)
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = "media_root"
