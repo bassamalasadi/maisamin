@@ -80,6 +80,17 @@ TEMPLATES = [
 WSGI_APPLICATION = 'webshop.wsgi.application'
 
 
+ACCOUNT_FORMS = {
+    "login": "main.forms.SelfLoginForm", # Notice modification to LOGIN form.
+    "signup": "main.forms.SelfSignUpForm",
+    "add_email": "allauth.account.forms.AddEmailForm",
+    "change_password": "allauth.account.forms.ChangePasswordForm",
+    "set_password": "allauth.account.forms.SetPasswordForm",
+    "reset_password": "allauth.account.forms.ResetPasswordForm",
+    "reset_password_from_key": "allauth.account.forms.ResetPasswordKeyForm",
+    "disconnect": "allauth.socialaccount.forms.DisconnectForm",
+}
+
 # Database
 
 if os.getenv("DEVELOPMENT_MODE", "False") == "True":

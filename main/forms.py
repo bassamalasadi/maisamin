@@ -55,3 +55,25 @@ class CheckoutForm(forms.Form):
     payment_option = forms.ChoiceField(required=True,
                                        label='',
                                        widget=forms.RadioSelect(), choices=PAYMENT_CHOICES)
+
+
+
+from django import forms
+from allauth.account.forms import LoginForm, PasswordField , SignupForm
+
+
+class SelfLoginForm(LoginForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["login"].label = ""
+        self.fields["password"].label = ""
+
+class SelfSignUpForm(SignupForm):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields["email"].label = ""
+        self.fields["username"].label = ""
+        self.fields["password1"].label = ""
+        self.fields["password2"].label = ""
