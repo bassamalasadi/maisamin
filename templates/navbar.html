@@ -17,25 +17,25 @@
   <div class="collapse navbar-collapse" id="basicExampleNav1">
 
   <ol class="navbar-nav">
-    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico" style="color:white;" href="{% url 'main:home' %}">Etusivu</a></li>
-    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico" style="color:white;" href="{% url 'main:cake' %}">Kakut</a></li>
-    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico" style="color:white;" href="{% url 'main:cheesecake' %}">Juustokakut</a></li>
-    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico" style="color:white;" href="{% url 'main:fatayer' %}">Fatayer</a></li>
-    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico" style="color:white;" href="{% url 'main:manakish' %}">Manakish</a></li>
-    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico" style="color:white;" href="{% url 'main:meze' %}">Alkuruoat ja salaatit</a></li>
+    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico text-white" href="{% url 'main:home' %}">Etusivu</a></li>
+    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico text-white" href="{% url 'main:cake' %}">Kakut</a></li>
+    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico text-white" href="{% url 'main:cheesecake' %}">Juustokakut</a></li>
+    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico text-white" href="{% url 'main:fatayer' %}">Fatayer</a></li>
+    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico text-white" href="{% url 'main:manakish' %}">Manakish</a></li>
+    <li class="nav-item"><a class="btn btn-md btn-rounded waves-effect waves-light navico text-white" href="{% url 'main:meze' %}">Alkuruoat ja salaatit</a></li>
   </ol>
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
       {% if user|cart_item_count > 0 %}
         <li class="nav-item">
-            <a href="{% url 'main:order-summary' %}"  class="btn  btn-md btn-rounded waves-effect waves-light navico" style="color:white;">
+            <a href="{% url 'main:order-summary' %}"  class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">
               <span class="badge badge-pill black px-3 py-1">{{ user|cart_item_count }}</span> &nbsp;
               <i class="fas fa-shopping-cart pl-1"></i>
             </a>
           </li>
         {% endif %}
         <li class="nav-item">
-          <a href="{% url 'account_logout' %}" class="btn  btn-md btn-rounded waves-effect waves-light navico" style="color:white;">
+          <a href="{% url 'account_logout' %}" class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">
             Kirjautua ulos
           </a>
         </li>
@@ -49,11 +49,11 @@
       {% else %}
           <li class="nav-item">
             <a href="{% url 'account_login' %}"
-            class="btn  btn-md btn-rounded waves-effect waves-ligh navico" style="color:white;"> Kirjaudu sisään </a>
+            class="btn  btn-md btn-rounded waves-effect waves-ligh navico text-white"> Kirjaudu sisään </a>
           </li>
           <li class="nav-item">
             <a href="{% url 'account_signup' %}" type="button"
-            class="btn  btn-md btn-rounded waves-effect waves-light navico" style="color:white;">Kirjaudu</a>
+            class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">Kirjaudu</a>
           </li>
       {% endif %}
     </ul>

@@ -142,6 +142,7 @@ header,
   }
   .navico{
     background-color:#BF9000;
+    color:white;
     font-family: 'Prompt', sans-serif;
     font-weight:bold;
     border-radius:14px 0px 14px 14px;
@@ -208,7 +209,7 @@ header,
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 600px) and (max-width:867) {
   /* For tablets: */
   .maintext {
     position: absolute;

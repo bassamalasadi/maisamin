@@ -141,13 +141,23 @@ USE_L10N = True
 
 USE_TZ = True
 
-CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:44100"]
+# CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:44100"]
 
 # Static files (CSS, JavaScript, Images)
+# STATIC_URL = '/static/'
+# STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-STATICFILES_DIRS = (os.path.join(BASE_DIR, "static"),)
+STATICFILES_DIRS = [
+    BASE_DIR / "static"
+]
+MEDIA_URL = '/media/'
+MEDIA_ROOT = "media_root"
+STATIC_ROOT = "static_root"
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+
 # Authenticate the allauth backage for login and signup with db
 
 AUTHENTICATION_BACKENDS = (
