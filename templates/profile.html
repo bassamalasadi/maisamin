@@ -1,0 +1,38 @@
+{% extends "account/base.html" %} {% load i18n %} {% load crispy_forms_tags %}
+{% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
+{% load static %}
+
+      <div class="pt-5">
+        <div class="mt-5">
+          <img src="{% static 'img/logo2.png' %}" alt="Untitled"  class="logo2">
+        </div>
+        <br>
+        <div class="form-s">
+          <h1 style="font-family: 'Pacifico', cursive;">Asiakastietoni</h1>
+
+          <form class="update" method="POST">
+            {% csrf_token %}
+            <p>Muokka Käyttäjän tietoja</p>
+            <hr>
+            <label for="">Käyttäjätunnus</label><br>
+            <input class="form-control w-50" type="text" name="username" value="{{ user.username }}">
+            <br>
+            <label for="">Sähköpostiosoite</label><br>
+            <input class="form-control w-50" type="text" name="email" value="{{ user.email }}">
+            <br>
+            <hr>
+            <br>
+            <button class="btn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" name="edit" type="submit">
+                Tallenna muutokset
+            </button>
+            <br>
+            <button class="btn text-white float-right" style="background-color:black ;'; font-family: 'Prompt', sans-serif;" name="delete"type="submit">
+                Poista tilisi
+            </button>
+          </form>
+          <br>
+        </div>
+        <br><br>
+      </div>
+
+{% endblock %}

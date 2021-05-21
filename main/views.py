@@ -25,7 +25,8 @@ from .serializers import ItemSerializer
 
 from .forms import CheckoutForm
 from django.utils.formats import sanitize_separators
-from .models import Product, OrderItem, Order, Request
+from django.contrib.auth.models import User
+from .models import Product, OrderItem, Order, Request, UserProfile
 from .lasku import create_invoice
 
 from tabulate import tabulate
@@ -242,7 +243,6 @@ class OrderSummaryView(LoginRequiredMixin, View):
         try:
             order = Order.objects.get(
                 user=self.request.user, ordered=False)
-            print("##############" , order)
             context = {
                 'object': order,
                 'product': order.products.all()
@@ -250,9 +250,54 @@ class OrderSummaryView(LoginRequiredMixin, View):
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
             messages.warning(
-                self.request, "You do not have an active order")
+                self.request, "Sinulla ei ole aktiivista tilausta")
             return redirect("/")
 
+
+class Profile(LoginRequiredMixin, View):
+    def get(self, *args, **kwargs):
+        try:
+            user = User.objects.get(username=self.request.user)
+
+            context = {
+                'user': user,
+            }
+            return render(self.request, 'profile.html', context)
+        except ObjectDoesNotExist:
+            messages.warning(
+                self.request, "käyttäjää ei löydy")
+            return redirect("/")
+
+    def post(self, request, *args, **kwargs):
+        if request.method == 'POST':
+            if 'edit' in request.POST:
+                username = request.POST.get('username')
+                email  = request.POST.get('email')
+                user = User.objects.get(username=self.request.user)
+                if user.username != username or user.email != email:
+                    user.username = username
+                    user.email = email
+                    user.save()
+                    messages.success(
+                        self.request, "Käyttäjätunnuksen tai sähköpostiosoitteen muuttaminen onnistui")
+                    return redirect("main:profile")
+                else:
+                    messages.warning(
+                        self.request, "käyttäjänimi ja sähköpostiosoite eivät muutu")
+                return redirect("main:profile")
+            if 'delete' in request.POST:
+                try:
+                    user = User.objects.get(username=self.request.user)
+                    user.delete()
+                    messages.success(self.request, "Käyttäjä on poistettu")
+                    return redirect("/")
+                except User.DoesNotExist:
+                    messages.warning(
+                        self.request, "Virhe. Anteeksi, yritä lähettää sähköpostia osoitteeseen info@maisaminherkku.com"
+                    )
+                    return redirect("main:profile")
+
+                return render(self.request, '/')
 
 class ClientOrder(LoginRequiredMixin,
                   SuperUserCheck,

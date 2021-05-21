@@ -1,5 +1,8 @@
 from django import forms
 import datetime
+from django import forms
+from allauth.account.forms import LoginForm, PasswordField , SignupForm
+
 CITIES = (
     ('Jämsä', 'Jämsä'),
     ('Jämsänkoski', 'Jämsänkoski'),
@@ -19,6 +22,7 @@ PAYMENT_CHOICES = (
 )
 
 x = datetime.datetime.now() + datetime.timedelta(days=3)
+
 
 
 class CheckoutForm(forms.Form):
@@ -57,9 +61,6 @@ class CheckoutForm(forms.Form):
                                        widget=forms.RadioSelect(), choices=PAYMENT_CHOICES)
 
 
-
-from django import forms
-from allauth.account.forms import LoginForm, PasswordField , SignupForm
 
 
 class SelfLoginForm(LoginForm):

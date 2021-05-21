@@ -8,11 +8,22 @@
             <img src="{% static 'img/logo2.png' %}" alt="Untitled" class="logo2 pt-5">
           </div>
         </div>
+        <br>
         <div class="form-s">
-          <h1>Kirjaudu sisään</h1>
-          <p>
-            Ole hyvä ja luo käyttäjätili, jos sinulla ei vielä ole sellaista.
-          </p>
+          <h1 style="font-family: 'Pacifico', cursive;">Kirjaudu sisään</h1>
+          <br>
+          <div class="float-right">
+            <a href="{% url 'account_signup' %}" type="button"
+            class="btn pt-1" >
+            <span class="pb-4 mb-4">Rekisteröidy uudelle käyttäjälle</span>
+            <i class="fas fa-registered fa-4x"  style="color:#BF9000"></i></a>
+          </div>
+          <br>
+          <br>
+          <br>
+          <br>
+
+          <hr>
 
           <form class="login" method="POST">
             {% csrf_token %}
@@ -29,7 +40,9 @@
               Kirjaudu sisään
             </button>
           </form>
-          <a class="btn float-right text-white" style="background-color:black ;color:#BF9000; font-family: 'Prompt', sans-serif;" href="{% url 'account_reset_password' %}"> Unohtuiko salasana?</a>
+          <br>
+          <a class="" style="" href="{% url 'account_reset_password' %}"> Unohtuiko salasana?</a>
+
         </div>
 
   <br><br><br>

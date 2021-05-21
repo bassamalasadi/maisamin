@@ -212,6 +212,18 @@ header,
   .featurette-heading {
     margin-top: 7rem;
   }
+  .order-table{
+    position: relative;
+    left: 0%;
+  }
+  .table-col,
+  .table-col-2{
+    display:none
+  }
+  .delete-item{
+    position: relative;
+    right: 20%;
+  }
 }
 
 @media only screen and (min-width: 600px) {
@@ -413,6 +425,11 @@ header,
   .featurette-heading {
     margin-top: 0rem;
   }
+  .order-table{
+    position: relative;
+    width: 70%;
+    left: 5%;
+  }
 }
 
 
@@ -550,6 +567,7 @@ header,
   .navico{
     background-color:#BF9000;
     font-family: 'Prompt', sans-serif;
+    font-size: 14px;
     border-radius:14px 0px 14px 14px;
   }
 

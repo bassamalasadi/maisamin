@@ -7,10 +7,8 @@
           <img src="{% static 'img/logo2.png' %}" alt="Untitled"  class="logo2">
         </div>
         <div class="form-s">
-          <h1>{% trans "Kirjaudu" %}</h1>
-          <p>
-            Ole hyvä ja luo käyttäjätili, jos sinulla ei vielä ole sellaista.
-          </p>
+          <h1 style="font-family: 'Pacifico', cursive;" >Rekisteröidy</h1>
+          <br>
           <form class="signup" id="signup_form" method="POST">
             {% csrf_token %}
             {{ form|crispy }}

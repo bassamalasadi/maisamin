@@ -12,6 +12,7 @@ from .views import (
     ManakishView,
     MezeView,
     Privacy,
+    Profile,
     add_to_cart,
     remove_from_cart,
     remove_single_item_from_cart,
@@ -42,5 +43,6 @@ urlpatterns = [
     path('order-detail/<int:pk>/', OrderDetail.as_view(), name="order-detail"),
     path('remove_from_order_page/<int:pk>/',
          remove_from_order_page, name="remove_from_order_page"),
-    path('privacy-policy/', Privacy.as_view(), name="privacy")
+    path('privacy-policy/', Privacy.as_view(), name="privacy"),
+    path('profile/', Profile.as_view(), name="profile")
 ]
