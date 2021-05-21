@@ -5,6 +5,11 @@ header,
   height: 60vh;
 }
 
+.info{
+  font-size:12px;
+  padding-left:5%;
+}
+
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
@@ -16,7 +21,7 @@ header,
     font-family: "Nosifer", cursive;
     width: 50%;
     left: 25%;
-    top: 17%;
+    top: 16%;
     margin: 0 auto;
   }
   .bgimg {
@@ -31,10 +36,10 @@ header,
   .foo-l{
     display: flex;
     justify-content: center;
-    margin-right: 10%;
+    margin-right: 8%;
   }
   .foo-c{
-    margin: 15%;
+    margin: 2%;
   }
 
   .foo-r{
@@ -209,7 +214,7 @@ header,
   }
 }
 
-@media only screen and (min-width: 600px) and (max-width:867) {
+@media only screen and (min-width: 600px) {
   /* For tablets: */
   .maintext {
     position: absolute;
@@ -234,10 +239,10 @@ header,
   .foo-l{
     display: flex;
     justify-content: center;
-    margin-right: 5%;
+    margin-right: 7%;
   }
   .foo-c{
-    margin: 15%;
+    margin: 2%;
   }
 
   .foo-r{

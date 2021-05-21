@@ -1,0 +1,69 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+
+
+<main role="main" class="container pt-5 mt-5">
+  <div class="jumbotron">
+    <h2 class="my-2 h1 text-center my-5"style="font-family: 'Pacifico', cursive; color:#BF9000">Tietosuojaseloste</h2>
+    <hr class="featurette-divider">
+    <div class="">
+      <p>1- Rekisterinpitäjä</p>
+      <p>2- Rekisteriasioita hoitava henkilö</p>
+      <p>3- Tietosuojavastaava</p>
+      <p class="info">Nimi: Maisamin Herkku</p>
+      <p class="info">Y-tunnus: 3209528-6</p>
+      <p class="info">Asessorintie 2 as 11, 42100 Jämsä</p>
+      <p class="info">Puhelinnumero: 040 5177444</p>
+      <p class="info">Sähköpostiosoite: info@maisaminherkku.fi</p>
+      <p>4- Rekisterin käyttötarkoitus</p>
+    </div>
+    <div class="">
+      <p class="info">Käyttäjän itsensä antamat tai henkilön tunnistavat tiedot</p>
+      <p class="info pl-5"><b>Tunnistamistiedot:</b> <span class="info ">Nimi, sähköpostiosoite</span></p>
+      <p class="info pl-5"> <b>Ostotiedot:</b> <span class="info">Nimi, sähköpostiosoite, osoite, puhelinnumero, valittu toimitustapa ja toimitusosoite</span></p>
+
+      <p class="info">Asiakkaan suostumuksella sijaintitiedot, joita käytetään toimitusajan arviointiin.</p>
+    </div>
+    <div class="">
+      <p>5- Tietojen keräämisen ja käsittelyn peruste</p>
+      <p class="info">Ostotiedot säilytetään niin kauan, kun niitä tarvitaan asiakkaan kanssa tehtävän sopimuksen täytäntöönpanemiseksi.</p>
+    </div>
+    <div class="">
+      <p>6- Rekisterin tietosisältö</p>
+      <p class="info">Asiakkaan nimi, sähköpostiosoite, puhelinnumero, osoite, tilaussisältö.</p>
+    </div>
+    <div class="">
+      <p>7- Säännönmukaiset tietojen siirto ja Euroopan talousalueen ulkopuolelle</p>
+      <p class="info">
+        Tietoja ei luovuteta yrityksen ulkopuolelle. Henkilötiedot säilytetään niin kauan, kun niitä tarvitaan asiakkaan kanssa tehtävän sopimuksen täytäntöönsaattamiseksi.
+      </p>
+    </div>
+    <div class="">
+      <p>8- Evästeiden (cookies) käyttö</p>
+      <p class="info">Käytämme sivuillamme ns. cookie-toimintoa eli evästeitä. Eväste on pieni, käyttäjän tietokoneelle lähetettävä ja siellä säilytettävä tekstitiedosto, joka mahdollistaa internet-sivujen ylläpitäjän tunnistamaan usein sivuilla vierailevat kävijät, helpottamaan kävijöiden kirjautumista sivuille sekä mahdollistamaan yhdistelmätiedon laatimisen kävijöistä.</p>
+    </div>
+    <div class="">
+      <p>9- Rekisterin suojaus</p>
+      <p class="info">Tiedot siirretään SSL-suojatun yhteyden ylitse. Henkilötietojen käsittelyssä ja teknisissä ratkaisuissa noudatamme hyviä tietosuojakäytäntöjä. Sähköiset tiedot on suojattu palomuurilla, käyttäjätunnuksin ja salasanoin. Tietojen käyttöoikeus on vain niillä rekisterinpitäjän palveluksessa olevilla henkilöillä, jotka tarvitsevat tietoja tehtävissään.</p>
+    </div>
+    <div class="">
+      <p>10- Automaattinen päätöksenteko</p>
+      <p class="info">Automatisoituja yksittäispäätöksiä (EU:n tietosuoja-asetuksen artikla 22) ei tehdä.</p>
+    </div>
+    <div class="">
+      <p>11. Rekisteröidyn oikeudet</p>
+      <p class="info">Saada pääsy itseäsi koskeviin henkilötietoihin, mukaan lukien oikeus saada jäljennös sinua koskevista henkilötiedoista
+         Pyytää itseäsi koskevien henkilötietojen oikaisemista tai poistamista
+         Tietyin edellytyksin pyytää käsittelyn rajoittamista tai vastustaa henkilötietojen käsittelyä
+       </p>
+       <p class="info">
+         Rekisteröidyllä on oikeus tarkastaa, mitä häntä koskevia tietoja henkilötietorekisteriin on talletettu. Kirjallinen tarkastuspyyntö tulee lähettää allekirjoitettuna rekisteriasioista vastaavalle henkilölle. Tarkastusoikeus on maksuton enintään kerran vuodessa toteutettuna.
+         Rekisteröidyllä on oikeus vaatia virheellisten tai vanhentuneiden tietojen oikaisua tai poistamista tai tietojen siirtoa järjestelmästä toiseen. Hänellä on myös oikeus rajoittaa tai vastustaa tietojensa käsittelyä EU:n tietosuoja-asetuksen artiklojen 18 ja 21 mukaisesti.
+         Rekisteröidyllä on oikeus peruuttaa aiemmin antamansa suostumus tietojen käsittelylle tai tehdä henkilötietojensa käsittelyyn liittyvistä seikoista valitus valvontaviranomaiselle.
+         Rekisteröidyllä on myös oikeus kieltää tietojensa käyttö suoramarkkinointitarkoituksiin.
+       </p>
+
+    </div>
+  </div>
+</main>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}

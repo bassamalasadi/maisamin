@@ -29,7 +29,7 @@
       {% if user|cart_item_count > 0 %}
         <li class="nav-item pl-1 mb-1">
             <a href="{% url 'main:order-summary' %}"  class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">
-              <span class="badge badge-pill black px-3 py-1">{{ user|cart_item_count }}</span> &nbsp;
+              <span class="badge badge-pill black px-3 py-1" style="background-color:black;"> {{ user|cart_item_count }}</span> &nbsp;
               <i class="fas fa-shopping-cart pl-1"></i>
             </a>
           </li>
@@ -56,6 +56,8 @@
             class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">Kirjaudu</a>
           </li>
       {% endif %}
+      <li></li>
+      <br>
     </ul>
   </div>
 </nav>

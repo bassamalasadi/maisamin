@@ -434,3 +434,8 @@ def remove_from_order_page(request, pk):
     else:
         messages.info(request, 'Sinulla ei ole poistettavaa tuotetta ')
         return redirect("main:client-order")
+
+
+class Privacy(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, "privacy-policy.html")
