@@ -2,30 +2,39 @@
 <main class="pt-5">
   <div class="order-table">
     <div class="table text-nowrap pt-5">
-      <h2 style="background-color:black ;color:#BF9000; display: inline-block; padding:2px 15px; border-radius:0px 20px 0px 20px; font-family: 'Prompt', sans-serif;">Ostoskori</h2>
+      <h2 style="background-color:black ;color:#BF9000; display: inline-block; padding:2px 15px; border-radius:5px; font-family: 'Prompt', sans-serif;">Ostoskori</h2>
         <table class="table table-responsive">
-          <thead>
+          <thead class="order-prod-text">
             <tr>
               <th scope="col" class="h6">Tuote</th>
               <td class="table-col-2"></td>
               <th scope="col" class="h6 table-col">Hinta</th>
-              <th scope="col" class="h6 table-col">Määrä</th>
+              <th scope="col" class="h6 ">Määrä</th>
               <th scope="col" class="h6 table-col-2"></th>
-              <th scope="col" class="h6" class="px-4">Tuotteen kokonaishinta</th>
+              <th scope="col" class="h6" class="px-4">Kokonaishinta</th>
             </tr>
           </thead>
           <tbody>
             {% for order_product in product %}
             <tr>
-              <td class="h6">{{ order_product.product.name }}</td>
+              <td class="h6">
+                <a
+                  style="color: red"
+                  href="{% url 'main:remove-from-cart' order_product.product.slug %}"
+                >
+                  <i class="fas fa-trash"></i>
+                </a>
+                &nbsp;&nbsp;
+                {{ order_product.product.name }}
+              </td>
               <td class="table-col-2"></td>
               <td class="h6 table-col">{{ order_product.price }}&nbsp;&euro;</td>
-              <td class="table-col">
+              <td class="">
                 <a
                   href="{% url 'main:remove-single-item-from-cart' order_product.product.slug order_product.price %}"
                   ><i class="fas fa-minus mr-2"></i></a> &nbsp;
 
-                <span class="h6 table-col">{{ order_product.quantity }}</span> &nbsp;
+                <span class="h6 ">{{ order_product.quantity }}</span> &nbsp;
 
                 &nbsp;
                 <a href="{% url 'main:add-to-cart' order_product.product.slug order_product.price %}"
@@ -37,12 +46,7 @@
                   {{ order_product.get_final_price }} &nbsp;&euro;
               </td>
               <td class="delete-item">
-                <a
-                  style="color: red"
-                  href="{% url 'main:remove-from-cart' order_product.product.slug %}"
-                >
-                  <i class="fas fa-trash float-right"></i>
-                </a>
+
             </td>
             </tr>
             {% empty %}
@@ -63,19 +67,23 @@
             {% if object.get_total %}
             <tr>
               <td  class="h5 pt-4"><b>Yhteensä</b></td>
-
+              <td></td>
               <td class="">
-                <div><h2><span class="badge px-3" style="background-color:black; color:white;">{{ object.get_total }}&nbsp;&euro;</span></h2></div>
+                <div><h2><span class="badge px-3 total-price" style="background-color:black; color:white;">{{ object.get_total }}&nbsp;&euro;</span></h2></div>
               </td>
             </tr>
             <tr>
               <td >
-                <a class="btn float-right ml-3 mt-3" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" href="/checkout/"
-                  >Maksamaan</a
-                >
-                <a class="btn float-right mt-3" style="background-color:black ;color:#BF9000; font-family: 'Prompt', sans-serif;" href="/"
-                  >Jatka ostoksia</a
-                >
+                <span class="order-but">
+                  <a class="btn mt-3" style="background-color:black ;color:#BF9000; font-family: 'Prompt', sans-serif;" href="/"
+                    >Jatka ostoksia</a
+                  >
+                </span>
+                <span class="order-but">
+                  <a class="btn mt-3 order-but" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" href="/checkout/"
+                    >Maksamaan</a
+                  >
+                </span>
               </td>
             </tr>
             {% endif %}

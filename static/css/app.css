@@ -1,0 +1,693 @@
+html,
+body,
+header,
+.carousel {
+  height: 60vh;
+}
+
+.info{
+  font-size:12px;
+  padding-left:5%;
+}
+
+@media only screen and (max-width: 600px){
+
+  /* For mobile phones: */
+  .maintext {
+    position: absolute;
+    font-size: 4vw;
+    font-weight: 200;
+    color: white;
+    font-family: "Nosifer", cursive;
+    width: 50%;
+    left: 25%;
+    top: 15%;
+    margin: 0 auto;
+  }
+  .bgimg {
+    position: sticky;
+    background-size: cover;
+    top:10%;
+    width: 100%;
+    height: auto;
+    filter: brightness(60%);
+  }
+
+  .foo-l{
+    display: flex;
+    justify-content: center;
+    margin-right: 8%;
+  }
+  .foo-c{
+    margin: 2%;
+  }
+
+  .foo-r{
+    visibility: hidden;
+  }
+  .logo2{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+  }
+  .form-s{
+    position: relative;
+    width: 90%;
+    left:5%;
+
+  }
+  .prodimg {
+    position: sticky;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(100%);
+  }
+
+
+  a:hover,
+  a:visited,
+  a:link,
+  a:active {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .imgcard {
+    position: relative;
+    background-color: white;
+    width: 260px;
+    height: 260px;
+    left:10%;
+    margin-left: 40px;
+    margin-top: 20px;
+    transition: ease-in-out 1s;
+  }
+  .prodtext{
+    position: relative;
+    left: 10%;
+  }
+  .mainimg {
+    position: relative;
+    width: 270px; /* You can set the dimensions to whatever you want */
+    height: 270px;
+    object-fit: cover;
+    padding: 10px;
+    margin: -4px;
+  }
+  .overlay {
+    position: absolute;
+    top: 52%;
+    bottom: 0;
+    left: 2.3%;
+    right: 0;
+    height: 25%;
+    width: 96.2%;
+    opacity: 0;
+    transform: translateY(100%);
+    background-color: hsla(0, 0%, 100%, 0.9);
+    transition: ease-in-out 1s, opacity 0.1;
+    z-index: 1;
+  }
+
+  .imgcard:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 0px;
+
+  }
+
+  .imgtext {
+    position: absolute;
+    padding-top: 1%;
+    color: #be2f55;
+    background-color: transparent;
+    border-width: thin;
+    border-style: solid;
+    border-color: #be2f55;
+    border-radius: 23px;
+    font-size: 12px;
+    font-weight: 500;
+    height: 10%;
+    top:43%;
+    left: 50%;
+    width: 60%;
+    height: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: ease-in-out 1s;
+  }
+  .imgtext:hover {
+    background-color: #be2f55;
+    color: white;
+    transition: ease-in-out 1s;
+  }
+  .navico{
+    background-color:#BF9000;
+    color:white;
+    font-family: 'Prompt', sans-serif;
+    font-weight:bold;
+    border-radius:14px 0px 14px 14px;
+  }
+
+  /* CUSTOMIZE THE CAROUSEL
+  -------------------------------------------------- */
+
+  .carousel {
+    margin-bottom: 4rem;
+  }
+  .carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+  }
+
+  .carousel-item {
+    height: 32rem;
+    background-color: #777;
+  }
+  .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
+  }
+
+  .marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .marketing h2 {
+    font-weight: 400;
+  }
+  .marketing .col-lg-4 p {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+
+  .featurette-divider {
+    margin: 5rem 0;
+  }
+
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.05rem;
+  }
+
+  .carousel-caption p {
+    margin-bottom: 1.25rem;
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  .featurette-heading {
+    font-size: 50px;
+  }
+
+  .featurette-heading {
+    margin-top: 7rem;
+  }
+  .order-table{
+    position: relative;
+    left: 0%;
+  }
+  .table-col,
+  .table-col-2{
+    display:none
+  }
+  /* .info{
+    position: relative;
+    right: 5%;
+  } */
+  .snippet{
+    position: relative;
+    width: 100%;
+  }
+  .order-prod-text{
+    font-size: 10px;
+  }
+}
+
+@media only screen and (min-width: 601px){
+  /* For tablets: */
+  .maintext {
+    position: absolute;
+    font-size: 4vw;
+    font-weight: 200;
+    color: white;
+    font-family: "Nosifer", cursive;
+    width: 50%;
+    left: 25%;
+    top: 17%;
+    margin: 0 auto;
+  }
+  .bgimg {
+    position: sticky;
+    background-size: cover;
+    top:10%;
+    width: 100%;
+    height: auto;
+    filter: brightness(60%);
+  }
+
+  .foo-l{
+    display: flex;
+    justify-content: center;
+    margin-right: 7%;
+  }
+  .foo-c{
+    margin: 2%;
+  }
+
+  .foo-r{
+    visibility: hidden;
+  }
+  .logo2{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+  }
+  .form-s{
+    position: relative;
+    width: 90%;
+    left:5%;
+
+  }
+  .prodimg {
+    position: sticky;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(100%);
+  }
+
+
+  a:hover,
+  a:visited,
+  a:link,
+  a:active {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .imgcard {
+    position: relative;
+    background-color: white;
+    width: 310px;
+    height: 260px;
+    margin-left: 40px;
+    margin-top: 20px;
+    transition: ease-in-out 1s;
+  }
+  .prodtext{
+    position: relative;
+    left: 10%;
+  }
+  .mainimg {
+    position: relative;
+    width: 270px; /* You can set the dimensions to whatever you want */
+    height: 270px;
+    object-fit: cover;
+    padding: 10px;
+    margin: -4px;
+  }
+  .overlay {
+    position: absolute;
+    top: 52%;
+    bottom: 0;
+    left: 2.3%;
+    right: 0;
+    height: 25%;
+    width: 96.2%;
+    opacity: 0;
+    transform: translateY(100%);
+    background-color: hsla(0, 0%, 100%, 0.9);
+    transition: ease-in-out 1s, opacity 0.1;
+    z-index: 1;
+  }
+
+  .imgcard:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 0px;
+
+  }
+
+  .imgtext {
+    position: absolute;
+    padding-top: 1%;
+    color: #be2f55;
+    background-color: transparent;
+    border-width: thin;
+    border-style: solid;
+    border-color: #be2f55;
+    border-radius: 23px;
+    font-size: 12px;
+    font-weight: 500;
+    height: 10%;
+    top:43%;
+    left: 50%;
+    width: 60%;
+    height: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: ease-in-out 1s;
+  }
+  .imgtext:hover {
+    background-color: #be2f55;
+    color: white;
+    transition: ease-in-out 1s;
+  }
+  .navico{
+    background-color:#BF9000;
+    font-family: 'Prompt', sans-serif;
+    font-weight:bold;
+    border-radius:14px 0px 14px 14px;
+  }
+
+  /* CUSTOMIZE THE CAROUSEL
+  -------------------------------------------------- */
+
+  .carousel {
+    margin-bottom: 4rem;
+  }
+  .carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+  }
+
+  .carousel-item {
+    height: 32rem;
+    background-color: #777;
+  }
+  .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
+  }
+
+  .marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .marketing h2 {
+    font-weight: 400;
+  }
+  .marketing .col-lg-4 p {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+
+  .featurette-divider {
+    margin: 5rem 0;
+  }
+
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1.3;
+    letter-spacing: -0.05rem;
+  }
+
+  .carousel-caption p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .featurette-heading {
+    font-size: 40px;
+  }
+
+  .featurette-heading {
+    margin-top: 0rem;
+  }
+  .order-table{
+    position: relative;
+    width: 70%;
+    top:50px;
+    left: 10%;
+  }
+  .snippet{
+    position: absolute;
+    right: 1px;
+    width: 100%;
+  }
+  .check-text{
+    font-size: 30px;
+  }
+  .table-col,
+  .table-col-2{
+
+  }
+  .checkout-list{
+    position: relative;
+    left: 230px;
+  }
+}
+
+
+@media only screen and (min-width: 992px){
+  /* For desktop: */
+  .maintext {
+    position: absolute;
+    font-size: 4vw;
+    font-weight: 200;
+    color: white;
+    font-family: "Nosifer", cursive;
+    width: 50%;
+    left: 25%;
+    top: 30%;
+    margin: 0 auto;
+  }
+  .bgimg {
+    position: sticky;
+    background-size: cover;
+    width: 100%;
+    height: auto;
+    filter: brightness(60%);
+  }
+
+  .foo-l{
+    display: flex;
+    justify-content: center;
+    padding-left: 3%;
+    margin-right: 5%;
+  }
+  .foo-c{
+    margin: 1%;
+  }
+
+
+  .logo2{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+  }
+
+  .form-s{
+    position: relative;
+    width: 40%;
+    left:30%;
+  }
+  .prodimg {
+    position: sticky;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    filter: brightness(100%);
+  }
+
+
+  a:hover,
+  a:visited,
+  a:link,
+  a:active {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+  }
+  .imgcard {
+    position: relative;
+    background-color: white;
+    width: 310px;
+    height: 260px;
+    margin-left: 40px;
+    margin-top: 20px;
+    transition: ease-in-out 1s;
+  }
+  .prodtext{
+    position: relative;
+    left: 10%;
+  }
+  .mainimg {
+    position: relative;
+    width: 270px; /* You can set the dimensions to whatever you want */
+    height: 270px;
+    object-fit: cover;
+    padding: 10px;
+    margin: -4px;
+  }
+  .overlay {
+    position: absolute;
+    top: 52%;
+    bottom: 0;
+    left: 2.3%;
+    right: 0;
+    height: 25%;
+    width: 96.2%;
+    opacity: 0;
+    transform: translateY(100%);
+    background-color: hsla(0, 0%, 100%, 0.9);
+    transition: ease-in-out 1s, opacity 0.1;
+    z-index: 1;
+  }
+
+  .imgcard:hover .overlay {
+    opacity: 1;
+    cursor: pointer;
+    border-radius: 0px;
+
+  }
+
+  .imgtext {
+    position: absolute;
+    padding-top: 1%;
+    color: #be2f55;
+    background-color: transparent;
+    border-width: thin;
+    border-style: solid;
+    border-color: #be2f55;
+    border-radius: 23px;
+    font-size: 12px;
+    font-weight: 500;
+    height: 10%;
+    top:43%;
+    left: 50%;
+    width: 60%;
+    height: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: ease-in-out 1s;
+  }
+  .imgtext:hover {
+    background-color: #be2f55;
+    color: white;
+    transition: ease-in-out 1s;
+  }
+  .navico{
+    background-color:#BF9000;
+    font-family: 'Prompt', sans-serif;
+    font-size: 14px;
+    border-radius:14px 0px 14px 14px;
+  }
+
+  /* CUSTOMIZE THE CAROUSEL
+  -------------------------------------------------- */
+
+  .carousel {
+    margin-bottom: 4rem;
+  }
+  .carousel-caption {
+    bottom: 3rem;
+    z-index: 10;
+  }
+
+  .carousel-item {
+    height: 32rem;
+    background-color: #777;
+  }
+  .carousel-item > img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    height: 32rem;
+  }
+
+  .marketing .col-lg-4 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+  }
+  .marketing h2 {
+    font-weight: 400;
+  }
+  .marketing .col-lg-4 p {
+    margin-right: 0.75rem;
+    margin-left: 0.75rem;
+  }
+
+
+  .featurette-divider {
+    margin: 5rem 0;
+  }
+
+  .featurette-heading {
+    font-weight: 300;
+    line-height: 1.3;
+    letter-spacing: -0.05rem;
+  }
+
+  .carousel-caption p {
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .featurette-heading {
+    font-size: 40px;
+  }
+
+  .featurette-heading {
+    margin-top: 0rem;
+  }
+  .order-table{
+    position: relative;
+    width: 80%;
+    top:50px;
+    left: 20%;
+  }
+  .snippet{
+    position: absolute;
+  }
+  .check-text{
+    font-size: 30px;
+  }
+  .table-col,
+  .table-col-2{
+
+  }
+  .total-price{
+    position: relative;
+    left:260px;
+  }
+  .order-but{
+    position: relative;
+    margin-left: 30px;
+  }
+  .checkout-list{
+    position: relative;
+    left: 230px;
+  }
+  .snippet{
+    position: absolute;
+    right: 16%;
+    width: 80%;
+  }
+  .check-text{
+    font-size: 50px;
+  }
+}

@@ -2,13 +2,11 @@
 {% load static %}{% block content %}
 
 <main class="pt-5">
-  <!-- <img class="bgimg"
-   src="{% static 'img/666.jpg' %}" alt="" style="position:absolute; height:100hv;"> -->
   <div class="container wow fadeIn pt-5" >
     <div class="row pt-5" >
-      <div class="col-md-8 mb-4 px-" >
+      <div class="col-md-8 mb-4 checkout-list" >
         <div class="card" style="border-radius:24px">
-          <h2 class="my-2 h1 text-center my-5"style="font-family: Nosifer, cursive; color:#636363">Laskutustiedot</h2>
+          <p class="my-2 text-center my-5 checks-text"style="font-family: Nosifer, cursive; color:#636363">Laskutustiedot</p>
 
           <hr>
           <form method="POST" class="card-body">
@@ -59,9 +57,10 @@
           </form>
         </div>
       </div>
-
-      <div class="col-md-4">
-        {% include "order_snippet.html" %}
+      <div class="snippet">
+        <div class="col-md-4">
+          {% include "order_snippet.html" %}
+        </div>
       </div>
     </div>
   </div>

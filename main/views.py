@@ -332,7 +332,8 @@ class ItemDetailView(View):
 
     def post(self, request, slug):
         price = sanitize_separators(request.POST.get('price'))
-
+        amount = sanitize_separators(request.POST.get('amount'))
+        print(amount)
         product = get_object_or_404(Product, slug=slug)
         if request.user.is_anonymous:
             return redirect('account_login')
@@ -344,6 +345,8 @@ class ItemDetailView(View):
                     ordered=False,
                     price=price
                 )
+                order_product.quantity = order_product.quantity + int(amount)
+                order_product.save()
                 order_qs = Order.objects.filter(
                     user=self.request.user, ordered=False)
 
@@ -351,8 +354,7 @@ class ItemDetailView(View):
                     order = order_qs[0]
                     # check if the order item is in the order
                     if order.products.filter(product__slug=product.slug, price=price).exists():
-                        order_product.quantity += 1
-                        order_product.save()
+
                         return redirect("main:order-summary")
                     else:
                         order.products.add(order_product)

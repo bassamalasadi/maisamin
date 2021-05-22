@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.conf.urls.static import static
+from django.conf.urls import url
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
@@ -12,6 +13,7 @@ urlpatterns = [
     path("password_reset", auth_views.PasswordResetView.as_view(template_name="account_reset_password"),
          name="password_reset"),
     path('', include('main.urls', namespace='main')),
+    
 ]
 
 if settings.DEBUG:

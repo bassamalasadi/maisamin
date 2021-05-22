@@ -1,30 +1,24 @@
-<div class="col-md-12 mb-4 p-4" style="position: absolute; background-color: white; border-radius: 16px; left: 15%;">
+
+<div class="">
   <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted" style="font-family: 'Prompt', sans-serif;">Ostoskorisi</span>
-    <!-- Number of items-->
     <span class="badge badge-danger badge-pill">{{ order.products.count }}</span>
   </h4>
-  <!--list of items with information-->
   <ul class="list-group mb-3 z-depth-1">
-    <!-- loop through the order items-->
     {% for order_item in order.products.all %}
     <li class="list-group-item d-flex justify-content-between lh-condensed">
       <div>
-        <span class="text-muted h6">
-          <!-- render the quantity and the title for each product in the client's order-->
+        <span class="text-muted ">
           {{ order_item.quantity }}  &nbsp;
         </span>
-        <!-- render the product's description-->
-        <small class="text-muted h6"><i>{{ order_item.product}}</i></small>
+        <small class="text-muted "><i>{{ order_item.product}}</i></small>
       </div>
-      <!-- render the total price for each item-->
       <span class="text-muted h6" style="font-family: 'Prompt', sans-serif;">{{ order_item.get_final_price }} &euro;</span>
     </li>
     {% endfor %}
     <li class="list-group-item d-flex justify-content-between mt-2">
-      <span class="h3" style="font-family: 'Prompt', sans-serif;">Yhteensä</span>
-      <!-- get the total price for the order-->
-      <strong class="h3" style="font-family: 'Prompt', sans-serif;">&nbsp;{{ order.get_total }}  &euro;</strong>
+      <span class="h5" style="font-family: 'Prompt', sans-serif;">Yhteensä</span>
+      <strong class="h5" style="font-family: 'Prompt', sans-serif;">&nbsp;{{ order.get_total }}  &euro;</strong>
     </li>
   </ul>
 </div>

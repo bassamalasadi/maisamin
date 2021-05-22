@@ -29,7 +29,7 @@
       {% if user|cart_item_count > 0 %}
         <li class="nav-item pl-1 mb-1">
             <a href="{% url 'main:order-summary' %}"  class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">
-              <span class="badge badge-pill black px-3 py-1" style="background-color:black;"> {{ user|cart_item_count }}</span> &nbsp;
+              <span class="badge badge-pill black px-3 py-1 " style="background-color:black;"> {{ user|cart_item_count }}</span> &nbsp;
               <i class="fas fa-shopping-cart pl-1"></i>
             </a>
           </li>
@@ -41,12 +41,12 @@
         </li>
         <li class="nav-item pl-1 mb-1">
           <a href="{% url 'main:profile' %}" type="button"
-          class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">
-          <i class="far fa-user-circle ">&nbsp;</i>Hei, {{ user }}</a>
+          class="btn btn-md navico text-white">
+          <i class="far fa-user-circle ">&nbsp; &nbsp;</i>Hei, {{ user }}</a>
         </li>
         {% if user.is_superuser %}
         <li class="nav-item pl-1 mb-1">
-            <a href="{% url 'main:client-order' %}" class="btn  btn-md btn-rounded waves-effect waves-light">
+            <a href="{% url 'main:client-order' %}" class="btn btn-md btn-rounded waves-effect waves-light navico">
               Admin
             </a>
           </li>
@@ -54,12 +54,8 @@
       {% else %}
           <li class="nav-item pl-1 mb-1">
             <a href="{% url 'account_login' %}"
-            class="btn  btn-md btn-rounded waves-effect waves-ligh navico text-white"> Kirjaudu sisään </a>
+            class="btn btn-md btn-rounded waves-effect waves-ligh navico text-white"> Kirjaudu sisään </a>
           </li>
-          <!-- <li class="nav-item pl-1 mb-1">
-            <a href="{% url 'account_signup' %}" type="button"
-            class="btn  btn-md btn-rounded waves-effect waves-light navico text-white">Kirjaudu</a>
-          </li> -->
       {% endif %}
       <li></li>
       <br>

@@ -1,4 +1,4 @@
-{% extends "base.html" %} {% load crispy_forms_tags %} {% block content %}
+{% extends "base.html" %} {% load crispy_forms_tags %}  {% block content %}
 <main class="mt-5 pt-4">
   <div class="container dark-grey-text mt-5">
     <div class="row wow fadeIn">
@@ -55,6 +55,21 @@
 
           {% if product.category == 'cake' or product.category == 'cheesecake' %}
             {% if product.variation_set.all %}
+            <select class="browser-default custom-select custom-select-lg mb-3 w-25" name="amount" id="amount" onchange="myFunction()">
+                <option value="1" selected>1</option>
+                <option value="2" >2</option>
+                <option value="3" >3</option>
+                <option value="4" >4</option>
+                <option value="5" >5</option>
+                <option value="6" >6</option>
+                <option value="7" >7</option>
+                <option value="8" >8</option>
+                <option value="9" >9</option>
+                <option value="10" >10</option>
+                <option value="20" >20</option>
+                <option value="30" >30</option>
+                <option value="40" >40</option>
+            </select>
 
             <select class="browser-default custom-select custom-select-lg mb-3" name="price" id="price" onchange="myFunction()">
               <option value="" id="disableitem" disabled selected>KOKO</option>
@@ -90,12 +105,14 @@
   </div>
   <script>
     function myFunction() {
-      var x = document.getElementById("price").value;
-      if (x != document.getElementById("disableitem")){
+      var x = parseInt(document.getElementById("price").value);
+      var y = parseInt(document.getElementById("amount").value);
+      if (Number.isNaN(x) == false){
         document.getElementById("addtocart").removeAttribute("disabled");
+        document.getElementById("hinta").innerHTML = x * y;
       }
-      document.getElementById("hinta").innerHTML = x ;
-}
+    }
+
   </script>
   <br>
 </main>

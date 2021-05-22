@@ -21,7 +21,7 @@ header,
     font-family: "Nosifer", cursive;
     width: 50%;
     left: 25%;
-    top: 16%;
+    top: 15%;
     margin: 0 auto;
   }
   .bgimg {
@@ -98,7 +98,7 @@ header,
   }
   .overlay {
     position: absolute;
-    top: 52%;
+    top: 50%;
     bottom: 0;
     left: 2.3%;
     right: 0;
@@ -220,13 +220,20 @@ header,
   .table-col-2{
     display:none
   }
-  .delete-item{
+  /* .info{
     position: relative;
-    right: 20%;
+    right: 5%;
+  } */
+  .snippet{
+    position: relative;
+    width: 100%;
+  }
+  .order-prod-text{
+    font-size: 10px;
   }
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 601px){
   /* For tablets: */
   .maintext {
     position: absolute;
@@ -428,12 +435,29 @@ header,
   .order-table{
     position: relative;
     width: 70%;
-    left: 5%;
+    top:50px;
+    left: 10%;
+  }
+  .snippet{
+    position: absolute;
+    right: 1px;
+    width: 100%;
+  }
+  .check-text{
+    font-size: 30px;
+  }
+  .table-col,
+  .table-col-2{
+
+  }
+  .checkout-list{
+    position: relative;
+    left: 230px;
   }
 }
 
 
-@media only screen and (min-width: 868px) {
+@media only screen and (min-width: 992px){
   /* For desktop: */
   .maintext {
     position: absolute;
@@ -517,7 +541,7 @@ header,
   }
   .overlay {
     position: absolute;
-    top: 52%;
+    top: 50%;
     bottom: 0;
     left: 2.3%;
     right: 0;
@@ -629,5 +653,41 @@ header,
 
   .featurette-heading {
     margin-top: 0rem;
+  }
+  .order-table{
+    position: relative;
+    width: 80%;
+    top:50px;
+    left: 20%;
+  }
+  .snippet{
+    position: absolute;
+  }
+  .check-text{
+    font-size: 30px;
+  }
+  .table-col,
+  .table-col-2{
+
+  }
+  .total-price{
+    position: relative;
+    left:260px;
+  }
+  .order-but{
+    position: relative;
+    margin-left: 30px;
+  }
+  .checkout-list{
+    position: relative;
+    left: 230px;
+  }
+  .snippet{
+    position: absolute;
+    right: 16%;
+    width: 80%;
+  }
+  .check-text{
+    font-size: 50px;
   }
 }

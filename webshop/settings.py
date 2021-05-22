@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'multiselectfield',
+    'star_ratings',
 ]
 
 MIDDLEWARE = [
@@ -188,6 +189,7 @@ EMAIL_HOST_PASSWORD = os.getenv("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = False
 EMAIL_USE_SSL = True
 EMAIL_PORT = os.getenv("EMAIL_PORT")
+DEFAULT_FROM_EMAIL=os.getenv("DEFAULT_FROM_EMAIL")
 
 
 
