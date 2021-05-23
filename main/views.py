@@ -125,7 +125,6 @@ class CheckoutView(View):
                         Yhteensä: {final}0 EURO \n
                         Eräpäivä: {due_date} \n
                     """
-                print(req)
                 if is_valid_form([firstName, lastName, city, street_address,
                                   postal, phone, email,
                                   date, pay]):
@@ -243,9 +242,10 @@ class OrderSummaryView(LoginRequiredMixin, View):
         try:
             order = Order.objects.get(
                 user=self.request.user, ordered=False)
+            order_item = OrderItem.objects.filter(user=self.request.user)
             context = {
                 'object': order,
-                'product': order.products.all()
+                'product': order_item,
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
@@ -275,12 +275,17 @@ class Profile(LoginRequiredMixin, View):
                 email  = request.POST.get('email')
                 user = User.objects.get(username=self.request.user)
                 if user.username != username or user.email != email:
-                    user.username = username
-                    user.email = email
-                    user.save()
-                    messages.success(
-                        self.request, "Käyttäjätunnuksen tai sähköpostiosoitteen muuttaminen onnistui")
-                    return redirect("main:profile")
+                    try:
+                        user.username = username
+                        user.email = email
+                        user.save()
+                        messages.success(
+                            self.request, "Käyttäjätunnuksen tai sähköpostiosoitteen muuttaminen onnistui")
+                        return redirect("main:profile")
+                    except:
+                        messages.success(
+                            self.request, "käyttäjänimi tai sähköpostiosoite on jo olemassa")
+                        return redirect("main:profile")
                 else:
                     messages.warning(
                         self.request, "käyttäjänimi ja sähköpostiosoite eivät muutu")
@@ -333,7 +338,8 @@ class ItemDetailView(View):
     def post(self, request, slug):
         price = sanitize_separators(request.POST.get('price'))
         amount = sanitize_separators(request.POST.get('amount'))
-        print(amount)
+        gluteen = sanitize_separators(request.POST.get('gluteen'))
+        laktoos = sanitize_separators(request.POST.get('laktoos'))
         product = get_object_or_404(Product, slug=slug)
         if request.user.is_anonymous:
             return redirect('account_login')
@@ -341,12 +347,13 @@ class ItemDetailView(View):
             try:
                 order_product, created = OrderItem.objects.get_or_create(
                     product=product,
-                    user=self.request.user,
+                    user=request.user,
                     ordered=False,
-                    price=price
+                    price=price,
+                    is_gluteen_free=isinstance(gluteen ,str),
+                    is_loctose_free=isinstance(laktoos ,str),
                 )
-                order_product.quantity = order_product.quantity + int(amount)
-                order_product.save()
+
                 order_qs = Order.objects.filter(
                     user=self.request.user, ordered=False)
 
@@ -354,26 +361,41 @@ class ItemDetailView(View):
                     order = order_qs[0]
                     # check if the order item is in the order
                     if order.products.filter(product__slug=product.slug, price=price).exists():
-
-                        return redirect("main:order-summary")
+                        order_product.quantity += int(amount) - 1
+                        if gluteen:
+                            order_product.is_gluteen_free = True
+                        if laktoos:
+                            order_product.is_loctose_free = True
+                        order_product.save()
+                        messages.info(
+                            self.request, "Tämä tuote lisättiin ostoskoriin")
+                        return redirect("main:product", slug=slug)
                     else:
+                        if int(amount) > 1:
+                            order_product.quantity += int(amount) - 1
+                            if gluteen:
+                                order_product.is_gluteen_free = True
+                            if laktoos:
+                                order_product.is_loctose_free = True
+                            order_product.save()
                         order.products.add(order_product)
                         messages.info(
                             self.request, "Tämä tuote lisättiin ostoskoriin")
-                        return redirect("main:order-summary")
+                        return redirect("main:product", slug=slug)
                 else:
                     order = Order.objects.create(
                         user=self.request.user)
                     order.products.add(order_product)
                     messages.info(
                         self.request, "Tämä tuote lisättiin ostoskoriin")
-                    return redirect("main:order-summary")
+                    return redirect("main:product", slug=slug)
             except:
                 HttpResponseBadRequest()
 
 
 @ login_required
 def add_to_cart(request, slug, **kwargs):
+    print("#############", kwargs)
     product = get_object_or_404(Product, slug=slug)
     if kwargs:
         price = request.POST.get('price') or kwargs['price']
@@ -388,11 +410,13 @@ def add_to_cart(request, slug, **kwargs):
     )
     order_qs = Order.objects.filter(
         user=request.user, ordered=False)
+
     if order_qs.exists():
         order = order_qs[0]
         if order.products.filter(product__slug=product.slug, price=price).exists():
             order_product.quantity += 1
             order_product.save()
+            messages.info(request, "Tämä tuote lisättiin ostoskoriin")
             return redirect("main:order-summary")
 
         else:
@@ -440,7 +464,7 @@ def remove_single_item_from_cart(request, slug, **kwargs):
             return redirect("main:order-summary")
     else:
         messages.info(request, "Sinulla ei ole tilausta")
-        return redirect("main:order-summary")
+        return redirect("main:home")
 
 
 @ login_required

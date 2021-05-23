@@ -7,7 +7,7 @@
           <thead class="order-prod-text">
             <tr>
               <th scope="col" class="h6">Tuote</th>
-              <td class="table-col-2"></td>
+              <th class="table-col-2"></th>
               <th scope="col" class="h6 table-col">Hinta</th>
               <th scope="col" class="h6 ">Määrä</th>
               <th scope="col" class="h6 table-col-2"></th>
@@ -26,20 +26,29 @@
                 </a>
                 &nbsp;&nbsp;
                 {{ order_product.product.name }}
+                &nbsp;&nbsp;
+                {% if order_product.is_gluteen_free %}
+                <span>G</span>
+                {% endif %}
+                &nbsp;&nbsp;
+                {% if order_product.is_loctose_free %}
+                <span>L</span>
+                {% endif %}
+
               </td>
               <td class="table-col-2"></td>
               <td class="h6 table-col">{{ order_product.price }}&nbsp;&euro;</td>
               <td class="">
-                <a
-                  href="{% url 'main:remove-single-item-from-cart' order_product.product.slug order_product.price %}"
-                  ><i class="fas fa-minus mr-2"></i></a> &nbsp;
+                <!-- <a
+                  href="{% url 'main:remove-single-item-from-cart' order_product.product.slug order_product.price%}"
+                  ><i class="fas fa-minus mr-2"></i></a> &nbsp; -->
 
-                <span class="h6 ">{{ order_product.quantity }}</span> &nbsp;
-
+                <span class="h6 pl-3">{{ order_product.quantity }}</span> &nbsp;
+<!--
                 &nbsp;
                 <a href="{% url 'main:add-to-cart' order_product.product.slug order_product.price %}"
                 ><i class="fas fa-plus"></i
-                ></a>
+                ></a> -->
               </td>
                 <td class="table-col-2"></td>
                 <td class="pl-5 h5">

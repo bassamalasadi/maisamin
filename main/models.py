@@ -85,10 +85,12 @@ class OrderItem(models.Model):
     quantity = models.IntegerField(default=1)
     # size of the product
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    # dunder method that returns a products' quantity
+
+    is_gluteen_free = models.BooleanField(default=False)
+    is_loctose_free = models.BooleanField(default=False)
 
     def __str__(self):
-        return f"{self.product.name} : qunatity = ({self.quantity}) : price = ({self.price})"
+        return f"{self.product.name} : qunatity = ({self.quantity}) : price = ({self.price}) : is_G = ({self.is_gluteen_free}) : is_L = ({self.is_loctose_free})"
 
     # to calculate the sum of the price for a specified quantity for a single product
     def get_total_product_price(self):
@@ -180,7 +182,6 @@ class Request(models.Model):
         return str(self.create)
 
     def get_absolute_url(self):
-        print(dir(self))
         return reverse("main:order-detail", kwargs={'pk': self.pk})
 
     class Meta:
