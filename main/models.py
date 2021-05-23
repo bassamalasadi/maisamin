@@ -93,12 +93,14 @@ class OrderItem(models.Model):
         return f"{self.product.name} : qunatity = ({self.quantity}) : price = ({self.price}) : is_G = ({self.is_gluteen_free}) : is_L = ({self.is_loctose_free})"
 
     # to calculate the sum of the price for a specified quantity for a single product
+    @property
     def get_total_product_price(self):
         return float(self.quantity * self.price)
 
     # to get the prices of the total product if has a discount on it or no
+    @property
     def get_final_price(self):
-        return self.get_total_product_price()
+        return self.get_total_product_price
 
     @property
     def get_product(self):
@@ -110,7 +112,7 @@ class OrderItem(models.Model):
 
     @property
     def get_item_detail(self):
-        return [self.get_product, self.get_quantity, self.get_total_product_price()]
+        return [self.get_product, self.get_quantity, self.get_total_product_price, self.is_gluteen_free, self.is_loctose_free]
 
     def is_ordered(self):
         if self.ordered:
@@ -136,10 +138,11 @@ class Order(models.Model):
         return self.user.username
 
     # The function will calculate the overall  prices for all products in : templates/order_summary.html
+    @property
     def get_total(self):
         total = 0
         for order_product in self.products.all():
-            total += order_product.get_final_price()
+            total += order_product.get_final_price
         return total
 
     @property

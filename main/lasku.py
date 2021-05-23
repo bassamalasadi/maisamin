@@ -19,7 +19,7 @@ class GenerateInvoice(FPDF):
         super().__init__()
 
     def header(self):
-        self.image('static_style/img/logo2.png', 10, 8, 25)
+        self.image('static/img/logo2.png', 10, 8, 25)
         self.set_font('courier', '', 16)
         self.cell(0, 10, 'Lasku', border=False, ln=1, align='C')
         self.ln(20)
@@ -111,9 +111,9 @@ def create_invoice(**kwargs):
 
     for value in pdf.store:
         pdf.set_x(20)
-        pdf.cell(130, 6, f'{value[0]}')
-        pdf.cell(20, 6, f'{value[1]}', align='C')
-        pdf.cell(20, 6, f'{value[2]}0', border=1, ln=1, align='C')
+        pdf.cell(130, 6, f'{value.product}')
+        pdf.cell(20, 6, f'{value.quantity}', align='C')
+        pdf.cell(20, 6, f'{value.price}0', border=1, ln=1, align='C')
     pdf.set_x(20)
     pdf.set_font('courier', 'B', 10)
     pdf.cell(150, 5, 'Toimitus', border=1, fill=1)

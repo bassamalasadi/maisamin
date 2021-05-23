@@ -2,12 +2,13 @@
 {% load static %}{% block content %}
 
 <main class="pt-5">
-  <div class="container wow fadeIn pt-5" >
+  <p class="text-center pt-5"style="font-family: 'Prompt', sans-serif;color:#636363; font-size:26px;">Kissa</p>
+  <hr class="w-25">
+  <div class="container wow" >
     <div class="row pt-5" >
-      <div class="col-md-8 mb-4 checkout-list" >
+      <div class="col-md-7 mb-4 checkout-list" >
         <div class="card" style="border-radius:24px">
-          <p class="my-2 text-center my-5 checks-text"style="font-family: Nosifer, cursive; color:#636363">Laskutustiedot</p>
-
+          <p class="text-center pt-4 checks-text"style="font-family: 'Prompt', sans-serif;color:#636363">Laskutustiedot</p>
           <hr>
           <form method="POST" class="card-body">
             {% csrf_token %}
@@ -25,7 +26,10 @@
             {{ form.email | as_crispy_field }}
             {{ form.phone | as_crispy_field }}
             {{ form.date | as_crispy_field }}
-            <p>Toimitamme</p>
+            <br>
+            <hr>
+            <br>
+            <p>Toimitamme &nbsp; <i class="fas fa-truck"></i></p>
             <select name="delivery" id="delivery" class="browser-default custom-select">
               <option value="0" id="0">Nouto (maksuton)</option>
               <option value="3.00" id="1">Jämsä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -41,7 +45,8 @@
                 7.00 &euro;</option>
             </select>
             <hr />
-            <h3>Maksuvaihtoehdot</h3>
+            <br>
+            <h3>Maksuvaihtoehdot &nbsp; <i class="fas fa-file-invoice"></i></h3>
 
             <div class="d-block my-3">
               {% for value, name in form.fields.payment_option.choices %}
@@ -51,14 +56,16 @@
               </div>
               {% endfor %}
             </div>
-            <button class="btn btn-lg btn-block w-50"  style="background-color:#BF9000 ;color:black;"  type="submit">
+            <hr>
+            <br>
+            <button class="btn btn-lg btn-block"  style="background-color:#BF9000 ;color:black;"  type="submit">
              <b> Lähetä Tilaus</b>
             </button>
           </form>
         </div>
       </div>
-      <div class="snippet">
-        <div class="col-md-4">
+      <div class="col-md-5">
+        <div class="snippet">
           {% include "order_snippet.html" %}
         </div>
       </div>

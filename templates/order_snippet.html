@@ -2,23 +2,39 @@
 <div class="">
   <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted" style="font-family: 'Prompt', sans-serif;">Ostoskorisi</span>
-    <span class="badge badge-danger badge-pill">{{ order.products.count }}</span>
+    <span class="badge badge-danger badge-pill">{{ order.count }}</span>
   </h4>
   <ul class="list-group mb-3 z-depth-1">
-    {% for order_item in order.products.all %}
+    {% for order_item in order %}
     <li class="list-group-item d-flex justify-content-between lh-condensed">
       <div>
         <span class="text-muted ">
           {{ order_item.quantity }}  &nbsp;
         </span>
         <small class="text-muted "><i>{{ order_item.product}}</i></small>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        {% if order_item.is_gluteen_free %}
+        <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Gluteeniton">
+        <span class="gluteen">G</span>
+        </span>
+        {% else %}
+        <span class="gl">G</span>
+        {% endif %}
+        &nbsp;&nbsp;
+        {% if order_item.is_loctose_free %}
+        <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Laktoositon">
+        <span class="loctose">L</span>
+        </span>
+        {% else %}
+        <span class="gl">L</span>
+        {% endif %}
       </div>
       <span class="text-muted h6" style="font-family: 'Prompt', sans-serif;">{{ order_item.get_final_price }} &euro;</span>
     </li>
     {% endfor %}
     <li class="list-group-item d-flex justify-content-between mt-2">
       <span class="h5" style="font-family: 'Prompt', sans-serif;">Yhteensä</span>
-      <strong class="h5" style="font-family: 'Prompt', sans-serif;">&nbsp;{{ order.get_total }}  &euro;</strong>
+      <strong class="h5" style="font-family: 'Prompt', sans-serif;">&nbsp;{{ object }}  &euro;</strong>
     </li>
   </ul>
 </div>

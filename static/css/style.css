@@ -9,7 +9,6 @@ header,
   font-size:12px;
   padding-left:5%;
 }
-
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
@@ -21,13 +20,13 @@ header,
     font-family: "Nosifer", cursive;
     width: 50%;
     left: 25%;
-    top: 15%;
+    top: 20%;
     margin: 0 auto;
   }
   .bgimg {
     position: sticky;
     background-size: cover;
-    top:10%;
+    margin-top: 10%;
     width: 100%;
     height: auto;
     filter: brightness(60%);
@@ -149,8 +148,6 @@ header,
     background-color:#BF9000;
     color:white;
     font-family: 'Lato', sans-serif;
-
-
     border-radius:14px 0px 14px 14px;
   }
 
@@ -219,18 +216,58 @@ header,
   }
   .table-col,
   .table-col-2{
-    display:none
+    display: none;
   }
-  /* .info{
+  .total-price{
     position: relative;
-    right: 5%;
-  } */
+    left:35%;
+    background: black;
+    color: white;
+    padding: 4px;
+    font-size: 25px;
+    border-radius:4px;
+  }
   .snippet{
     position: relative;
     width: 100%;
   }
+  .order-but{
+    position: relative;
+    left: 5%;
+  }
   .order-prod-text{
     font-size: 10px;
+  }
+  .gl{
+    visibility: hidden;
+  }
+  .gluteen{
+    padding: 3px 4px;
+    background-color: 	#5cb85c;
+    font-style: italic;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+  }
+  .loctose{
+    padding: 3px 5px;
+    background-color: #fcdf03;
+    font-style: italic;
+    font-size: 10px;
+    font-weight: bold;
+    color: 	#5cb85c;
+    border-radius: 50%;
+  }
+  .alert{
+   position: absolute;
+   z-index: 999;
+   top: 14%;
+   color:#BF9000;
+   background-color: black;
+   border-color:#BF9000;
+   border:solid;
+   padding:30px;
   }
 }
 
@@ -441,20 +478,53 @@ header,
     left: 10%;
   }
   .snippet{
-    position: absolute;
-    right: 1px;
+    position: relative;
     width: 100%;
+    z-index: -1;
   }
   .check-text{
     font-size: 30px;
   }
-  .table-col,
-  .table-col-2{
-
-  }
-  .checkout-list{
+  .total-price{
     position: relative;
-    left: 230px;
+    left:35%;
+    background: black;
+    color: white;
+    padding: 4px;
+    font-size: 25px;
+    border-radius:4px;
+  }
+  .gl{
+    visibility: hidden;
+  }
+  .gluteen{
+    padding: 3px 4px;
+    background-color: 	#5cb85c;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+  }
+  .loctose{
+    padding: 3px 5px;
+    background-color: #fcdf03;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: bold;
+    color: 	#5cb85c;
+    border-radius: 50%;
+  }
+  .alert{
+   position: absolute;
+   z-index: 999;
+   float: right;
+   top: 20%;
+   color:#BF9000;
+   background-color: black;
+   border-color:#BF9000;
+   border:solid;
+   padding:30px;
   }
 }
 
@@ -681,17 +751,43 @@ header,
     position: relative;
     margin-left: 30px;
   }
-  .checkout-list{
-    position: relative;
-    left: 230px;
-  }
   .snippet{
     position: absolute;
     right: 16%;
-    width: 80%;
+    width: 60%;
   }
   .check-text{
     font-size: 50px;
+  }
+  .gl{
+    visibility: hidden;
+  }
+  .total-price{
+    position: relative;
+    left:45%;
+    background: black;
+    color: white;
+    padding: 5px;
+    font-size: 30px;
+    border-radius:4px;
+  }
+  .gluteen{
+    padding: 3px 6px;
+    background-color: 	#5cb85c;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
+    border-radius: 50%;
+  }
+  .loctose{
+    padding: 3px 7px;
+    background-color: #fcdf03;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: bold;
+    color: 	#5cb85c;
+    border-radius: 50%;
   }
   .alert{
    position: relative;
@@ -705,7 +801,7 @@ header,
    padding:30px;
   }
   .cart{
-    position: relative;
+    position: absolute;
     z-index: 999;
     float: right;
     top: 20%;
