@@ -3,7 +3,7 @@
   <div class="container dark-grey-text mt-5">
     <div class="row wow fadeIn">
       <div class="col-md-6 mb-4" style="border: none; border-radius: 40px;">
-        <img src="{{ product.image1.url }}" class="card-img-top img-thumbnail" />
+        <img src="{{ product.image1.url }}" class="card-img-top img-thumbnail prod-img" />
       </div>
 
       <div class="col-md-6 mb-4">
@@ -100,17 +100,17 @@
     </div>
   </div>
   <script>
+    function convert_to_float(a) {
+        var floatValue = +(a);
+        return floatValue;
+    }
     function myFunction() {
-      var x = parseInt(document.getElementById("price").value);
+      var x = document.getElementById("price").value;
       var y = parseInt(document.getElementById("amount").value);
-      var g = 0
-      var l = 0
-      if (document.getElementById("gluteen").checked){
-        g = 5.00
-      }
-      if (document.getElementById("laktoos").checked){
-        l = 5.00
-      }
+      x = x.replace(',', '.')
+      x = Number.parseFloat(x)
+      var g = (document.getElementById("gluteen").checked) ? 5.00 : 0
+      var l = (document.getElementById("laktoos").checked) ? 5.00 : 0
       if (Number.isNaN(x) == false){
         x = x + g + l
         res = parseFloat(x * y).toFixed(2)

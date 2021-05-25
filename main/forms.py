@@ -49,12 +49,13 @@ class CheckoutForm(forms.Form):
     phone = forms.CharField(required=True,
                             label='',
                             widget=forms.TextInput(attrs={'placeholder': 'Puhelin'}))
-    date = forms.DateTimeField(input_formats=['%d/%m/%Y %H:%M'],
-                               required=True,
+    date = forms.DateTimeField(required=True,
+                               input_formats=['%d/%m/%Y %H:%M'],
                                label='',
                                widget=forms.TextInput(attrs={'placeholder': 'Valitse noutopäivä',
                                                              'start_date': x,
                                                              'readonly':'readonly'}))
+
 
     payment_option = forms.ChoiceField(required=True,
                                        label='',

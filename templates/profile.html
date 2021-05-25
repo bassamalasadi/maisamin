@@ -12,13 +12,13 @@
 
           <form class="update" method="POST">
             {% csrf_token %}
-            <p>Muokka Käyttäjän tietoja</p>
+            <p>Muokkaa käyttäjän tietoja</p>
             <hr>
             <label for="">Käyttäjätunnus</label><br>
-            <input class="form-control w-50" type="text" name="username" value="{{ user.username }}">
+            <input class="form-control w-50" type="text" pattern="[A-Za-z0-9]+{3}" placeholder="Ainakin kolme kirjainta" name="username" value="{{ user.username }}">
             <br>
             <label for="">Sähköpostiosoite</label><br>
-            <input class="form-control w-50" type="text" name="email" value="{{ user.email }}">
+            <input class="form-control w-50" type="email" name="email" value="{{ user.email }}">
             <br>
             <hr>
             <br>

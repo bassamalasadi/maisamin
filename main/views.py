@@ -31,7 +31,6 @@ from .lasku import create_invoice
 
 from tabulate import tabulate
 
-
 class SuperUserCheck(UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.is_superuser
@@ -49,13 +48,11 @@ def modify_date(value):
 
     return (year, month, day)
 
-
 def is_valid_form(values):
     for field in values:
         if field == '' or len(str(field)) < 3:
             return False
     return True
-
 
 def queryset_to_list(values):
     new_str = ""
@@ -64,12 +61,19 @@ def queryset_to_list(values):
         new_str = new_str + value + ' - ' + '\n'
     return new_str
 
+def order_list_for_email(order_item):
+    order_email =[]
+    for order in list(order_item):
+        g = "Gluteeniton" if order.is_gluteen_free else ""
+        l = "Laktoositon" if order.is_loctose_free else ""
+        res = [str(order.product)+ " " + g + " "+ l, order.quantity, "{:.2f}".format(order.get_total_product_price)]
+        order_email.append(res)
+    return order_email
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:
             order_item = OrderItem.objects.filter(user=self.request.user, ordered=False)
-            order_detail = Order.objects.filter(user=self.request.user, ordered=False)
             total = 0
             for order in order_item:
                 total += float(order.get_final_price)
@@ -94,14 +98,12 @@ class CheckoutView(View):
             for order in order_item:
                 amount += float(order.get_final_price)
             amount = "{:.2f}".format(amount)
-            order_detail = Order.objects.get(user=self.request.user, ordered=False)
-            product_order = order_detail.get_items_detail
             if float(amount) <= 0:
                 messages.warning(self.request, "Empty cart")
                 return redirect("main:checkout")
-            if request.method == 'POST':
+
+            if request.method == 'POST' and form.is_valid:
                 req = request.POST
-                year, month, day = modify_date(req.get('date'))
                 firstName = req.get('firstName')
                 lastName = req.get('lastName')
                 city = req.get('city')
@@ -112,9 +114,15 @@ class CheckoutView(View):
                 email = req.get('email')
                 address = str(city) + ' - ' + str(street_address) + \
                     ' - ' + str(apartment_address)
-                date = datetime(year, month, day)
-                delivery_date = date - timedelta(days=2)
-                due_date = delivery_date.strftime('%Y-%m-%d')
+                if req.get('date'):
+                    year, month, day = modify_date(req.get('date'))
+                    date = datetime(year, month, day)
+                    delivery_date = date - timedelta(days=2)
+                    due_date = delivery_date.strftime('%Y-%m-%d')
+                else:
+                    messages.warning(self.request, "Valitse noutopäivä")
+                    return redirect("main:checkout")
+
                 delivery = req.get('delivery')
                 refrence = str(datetime.timestamp(
                     datetime.now())).replace(".", "")
@@ -122,24 +130,24 @@ class CheckoutView(View):
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
                         float(req.get('delivery'))
-                vat = float(amount) * 0.24
-                final = amount + vat
-                final = "{:.2f}".format(final)
-                vat = "{:.2f}".format(vat)
+                # vat = float(amount) * 0.24
+                # final = amount + vat
+                # final = "{:.2f}".format(final)
+                # vat = "{:.2f}".format(vat)
                 amount = "{:.2f}".format(amount)
+                print("amount", amount)
                 if req.get('payment_option') == 'Invoice':
                     pay = f"""
                         Saajan IBAN: FI19 5091 0320 1303 46  \n
                         Viitenumero: {refrence} \n
-                        Yhteensä: {final}0 EURO \n
+                        Yhteensä: {amount} EURO \n
                         Eräpäivä: {due_date} \n
                     """
                 if is_valid_form([firstName, lastName, city, street_address,
                                   postal, phone, email,
                                   date, pay]):
-                    order_list = queryset_to_list(
-                        list(order_item))
-
+                    order_list = queryset_to_list(list(order_item))
+                    order_email = order_list_for_email(order_item)
                     req = Request.objects.create(
                         name=firstName,
                         address=address,
@@ -157,12 +165,12 @@ class CheckoutView(View):
                         lname= lastName,
                         address=address,
                         email=email,
-                        store=order_item,
-                        totel=amount,
+                        store=order_email,
+                        total=amount,
                         refrence=refrence,
                         delivery_way=delivery,
-                        vat=vat,
-                        final=final
+                        # vat=vat,
+                        # final=final
                     )
                     subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
                     message = f""" Moi, {lastName}  \n
@@ -173,10 +181,10 @@ Osoitteeseen : {address} \n
 ____________________________________________________________________________________________________ \n
 Tilaus: \n
 
-{tabulate(product_order,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='rst', colalign=("right",))}
+{tabulate(order_email,headers=["                 Kuvaus                  ","  Määrä  ","   Yhteensä   "], tablefmt='rst', colalign=("left",))}
 
 ____________________________________________________________________________________________________ \n
-Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {order_detail.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
+Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {req.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
 tai sähköpostiosoitteeseen:  Info@maisaminherkku.fi  \n
 ____________________________________________________________________________________________________ \n
 {pay}
@@ -192,10 +200,10 @@ Kiitos
                     email.send(fail_silently=False)
 
                     try:
-                        # os.remove(f'{firstName} {lastName}.pdf')
+                        os.remove(f'{firstName} {lastName}.pdf')
                         OrderItem.objects.filter(user=self.request.user).delete()
                     except:
-                        pass
+                        HttpResponseBadRequest()
                 else:
                     messages.warning(self.request, "Virheellinen muoto, kentän tulee sisältää enemmän kuin kaksi merkkiä eikä olla tyhjä")
                     return redirect("main:checkout")
@@ -288,19 +296,25 @@ class Profile(LoginRequiredMixin, View):
                 user = User.objects.get(username=self.request.user)
                 if user.username != username or user.email != email:
                     try:
-                        user.username = username
-                        user.email = email
-                        user.save()
-                        messages.success(
-                            self.request, "Käyttäjätunnuksen tai sähköpostiosoitteen muuttaminen onnistui")
-                        return redirect("main:profile")
+                        if len(username) >= 3:
+                            user.username = username
+                            user.email = email
+                            user.save()
+                            messages.success(
+                                self.request, "Muutokset tallennettu")
+                            return redirect("main:profile")
+                        else:
+                            messages.success(
+                                self.request, "Käyttäjätunnuksen tulee olla vähintään kolme kirjainta")
+                            return redirect("main:profile")
                     except:
                         messages.success(
-                            self.request, "käyttäjänimi tai sähköpostiosoite on jo olemassa")
+                            self.request, "Käyttäjätunnus tai sähköpostiosoite on varattu.")
                         return redirect("main:profile")
+
                 else:
                     messages.warning(
-                        self.request, "käyttäjänimi ja sähköpostiosoite eivät muutu")
+                        self.request, "Käyttäjän tietoja ei muutettu.")
                 return redirect("main:profile")
             if 'delete' in request.POST:
                 try:
