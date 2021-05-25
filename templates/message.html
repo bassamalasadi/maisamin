@@ -5,6 +5,7 @@
   <div class="jumbotron">
     <h1>Kiitos</h1>
     <p class="lead">Sinut ohjataan pääsivulle viiden sekunnin kuluttua, kun taas saat sähköpostin, jossa on toimitusaika ja tilauksen harkinta.</p>
+    <p class="lead">Muista tarkistaa <strong>roskapostisuodattimesi</strong>. Jos et saa varmistusviestiä muutaman minuutin sisällä, tarkista roskapostisi ja merkkaa viesti muuksi kuin roskapostiksi. Tämän pitäisi mahdollistaa sähköpostin saapuminen normaalisti tulevaisuudessa.</p>
     <a class="btn mt-3 order-but" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" href="{% url 'main:home' %}" role="button"
       >Etusivu &raquo;</a
     >
@@ -14,7 +15,7 @@
       window.location.href = "{% url 'main:home' %}";
     }
 
-    setTimeout(redirect, 5000);
+    setTimeout(redirect, 12000);
   </script>
 </main>
 <br><br><br><br><br><br><br><br><br><br>

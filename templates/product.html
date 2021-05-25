@@ -1,9 +1,13 @@
-{% extends "base.html" %} {% load crispy_forms_tags %}  {% block content %}
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load ratings %} {% block content %}
 <main class="mt-5 pt-4">
   <div class="container dark-grey-text mt-5">
     <div class="row wow fadeIn">
       <div class="col-md-6 mb-4" style="border: none; border-radius: 40px;">
+
         <img src="{{ product.image1.url }}" class="card-img-top img-thumbnail prod-img" />
+        <br>
+        <hr>
+        <span class="">{% ratings product %}</span>
       </div>
 
       <div class="col-md-6 mb-4">
@@ -12,19 +16,11 @@
             {% csrf_token %}
             <br>
 
-            <span class="h3 font-weight-bold" style="font-family: cursive;">{{product.name}} </span>
-            {% if product.category == 'cake' or product.category == 'cheesecake' %}
-              <span class="float-right badge bg-dark" style="font-size: 2em; color:white" >
-              <span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
-            {% else %}
-              <span class="float-right badge bg-dark" style="font-size: 2em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
-              <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
-            {% endif %}
-            <br>
+            <span class="h3 font-weight-bold" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
             <br>
             <hr>
-            <p class=" font-weight-bold" style="font-family: cursive;">Ainesosat</p>
-            <p style="font-family: cursive;">{{ product.description|linebreaks }}</p>
+            <p class=" font-weight-bold" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
+            <p style="font-family: 'Indie Flower', cursive;">{{ product.description|linebreaks }}</p>
             <br />
             <hr>
 
@@ -33,13 +29,13 @@
                   {% if product.is_gluteen_free %}
                     <span class="text-dark rounded">
                       <input type="checkbox" id="gluteen" name="gluteen" value="5" onchange="myFunction()">
-                      <label for="gluteen">Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <label class="swingHorizontal" for="gluteen">Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
                     </span>
                   {% endif %}
                   {% if product.is_loctose_free %}
                     <span class="text-dark rounded">
                       <input type="checkbox" id="laktoos" name="laktoos" value="5" onchange="myFunction()">
-                      <label for="laktoos">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <label class="swingHorizontal" for="laktoos">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
                     </span>
                   {% endif %}
                   <hr>
@@ -50,7 +46,16 @@
             {% if product.category != 'cake' and product.category != 'cheesecake' %}
               <input class="form-control w-25" type="number" name="amount-2" value="1" min="1" step="1" max=50 oninput="validity.valid||(value='');" placeholder="1">
             {% endif %}
-
+            {% if product.category == 'cake' or product.category == 'cheesecake' %}
+              <span class="float-right badge bg-dark" style="font-size: 2em; color:white" >
+              <span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
+            {% else %}
+            <br>
+              <span class="badge bg-dark " style="font-size: 2em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
+              <br>
+              <br><br>
+              <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
+            {% endif %}
             {% if product.category == 'cake' or product.category == 'cheesecake' %}
               {% if product.variation_set.all %}
               <select class="browser-default custom-select custom-select-lg mb-3 w-25" name="amount" id="amount" onchange="myFunction()">
@@ -74,15 +79,15 @@
                 </select>
               {% endif %}
             <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
-              <i class="fas fa-shopping-cart ml-1"></i>
+              <i class="fas fa-cart-plus ml-1"></i>
             </button>
             {% else %}
             <!-- <a href="{{ product.get_add_to_cart_url }}" class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;">
               Lisää ostoskoriin
-              <i class="fas fa-shopping-cart ml-1"></i>
+              <i class="fas fa-cart-plus ml-1"></i>
             </a> -->
             <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" id="addtocart-2">Lisää ostoskoriin
-              <i class="fas fa-shopping-cart ml-1"></i>
+              <i class="fas fa-cart-plus ml-1"></i>
             </button>
             {% endif%}
           </div>
@@ -93,9 +98,9 @@
     <hr />
     <div class="row d-flex justify-content-center wow fadeIn rounded">
       <div class="col-md-6 text-center bg-white">
-        <h4 class="my-4 h4" style="font-family: cursive;">Ravintosisältö</h4>
+        <h4 class="my-4 h4" style="font-family: 'Indie Flower', cursive;">Ravintosisältö</h4>
 
-        <p style="font-family: cursive;">{{product.additional_info}}</p>
+        <p style="font-family: 'Indie Flower', cursive;">{{product.additional_info}}</p>
       </div>
     </div>
   </div>

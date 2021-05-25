@@ -113,7 +113,7 @@ def create_invoice(**kwargs):
         pdf.set_x(20)
         pdf.cell(130, 6, f'{value[0]}')
         pdf.cell(20, 6, f'{value[1]}', align='C')
-        pdf.cell(20, 6, f'{value[2]}0', border=1, ln=1, align='C')
+        pdf.cell(20, 6, f'{value[2]}', border=1, ln=1, align='C')
 
     pdf.set_x(20)
     pdf.set_font('courier', 'B', 10)

@@ -13,24 +13,26 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.js" integrity="sha256-/7FLTdzP6CfC1VBAj/rsp3Rinuuu9leMRGd354hvk0k=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <!-- <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet" /> -->
+
 
     <!-- bootstrap -->
     <link href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" rel="stylesheet"/>
-    <!-- <link href="{% static 'css/mdb.min.css' %}" rel="stylesheet" />
-    <link href="{% static 'css/app.css' %}" rel="stylesheet">
-    <link href="{% static 'css/style.min.css' %}" rel="stylesheet" /> -->
+
     <link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}"/>
 
     <!-- google fonts -->
     <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap" rel="stylesheet">b
+    <link href="https://fonts.googleapis.com/css2?family=Miltonian+Tattoo&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Prompt&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Lato:ital@1&family=Miltonian+Tattoo&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
 
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
@@ -42,6 +44,14 @@
 
   {% include "navbar.html" %}
   <body>
+    <!-- <div class='cookie-banner' style="">
+      <h3>Käytämme evästeitä</h3>
+      <p>
+        Käytämme evästeitä ja muita seurantateknologioita parantaaksemme käyttäjäkokemusta verkkosivustollamme, näyttääksemme sinulle personoituja sisältöjä ja mainoksia, analysoidaksemme verkkoliikennettä sekä lisätäksemme ymmärrystämme käyttäjiemme sijainnista.
+        <a class="btn" style="color:#FB9000;" href='https://www.maisaminherkku.fi/privacy-policy/'>Tietosuojaseloste</a>
+      </p>
+      <button class='close btn' style="background-color:#FB9000, color:black;">Hyväksyä</button>
+    </div> -->
 
       {% if messages %} {% for message in messages %}
         <div
@@ -50,12 +60,26 @@
           {{ message }}
         </div >
       {% endfor %} {% endif %}
+
       <!-- {% include "cart.html" %} -->
+    <div class="">
+      {% include "kissa.html" %}
+    </div>
 
     {% block content %}
      {% endblock content %}
   </body>
   {% include "footer.html" %}
+  <!-- <script>
+  if (window.localStorage.getItem("cookieSeen") != "shown") {
+    $(".cookie-banner").delay(2000).fadeIn();
+    window.localStorage.setItem("cookieSeen","shown")
+  };
+  $(".close").click(function() {
+    $(".cookie-banner").fadeOut();
+  })
+
+  </script> -->
   <script>
     $(function () {
       var date = new Date()

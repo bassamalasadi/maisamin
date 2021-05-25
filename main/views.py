@@ -135,20 +135,14 @@ class CheckoutView(View):
                 # final = "{:.2f}".format(final)
                 # vat = "{:.2f}".format(vat)
                 amount = "{:.2f}".format(amount)
-                print("amount", amount)
-                if req.get('payment_option') == 'Invoice':
-                    pay = f"""
-                        Saajan IBAN: FI19 5091 0320 1303 46  \n
-                        Viitenumero: {refrence} \n
-                        Yhteensä: {amount} EURO \n
-                        Eräpäivä: {due_date} \n
-                    """
+                deliv = 'Toimitus : ' + delivery + ' EURO' if float(delivery) > 0 else ''
+
                 if is_valid_form([firstName, lastName, city, street_address,
                                   postal, phone, email,
                                   date, pay]):
                     order_list = queryset_to_list(list(order_item))
                     order_email = order_list_for_email(order_item)
-                    req = Request.objects.create(
+                    req_order = Request.objects.create(
                         name=firstName,
                         address=address,
                         phone=phone,
@@ -158,33 +152,39 @@ class CheckoutView(View):
                         delivery=date,
                         delivery_price=delivery,
                     )
-
-                    create_invoice(
-                        delivery_date=due_date,
-                        fname=firstName,
-                        lname= lastName,
-                        address=address,
-                        email=email,
-                        store=order_email,
-                        total=amount,
-                        refrence=refrence,
-                        delivery_way=delivery,
-                        # vat=vat,
-                        # final=final
-                    )
+                    if req.get('payment_option') == 'Invoice':
+                        pay = f"""
+                            Saajan IBAN: FI19 5091 0320 1303 46  \n
+                            Viitenumero: {refrence} \n
+                            Yhteensä: {amount} EURO \n
+                            Eräpäivä: {due_date} \n
+                        """
+                        create_invoice(
+                            delivery_date=due_date,
+                            fname=firstName,
+                            lname= lastName,
+                            address=address,
+                            email=email,
+                            store=order_email,
+                            total=amount,
+                            refrence=refrence,
+                            delivery_way=delivery,
+                            # vat=vat,
+                            # final=final
+                        )
                     subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
                     message = f""" Moi, {lastName}  \n
 Kiitos, että valitsit Maisamin Herkun. \n
-Tilauksesi numero : {req.id} \n
+Tilauksesi numero : {req_order.id} \n
 Toimitetaan : {str(date)[0:10]} \n
 Osoitteeseen : {address} \n
 ____________________________________________________________________________________________________ \n
 Tilaus: \n
 
-{tabulate(order_email,headers=["                 Kuvaus                  ","  Määrä  ","   Yhteensä   "], tablefmt='rst', colalign=("left",))}
-
+{tabulate(order_email,headers=["                 Kuvaus                  ","           Määrä          ","         Yhteensä         "], tablefmt='rst', colalign=("left",))}
+{deliv}
 ____________________________________________________________________________________________________ \n
-Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {req.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
+Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {req_order.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
 tai sähköpostiosoitteeseen:  Info@maisaminherkku.fi  \n
 ____________________________________________________________________________________________________ \n
 {pay}
@@ -196,11 +196,13 @@ Kiitos
                         subject, message, settings.EMAIL_HOST_USER, [
                             recepient, settings.EMAIL_HOST_USER],
                     )
-                    email.attach_file(f'{firstName} {lastName}.pdf')
+                    if req.get('payment_option') == 'Invoice':
+                        email.attach_file(f'{firstName} {lastName}.pdf')
                     email.send(fail_silently=False)
 
                     try:
-                        os.remove(f'{firstName} {lastName}.pdf')
+                        if req.get('payment_option') == 'Invoice':
+                            os.remove(f'{firstName} {lastName}.pdf')
                         OrderItem.objects.filter(user=self.request.user).delete()
                     except:
                         HttpResponseBadRequest()

@@ -9,9 +9,111 @@ header,
   font-size:12px;
   padding-left:5%;
 }
+.swingHorizontal{
+    color:hsl(222, 25%, 14%);
+}
+
+.swingHorizontal:hover
+{
+    animation: swingHorizontal 1s ease;
+    animation-iteration-count: 1;
+}
+
+@keyframes swingHorizontal
+{
+    15%
+    {
+        transform: translateX(5px);
+    }
+    30%
+    {
+        transform: translateX(-5px);
+    }
+    50%
+    {
+        transform: translateX(3px);
+    }
+    65%
+    {
+        transform: translateX(-3px);
+    }
+    80%
+    {
+        transform: translateX(2px);
+    }
+    100%
+    {
+        transform: translateX(0);
+    }
+}
+
+
+.pulseBtn {
+    background-color: hsl(222, 100%, 95%);
+    color: hsl(243, 80%, 62%);
+    border-radius: 6px;
+    box-shadow: 0 0 0 0 rgba(230, 237, 255, 0.7);
+    animation: pulse 2.95s infinite cubic-bezier(0.66, 0, 0, 1);
+}
+
+@keyframes pulse {
+    to {
+      box-shadow: 0 0 0 30px rgba(218, 196, 134, 0);
+    }
+}
+/* .cookie-banner {
+  position: fixed;
+  bottom: 40px;
+  left: 10%;
+  right: 10%;
+  width: 80%;
+  padding: 15px 20px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: black;
+  color:#BF9000;
+  border-radius: 5px;
+  box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  z-index: 2;
+  opacity: 0.9;
+}
+.close {
+  height: 20px;
+  background-color: #777;
+  top:5px;
+  border: none;
+  color: white;
+  border-radius: 2px;
+  cursor: pointer;
+} */
+
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
+  .kissa{
+    position: fixed;
+    bottom: 35px;
+    left: 71%;
+    right: 10%;
+    padding: 17px 18px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #BF9000;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0.8;
+  }
+  .kissa-text{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    bottom:28px;
+    background-color:#BF9000;
+    color:white;
+    padding: 5px 10px;
+    border-radius:50%;
+  }
   .maintext {
     position: absolute;
     font-size: 4vw;
@@ -64,8 +166,6 @@ header,
     height: 100%;
     filter: brightness(100%);
   }
-
-
   a:hover,
   a:visited,
   a:link,
@@ -81,8 +181,9 @@ header,
     left:10%;
     margin-left: 40px;
     margin-top: 20px;
-    transition: ease-in-out 1s;
+    transition: ease-in-out 1s,
   }
+
   .prodtext{
     position: relative;
     left: 10%;
@@ -110,13 +211,6 @@ header,
     z-index: 1;
   }
 
-  .imgcard:hover .overlay {
-    opacity: 1;
-    cursor: pointer;
-    border-radius: 0px;
-
-  }
-
   .imgtext {
     position: absolute;
     padding-top: 1%;
@@ -139,11 +233,7 @@ header,
     text-align: center;
     transition: ease-in-out 1s;
   }
-  .imgtext:hover {
-    background-color: #be2f55;
-    color: white;
-    transition: ease-in-out 1s;
-  }
+
   .navico{
     background-color:#BF9000;
     color:white;
@@ -220,7 +310,7 @@ header,
   }
   .total-price{
     position: relative;
-    left:35%;
+    left:28%;
     background: black;
     color: white;
     padding: 4px;
@@ -243,21 +333,21 @@ header,
   }
   .gluteen{
     padding: 3px 4px;
-    background-color: 	#5cb85c;
+    background-color:#669474;
     font-style: italic;
     font-size: 10px;
     font-weight: bold;
     color: white;
-    border-radius: 50%;
+    border-radius: 30%;
   }
   .loctose{
     padding: 3px 5px;
-    background-color: #fcdf03;
+    background-color: #817640;
     font-style: italic;
     font-size: 10px;
     font-weight: bold;
-    color: 	#5cb85c;
-    border-radius: 50%;
+    color:white;
+    border-radius: 30%;
   }
   .alert{
    position: absolute;
@@ -273,6 +363,30 @@ header,
 
 @media only screen and (min-width: 601px){
   /* For tablets: */
+  .kissa{
+    position: fixed;
+    bottom: 15%;
+    left: 80%;
+    right: 10%;
+    padding: 17px 20px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #BF9000;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0.8;
+  }
+  .kissa-text{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    bottom:28px;
+    background-color:#BF9000;
+    color:white;
+    padding: 5px 10px;
+    border-radius:50%;
+  }
   .maintext {
     position: absolute;
     font-size: 4vw;
@@ -341,7 +455,7 @@ header,
     height: 260px;
     margin-left: 40px;
     margin-top: 20px;
-    transition: ease-in-out 1s;
+    transition: 1s;
   }
   .prodtext{
     position: relative;
@@ -499,21 +613,21 @@ header,
   }
   .gluteen{
     padding: 3px 4px;
-    background-color: 	#5cb85c;
+    background-color:#669474;
     font-style: italic;
     font-size: 13px;
     font-weight: bold;
     color: white;
-    border-radius: 50%;
+    border-radius: 30%;
   }
   .loctose{
     padding: 3px 5px;
-    background-color: #fcdf03;
+    background-color: #817640;
     font-style: italic;
     font-size: 13px;
     font-weight: bold;
-    color: 	#5cb85c;
-    border-radius: 50%;
+    color:white;
+    border-radius: 30%;
   }
   .alert{
    position: absolute;
@@ -531,6 +645,30 @@ header,
 
 @media only screen and (min-width: 992px){
   /* For desktop: */
+  .kissa{
+    position: fixed;
+    bottom: 35px;
+    left: 94%;
+    right: 2%;
+    padding: 17px 18px;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #BF9000;
+    border-radius: 50%;
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+    z-index: 2;
+    opacity: 0.8;
+  }
+  .kissa-text{
+    position: relative;
+    font-size: 20px;
+    font-weight: 600;
+    bottom:28px;
+    background-color:#BF9000;
+    color:white;
+    padding: 5px 10px;
+    border-radius:50%;
+  }
   .maintext {
     position: absolute;
     font-size: 4vw;
@@ -597,7 +735,11 @@ header,
     height: 260px;
     margin-left: 40px;
     margin-top: 20px;
-    transition: ease-in-out 1s;
+    transition: ease-in-out 1s linear;
+    -o-transition: ease-in-out 1s linear;
+    -ms-transition: ease-in-out 1s linear;
+    -moz-transition: ease-in-out 1s linear;
+    -webkit-transition: ease-in-out 1s linear;
   }
   .prodtext{
     position: relative;
@@ -605,7 +747,7 @@ header,
   }
   .mainimg {
     position: relative;
-    width: 270px; /* You can set the dimensions to whatever you want */
+    width: 270px;
     height: 270px;
     object-fit: cover;
     padding: 10px;
@@ -622,15 +764,29 @@ header,
     opacity: 0;
     transform: translateY(100%);
     background-color: hsla(0, 0%, 100%, 0.9);
-    transition: ease-in-out 1s, opacity 0.1;
+    transition: 1s;
+    -o-transition: 1s;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -webkit-transition: 1s;
     z-index: 1;
   }
-
-  .imgcard:hover .overlay {
+  .overlay:hover{
+    transition: 1s;
+    -o-transition: 1s;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -webkit-transition: 1s;
+  }
+  .imgcard:hover {
     opacity: 1;
     cursor: pointer;
     border-radius: 0px;
-
+    transition: 1s;
+    -o-transition: 1s;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -webkit-transition: 1s;
   }
 
   .imgtext {
@@ -653,12 +809,11 @@ header,
     -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-    transition: ease-in-out 1s;
+
   }
   .imgtext:hover {
     background-color: #be2f55;
     color: white;
-    transition: ease-in-out 1s;
   }
   .navico{
     background-color:#BF9000;
@@ -773,21 +928,21 @@ header,
   }
   .gluteen{
     padding: 3px 6px;
-    background-color: 	#5cb85c;
+    background-color:#669474;
     font-style: italic;
     font-size: 18px;
     font-weight: bold;
     color: white;
-    border-radius: 50%;
+    border-radius: 30%;
   }
   .loctose{
     padding: 3px 7px;
-    background-color: #fcdf03;
+    background-color: #817640;
     font-style: italic;
     font-size: 18px;
     font-weight: bold;
-    color: 	#5cb85c;
-    border-radius: 50%;
+    color:white;
+    border-radius: 30%;
   }
   .alert{
    position: relative;

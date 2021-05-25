@@ -13,7 +13,8 @@ urlpatterns = [
     path("password_reset", auth_views.PasswordResetView.as_view(template_name="account_reset_password"),
          name="password_reset"),
     path('', include('main.urls', namespace='main')),
-    
+    path('ratings/', include('star_ratings.urls', namespace='ratings')),
+
 ]
 
 if settings.DEBUG:
