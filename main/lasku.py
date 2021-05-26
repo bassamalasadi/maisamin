@@ -7,6 +7,8 @@ class GenerateInvoice(FPDF):
     def __init__(self, *args, **kwargs):
         self.date = date.today()
         self.delivery_date = kwargs.get('delivery_date', 'Error')
+        self.user_id = kwargs.get('user_id', 'Error')
+        self.lasku_id = kwargs.get('lasku_id', 'Error')
         self.fname = kwargs.get('fname', 'Error')
         self.lname = kwargs.get('lname', 'Error')
         self.address = kwargs.get('address', 'Error')
@@ -20,8 +22,9 @@ class GenerateInvoice(FPDF):
 
     def header(self):
         self.image('static/img/logo2.png', 10, 8, 25)
-        self.set_font('courier', '', 16)
-        self.cell(0, 10, 'Lasku', border=False, ln=1, align='C')
+        self.set_font('courier', 'B', 20)
+        self.cell(0, 10, 'Maisamin Herkku', border=False, ln=1, align='C')
+        self.image(f'{self.fname} {self.lname}.jpg', 162, 75, 45)
         self.ln(20)
 
     def footer(self):
@@ -34,12 +37,12 @@ class GenerateInvoice(FPDF):
         self.cell(20, 10, '    Saajan ', border=1)
         self.set_font('courier', '', 10)
         self.cell(
-            165, 10, """  Osuuspankki                         FI03 1025 3000 2593 51""", border=1, ln=1)
+            165, 10, """  S-Pankki                         IBAN: FI32 3939 0054 3954 05""", border=1, ln=1)
         self.set_x(10)
         self.set_font('courier', '', 7)
-        self.cell(20, 10, '     Saaja  ', border=1)
+        self.cell(20, 10, 'Saaja ', border=1)
         self.set_font('courier', 'B', 10)
-        self.cell(65, 10, '  MAISAMIN HERKKU Oy', border=1, )
+        self.cell(65, 10, '  Maisamin Herkku', border=1, )
         self.set_x(95)
         self.set_font('courier', '', 10)
         self.cell(
@@ -57,12 +60,14 @@ class GenerateInvoice(FPDF):
         self.cell(65, 10, f'{self.fname} {self.lname}', align='C')
         self.line(30, 272, 95, 272)
         self.set_font('courier', '', 7)
-        self.cell(20, 10, ' Eräpäivä ', border=1)
+        self.cell(20, 10, """ Eräpäivä \r\n Förfallodag """, border=1)
         self.set_font('courier', 'B', 12)
         self.cell(40, 10, f'  {self.delivery_date}  ', border=1, align='R')
         self.cell(40, 10, f'   {self.total} ', border=1, align='R')
         self.set_font('courier', '', 7)
-        self.cell(10, 10, 'EURO')
+        self.cell(10, 10, 'EURO', ln=1)
+
+
 
 
 def create_invoice(**kwargs):
@@ -71,6 +76,7 @@ def create_invoice(**kwargs):
 
     pdf.line(10, 30, 210, 30)
     pdf.set_font('courier', '', 8)
+    pdf.cell(0, 3, 'Maisamin Herkku', ln=1)
     pdf.cell(0, 3, 'Asessorintie 2 11', ln=1)
     pdf.cell(0, 3, '32100 Jämsä', ln=1)
     pdf.cell(0, 3, 'maisaminherkku.fi', ln=1)
@@ -80,17 +86,20 @@ def create_invoice(**kwargs):
 
     pdf.set_font('courier', 'B', 11)
     pdf.set_fill_color(220, 220, 220)
-    pdf.cell(0, 10, f'Lasku:', ln=1, fill=1)
+    pdf.cell(0, 10, f'LASKU', ln=1, fill=1)
     pdf.set_font('courier', '', 10)
-    pdf.cell(0, 5, f'Laskun päivöys: {date.today()}', ln=1)
-    pdf.cell(0, 5, f'Eräpäivä: {pdf.delivery_date}', ln=1)
+    pdf.cell(0,5, f'Asiakasnumero                    {pdf.user_id}', ln=1)
+    pdf.cell(0,5, f'Laskunumero                      {pdf.lasku_id}', ln=1)
+    pdf.cell(0, 5, f'laskunpäivämäärä                 {date.today()}', ln=1)
+    pdf.cell(0, 5, f'Maksutapa                        Lasku', ln=1)
+    pdf.cell(0, 5, f'Eräpäivä                         {pdf.delivery_date}', ln=1)
     pdf.ln()
 
     # payer
 
     pdf.set_fill_color(210, 210, 210)
     pdf.set_font('courier', 'B', 11)
-    pdf.cell(0, 10, 'Maksaja', ln=1, fill=1)
+    pdf.cell(0, 10, 'MAKSAJA', ln=1, fill=1)
     pdf.set_font('courier', '', 9)
     pdf.cell(0, 5, f'ATTN:{pdf.fname} {pdf.lname}', ln=1)
     pdf.cell(0, 5, f'{pdf.address}', ln=1)
@@ -102,35 +111,35 @@ def create_invoice(**kwargs):
     # products
 
     pdf.set_x(20)
-    pdf.set_fill_color(240, 240, 240)
+    pdf.set_fill_color(250, 250, 250)
     pdf.set_font('courier', 'B', 10)
-    pdf.cell(130, 7, 'Kuvaus', border=1, fill=1)
-    pdf.cell(20, 7, 'Määrä', border=1, fill=1)
-    pdf.cell(20, 7, 'Yhteensä', border=1, ln=1, align='C', fill=1)
+    pdf.cell(120, 7, 'TUOTE', border=1, fill=1)
+    pdf.cell(20, 7, ' KPL', border=1, fill=1)
+    pdf.cell(30, 7, ' Yhteensä', border=1, ln=1, align='C', fill=1)
     pdf.set_font('courier', '', 9)
 
     for value in pdf.store:
         pdf.set_x(20)
-        pdf.cell(130, 6, f'{value[0]}')
-        pdf.cell(20, 6, f'{value[1]}', align='C')
-        pdf.cell(20, 6, f'{value[2]}', border=1, ln=1, align='C')
+        pdf.cell(120, 6, f'EUR   {value[0]}')
+        pdf.cell(20, 6, f'EUR   {value[1]}', align='C')
+        pdf.cell(30, 6, f'EUR   {value[2]}', border=1, ln=1, align='C')
 
     pdf.set_x(20)
     pdf.set_font('courier', 'B', 10)
-    pdf.cell(150, 5, 'Toimitus', border=1, fill=1)
-    pdf.cell(20, 5, f'{pdf.delivery_way}', border=1, ln=1, align='C', fill=1)
+    pdf.cell(140, 5, 'Toimitus', border=1, fill=1)
+    pdf.cell(30, 5, f'EUR   {pdf.delivery_way}', border=1, ln=1, align='C', fill=1)
+    # pdf.set_x(20)
+    # pdf.set_font('courier', 'B', 10)
+    # pdf.cell(150, 5, 'Välisumma', border=1, fill=1)
+    # pdf.cell(20, 5, f'{pdf.total}', border=1, ln=1, align='C', fill=1)
+    # pdf.set_x(20)
+    # pdf.set_font('courier', 'B', 10)
+    # pdf.cell(150, 5, '24.00% alv', border=1, fill=1)
+    # pdf.cell(20, 5, f'0.00', border=1, ln=1, align='C', fill=1)
     pdf.set_x(20)
     pdf.set_font('courier', 'B', 10)
-    pdf.cell(150, 5, 'Välisumma', border=1, fill=1)
-    pdf.cell(20, 5, f'{pdf.total}', border=1, ln=1, align='C', fill=1)
-    pdf.set_x(20)
-    pdf.set_font('courier', 'B', 10)
-    pdf.cell(150, 5, '24.00% alv', border=1, fill=1)
-    pdf.cell(20, 5, f'0.00', border=1, ln=1, align='C', fill=1)
-    pdf.set_x(20)
-    pdf.set_font('courier', 'B', 10)
-    pdf.cell(150, 8, 'Yhteensä', border=1, fill=1)
-    pdf.cell(20, 8, f'{pdf.total}', border=1, ln=1, align='C', fill=1)
+    pdf.cell(140, 8, 'SUMMA', border=1, fill=1)
+    pdf.cell(30, 8, f'EUR   {pdf.total}', border=1, ln=1, align='C', fill=1)
     pdf.ln()
     pdf.ln()
 

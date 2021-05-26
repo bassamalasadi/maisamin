@@ -34,17 +34,12 @@
                 <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Gluteeniton">
                 <span class="gluteen">G</span>
                 </span>
-                {% else %}
-                <span class="gl">G</span>
                 {% endif %}
-                &nbsp;&nbsp;
-                &nbsp;&nbsp;
+                &nbsp;
                 {% if order_product.is_loctose_free %}
                 <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Laktoositon">
                 <span class="loctose">L</span>
                 </span>
-                {% else %}
-                <span class="gl">L</span>
                 {% endif %}
               </td>
               <td class="h6 table-col">{{ order_product.price }}&nbsp;&euro;</td>

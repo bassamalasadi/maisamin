@@ -8,7 +8,7 @@
     <img class="prodimg" src="{% static 'img/manakish.jpg' %}" alt="" width="1090" height="220">
 
   </div>
-  <div class="container pt-1 mt-1">
+  <div class="container marketing pt-1 mt-1">
     <br>
     <h1 style="font-family: 'Pacifico', cursive;">Manakish</h1>
     <hr>
@@ -29,8 +29,10 @@
               </div>
             </div>
           </a>
-          <div class="pl-5 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</div><br>
-          <div class="pl-5 float-left" style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</div>
+          <div class="prodtext">
+            <div class="pl-5 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</div><br>
+            <div class="pl-5 float-left" style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</div>
+          </div>
           </div>
         </div>
         {%  endif %}

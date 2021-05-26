@@ -657,7 +657,7 @@ header,
     border-radius: 50%;
     box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    opacity: 0.8;
+    opacity: 0.9;
   }
   .kissa-text{
     position: relative;
@@ -907,9 +907,8 @@ header,
     margin-left: 30px;
   }
   .snippet{
-    position: absolute;
-    right: 16%;
-    width: 60%;
+    position: sticky;
+    width: 80%;
   }
   .check-text{
     font-size: 50px;
@@ -967,5 +966,13 @@ header,
     border-color:#BF9000;
     border:solid;
     padding:30px;
+  }
+  .order_sum_tot{
+    font-family: 'Prompt', sans-serif;
+    background-color:black;
+    color:white;
+    border-radius:4px;
+    padding:2px 8px;
+    font-size:28px;
   }
 }

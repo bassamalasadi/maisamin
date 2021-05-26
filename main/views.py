@@ -26,10 +26,13 @@ from .serializers import ItemSerializer
 from .forms import CheckoutForm
 from django.utils.formats import sanitize_separators
 from django.contrib.auth.models import User
-from .models import Product, OrderItem, Order, Request, UserProfile
+from .models import Product, OrderItem, Order, Request
 from .lasku import create_invoice
 
 from tabulate import tabulate
+
+from barcode import EAN13
+from barcode.writer import ImageWriter
 
 class SuperUserCheck(UserPassesTestMixin, View):
     def test_func(self):
@@ -74,6 +77,7 @@ class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:
             order_item = OrderItem.objects.filter(user=self.request.user, ordered=False)
+
             total = 0
             for order in order_item:
                 total += float(order.get_final_price)
@@ -94,6 +98,7 @@ class CheckoutView(View):
         pay = 'Maksat, kun tilaus toimitetaan tai noudetaan '
         try:
             order_item = OrderItem.objects.filter(user=self.request.user, ordered=False)
+            user = User.objects.get(username=self.request.user)
             amount = 0
             for order in order_item:
                 amount += float(order.get_final_price)
@@ -127,6 +132,9 @@ class CheckoutView(View):
                 refrence = str(datetime.timestamp(
                     datetime.now())).replace(".", "")
 
+                with open(f'{firstName} {lastName}.jpg', 'wb') as f:
+                    EAN13(f'{refrence}', writer=ImageWriter()).write(f)
+
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
                         float(req.get('delivery'))
@@ -154,13 +162,15 @@ class CheckoutView(View):
                     )
                     if req.get('payment_option') == 'Invoice':
                         pay = f"""
-                            Saajan IBAN: FI19 5091 0320 1303 46  \n
-                            Viitenumero: {refrence} \n
-                            Yhteensä: {amount} EURO \n
-                            Eräpäivä: {due_date} \n
+Saajan IBAN: FI32 3939 0054 3954 05  \n
+Viitenumero: {refrence} \n
+Yhteensä: {amount} EURO \n
+Eräpäivä: {due_date} \n
                         """
                         create_invoice(
                             delivery_date=due_date,
+                            user_id=user.id,
+                            lasku_id=req_order.id,
                             fname=firstName,
                             lname= lastName,
                             address=address,
@@ -181,7 +191,7 @@ Osoitteeseen : {address} \n
 ____________________________________________________________________________________________________ \n
 Tilaus: \n
 
-{tabulate(order_email,headers=["                 Kuvaus                  ","           Määrä          ","         Yhteensä         "], tablefmt='rst', colalign=("left",))}
+{tabulate(order_email,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='rst', colalign=("right",))}
 {deliv}
 ____________________________________________________________________________________________________ \n
 Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {req_order.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
@@ -203,6 +213,7 @@ Kiitos
                     try:
                         if req.get('payment_option') == 'Invoice':
                             os.remove(f'{firstName} {lastName}.pdf')
+                            os.remove(f'{firstName} {lastName}.jpg')
                         OrderItem.objects.filter(user=self.request.user).delete()
                     except:
                         HttpResponseBadRequest()

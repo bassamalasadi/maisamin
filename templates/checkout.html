@@ -2,11 +2,11 @@
 {% load static %}{% block content %}
 
 <main class="pt-5">
-  <p class="text-center pt-5"style="font-family: 'Prompt', sans-serif;color:#636363; font-size:26px;">Kissa</p>
-  <hr class="w-25">
-  <div class="container wow" >
+  <br>
+  <br><br>
+  <div class="container-fluid w-75" >
     <div class="row pt-5" >
-      <div class="col-md-7 mb-4 checkout-list" >
+      <div class="col mb-4 checkout-list" >
         <div class="card" style="border-radius:24px">
           <p class="text-center pt-4 checks-text"style="font-family: 'Prompt', sans-serif;color:#636363">Laskutustiedot</p>
           <hr>
@@ -25,12 +25,13 @@
             {{ form.postal | as_crispy_field }}
             {{ form.email | as_crispy_field }}
             {{ form.phone | as_crispy_field }}
+            <hr>
+            <label for="">Päivämäärä &nbsp; <i class="fas fa-calendar-day"></i></label>
             {{ form.date | as_crispy_field }}
-            <br>
             <hr>
             <br>
-            <p>Toimitamme &nbsp; <i class="fas fa-truck"></i></p>
-            <select name="delivery" id="delivery" class="browser-default custom-select">
+            <p>Toimitamme &nbsp;<i class="fas fa-truck"></i> &nbsp; &nbsp;<span id="delv_price"></span></p>
+            <select name="delivery" id="delivery" class="browser-default custom-select" onchange="myFunction()">
               <option value="0" id="0">Nouto (maksuton)</option>
               <option value="3.00" id="1">Jämsä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -64,7 +65,7 @@
           </form>
         </div>
       </div>
-      <div class="col-md-5">
+      <div class="col">
         <div class="snippet">
           {% include "order_snippet.html" %}
         </div>
@@ -72,6 +73,16 @@
     </div>
   </div>
   <br>
-    </div>
+  <script>
+    function myFunction() {
+      var x = parseInt(document.getElementById("delivery").value);
+      x = parseFloat(x).toFixed(2).toString()
+      if (x > 0){
+        document.getElementById("delv_price").innerHTML = '+ ' + x + ' Euro';
+      }else{
+        document.getElementById("delv_price").innerHTML = '';
+      }
+    }
+  </script>
 </main>
 {% endblock content %}
