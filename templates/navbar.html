@@ -36,12 +36,11 @@
           </li>
         {% endif %}
         <li class="nav-item navico text-white">
-          <a href="{% url 'main:profile' %}" type="button"
-          class="btn btn-md text-white">
+          <a href="{% url 'main:profile' %}" class="btn waves-effect waves-light text-white">
           <i class="far fa-user-circle ">&nbsp; &nbsp;</i>Hei, {{ user }}</a>
         </li>
         <li class="nav-item navico">
-          <a href="{% url 'account_logout' %}" class="btn  waves-effect waves-light text-white">
+          <a href="{% url 'account_logout' %}" class="btn waves-effect waves-light text-white">
             Kirjaudu ulos &nbsp; <i class="fas fa-sign-out-alt"></i>
           </a>
         </li>
