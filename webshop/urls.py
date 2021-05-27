@@ -14,7 +14,6 @@ urlpatterns = [
          name="password_reset"),
     path('', include('main.urls', namespace='main')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-
 ]
 
 if settings.DEBUG:

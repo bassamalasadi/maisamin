@@ -72,7 +72,7 @@
                 <option value="20" >20</option>
               </select>
                 <select class="browser-default custom-select custom-select-lg mb-3" name="price" id="price" onchange="myFunction()">
-                  <option value="" id="disableitem" disabled selected>KOKO</option>
+                  <option value="" id="disableitem" disabled selected>Valitse</option>
                   {% for item in product.variation_set.all %}
                     <option value="{{item.price}}" > {{item.size}}</option>
                   {% endfor %}

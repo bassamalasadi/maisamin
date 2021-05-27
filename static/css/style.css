@@ -6,11 +6,12 @@ header,
 }
 
 .info{
-  font-size:12px;
+  font-size:14px;
   padding-left:5%;
 }
 .swingHorizontal{
     color:hsl(222, 25%, 14%);
+    cursor:pointer;
 }
 
 .swingHorizontal:hover
@@ -61,7 +62,7 @@ header,
       box-shadow: 0 0 0 30px rgba(218, 196, 134, 0);
     }
 }
-/* .cookie-banner {
+.cookie-banner {
   position: fixed;
   bottom: 40px;
   left: 10%;
@@ -77,7 +78,7 @@ header,
   z-index: 2;
   opacity: 0.9;
 }
-.close {
+/* .close {
   height: 20px;
   background-color: #777;
   top:5px;
@@ -344,6 +345,7 @@ header,
     font-weight: bold;
     color: white;
     border-radius: 30%;
+    cursor: pointer;
   }
   .loctose{
     padding: 3px 5px;
@@ -353,16 +355,19 @@ header,
     font-weight: bold;
     color:white;
     border-radius: 30%;
+    cursor: pointer;
   }
   .alert{
    position: absolute;
    z-index: 999;
    top: 14%;
+   font-size: 16px;
    color:#BF9000;
    background-color: black;
    border-color:#BF9000;
    border:solid;
    padding:30px;
+   opacity:0.9
   }
 }
 
@@ -627,6 +632,7 @@ header,
     font-weight: bold;
     color: white;
     border-radius: 30%;
+    cursor: pointer;
   }
   .loctose{
     padding: 3px 5px;
@@ -636,10 +642,12 @@ header,
     font-weight: bold;
     color:white;
     border-radius: 30%;
+    cursor: pointer;
   }
   .alert{
    position: absolute;
    z-index: 999;
+   font-size: 18;
    float: right;
    top: 20%;
    color:#BF9000;
@@ -647,12 +655,16 @@ header,
    border-color:#BF9000;
    border:solid;
    padding:30px;
+   opacity:0.9;
   }
 }
 
 
 @media only screen and (min-width: 992px){
   /* For desktop: */
+  .container-fluid{
+        max-width: 80%;
+    }
   .kissa{
     position: fixed;
     bottom: 35px;
@@ -944,6 +956,7 @@ header,
     font-weight: bold;
     color: white;
     border-radius: 30%;
+    cursor: pointer;
   }
   .loctose{
     padding: 3px 7px;
@@ -953,10 +966,12 @@ header,
     font-weight: bold;
     color:white;
     border-radius: 30%;
+    cursor: pointer;
   }
   .alert{
    position: relative;
    z-index: 999;
+   font-size: 22px;
    float: right;
    top: 20%;
    color:#BF9000;
@@ -964,6 +979,7 @@ header,
    border-color:#BF9000;
    border:solid;
    padding:30px;
+   opacity:0.9;
   }
   .cart{
     position: absolute;

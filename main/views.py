@@ -73,6 +73,13 @@ def order_list_for_email(order_item):
         order_email.append(res)
     return order_email
 
+def get_total_price(items):
+    total = 0
+    for order in items:
+        total += float(order.get_final_price)
+    total = "{:.2f}".format(total)
+    return total
+
 class CheckoutView(View):
     def get(self, *args, **kwargs):
         try:
@@ -95,17 +102,15 @@ class CheckoutView(View):
 
     def post(self, request, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
+        print(form)
         pay = 'Maksat, kun tilaus toimitetaan tai noudetaan '
         try:
             order_item = OrderItem.objects.filter(user=self.request.user, ordered=False)
             user = User.objects.get(username=self.request.user)
-            amount = 0
-            for order in order_item:
-                amount += float(order.get_final_price)
-            amount = "{:.2f}".format(amount)
+            amount = get_total_price(order_item)
             if float(amount) <= 0:
-                messages.warning(self.request, "Empty cart")
-                return redirect("main:checkout")
+                messages.warning(self.request, "Tyhjä ostoskori")
+                return redirect("main:home")
 
             if request.method == 'POST' and form.is_valid:
                 req = request.POST
@@ -117,8 +122,7 @@ class CheckoutView(View):
                 postal = req.get('postal')
                 phone = req.get('phone')
                 email = req.get('email')
-                address = str(city) + ' - ' + str(street_address) + \
-                    ' - ' + str(apartment_address)
+                address = str(city) + ' - ' + str(street_address) + '   ' + str(apartment_address)
                 if req.get('date'):
                     year, month, day = modify_date(req.get('date'))
                     date = datetime(year, month, day)

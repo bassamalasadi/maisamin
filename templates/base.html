@@ -41,16 +41,16 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datepicker/0.6.5/datepicker.min.css" integrity="sha256-b88RdwbRJEzRx95nCuuva+hO5ExvXXnpX+78h8DjyOE=" crossorigin="anonymous" />
 
   </head>
-
+  <meta name="google-site-verification" content="QjF0pAjDXVWuGd2Fnji4BJHxua3D0F2NT2wL3xSRf3Y" />
   {% include "navbar.html" %}
   <body>
-    <!-- <div class='cookie-banner' style="">
+    <!-- <div class='cookie-banner' style="" hidden>
       <h3>Käytämme evästeitä</h3>
       <p>
         Käytämme evästeitä ja muita seurantateknologioita parantaaksemme käyttäjäkokemusta verkkosivustollamme, näyttääksemme sinulle personoituja sisältöjä ja mainoksia, analysoidaksemme verkkoliikennettä sekä lisätäksemme ymmärrystämme käyttäjiemme sijainnista.
         <a class="btn" style="color:#FB9000;" href='https://www.maisaminherkku.fi/privacy-policy/'>Tietosuojaseloste</a>
       </p>
-      <button class='close btn' style="background-color:#FB9000, color:black;">Hyväksyä</button>
+      <button class='btn btn-warning close' >Hyväksyä</button>
     </div> -->
 
       {% if messages %} {% for message in messages %}
@@ -71,8 +71,9 @@
   </body>
   {% include "footer.html" %}
   <!-- <script>
+
   if (window.localStorage.getItem("cookieSeen") != "shown") {
-    $(".cookie-banner").delay(2000).fadeIn();
+    $(".cookie-banner").removeAttr("hidden")
     window.localStorage.setItem("cookieSeen","shown")
   };
   $(".close").click(function() {
