@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% load crispy_forms_tags %} {% load static %}
+{% block content %}
+
+
+<main role="main" class="container pt-5 mt-5">
+  <div class="jumbotron">
+    <h1>(:</h1>
+    <p class="lead">Valitettavasti sisäinen palvelinvirhe</p>
+    <a class="btn mt-3 order-but" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" href="{% url 'main:home' %}" role="button"
+      >Etusivu &raquo;</a
+    >
+  </div>
+</main>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock content %}
