@@ -16,7 +16,8 @@ if READ_DOT_ENV_FILE:
     environ.Env.read_env()
     env_var = os.environ
 
-DEBUG = os.getenv("DEBUG", "False") == "True"
+# DEBUG = os.getenv("DEBUG", "False") == "True"
+DEBUG = False
 
 SECRET_KEY = os.getenv("SECRET_KEY", get_random_secret_key())
 
