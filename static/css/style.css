@@ -154,6 +154,13 @@ header,
     margin-right: auto;
     width: 20%;
   }
+  .mainlogo{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 55%;
+  }
   .form-s{
     position: relative;
     width: 90%;
@@ -235,7 +242,7 @@ header,
     transition: ease-in-out 1s;
   }
 
-  .navico{
+  /* .navico{
     margin:5px 0px 2px 22px;
     width: fit-content;
     background-color: #BF9000;
@@ -244,7 +251,33 @@ header,
     color:white;
     font-family: 'Lato', sans-serif;
     border-radius: 0px 24px 24px 24px;
+  } */
+  .navico {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    display: inline-block;
+    position: relative;
+    color: hsl(222, 25%, 14%);
   }
+
+  .navico::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #BF9000;
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  .navico:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
+
 
 
   /* CUSTOMIZE THE CAROUSEL
@@ -369,6 +402,13 @@ header,
    padding:30px;
    opacity:0.9
   }
+  .par-1{
+    position:relative;
+    font-family: 'Merienda', cursive;
+    padding-top:2px;
+    font-size: 13px;
+    font-weight: 500;
+  }
 }
 
 @media only screen and (min-width: 601px){
@@ -435,6 +475,13 @@ header,
     margin-left: auto;
     margin-right: auto;
     width: 20%;
+  }
+  .mainlogo{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 60%;
   }
   .form-s{
     position: relative;
@@ -528,7 +575,7 @@ header,
     color: white;
     transition: ease-in-out 1s;
   }
-  .navico{
+  /* .navico{
     margin:5px 0px 2px 22px;
     width: fit-content;
     background-color: #BF9000;
@@ -537,8 +584,33 @@ header,
     color:white;
     font-family: 'Lato', sans-serif;
     border-radius: 0px 24px 24px 24px;
+  } */
+  .navico {
+    text-align: center;
+    font-family: 'Lato', sans-serif;
+    margin-top: 5px;
+    display: inline-block;
+    position: relative;
+    color: hsl(222, 25%, 14%);
   }
 
+  .navico::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #BF9000;
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  .navico:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+  }
   /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
 
@@ -657,6 +729,13 @@ header,
    padding:30px;
    opacity:0.9;
   }
+  .par-1{
+    position:relative;
+    font-family: 'Merienda', cursive;
+    padding-top:2px;
+    font-size: 18px;
+    font-weight: 500;
+  }
 }
 
 
@@ -726,7 +805,13 @@ header,
     margin-right: auto;
     width: 20%;
   }
-
+  .mainlogo{
+    position: relative;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+  }
   .form-s{
     position: relative;
     width: 40%;
@@ -838,13 +923,12 @@ header,
   .navico{
     margin:5px 0px 2px 10px;
     width: fit-content;
-    background-color: #BF9000;
+    background-color:white;
     display: inline;
     top:2px;
-    color:white;
     font-family: 'Lato', sans-serif;
-    border-radius: 24px 0px 24px 24px;
   }
+
 
   /* CUSTOMIZE THE CAROUSEL
   -------------------------------------------------- */
@@ -1001,5 +1085,14 @@ header,
     border-radius:4px;
     padding:2px 8px;
     font-size:28px;
+  }
+  .par-1{
+    position:relative;
+    font-family: 'Merienda', cursive;
+    width:300%;
+    right:100%;
+    padding-top:2px;
+    font-size: 25px;
+    color:black;
   }
 }
