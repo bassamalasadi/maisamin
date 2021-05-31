@@ -31,7 +31,7 @@ from .lasku import create_invoice
 
 from tabulate import tabulate
 
-from barcode import EAN13
+from barcode import EAN13, Code39
 from barcode.writer import ImageWriter
 
 class SuperUserCheck(UserPassesTestMixin, View):
@@ -102,7 +102,6 @@ class CheckoutView(View):
 
     def post(self, request, *args, **kwargs):
         form = CheckoutForm(self.request.POST or None)
-        print(form)
         pay = 'Maksat, kun tilaus toimitetaan tai noudetaan '
         try:
             order_item = OrderItem.objects.filter(user=self.request.user, ordered=False)
@@ -135,9 +134,8 @@ class CheckoutView(View):
                 delivery = req.get('delivery')
                 refrence = str(datetime.timestamp(
                     datetime.now())).replace(".", "")
-
                 with open(f'{firstName} {lastName}.jpg', 'wb') as f:
-                    EAN13(f'{refrence}', writer=ImageWriter()).write(f)
+                    Code39(f'{refrence}', writer=ImageWriter()).write(f)
 
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
@@ -433,7 +431,6 @@ class ItemDetailView(View):
 
 @ login_required
 def add_to_cart(request, slug, **kwargs):
-    print("#############", kwargs)
     product = get_object_or_404(Product, slug=slug)
     if kwargs:
         price = request.POST.get('price') or kwargs['price']

@@ -88,13 +88,15 @@ header,
   cursor: pointer;
 } */
 
+
+
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
   .kissa{
     position: fixed;
     bottom: 35px;
-    left: 71%;
+    left: 68%;
     right: 10%;
     padding: 17px 18px;
     align-items: center;
@@ -253,8 +255,10 @@ header,
     border-radius: 0px 24px 24px 24px;
   } */
   .navico {
+    position: absolute;
     text-align: center;
     font-family: 'Lato', sans-serif;
+    padding: 10px;
     display: inline-block;
     position: relative;
     color: hsl(222, 25%, 14%);
@@ -586,9 +590,12 @@ header,
     border-radius: 0px 24px 24px 24px;
   } */
   .navico {
+    position: absolute;
     text-align: center;
+    font-size: 22px;
     font-family: 'Lato', sans-serif;
-    margin-top: 5px;
+    top:10px;
+    padding: 20px;
     display: inline-block;
     position: relative;
     color: hsl(222, 25%, 14%);
@@ -927,6 +934,9 @@ header,
     display: inline;
     top:2px;
     font-family: 'Lato', sans-serif;
+
+    text-align: center;
+    font-size: 16px;
   }
 
 

@@ -3,6 +3,12 @@ from datetime import date, datetime
 
 
 class GenerateInvoice(FPDF):
+    TEXT1= """
+Saajan \n
+tilinumero \n
+Mottagrens \n
+kontonummer \n
+    """
 
     def __init__(self, *args, **kwargs):
         self.date = date.today()
@@ -18,13 +24,14 @@ class GenerateInvoice(FPDF):
         self.delivery_way = kwargs.get('delivery_way', 'Nouto')
         self.vat = kwargs.get('vat', 'Error')
         self.final = kwargs.get('final', 'Error')
+        self.refrence = kwargs.get('refrence', 'Error')
         super().__init__()
 
     def header(self):
-        self.image('static/img/logo2.png', 10, 8, 25)
+        self.image('static/img/logo2.jpg', 10, 8, 25)
         self.set_font('courier', 'B', 20)
         self.cell(0, 10, 'Maisamin Herkku', border=False, ln=1, align='C')
-        self.image(f'{self.fname} {self.lname}.jpg', 162, 75, 45)
+        self.image(f'{self.fname} {self.lname}.jpg', 150, 72, 45)
         self.ln(20)
 
     def footer(self):
@@ -33,11 +40,17 @@ class GenerateInvoice(FPDF):
         self.set_font('courier', '', 10)
         self.line(0, 232, 225, 232)
         self.set_x(10)
-        self.set_font('courier', '', 7)
-        self.cell(20, 10, '    Saajan ', border=1)
+        self.set_font('courier', '', 6)
+        # self.cell(20, 10, 'Saajan', border=1)
+        # Save top coordinate
+        top = self.y
+        offset = self.x + 40
+        self.multi_cell(30, 1, self.TEXT1, 'RB', 'R',)
+                # Reset y coordinate
+        self.y = top
+        self.x = offset
         self.set_font('courier', '', 10)
-        self.cell(
-            165, 10, """  S-Pankki                         IBAN: FI32 3939 0054 3954 05""", border=1, ln=1)
+        self.cell(155, 10, """  S-Pankki                         IBAN: FI32 3939 0054 3954 05""", 'B', ln=1)
         self.set_x(10)
         self.set_font('courier', '', 7)
         self.cell(20, 10, 'Saaja ', border=1)
@@ -51,7 +64,7 @@ class GenerateInvoice(FPDF):
         self.set_font('courier', '', 7)
         self.cell(20, 10, ' Viitenumero ', border=1)
         self.set_font('courier', 'B', 11)
-        self.cell(80, 10, f'{str(datetime.timestamp(datetime.now())).replace(".", "")}',
+        self.cell(80, 10, f'{self.refrence}',
                   border=1, ln=1, align='R')
         self.set_x(10)
         self.set_font('courier', '', 7)
@@ -60,7 +73,7 @@ class GenerateInvoice(FPDF):
         self.cell(65, 10, f'{self.fname} {self.lname}', align='C')
         self.line(30, 272, 95, 272)
         self.set_font('courier', '', 7)
-        self.cell(20, 10, """ Eräpäivä \r\n Förfallodag """, border=1)
+        self.cell(20, 10, """ Eräpäivä """, border=1)
         self.set_font('courier', 'B', 12)
         self.cell(40, 10, f'  {self.delivery_date}  ', border=1, align='R')
         self.cell(40, 10, f'   {self.total} ', border=1, align='R')
