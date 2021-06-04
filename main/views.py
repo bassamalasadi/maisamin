@@ -34,6 +34,9 @@ from tabulate import tabulate
 from barcode import EAN13, Code39
 from barcode.writer import ImageWriter
 
+from django.http import HttpResponseRedirect
+from allauth.account.adapter import DefaultAccountAdapter
+
 class SuperUserCheck(UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.is_superuser
@@ -245,6 +248,10 @@ class CakeView(ListView):
     paginate_by = 10
     template_name = "cake.html"
 
+class CupcakeView(ListView):
+    model = Product
+    paginate_by = 10
+    template_name = "cupcake.html"
 
 class CheeseCakeView(ListView):
     model = Product
@@ -377,6 +384,7 @@ class ItemDetailView(View):
             return redirect("main:home")
 
     def post(self, request, slug):
+        print(request.POST)
         if request.POST.get('hinta-2'):
             price = sanitize_separators(request.POST.get('hinta-2'))
             amount = sanitize_separators(request.POST.get('amount-2'))
@@ -530,3 +538,12 @@ def remove_from_order_page(request, pk):
 class Privacy(View):
     def get(self, *args, **kwargs):
         return render(self.request, "privacy-policy.html")
+
+
+class MyAccountAdapter(DefaultAccountAdapter):
+
+    def get_login_redirect_url(self, request):
+        print("in code")
+        redirect_to = request.GET.get('next', '')
+        print(redirect_to)
+        return HttpResponseRedirect(redirect_to)

@@ -4,7 +4,10 @@ header,
 .carousel {
   height: 60vh;
 }
-
+.dec-text{
+  text-align: center;
+  font-family: 'Lato', sans-serif;
+}
 .info{
   font-size:14px;
   padding-left:5%;
@@ -93,11 +96,27 @@ header,
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
+  /* .main-card{
+    position: relative;
+    width:90%;
+    height: 60vh;
+    left:5%;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 9px 	rgb(191, 144, 0), 0 2px 4px 	rgb(191, 144, 0);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 10px;
+  }
+  .mid-card{
+    width: 100%;
+    height: 60vh;
+    object-fit: cover;
+    border-radius: 10px;
+  } */
   .kissa{
     position: fixed;
     bottom: 35px;
-    left: 68%;
-    right: 10%;
+    left: 76%;
+    right: 4%;
     padding: 17px 18px;
     align-items: center;
     justify-content: space-between;
@@ -193,18 +212,26 @@ header,
     margin-top: 20px;
     transition: ease-in-out 1s,
   }
-
+  .prod-img{
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+  }
   .prodtext{
     position: relative;
     left: 10%;
   }
+  .card{
+    width: 80%;
+    left:5%;
+  }
+  .check-card{
+    width:90%;
+  }
   .mainimg {
-    position: relative;
-    width: 270px; /* You can set the dimensions to whatever you want */
-    height: 270px;
+    width: 100%;
+    height: 40vh;
     object-fit: cover;
-    padding: 10px;
-    margin: -4px;
   }
   .overlay {
     position: absolute;
@@ -319,9 +346,8 @@ header,
     margin-left: 0.75rem;
   }
 
-
   .featurette-divider {
-    margin: 5rem 0;
+    margin: 1rem 0;
   }
 
   .featurette-heading {
@@ -410,8 +436,12 @@ header,
     position:relative;
     font-family: 'Merienda', cursive;
     padding-top:2px;
-    font-size: 13px;
+    font-size: 12px;
     font-weight: 500;
+  }
+  .par-1-head{
+    font-size: 20px;
+    font-weight:bold;
   }
 }
 
@@ -420,8 +450,8 @@ header,
   .kissa{
     position: fixed;
     bottom: 15%;
-    left: 80%;
-    right: 10%;
+    left: 84%;
+    right: 6%;
     padding: 17px 20px;
     align-items: center;
     justify-content: space-between;
@@ -435,11 +465,12 @@ header,
     position: relative;
     font-size: 20px;
     font-weight: 600;
-    bottom:28px;
+    bottom:26px;
     background-color:#BF9000;
     color:white;
     padding: 5px 10px;
     border-radius:50%;
+
   }
   .maintext {
     position: absolute;
@@ -509,6 +540,17 @@ header,
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
+  .card {
+    width:22%;
+    box-shadow: 0 2px 9px 	rgb(191, 144, 0), 0 2px 4px 	rgb(191, 144, 0);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  .card-2{
+    width:100%;
+    height: 40vh;
+    box-shadow: 0 2px 9px 	rgb(191, 144, 0), 0 2px 4px 	rgb(191, 144, 0);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
   .imgcard {
     position: relative;
     background-color: white;
@@ -520,15 +562,24 @@ header,
   }
   .prodtext{
     position: relative;
-    left: 10%;
+    left: 20%;
+  }
+  .prod-img{
+    width: 100%;
+    height: 40vh;
+    object-fit: cover;
+  }
+  .card{
+    width: 28%;
+    left:1%;
+  }
+  .check-card{
+    width:100%;
   }
   .mainimg {
-    position: relative;
-    width: 270px; /* You can set the dimensions to whatever you want */
-    height: 270px;
+    width: 100%;
+    height: 20vh;
     object-fit: cover;
-    padding: 10px;
-    margin: -4px;
   }
   .overlay {
     position: absolute;
@@ -655,7 +706,7 @@ header,
 
 
   .featurette-divider {
-    margin: 5rem 0;
+    margin: 2rem 0;
   }
 
   .featurette-heading {
@@ -743,6 +794,12 @@ header,
     font-size: 18px;
     font-weight: 500;
   }
+  .par-1-head{
+    font-size: 26px;
+    font-weight:bold;
+    padding-bottom: 15px;
+  }
+
 }
 
 
@@ -789,9 +846,13 @@ header,
   .bgimg {
     position: sticky;
     background-size: cover;
-    width: 100%;
-    height: auto;
+    left:10%;
+    width: 80%;
+    height: 70vh;
     filter: brightness(60%);
+    border-radius: 0 0 27px 27px;
+    box-shadow: 0 6px 18px 	rgb(191, 144, 0), 0 6px 12px 	rgb(191, 144, 0);
+    transition: all 0.3s cubic-bezier(.25,.2,.25,1);
   }
 
   .foo-l{
@@ -840,6 +901,12 @@ header,
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
+  .card{
+    width:22%;
+  }
+  .check-card{
+    width:90%;
+  }
   .imgcard {
     position: relative;
     background-color: white;
@@ -857,13 +924,24 @@ header,
     position: relative;
     left: 10%;
   }
-  .mainimg {
-    position: relative;
-    width: 270px;
-    height: 270px;
+  .card-2{
+    width:100%;
+    height: 60vh;
+    box-shadow: 0 3px 12px 	rgb(191, 144, 0), 0 3px 9px 	rgb(191, 144, 0);
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+    border-radius: 10px;
+  }
+
+  .prod-img{
+    width: 100%;
+    height: 60vh;
     object-fit: cover;
-    padding: 10px;
-    margin: -4px;
+    border-radius: 10px;
+  }
+  .mainimg {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
   }
   .overlay {
     position: absolute;
@@ -977,7 +1055,7 @@ header,
 
 
   .featurette-divider {
-    margin: 5rem 0;
+    margin: 3rem 0;
   }
 
   .featurette-heading {
@@ -1005,9 +1083,7 @@ header,
     top:50px;
     left: 20%;
   }
-  .snippet{
-    position: absolute;
-  }
+
   .check-text{
     font-size: 30px;
   }
@@ -1024,8 +1100,8 @@ header,
     margin-left: 30px;
   }
   .snippet{
-    position: sticky;
-    width: 80%;
+    position: fixed;
+    width: 40%;
   }
   .check-text{
     font-size: 50px;
@@ -1101,8 +1177,98 @@ header,
     font-family: 'Merienda', cursive;
     width:300%;
     right:100%;
-    padding-top:2px;
-    font-size: 25px;
+    padding-top:1px;
+    font-size: 16px;
     color:black;
   }
+  .par-1-head{
+    font-size: 36px;
+    font-weight:bold;
+    padding: 15px 0px;
+  }
+
+  /* price color */
+  .pricing-wrap{
+  position: relative;
+  left:90px;
+  bottom: 33px;
+  width: 100%;
+  display: block;
+  z-index: 1;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+.pricing-wrap span{
+  position: relative;
+  width: 100%;
+  display: block;
+  text-align: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  letter-spacing: 3px;
+  font-size: 16px;
+  line-height: 0.1;
+  color: #3C0008;
+  transform: translate3d(0, 0, 35px) perspective(100px);
+}
+.pricing-wrap span:before{
+  position: absolute;
+  content: '';
+  z-index: -1;
+  background: linear-gradient(217deg, #BF9000, #FFF);
+  width: 80px;
+  height: 70px;
+  display: block;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 6px 20px 0 rgba(16, 39, 112,.3);
+  animation: border-transform 9s linear infinite;
+}
+
+@keyframes border-transform{
+  0%,100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
+  14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
+  28% { border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; }
+  42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; }
+  56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
+  70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
+  84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
+}
+.prod-text{
+  position: relative;
+  background-color: #BF9000;
+  padding: 5px 75px;
+  color: white;
+  right: 60px;
+  border-radius: 0 6px 6px 0;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 6px 10px 0 #BF9000;
+}
+.mid-card{
+  position: relative;
+  width: 15%;
+  left:5%;
+  padding: 2px;
+}
+.cap-text{
+  position: relative;
+  bottom: 180px;
+  right: 5%;
+  color: white;
+  font-size: 5rem;
+}
+}
+.cak-text{
+  position: relative;
+  bottom: 180px;
+  left:82%;
+  color: white;
+  font-size: 5rem;
+}
+
 }

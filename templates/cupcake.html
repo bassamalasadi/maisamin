@@ -1,0 +1,80 @@
+{% extends "base.html" %} {% block content %}
+{% load static %}
+<main>
+  <br />
+  <br />
+  <br />
+  <div class="">
+    <img class="bgimg" src="{% static 'img/cupcake.jpg' %}" alt="" width="1090" height="220">
+  </div>
+  <div class="container marketing pt-1 mt-1">
+    <br>
+   <h1 class="cap-text" style="font-family: 'Pacifico', cursive;">Kuppikakut</h1>
+   <section class="text-center mt-1">
+     <div class="row wow fadeIn">
+       {% for item in object_list %}
+       {% if item.category == 'cupcake' %}
+       <div class="card m-3">
+         <div class="">
+           <a href="{{ item.get_absolute_url }}">
+           <div class="">
+             <img src="{{ item.image1.url }}" class="mainimg" />
+             <div class="">
+               <h6 class="p-2 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</h6>
+               <div class="pricing-wrap">
+                 <span class="float-right pr-2 " style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</span>
+               </div>
+             </div>
+           </div>
+         </a>
+         </div>
+       </div>
+       {%  endif %}
+       {% endfor %}
+     </div>
+   </section>
+
+    <!--Handling multiple pages-->
+    {% if is_paginated %}
+    <nav class="d-flex justify-content-center wow fadeIn">
+      <ul class="pagination pg-blue">
+        {% if page_obj.has_previous %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.previous_page_number }}"
+            aria-label="Previous"
+          >
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Edellinen</span>
+          </a>
+        </li>
+        {% endif %}
+
+        <li class="page-item active">
+          <a class="page-link" href="?page={{ page_obj.number }}"
+            >{{ page_obj.number }}
+            <span class="sr-only">(Nykyinen)</span>
+          </a>
+        </li>
+
+        {% if page_obj.has_next %}
+        <li class="page-item">
+          <a
+            class="page-link"
+            href="?page={{ page_obj.next_page_number }}"
+            aria-label="Next"
+          >
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Seuraava</span>
+          </a>
+        </li>
+        {% endif %}
+      </ul>
+    </nav>
+    {% endif %}
+  </div>
+  <br>
+</main>
+
+{% endblock content %}

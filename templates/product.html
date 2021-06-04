@@ -2,11 +2,11 @@
 <main class="mt-5 pt-4">
   <div class="container dark-grey-text mt-5">
     <div class="row wow fadeIn">
-      <div class="col-md-6 mb-4" style="border: none; border-radius: 40px;">
-
-        <img src="{{ product.image1.url }}" class="card-img-top img-thumbnail prod-img" />
+      <div class="col-md-6" style="z-index:1;">
+        <div class="card-2">
+          <img src="{{ product.image1.url }}" class="prod-img"/>
+        </div>
         <br>
-        <hr>
         <span class="">{% ratings product %}</span>
       </div>
 
@@ -16,10 +16,12 @@
             {% csrf_token %}
             <br>
 
-            <span class="h3 font-weight-bold" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
-            <br>
-            <hr>
-            <p class=" font-weight-bold" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
+            <span class="h3 font-weight-bold prod-text" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
+
+            <br><br>
+
+
+            <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
             <p style="font-family: 'Indie Flower', cursive;">{{ product.description|linebreaks }}</p>
             <br />
             <hr>
@@ -82,10 +84,6 @@
               <i class="fas fa-cart-plus ml-1"></i>
             </button>
             {% else %}
-            <!-- <a href="{{ product.get_add_to_cart_url }}" class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;">
-              Lisää ostoskoriin
-              <i class="fas fa-cart-plus ml-1"></i>
-            </a> -->
             <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" id="addtocart-2">Lisää ostoskoriin
               <i class="fas fa-cart-plus ml-1"></i>
             </button>

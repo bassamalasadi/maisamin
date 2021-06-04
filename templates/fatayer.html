@@ -5,33 +5,28 @@
   <br />
   <br />
   <div class="">
-    <img class="prodimg" src="{% static 'img/fatayer.jpg' %}" alt="" width="1090" height="220">
+    <img class="bgimg" src="{% static 'img/fatayer.jpg' %}" alt="" width="1090" height="220">
   </div>
   <div class="container marketing pt-1 mt-1">
     <br>
-   <h1 style="font-family: 'Pacifico', cursive;">Fatayer</h1>
-   <hr>
-   <br>
+   <h1 class="cak-text"style="font-family: 'Pacifico', cursive;">Fatayer</h1>
    <section class="text-center mt-1">
      <div class="row wow fadeIn">
        {% for item in object_list %}
        {% if item.category == 'pastry' %}
-       <div class="row">
-         <div class="column">
+       <div class="card m-3">
+         <div class="">
            <a href="{{ item.get_absolute_url }}">
-           <div class="imgcard">
+           <div class="">
              <img src="{{ item.image1.url }}" class="mainimg" />
-             <div class="overlay">
-               <div class="imgtext">
-                 <p>Tarkemmat tiedot</p>
+             <div class="">
+               <h6 class="p-2 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</h6>
+               <div class="pricing-wrap">
+                 <span class="float-right pr-2 " style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</span>
                </div>
              </div>
            </div>
          </a>
-         <div class="prodtext">
-           <div class="pl-5 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</div><br>
-           <div class="pl-5 float-left" style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</div>
-         </div>
          </div>
        </div>
        {%  endif %}

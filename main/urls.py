@@ -5,6 +5,7 @@ from .views import (
     HomeView,
     OrderSummaryView,
     CakeView,
+    CupcakeView,
     CheeseCakeView,
     FatayerView,
     ClientOrder,
@@ -24,6 +25,7 @@ app_name = 'main'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('cake/', CakeView.as_view(), name='cake'),
+    path('cupcake', CupcakeView.as_view(), name='cupcake'),
     path('cheesecake/', CheeseCakeView.as_view(), name='cheesecake'),
     path('fatayer', FatayerView.as_view(), name='fatayer'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
@@ -44,5 +46,5 @@ urlpatterns = [
     path('remove_from_order_page/<int:pk>/',
          remove_from_order_page, name="remove_from_order_page"),
     path('privacy-policy/', Privacy.as_view(), name="privacy"),
-    path('profile/', Profile.as_view(), name="profile")
+    path('accounts/profile/', Profile.as_view(), name="profile")
 ]

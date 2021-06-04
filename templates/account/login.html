@@ -36,6 +36,9 @@
               value="{{ redirect_field_value }}"
             />
             {% endif %}
+            {% if request.GET.next %}
+              <<input type="hidden" name="next" value="{{request.GET.next}}">
+            {% endif %}
             <button class="btn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;"type="submit">
               Kirjaudu sisään &nbsp; <i class="fas fa-sign-in-alt"></i>
             </button>
@@ -45,7 +48,7 @@
 
         </div>
   <br><br><br>
-  
+
 </main>
 
 {% endblock %}
