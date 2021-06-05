@@ -447,6 +447,7 @@ header,
 
 @media only screen and (min-width: 601px){
   /* For tablets: */
+
   .kissa{
     position: fixed;
     bottom: 15%;
@@ -1262,7 +1263,7 @@ header,
   color: white;
   font-size: 5rem;
 }
-}
+
 .cak-text{
   position: relative;
   bottom: 180px;
