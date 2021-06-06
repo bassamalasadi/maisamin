@@ -6,6 +6,7 @@
         <div class="mt-5">
           <img src="{% static 'img/logo2.jpg' %}" alt="Untitled"  class="logo2">
         </div>
+        <hr class="w-50">
         <div class="form-s">
           <h1 style="font-family: 'Pacifico', cursive;" >Rekisteröidy</h1>
           <br>
@@ -19,12 +20,25 @@
               value="{{ redirect_field_value }}"
             />
             {% endif %}
-            <button class="btn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit">
+            <input type="checkbox" id="agree" name="agree" value="agree" onchange="onToggle()"> &nbsp
+            <span class="" for="agree">Luomalla tilin hyväksyt tietosuojakäytäntömme ja ehdot. Peruuta tilaus milloin tahansa!</span>
+            <br>
+            <br>
+            <button id="regbtn" class="btn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" disabled type="submit">
               {% trans "Kirjaudu" %} &raquo; &nbsp; <i class="fas fa-sign-in-alt"></i>
             </button>
           </form>
         </div>
         <br><br>
       </div>
+      <script>
+        function onToggle() {
+         if (document.querySelector('#agree').checked) {
+           document.querySelector('#regbtn').removeAttribute('disabled')
+         } else {
+           document.querySelector('#regbtn').setAttribute('disabled', '')
+         }
+       }
 
+      </script>
 {% endblock %}

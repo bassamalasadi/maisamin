@@ -37,6 +37,8 @@ from barcode.writer import ImageWriter
 from django.http import HttpResponseRedirect
 from allauth.account.adapter import DefaultAccountAdapter
 
+from django.core.mail import EmailMultiAlternatives
+
 class SuperUserCheck(UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.is_superuser
@@ -137,8 +139,6 @@ class CheckoutView(View):
                 delivery = req.get('delivery')
                 refrence = str(datetime.timestamp(
                     datetime.now())).replace(".", "")
-                with open(f'{firstName} {lastName}.jpg', 'wb') as f:
-                    Code39(f'{refrence}', writer=ImageWriter()).write(f)
 
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
@@ -166,12 +166,14 @@ class CheckoutView(View):
                         delivery_price=delivery,
                     )
                     if req.get('payment_option') == 'Invoice':
-                        pay = f"""
-Saajan IBAN: FI32 3939 0054 3954 05  \n
-Viitenumero: {refrence} \n
-Yhteensä: {amount} EURO \n
-Eräpäivä: {due_date} \n
+                        pay = f"""<br>
+Saajan IBAN: <b> FI32 3939 0054 3954 05</b>  <br>
+Viitenumero: <b>{refrence}</b> <br>
+Yhteensä: <b>{amount} EUR </b><br>
+Eräpäivä:<b> {due_date}</b> <br>
                         """
+                        with open(f'{firstName} {lastName}.jpg', 'wb') as f:
+                            Code39(f'{refrence}', writer=ImageWriter()).write(f)
                         create_invoice(
                             delivery_date=due_date,
                             user_id=user.id,
@@ -187,30 +189,35 @@ Eräpäivä: {due_date} \n
                             # vat=vat,
                             # final=final
                         )
-                    subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
-                    message = f""" Moi, {lastName}  \n
-Kiitos, että valitsit Maisamin Herkun. \n
-Tilauksesi numero : {req_order.id} \n
-Toimitetaan : {str(date)[0:10]} \n
-Osoitteeseen : {address} \n
-____________________________________________________________________________________________________ \n
-Tilaus: \n
 
-{tabulate(order_email,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='rst', colalign=("right",))}
+
+                    subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
+                    text_content = f"Moi, {lastName}"
+                    html_content = f""" <h4>Kiitos, että valitsit Maisamin Herkun.</h4> <br>
+Tilauksesi numero : <b>{req_order.id}</b><br>
+Toimitetaan : <b>{str(date)[0:10]}</b> <br>
+Osoitteeseen : <b>{address}</b> <br>
+<br>
+Tilaus:
+<hr>
+{tabulate(order_email,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='html')}
+<br>
 {deliv}
-____________________________________________________________________________________________________ \n
-Huom! Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: {req_order.id}, Viitenumero: {refrence}, ja "Peruuttaa") tähän puhelinnumeroon: 0405177444
-tai sähköpostiosoitteeseen:  Info@maisaminherkku.fi  \n
-____________________________________________________________________________________________________ \n
+<hr>
 {pay}
+<br>
+<hr>
+<h4>Huom!</h4> Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: <b>{req_order.id}</b>, Viitenumero: <b>{refrence}</b>, ja "Peruuttaa") tähän puhelinnumeroon: <b>0405177444</b>
+tai sähköpostiosoitteeseen:  <b>Info@maisaminherkku.fi</b>  <br>
 Kiitos
                     """
 
                     recepient = email
-                    email = EmailMessage(
-                        subject, message, settings.EMAIL_HOST_USER, [
+                    email = EmailMultiAlternatives(
+                        subject, text_content, settings.EMAIL_HOST_USER, [
                             recepient, settings.EMAIL_HOST_USER],
                     )
+                    email.attach_alternative(html_content, "text/html")
                     if req.get('payment_option') == 'Invoice':
                         email.attach_file(f'{firstName} {lastName}.pdf')
                     email.send(fail_silently=False)
