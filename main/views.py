@@ -207,7 +207,7 @@ Tilaus:
 {pay}
 <br>
 <hr>
-<h4>Huom!</h4> Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: <b>{req_order.id}</b>, Viitenumero: <b>{refrence}</b>, ja "Peruuttaa") tähän puhelinnumeroon: <b>0405177444</b>
+<h4>Huom!</h4> Jos haluat peruuttaa tilauksesi, lähetä: (tilausnumero: <b>{req_order.id}</b>, ja "Peruuttaa") tähän puhelinnumeroon: <b>0405177444</b>
 tai sähköpostiosoitteeseen:  <b>Info@maisaminherkku.fi</b>  <br>
 Kiitos
                     """

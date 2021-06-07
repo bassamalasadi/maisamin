@@ -1,5 +1,6 @@
 {% load static %}
 {% load static i18n %}
+{% load cart_template_tags %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -54,15 +55,6 @@
   <meta name="google-site-verification" content="QjF0pAjDXVWuGd2Fnji4BJHxua3D0F2NT2wL3xSRf3Y" />
   {% include "navbar.html" %}
   <body>
-    <!-- <div class='cookie-banner' style="" hidden>
-      <h3>Käytämme evästeitä</h3>
-      <p>
-        Käytämme evästeitä ja muita seurantateknologioita parantaaksemme käyttäjäkokemusta verkkosivustollamme, näyttääksemme sinulle personoituja sisältöjä ja mainoksia, analysoidaksemme verkkoliikennettä sekä lisätäksemme ymmärrystämme käyttäjiemme sijainnista.
-        <a class="btn" style="color:#FB9000;" href='https://www.maisaminherkku.fi/privacy-policy/'>Tietosuojaseloste</a>
-      </p>
-      <button class='btn btn-warning close' >Hyväksyä</button>
-    </div> -->
-
       {% if messages %} {% for message in messages %}
         <div
           class="alert alert-{{ message.tags }} alert-dismissible fade show"
@@ -80,17 +72,12 @@
      {% endblock content %}
   </body>
   {% include "footer.html" %}
-  <!-- <script>
-
-  if (window.localStorage.getItem("cookieSeen") != "shown") {
-    $(".cookie-banner").removeAttr("hidden")
-    window.localStorage.setItem("cookieSeen","shown")
-  };
-  $(".close").click(function() {
-    $(".cookie-banner").fadeOut();
-  })
-
-  </script> -->
+  <script>
+   $(window).scroll(function(){
+     $('nav').toggleClass('scrolled', $(this).scrollTop() > 700);
+     $('.item-text').toggleClass('scrolled', $(this).scrollTop() > 700);
+   });
+</script>
   <script>
     $(function () {
       var date = new Date()
