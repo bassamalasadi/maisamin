@@ -636,10 +636,10 @@ header,
   .navico {
     position: absolute;
     text-align: center;
-    font-size: 22px;
+    font-size: 16px;
     font-family: 'Lato', sans-serif;
     top:10px;
-    padding: 20px;
+    padding: 10px;
     display: inline-block;
     position: relative;
     color: hsl(222, 25%, 14%);
@@ -825,13 +825,13 @@ header,
     color: black !important;
   }
   .navico{
-    margin:5px 0px 2px 10px;
+    margin:5px 0px 2px 5px;
     width: fit-content;
     display: inline;
     top:2px;
     font-family: 'Lato', sans-serif;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
   }
   .spe-ord{
     position: absolute;
