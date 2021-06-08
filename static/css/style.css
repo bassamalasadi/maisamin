@@ -646,7 +646,7 @@ header,
   .navico {
     position: absolute;
     text-align: center;
-    font-size: 16px;
+    font-size: 14px;
     font-family: 'Lato', sans-serif;
     top:10px;
     padding: 10px;
@@ -851,14 +851,14 @@ header,
     top:2px;
     font-family: 'Lato', sans-serif;
     text-align: center;
-    font-size: 14px;
+    font-size: 16px;
   }
   .spe-ord{
     position: absolute;
     font-size: 34px;
     font-weight: 900;
     color: white;
-    left: 84.55%;
+    left: 82.55%;
     top: 66.2%;
     font-family: 'Lato', sans-serif;
     line-height: 0.5;
