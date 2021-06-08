@@ -27,7 +27,7 @@ from .forms import CheckoutForm
 from django.utils.formats import sanitize_separators
 from django.contrib.auth.models import User
 from .models import Product, OrderItem, Order, Request
-from .lasku import create_invoice
+from .lasku0 import create_invoice
 
 from tabulate import tabulate
 
@@ -156,7 +156,6 @@ class CheckoutView(View):
                                   date, pay]):
                     order_list = queryset_to_list(list(order_item))
                     order_email = order_list_for_email(order_item)
-                    print(order_email)
                     req_order = Request.objects.create(
                         name=firstName,
                         address=address,
@@ -183,6 +182,7 @@ Eräpäivä:<b> {due_date}</b> <br>
                             fname=firstName,
                             lname= lastName,
                             address=address,
+                            postal=postal,
                             email=email,
                             store=order_email,
                             total=amount,
@@ -559,7 +559,5 @@ class Privacy(View):
 class MyAccountAdapter(DefaultAccountAdapter):
 
     def get_login_redirect_url(self, request):
-        print("in code")
         redirect_to = request.GET.get('next', '')
-        print(redirect_to)
         return HttpResponseRedirect(redirect_to)

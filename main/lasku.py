@@ -135,8 +135,8 @@ def create_invoice(**kwargs):
     for value in pdf.store:
         pdf.set_x(20)
         pdf.cell(75, 6, f'  {value[0]}')
-        pdf.cell(50, 6, f'  {value[1]}', align='C')
-        pdf.cell(15, 6, f'  {value[3]}', align='C')
+        pdf.cell(50, 6, f'  {value[1]}', align='R')
+        pdf.cell(15, 6, f'  {value[3]}', align='R')
         pdf.cell(30, 6, f'EUR   {value[4]}', border=1, ln=1, align='C')
 
     pdf.set_x(20)
