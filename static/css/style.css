@@ -87,7 +87,7 @@ header,
   }
   .spe-ord{
     position: absolute;
-    font-size: 12px;
+    font-size: 10px;
     font-weight: 700;
     color: white;
     left: 76%;
@@ -130,8 +130,8 @@ header,
     color: white;
     font-family: "Nosifer", cursive;
     width: 50%;
-    left: 5%;
-    top: 20%;
+    left: 12%;
+    top: 16%;
     margin: 0 auto;
   }
   .bgimg, .maimg{
@@ -451,7 +451,7 @@ header,
     font-size: 16px;
     font-weight: 700;
     color: white;
-    left: 83%;
+    left: 80%;
     top: 25%;
     font-family: 'Lato', sans-serif;
     line-height: 0.3;
@@ -855,10 +855,10 @@ header,
   }
   .spe-ord{
     position: absolute;
-    font-size: 34px;
+    font-size: 30px;
     font-weight: 900;
     color: white;
-    left: 82.55%;
+    left: 80%;
     top: 66.2%;
     font-family: 'Lato', sans-serif;
     line-height: 0.5;
