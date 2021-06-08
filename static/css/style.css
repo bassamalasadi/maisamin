@@ -84,6 +84,7 @@ header,
   /* For mobile phones: */
   .par-text{
     font-family: 'Pacifico', cursive;
+    color:#BF9000;
   }
   .spe-ord{
     position: absolute;
@@ -424,12 +425,13 @@ header,
     position:relative;
     font-family: 'Merienda', cursive;
     padding-top:2px;
-    font-size: 12px;
-    font-weight: 500;
+    font-size: 10.5px;
+    font-weight: 700;
   }
   .par-1-head{
     font-size: 20px;
     font-weight:bold;
+    color:#BF9000;
   }
   .cap-text{
     position: relative;
@@ -811,6 +813,7 @@ header,
     font-size: 26px;
     font-weight:bold;
     padding-bottom: 15px;
+    color:#BF9000;
   }
   .cap-text{
     position: relative;
@@ -822,6 +825,10 @@ header,
     position: relative;
     color: black;
     font-size: 2rem;
+  }
+  .par-text{
+    font-family: 'Pacifico', cursive;
+    color:#BF9000;
   }
 
 }
@@ -1268,6 +1275,7 @@ header,
     font-size: 36px;
     font-weight:bold;
     padding: 15px 0px;
+    color:#BF9000;
   }
 
   /* price color */
