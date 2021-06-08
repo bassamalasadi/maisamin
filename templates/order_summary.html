@@ -1,4 +1,5 @@
 {% extends "base.html" %} {% block content %}
+{% include "navbar0.html" %}
 <main class="pt-5 pl-2">
   <div class="order-table">
     <div class="table text-nowrap pt-5">
@@ -41,6 +42,13 @@
                 <span class="loctose">L</span>
                 </span>
                 {% endif %}
+                &nbsp;
+                {% if order_product.additional_info %}
+                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Lisää tiedot">
+                <span class="addinfo">A</span>
+                </span>
+                {% endif %}
+                &nbsp;
               </td>
               <td class="h6 table-col">{{ order_product.price }}&nbsp;&euro;</td>
               <td class="">

@@ -398,6 +398,16 @@ header,
     border-radius: 30%;
     cursor: pointer;
   }
+  .addinfo{
+    padding: 3px 5px;
+    background-color: #FB9000;
+    font-style: italic;
+    font-size: 10px;
+    font-weight: bold;
+    color:white;
+    border-radius: 30%;
+    cursor: pointer;
+  }
   .alert{
    position: absolute;
    z-index: 999;
@@ -767,6 +777,16 @@ header,
     border-radius: 30%;
     cursor: pointer;
   }
+  .addinfo{
+    padding: 3px 5px;
+    background-color: #FB9000;
+    font-style: italic;
+    font-size: 13px;
+    font-weight: bold;
+    color:white;
+    border-radius: 30%;
+    cursor: pointer;
+  }
   .alert{
    position: absolute;
    z-index: 999;
@@ -817,7 +837,7 @@ header,
       background:#FFF !important;
   }
   .item-text {
-    color: #BF9000 !important;
+    color: white !important;
     transition:0.75s ease;
     font-size: 18px;
   }
@@ -1188,6 +1208,16 @@ header,
     font-size: 18px;
     font-weight: bold;
     color:white;
+    border-radius: 30%;
+    cursor: pointer;
+  }
+  .addinfo{
+    padding: 3px 6px;
+    background-color:#BF9000;
+    font-style: italic;
+    font-size: 18px;
+    font-weight: bold;
+    color: white;
     border-radius: 30%;
     cursor: pointer;
   }

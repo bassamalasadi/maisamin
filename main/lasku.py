@@ -126,16 +126,18 @@ def create_invoice(**kwargs):
     pdf.set_x(20)
     pdf.set_fill_color(250, 250, 250)
     pdf.set_font('courier', 'B', 10)
-    pdf.cell(120, 7, 'TUOTE', border=1, fill=1)
-    pdf.cell(20, 7, ' KPL', border=1, fill=1)
+    pdf.cell(75, 7, 'TUOTE', border=1, fill=1)
+    pdf.cell(50, 7 , 'G&L', border=1, fill=1)
+    pdf.cell(15, 7, ' KPL', border=1, fill=1)
     pdf.cell(30, 7, ' Yhteensä', border=1, ln=1, align='C', fill=1)
     pdf.set_font('courier', '', 9)
 
     for value in pdf.store:
         pdf.set_x(20)
-        pdf.cell(120, 6, f'  {value[0]}')
-        pdf.cell(20, 6, f'  {value[1]}', align='C')
-        pdf.cell(30, 6, f'EUR   {value[2]}', border=1, ln=1, align='C')
+        pdf.cell(75, 6, f'  {value[0]}')
+        pdf.cell(50, 6, f'  {value[1]}', align='C')
+        pdf.cell(15, 6, f'  {value[3]}', align='C')
+        pdf.cell(30, 6, f'EUR   {value[4]}', border=1, ln=1, align='C')
 
     pdf.set_x(20)
     pdf.set_font('courier', 'B', 10)

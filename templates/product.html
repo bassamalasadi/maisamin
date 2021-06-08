@@ -1,5 +1,7 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% load ratings %} {% block content %}
+{% include "navbar0.html" %}
 <main class="mt-5 pt-4">
+  
   <div class="container dark-grey-text mt-5">
     <div class="row wow fadeIn">
       <div class="col-md-6" style="z-index:1;">
@@ -46,6 +48,7 @@
           <div class="">
             <br>
             {% if product.category != 'cake' and product.category != 'cheesecake' %}
+            <span style="font-family: 'Lato', sans-serif;">Määrä</span>
               <input class="form-control w-25" type="number" name="amount-2" value="1" min="1" step="1" max=50 oninput="validity.valid||(value='');" placeholder="1">
             {% endif %}
             {% if product.category == 'cake' or product.category == 'cheesecake' %}
@@ -73,6 +76,10 @@
                 <option value="10" >10</option>
                 <option value="20" >20</option>
               </select>
+              <!-- <p style="font-family: 'Lato', sans-serif;"> Määrä&nbsp;&nbsp;&nbsp;&nbsp;</p> -->
+
+              <br>
+              <span style="font-family: 'Lato', sans-serif;">KOKO</span>
                 <select class="browser-default custom-select custom-select-lg mb-3" name="price" id="price" onchange="myFunction()">
                   <option value="" id="disableitem" disabled selected>Valitse</option>
                   {% for item in product.variation_set.all %}
@@ -80,15 +87,23 @@
                   {% endfor %}
                 </select>
               {% endif %}
-            <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
-              <i class="fas fa-cart-plus ml-1"></i>
-            </button>
+              <textarea class="form-control" id="lisaa" rows="3" name="lisaa" placeholder="Lisää tiedot"></textarea>
+
+              <br>
+              <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
+                <i class="fas fa-cart-plus ml-1"></i>
+              </button>
             {% else %}
-            <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" id="addtocart-2">Lisää ostoskoriin
-              <i class="fas fa-cart-plus ml-1"></i>
-            </button>
+            <textarea class="form-control" id="lisaa-2" rows="3" name="lisaa-2" placeholder="Lisää tiedot"></textarea>
+
+              <br>
+              <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" id="addtocart-2">Lisää ostoskoriin
+                <i class="fas fa-cart-plus ml-1"></i>
+              </button>
             {% endif%}
           </div>
+          <br><br>
+
         </form>
         </div>
       </div>

@@ -89,8 +89,10 @@ class OrderItem(models.Model):
     is_gluteen_free = models.BooleanField(default=False)
     is_loctose_free = models.BooleanField(default=False)
 
+    additional_info = models.TextField(null=True, blank=True)
+
     def __str__(self):
-        return f"{self.product.name} : qunatity = ({self.quantity}) : price = ({self.price}) : is_G = ({self.is_gluteen_free}) : is_L = ({self.is_loctose_free})"
+        return f"{self.product.name} : qunatity = ({self.quantity}) : price = ({self.price}) : is_G = ({self.is_gluteen_free}) : is_L = ({self.is_loctose_free}) : add_info=({self.additional_info})"
 
     # to calculate the sum of the price for a specified quantity for a single product
     @property

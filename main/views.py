@@ -74,7 +74,8 @@ def order_list_for_email(order_item):
     for order in list(order_item):
         g = "Gluteeniton" if order.is_gluteen_free else ""
         l = "Laktoositon" if order.is_loctose_free else ""
-        res = [str(order.product)+ " " + g + " "+ l, order.quantity, "{:.2f}".format(order.get_total_product_price)]
+        add_info = order.additional_info if order.additional_info else ""
+        res = [str(order.product), g + " "+ l , add_info, order.quantity, "{:.2f}".format(order.get_total_product_price)]
         order_email.append(res)
     return order_email
 
@@ -155,6 +156,7 @@ class CheckoutView(View):
                                   date, pay]):
                     order_list = queryset_to_list(list(order_item))
                     order_email = order_list_for_email(order_item)
+                    print(order_email)
                     req_order = Request.objects.create(
                         name=firstName,
                         address=address,
@@ -200,9 +202,11 @@ Osoitteeseen : <b>{address}</b> <br>
 <br>
 Tilaus:
 <hr>
-{tabulate(order_email,headers=["Kuvaus","Määrä","Yhteensä"], tablefmt='html')}
+{tabulate(order_email,headers=["Kuvaus","G&L", "Lisää tiedot","Määrä","Yhteensä"], tablefmt='html')}
 <br>
 {deliv}
+<br>
+<b>Yhteensä: {amount} EURO</b>
 <hr>
 {pay}
 <br>
@@ -391,25 +395,28 @@ class ItemDetailView(View):
             return redirect("main:home")
 
     def post(self, request, slug):
-        print(request.POST)
-        if request.POST.get('hinta-2'):
-            price = sanitize_separators(request.POST.get('hinta-2'))
-            amount = sanitize_separators(request.POST.get('amount-2'))
-            gluteen = False
-            laktoos = False
-        else:
-            price = sanitize_separators(request.POST.get('price'))
-            amount = sanitize_separators(request.POST.get('amount'))
-            gluteen = sanitize_separators(request.POST.get('gluteen'))
-            laktoos = sanitize_separators(request.POST.get('laktoos'))
-        if gluteen:
-            price = str(float(price) + 5.00)
-        if laktoos:
-            price = str(float(price) + 5.00)
-        product = get_object_or_404(Product, slug=slug)
+        add_info = ""
         if request.user.is_anonymous:
             return redirect('account_login')
         else:
+            if request.POST.get('hinta-2'):
+                price = sanitize_separators(request.POST.get('hinta-2'))
+                amount = sanitize_separators(request.POST.get('amount-2'))
+                gluteen = False
+                laktoos = False
+                add_info = sanitize_separators(request.POST.get('lisaa-2'))
+            else:
+                price = sanitize_separators(request.POST.get('price'))
+                amount = sanitize_separators(request.POST.get('amount'))
+                gluteen = sanitize_separators(request.POST.get('gluteen'))
+                laktoos = sanitize_separators(request.POST.get('laktoos'))
+                add_info = sanitize_separators(request.POST.get('lisaa'))
+            if gluteen:
+                price = str(float(price) + 5.00)
+            if laktoos:
+                price = str(float(price) + 5.00)
+            product = get_object_or_404(Product, slug=slug)
+
             try:
                 order_qs = OrderItem.objects.get(
                     user=self.request.user,
@@ -417,6 +424,7 @@ class ItemDetailView(View):
                     price=price,
                     is_gluteen_free=isinstance(gluteen ,str),
                     is_loctose_free=isinstance(laktoos ,str),
+                    additional_info=add_info
                     )
                 order_qs.quantity += int(amount)
                 if gluteen:
@@ -436,6 +444,7 @@ class ItemDetailView(View):
                     quantity=amount,
                     is_gluteen_free=isinstance(gluteen ,str),
                     is_loctose_free=isinstance(laktoos ,str),
+                    additional_info=add_info,
                 )
                 messages.info(
                     self.request, "Tämä tuote lisättiin ostoskoriin")
