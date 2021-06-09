@@ -14,7 +14,7 @@ urlpatterns = [
          name="password_reset"),
     path('', include('main.urls', namespace='main')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-]
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 if settings.DEBUG:
     import debug_toolbar
