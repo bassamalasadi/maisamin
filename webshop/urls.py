@@ -14,10 +14,6 @@ urlpatterns = [
          name="password_reset"),
     path('', include('main.urls', namespace='main')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    url(r'^media/(?P<path>.*)$', serve, {'document_root':
-        settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve, {'document_root':
-        settings.STATIC_ROOT}),
 ]
 
 
