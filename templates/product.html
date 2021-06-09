@@ -10,6 +10,10 @@
         </div>
         <br>
         <span class="">{% ratings product %}</span>
+        <div class="">
+          <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
+          <p style="font-family: 'Indie Flower', cursive;">{{ product.additional_info|linebreaks }}</p>
+        </div>
       </div>
 
       <div class="col-md-6 mb-4">
@@ -24,7 +28,7 @@
 
 
             <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
-            <p style="font-family: 'Indie Flower', cursive;">{{ product.description|linebreaks }}</p>
+            <p style="font-family: 'Indie Flower', cursive;">{{ product.contents|linebreaks }}</p>
             <br />
             <hr>
 
@@ -119,12 +123,18 @@
   <script>
 
     function myFunction() {
+      g = 0
+      l = 0
       var x = document.getElementById("price").value;
       var y = parseInt(document.getElementById("amount").value);
       x = x.replace(',', '.')
       x = Number.parseFloat(x)
-      var g = (document.getElementById("gluteen").checked) ? 5.00 : 0
-      var l = (document.getElementById("laktoos").checked) ? 5.00 : 0
+      if (document.getElementById("gluteen")){
+        var g = (document.getElementById("gluteen").checked) ? 5.00 : 0
+      }
+      if (document.getElementById("laktoos")){
+        var l = (document.getElementById("laktoos").checked) ? 5.00 : 0
+      }
       if (Number.isNaN(x) == false){
         x = x + g + l
         res = parseFloat(x * y).toFixed(2)
