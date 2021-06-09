@@ -110,10 +110,10 @@ FÖrfallodag \n
 
 
     def header(self):
-        # self.image('static/img/logo2.jpg', 10, 8, 25)
+        self.image('static/img/logo2.jpg', 10, 8, 25)
         self.set_font('courier', 'B', 20)
         self.cell(0, 10, 'Maisamin Herkku', border=False, ln=1, align='C')
-        # self.image(f'{self.fname} {self.lname}.jpg', 150, 72, 45)
+        self.image(f'{self.fname} {self.lname}.jpg', 150, 72, 45)
         self.ln(20)
 
     def footer(self):
