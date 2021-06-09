@@ -1,6 +1,6 @@
 {% extends "base.html" %} {% load crispy_forms_tags %} {% load ratings %}
 {% load static %}
-
+{% load media %}
 {% block content %}
 {% include "navbar0.html" %}
 <main class="mt-5 pt-4">
@@ -9,7 +9,7 @@
     <div class="row wow fadeIn">
       <div class="col-md-6" style="z-index:1;">
         <div class="card-2">
-          <img src="{{MEDIA_URL}}{{ product.image1.url }}" class="prod-img"/>
+          <img src="{{ product.image1.url }}" class="prod-img"/>
         </div>
         <br>
         <span class="">{% ratings product %}</span>
