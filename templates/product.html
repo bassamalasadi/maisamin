@@ -5,16 +5,16 @@
 <main class="mt-5 pt-4">
 
   <div class="container dark-grey-text mt-5">
-    <div class="row wow fadeIn">
+    <div class="row">
       <div class="col-md-6" style="z-index:1;">
         <div class="card-2">
-          <img src="{{ product.image1.url }}" class="prod-img"/>
+          <img src="{{ product.image1 }}" class="prod-img"/>
         </div>
         <br>
         <span class="">{% ratings product %}</span>
         <div class="">
           <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
-          <p style="font-family: 'Indie Flower', cursive;">{{ product.additional_info|linebreaks }}</p>
+          <div style="font-family: 'Acme', sans-serif;">{{ product.additional_info|linebreaks }}</div>
         </div>
       </div>
 
@@ -30,7 +30,7 @@
 
 
             <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
-            <p style="font-family: 'Indie Flower', cursive;">{{ product.contents|linebreaks }}</p>
+            <div style="font-family: 'Acme', sans-serif;">{{ product.contents|linebreaks }}</div>
             <br />
             <hr>
 
@@ -62,13 +62,14 @@
               <span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
             {% else %}
             <br>
-              <span class="badge bg-dark " style="font-size: 2em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
+              <span class="badge bg-dark" style="font-size: 2em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
               <br>
               <br><br>
               <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
             {% endif %}
             {% if product.category == 'cake' or product.category == 'cheesecake' %}
               {% if product.variation_set.all %}
+                <span style="font-family: 'Lato', sans-serif; position:relative; bottom:6px;">Määrä&nbsp;&nbsp;</span>
               <select class="browser-default custom-select custom-select-lg mb-3 w-25" name="amount" id="amount" onchange="myFunction()">
                 <option value="1" selected>1</option>
                 <option value="2" >2</option>

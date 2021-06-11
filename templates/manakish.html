@@ -7,22 +7,22 @@
     <img class="bgimg" src="{% static 'img/manakish2.jpg' %}" alt="" width="1090" height="220">
 
   </div>
-  <div class="container marketing pt-1 mt-1">
+  <div class="container-fluid marketing pt-1 mt-1">
     <br>
     <h1 class="cak-text" style="font-family: 'Pacifico', cursive;">Manakish</h1>
 
     <section class="text-center mt-1">
-      <div class="row wow fadeIn">
+      <div class="row">
         {% for item in object_list %}
         {% if item.category == 'manakish' %}
-        <div class="card m-3">
-          <div class="">
+        <div class="prod-card m-3">
+          <div>
             <a href="{{ item.get_absolute_url }}">
-            <div class="">
-              <img src="{{ item.image1.url }}" class="mainimg" />
-              <div class="">
+            <div>
+              <img src="{{ item.image1}}" class="mainimg" />
+              <div>
                 <h6 class="p-2 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</h6>
-                <div class="pricing-wrap">
+                <div class="">
                   <span class="float-right pr-2 " style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</span>
                 </div>
               </div>

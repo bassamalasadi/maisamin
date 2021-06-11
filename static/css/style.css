@@ -209,7 +209,9 @@ header,
     position: relative;
     left: 10%;
   }
-  .card{
+  .card,
+  .prod-card{
+    position: relative;
     width: 80%;
     left:5%;
   }
@@ -554,8 +556,11 @@ header,
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
-  .card {
+  .card,
+  .prod-card {
+    position: relative;
     width:22%;
+    left:10%;
     box-shadow: 0 2px 9px 	rgb(191, 144, 0), 0 2px 4px 	rgb(191, 144, 0);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   }
@@ -583,10 +588,10 @@ header,
     height: 40vh;
     object-fit: cover;
   }
-  .card{
+  /* .card{
     width: 28%;
     left:1%;
-  }
+  } */
   .check-card{
     width:100%;
   }
@@ -998,6 +1003,13 @@ header,
   .check-card{
     width:90%;
   }
+  .prod-card{
+    position: relative;
+    left:10%;
+    width:22%;
+    height:40vh;
+    border-radius: 10px;
+  }
   .imgcard {
     position: relative;
     background-color: white;
@@ -1033,6 +1045,7 @@ header,
     width: 100%;
     height: 30vh;
     object-fit: cover;
+    border-radius: 10px 10px 0 0 ;
   }
   .overlay {
     position: absolute;

@@ -49,7 +49,7 @@ class Product(models.Model):
     feedback = models.TextField(null=True, blank=True)
     price = models.DecimalField(max_digits=10, decimal_places=2)
     slug = models.SlugField()
-    image1 = models.ImageField(null=False)
+    image1 = models.TextField(null=True, blank=True)
     size = MultiSelectField(choices=SIZE)
 
     def __str__(self):
