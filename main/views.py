@@ -216,15 +216,26 @@ tai sähköpostiosoitteeseen:  <b>Info@maisaminherkku.fi</b>  <br>
 Kiitos
                     """
 
-                    recepient = email
-                    email = EmailMultiAlternatives(
-                        subject, text_content, settings.EMAIL_HOST_USER, [
-                            recepient, settings.EMAIL_HOST_USER],
+                    email_to_us = EmailMultiAlternatives(
+                        subject, text_content, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER],
                     )
-                    email.attach_alternative(html_content, "text/html")
+                    email_to_us.attach_alternative(html_content, "text/html")
                     if req.get('payment_option') == 'Invoice':
-                        email.attach_file(f'{firstName} {lastName}.pdf')
-                    email.send(fail_silently=False)
+                        email_to_us.attach_file(f'{firstName} {lastName}.pdf')
+                    email_to_us.send(fail_silently=False)
+
+                    subject_to_user = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
+                    text_content_to_user = f"Moi, {lastName}"
+                    confirmation_email_to_user = f"""
+<h4>Kiitos, että valitsit Maisamin Herkun.</h4> <br>
+<h4>Tilauksesi käsitellään pian. Saat vahvistussähköpostin mahdollisimman pian.</h4><br>
+<img src="https://www.maisaminherkku.fi/static/img/brand2.jpg" alt="M">
+                    """
+                    email_to_user = EmailMultiAlternatives(
+                        subject_to_user, text_content_to_user, settings.EMAIL_HOST_USER, [email],
+                    )
+                    email_to_user.attach_alternative(confirmation_email_to_user, "text/html")
+                    email_to_user.send(fail_silently=False)
 
                     try:
                         if req.get('payment_option') == 'Invoice':

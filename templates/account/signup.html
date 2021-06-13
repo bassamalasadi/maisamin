@@ -21,7 +21,7 @@
             />
             {% endif %}
             <input type="checkbox" id="agree" name="agree" value="agree" onchange="onToggle()"> &nbsp
-            <span class="" for="agree">Luomalla tilin hyväksyt tietosuojakäytäntömme ja ehdot. Peruuta tilaus milloin tahansa!</span>
+            <span class="" for="agree">Luomalla tilin hyväksyt <a href="{% url 'main:privacy' %}" style="color:#BF9000;font-weight:800;">tietosuojakäytäntömme ja ehdot.</a></span>
             <br>
             <br>
             <button id="regbtn" class="btn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" disabled type="submit">
