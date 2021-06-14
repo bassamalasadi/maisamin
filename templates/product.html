@@ -11,10 +11,12 @@
         </div>
         <br>
         <span class="">{% ratings product %}</span>
-        <div class="">
-          <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
-          <div style="font-family: 'Acme', sans-serif;">{{ product.additional_info|linebreaks }}</div>
-        </div>
+        {% if product.additional_info %}
+          <div class="">
+            <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
+            <div style="font-family: 'Acme', sans-serif;">{{ product.additional_info|linebreaks }}</div>
+          </div>
+        {% endif%}
       </div>
 
       <div class="col-md-6 mb-4">

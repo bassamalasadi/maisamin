@@ -4,7 +4,7 @@
   {% if user|cart_item_count > 0 %}
     <a href="{% url 'main:order-summary' %}">
       <div class="kissa">
-        <i class="fas fa-shopping-basket fa-2x text-white"><span class="kissa-text" >{{ user|cart_item_count }}</span></i>
+        <i class="fas fa-shopping-basket fa-2x text-white"></i>
       </div>
     </a>
   {% endif %}

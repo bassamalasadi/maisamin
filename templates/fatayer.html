@@ -17,10 +17,13 @@
            <a href="{{ item.get_absolute_url }}">
            <div>
              <img src="{{ item.image1}}" class="mainimg" />
-             <div>
-               <h6 class="p-2 float-left" style="font-family: 'Pacifico', cursive;">{{ item.name }}</h6>
-               <br>
-                 <p class="float-right pr-2 " style="font-family: 'Pacifico', cursive;">&euro;{{ item.price }}</p>
+             <div class="row">
+               <div class="col-sm-7">
+                 <h6 class="p-2" style="font-family: 'Pacifico', cursive;">{{ item.name }}</h6>
+               </div>
+               <div class="col-sm-5">
+                 <p class="" style="font-family: 'Pacifico', cursive; background-color:#BF9000; border-radius:0 0 0 15px; padding:5px 10px; color:white;">&euro;{{ item.price }}</p>
+               </div>
              </div>
            </div>
          </a>
