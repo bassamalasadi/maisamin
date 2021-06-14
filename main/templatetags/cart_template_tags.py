@@ -1,6 +1,5 @@
 from django import template
 from main.models import Order, OrderItem
-
 register = template.Library()
 
 # counting the number of orders in your navbar cart

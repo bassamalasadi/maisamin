@@ -102,7 +102,9 @@ class OrderItem(models.Model):
     # to get the prices of the total product if has a discount on it or no
     @property
     def get_final_price(self):
-        return self.get_total_product_price
+        print(self.get_total_product_price)
+        print("{:.2f}".format(self.get_total_product_price))
+        return "{:.2f}".format(self.get_total_product_price)
 
     @property
     def get_product(self):
@@ -199,4 +201,4 @@ class Variation(models.Model):
     size = models.CharField(max_length=30)
 
     def __str__(self):
-        return self.size
+        return f'{self.product} {self.size}'

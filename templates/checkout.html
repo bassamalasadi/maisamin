@@ -73,16 +73,5 @@
     </div>
   </div>
   <br>
-  <script>
-    function myFunction() {
-      var x = parseInt(document.getElementById("delivery").value);
-      x = parseFloat(x).toFixed(2).toString()
-      if (x > 0){
-        document.getElementById("delv_price").innerHTML = '+ ' + x + ' Euro';
-      }else{
-        document.getElementById("delv_price").innerHTML = '';
-      }
-    }
-  </script>
 </main>
 {% endblock content %}

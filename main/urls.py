@@ -15,6 +15,7 @@ from .views import (
     Privacy,
     Profile,
     add_to_cart,
+    testView,
     remove_from_cart,
     remove_single_item_from_cart,
     remove_from_order_page,
@@ -24,6 +25,7 @@ app_name = 'main'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
+    path('test/', testView, name="test"),
     path('cake/', CakeView.as_view(), name='cake'),
     path('cupcake', CupcakeView.as_view(), name='cupcake'),
     path('cheesecake/', CheeseCakeView.as_view(), name='cheesecake'),

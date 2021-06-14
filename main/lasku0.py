@@ -113,7 +113,7 @@ FÖrfallodag \n
         self.image('static/img/logo2.jpg', 10, 8, 25)
         self.set_font('courier', 'B', 20)
         self.cell(0, 10, 'Maisamin Herkku', border=False, ln=1, align='C')
-        self.image(f'{self.fname} {self.lname}.jpg', 150, 72, 45)
+        self.image(f'{self.fname} {self.lname}.svg', 150, 72, 45)
         self.ln(20)
 
     def footer(self):
@@ -352,8 +352,8 @@ def create_invoice(**kwargs):
     for value in pdf.store:
         pdf.set_x(20)
         pdf.cell(75, 6, f'  {value[0]}')
-        pdf.cell(50, 6, f'  {value[1]}', align='R')
-        pdf.cell(15, 6, f'  {value[3]}', align='R')
+        pdf.cell(50, 6, f'  {value[1]}', align='L')
+        pdf.cell(15, 6, f'  {value[3]}', align='L')
         pdf.cell(30, 6, f'EUR   {value[4]}', border=1, ln=1, align='C')
 
     pdf.set_x(20)

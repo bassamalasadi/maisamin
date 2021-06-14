@@ -3,7 +3,6 @@
 {% block content %}
 {% include "navbar0.html" %}
 <main class="mt-5 pt-4">
-
   <div class="container dark-grey-text mt-5">
     <div class="row">
       <div class="col-md-6" style="z-index:1;">
@@ -50,7 +49,8 @@
                   {% endif %}
                   <hr>
               </div>
-          {% endif %}
+            {% endif %}
+
           <div class="">
             <br>
             {% if product.category != 'cake' and product.category != 'cheesecake' %}
@@ -83,7 +83,6 @@
                 <option value="10" >10</option>
                 <option value="20" >20</option>
               </select>
-              <!-- <p style="font-family: 'Lato', sans-serif;"> Määrä&nbsp;&nbsp;&nbsp;&nbsp;</p> -->
 
               <br>
               <span style="font-family: 'Lato', sans-serif;">KOKO</span>
@@ -94,14 +93,14 @@
                   {% endfor %}
                 </select>
               {% endif %}
-              <textarea class="form-control" id="lisaa" rows="3" name="lisaa" placeholder="Lisää tiedot"></textarea>
+              <textarea class="form-control" id="lisaa" rows="3" name="lisaa" placeholder="Lisätiedot"></textarea>
 
               <br>
               <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
                 <i class="fas fa-cart-plus ml-1"></i>
               </button>
             {% else %}
-            <textarea class="form-control" id="lisaa-2" rows="3" name="lisaa-2" placeholder="Lisää tiedot"></textarea>
+            <textarea class="form-control" id="lisaa-2" rows="3" name="lisaa-2" placeholder="Lisätiedot"></textarea>
 
               <br>
               <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" id="addtocart-2">Lisää ostoskoriin
@@ -110,7 +109,6 @@
             {% endif%}
           </div>
           <br><br>
-
         </form>
         </div>
       </div>
@@ -123,30 +121,16 @@
       </div>
     </div>
   </div>
-  <script>
-
-    function myFunction() {
-      g = 0
-      l = 0
-      var x = document.getElementById("price").value;
-      var y = parseInt(document.getElementById("amount").value);
-      x = x.replace(',', '.')
-      x = Number.parseFloat(x)
-      if (document.getElementById("gluteen")){
-        var g = (document.getElementById("gluteen").checked) ? 5.00 : 0
-      }
-      if (document.getElementById("laktoos")){
-        var l = (document.getElementById("laktoos").checked) ? 5.00 : 0
-      }
-      if (Number.isNaN(x) == false){
-        x = x + g + l
-        res = parseFloat(x * y).toFixed(2)
-        document.getElementById("addtocart").removeAttribute("disabled");
-        document.getElementById("hinta").innerHTML = res;
-      }
-    }
-
-  </script>
   <br>
 </main>
+<script type="text/javascript">
+  $( document ).ready(function() {
+  if (document.cookie.indexOf('visited=true') == -1){
+    $('#myModal').modal({show:true});
+    var year = 1000*60*60*24*365;
+    var expires = new Date((new Date()).valueOf() + year);
+    document.cookie = "visited=false;expires=" + expires.toUTCString();
+    }
+  });
+</script>
 {% endblock content %}

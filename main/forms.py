@@ -36,13 +36,13 @@ class CheckoutForm(forms.Form):
                              label='')
     street_address = forms.CharField(required=True,
                                      label='',
-                                     widget=forms.TextInput(attrs={'placeholder': 'Kadunnimi ja Talon numero'}))
+                                     widget=forms.TextInput(attrs={'placeholder': 'Osoite'}))
     apartment_address = forms.CharField(required=False,
                                         label='',
                                         widget=forms.TextInput(attrs={'placeholder': 'Huoneisto, Yksikkö jne. (valinnainen)'}))
     postal = forms.CharField(required=True,
                              label='',
-                             widget=forms.TextInput(attrs={'placeholder': 'Postinumer'}))
+                             widget=forms.TextInput(attrs={'placeholder': 'Postinumero'}))
     email = forms.EmailField(required=True,
                              label='',
                              widget=forms.TextInput(attrs={'placeholder': 'Sähköpostiosoite'}))

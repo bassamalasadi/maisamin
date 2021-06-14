@@ -173,7 +173,7 @@ Viitenumero: <b>{refrence}</b> <br>
 Yhteensä: <b>{amount} EUR </b><br>
 Eräpäivä:<b> {due_date}</b> <br>
                         """
-                        with open(f'{firstName} {lastName}.jpg', 'wb') as f:
+                        with open(f'{firstName} {lastName}.svg', 'wb') as f:
                             Code39(f'{refrence}', writer=ImageWriter()).write(f)
                         create_invoice(
                             delivery_date=due_date,
@@ -240,7 +240,7 @@ Kiitos
                     try:
                         if req.get('payment_option') == 'Invoice':
                             os.remove(f'{firstName} {lastName}.pdf')
-                            os.remove(f'{firstName} {lastName}.jpg')
+                            os.remove(f'{firstName} {lastName}.svg')
                         OrderItem.objects.filter(user=self.request.user).delete()
                     except:
                         HttpResponseBadRequest()
@@ -407,6 +407,7 @@ class ItemDetailView(View):
 
     def post(self, request, slug):
         add_info = ""
+        print(request.path)
         if request.user.is_anonymous:
             return redirect('account_login')
         else:
@@ -572,3 +573,11 @@ class MyAccountAdapter(DefaultAccountAdapter):
     def get_login_redirect_url(self, request):
         redirect_to = request.GET.get('next', '')
         return HttpResponseRedirect(redirect_to)
+
+
+
+def testView(request):
+    current_user = request.user
+    context = {'username': current_user.username,
+               'current_user': current_user}
+    return render(request, 'test.html', context)
