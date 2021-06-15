@@ -21,6 +21,7 @@ CATEGORY = (
     ('cheesecake', 'cheesecake'),
     ('manakish', 'manakish'),
     ('meze', 'meze'),
+    ('cupcake', 'cupcake'),
 )
 
 User._meta.get_field('email')._unique = True
