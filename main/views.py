@@ -99,7 +99,8 @@ class CheckoutView(View):
             context = {
                 'form': form,
                 'order': order_item,
-                'object': total
+                'object': total,
+                'user': self.request.user,
             }
             return render(self.request, "checkout.html", context)
         except ObjectDoesNotExist:
@@ -261,42 +262,54 @@ Kiitos
 
 class HomeView(ListView):
     model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "home.html"
 
 
 class CakeView(ListView):
-    model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "cake.html"
 
+    def get_queryset(self):
+        return Product.objects.filter(category='cake')
+
 class CupcakeView(ListView):
-    model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "cupcake.html"
 
+    def get_queryset(self):
+        return Product.objects.filter(category='cupcake')
+
 class CheeseCakeView(ListView):
-    model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "cheesecake.html"
+
+    def get_queryset(self):
+        return Product.objects.filter(category='cheesecake')
 
 
 class FatayerView(ListView):
-    model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "fatayer.html"
+
+    def get_queryset(self):
+        return Product.objects.filter(category='fatayer')
 
 
 class ManakishView(ListView):
-    model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "manakish.html"
+
+    def get_queryset(self):
+        return Product.objects.filter(category='manakish')
 
 
 class MezeView(ListView):
-    model = Product
-    paginate_by = 10
+    paginate_by = 20
     template_name = "meze.html"
+
+    def get_queryset(self):
+        return Product.objects.filter(category='meze')
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -377,7 +390,7 @@ class Profile(LoginRequiredMixin, View):
 class ClientOrder(LoginRequiredMixin,
                   SuperUserCheck,
                   ListView):
-    paginate_by = 10
+    paginate_by = 20
     template_name = "clientorder.html"
 
     def get_queryset(self):
@@ -388,7 +401,7 @@ class OrderDetail(LoginRequiredMixin,
                   SuperUserCheck,
                   DetailView):
     model = Request
-    paginate_by = 10
+    paginate_by = 20
     template_name = "order_detail.html"
 
 
@@ -407,7 +420,6 @@ class ItemDetailView(View):
 
     def post(self, request, slug):
         add_info = ""
-        print(request.path)
         if request.user.is_anonymous:
             return redirect('account_login')
         else:
@@ -567,6 +579,9 @@ class Privacy(View):
     def get(self, *args, **kwargs):
         return render(self.request, "privacy-policy.html")
 
+class Delivery(View):
+    def get(self, *args, **kwargs):
+        return render(self.request, "delivery_policy.html")
 
 class MyAccountAdapter(DefaultAccountAdapter):
 
