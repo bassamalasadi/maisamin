@@ -86,6 +86,12 @@ header {
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
+
+  .container_5{
+  padding: 1em 0;
+  float: left;
+  width: 50%;
+  }
   .par-text{
     font-family: 'Pacifico', cursive;
     color:#BF9000;
@@ -405,6 +411,10 @@ header {
 
 @media only screen and (min-width: 601px) and (max-width:991px){
   /* For tablets: */
+  .container_5{
+    display: block;
+    width: 100%;
+  }
   .spe-ord{
     position: absolute;
     font-size: 16px;
@@ -743,6 +753,10 @@ header {
 
 @media only screen and (min-width: 992px){
   /* For desktop: */
+
+  .container_5{
+    width: 33.33333%;
+  }
   .bg-white {
       background:transparent !important;
       transition:0.75s ease;
@@ -954,7 +968,7 @@ header {
   }
   .card-2{
     width:100%;
-    height: 55vh;
+    height: 60vh;
     box-shadow: 0 3px 12px 	rgb(191, 144, 0), 0 3px 9px 	rgb(191, 144, 0);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     border-radius: 10px;
@@ -962,7 +976,7 @@ header {
 
   .prod-img{
     width: 100%;
-    height: 55vh;
+    height: 60vh;
     object-fit: cover;
     border-radius: 10px;
   }
@@ -1244,7 +1258,7 @@ header {
   padding: 5px 25px;
   color: white;
   right: 60px;
-  top:7%;
+  top:10%;
   left:98%;
   border-radius:  6px;
   transform: translate(-50%, -50%);
@@ -1263,4 +1277,93 @@ header {
   color: white;
   font-size: 5rem;
 }
+}
+
+@import url(https://fonts.googleapis.com/css?family=Raleway);
+
+
+
+
+
+@media screen and (min-width: 900px){
+.container_5{
+  width: 33.33333%;
+}
+}
+
+.container_5 .title{
+color: #1a1a1a;
+text-align: center;
+margin-bottom: 10px;
+}
+
+.content {
+position: relative;
+width: 90%;
+max-width: 400px;
+margin: auto;
+overflow: hidden;
+}
+
+.content .content-overlay {
+background: rgba(0,0,0,0.7);
+position: absolute;
+height: 99%;
+width: 100%;
+left: 0;
+top: 0;
+bottom: 0;
+right: 0;
+opacity: 0;
+-webkit-transition: all 0.4s ease-in-out 0s;
+-moz-transition: all 0.4s ease-in-out 0s;
+transition: all 0.4s ease-in-out 0s;
+}
+
+.content:hover .content-overlay{
+opacity: 1;
+}
+
+.content-image{
+width: 100%;
+}
+
+.content-details {
+position: absolute;
+text-align: center;
+padding-left: 1em;
+padding-right: 1em;
+width: 100%;
+top: 50%;
+left: 50%;
+opacity: 0;
+-webkit-transform: translate(-50%, -50%);
+-moz-transform: translate(-50%, -50%);
+transform: translate(-50%, -50%);
+-webkit-transition: all 0.3s ease-in-out 0s;
+-moz-transition: all 0.3s ease-in-out 0s;
+transition: all 0.3s ease-in-out 0s;
+}
+
+.content:hover .content-details{
+top: 50%;
+left: 50%;
+opacity: 1;
+}
+
+.content-details h3{
+color: #fff;
+font-weight: 500;
+letter-spacing: 0.15em;
+margin-bottom: 0.5em;
+text-transform: uppercase;
+}
+
+.content-details p{
+color: #fff;
+font-size: 0.8em;
+}
+
+.fadeIn-bottom{
+top: 80%;
 }

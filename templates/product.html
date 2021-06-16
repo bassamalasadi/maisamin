@@ -3,115 +3,8 @@
 {% block content %}
 {% include "navbar0.html" %}
 
-<style media="screen">
-  @import url(https://fonts.googleapis.com/css?family=Raleway);
-
-
-.main-title{
-  color: #2d2d2d;
-  text-align: center;
-  text-transform: capitalize;
-  padding: 0.7em 0;
-}
-
-.container_5{
-  padding: 1em 0;
-  float: left;
-  width: 50%;
-}
-@media screen and (max-width: 640px){
-  .container_5{
-    display: block;
-    width: 100%;
-  }
-}
-
-@media screen and (min-width: 900px){
-  .container_5{
-    width: 33.33333%;
-  }
-}
-
-.container_5 .title{
-  color: #1a1a1a;
-  text-align: center;
-  margin-bottom: 10px;
-}
-
-.content {
-  position: relative;
-  width: 90%;
-  max-width: 400px;
-  margin: auto;
-  overflow: hidden;
-}
-
-.content .content-overlay {
-  background: rgba(0,0,0,0.7);
-  position: absolute;
-  height: 99%;
-  width: 100%;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  opacity: 0;
-  -webkit-transition: all 0.4s ease-in-out 0s;
-  -moz-transition: all 0.4s ease-in-out 0s;
-  transition: all 0.4s ease-in-out 0s;
-}
-
-.content:hover .content-overlay{
-  opacity: 1;
-}
-
-.content-image{
-  width: 100%;
-}
-
-.content-details {
-  position: absolute;
-  text-align: center;
-  padding-left: 1em;
-  padding-right: 1em;
-  width: 100%;
-  top: 50%;
-  left: 50%;
-  opacity: 0;
-  -webkit-transform: translate(-50%, -50%);
-  -moz-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-  -webkit-transition: all 0.3s ease-in-out 0s;
-  -moz-transition: all 0.3s ease-in-out 0s;
-  transition: all 0.3s ease-in-out 0s;
-}
-
-.content:hover .content-details{
-  top: 50%;
-  left: 50%;
-  opacity: 1;
-}
-
-.content-details h3{
-  color: #fff;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  margin-bottom: 0.5em;
-  text-transform: uppercase;
-}
-
-.content-details p{
-  color: #fff;
-  font-size: 0.8em;
-}
-
-.fadeIn-bottom{
-  top: 80%;
-}
-
-</style>
 <main class="" style="background-color:#FAF9F6">
-  <br><br><br><br><br><br>
+  <br><br><br><br><br>
   <div class="container dark-grey-text ">
     <div class="row">
 
@@ -121,19 +14,14 @@
         <div class="card-2">
           <img src="{{ product.image1 }}" class="prod-img"/>
         </div>
-
         <br>
         <span class="">{% ratings product %}</span>
         {% if product.additional_info %}
-
         <hr>
         <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
-
         <div style="font-family: 'Acme', sans-serif;">{{ product.additional_info|linebreaks }}</div>
-
         {% endif%}
       </div>
-
       <div class="col-md-6 mb-4">
         <div class="p-4 bg-white">
           <form method="POST" action="{% url 'main:product' product.slug %}">
@@ -144,7 +32,7 @@
             <br><br>
             <br><br>
 
-            <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
+            <p class="font-weight-bold pt-3" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
             <div style="font-family: 'Acme', sans-serif;">{{ product.contents|linebreaks }}</div>
             <br />
             <hr>
