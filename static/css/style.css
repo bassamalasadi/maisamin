@@ -1259,10 +1259,8 @@ header {
   color: white;
   right: 60px;
   top:10%;
-  left:98%;
   border-radius:  6px;
   transform: translate(-50%, -50%);
-  z-index:-1;
 }
 .mid-card{
   position: relative;

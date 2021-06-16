@@ -9,34 +9,40 @@
     <div class="row">
 
       <div class="col-md-6" style="z-index:1;">
-        <span class="h4 font-weight-bold prod-text" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
 
         <div class="card-2">
           <img src="{{ product.image1 }}" class="prod-img"/>
         </div>
         <br>
         <span class="">{% ratings product %}</span>
-        {% if product.additional_info %}
-        <hr>
-        <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
-        <div style="font-family: 'Acme', sans-serif;">{{ product.additional_info|linebreaks }}</div>
-        {% endif%}
+
       </div>
       <div class="col-md-6 mb-4">
         <div class="p-4 bg-white">
+          <br><br>
+          <span class="h4 font-weight-bold prod-text" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
+          <br><br>
+          <p class="font-weight-bold pt-3" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
+          <div style="font-family: 'Acme', sans-serif;background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
+          <br>
+          <hr>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+
+      <div class="col-md-6">
+        {% if product.additional_info %}
+        <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
+        <div style="font-family: 'Acme', sans-serif; background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
+        {% endif%}
+      </div>
+      <div class="col-md-6">
           <form method="POST" action="{% url 'main:product' product.slug %}">
+            <div class="" style="background-color:white; padding:45px; border-radius:10px;">
+
+
             {% csrf_token %}
-            <br>
-
-
-            <br><br>
-            <br><br>
-
-            <p class="font-weight-bold pt-3" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
-            <div style="font-family: 'Acme', sans-serif;">{{ product.contents|linebreaks }}</div>
-            <br />
-            <hr>
-
             {% if product.is_gluteen_free or product.is_loctose_free %}
               <div>
                   {% if product.is_gluteen_free %}
@@ -51,10 +57,9 @@
                       <label class="swingHorizontal" for="laktoos">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
                     </span>
                   {% endif %}
-                  <hr>
+                  <br>
               </div>
             {% endif %}
-
           <div class="">
             <br>
             {% if product.category != 'cake' and product.category != 'cheesecake' %}
@@ -113,10 +118,12 @@
             {% endif%}
           </div>
           <br><br>
+          </div>
         </form>
         </div>
+
       </div>
-    </div>
+
     <div class="row d-flex justify-content-center wow fadeIn rounded">
       <div class="col-md-6 text-center bg-white">
         <h4 class="my-4 h4" style="font-family: 'Indie Flower', cursive;">Ravintosisältö</h4>
@@ -139,7 +146,7 @@
       </div>
     </div>
     {% endfor %}
-
+</div>
 
   </div>
   <br>

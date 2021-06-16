@@ -411,7 +411,7 @@ class ItemDetailView(View):
         try:
             product = get_object_or_404(Product, slug=kwargs['slug'])
             num_entities = Product.objects.all().count()
-            rand_entities = random.sample(range(num_entities), 3)
+            rand_entities = random.sample(range(1, num_entities), 3)
             sample_entities = Product.objects.filter(id__in=rand_entities)
             context = {
                 'product': product,
