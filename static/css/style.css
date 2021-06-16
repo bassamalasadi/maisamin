@@ -1,10 +1,13 @@
- html,
+html,
 body,
-header,
-.carousel {
+header {
   height: 60vh;
+  font-size:14;
 }
-
+.page-link{
+  background-color: black;
+  color:#BF9000;
+}
 .info{
   font-size:14px;
   padding-left:5%;
@@ -79,6 +82,7 @@ header,
   opacity: 0.9;
 }
 
+
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
@@ -108,21 +112,7 @@ header,
     padding: 17px 18px;
     align-items: center;
     justify-content: space-between;
-    background-color: #BF9000;
-    border-radius: 50%;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    opacity: 0.8;
-  }
-  .kissa-text{
-    position: relative;
-    font-size: 20px;
-    font-weight: 600;
-    bottom:28px;
-    background-color:#BF9000;
-    color:white;
-    padding: 5px 10px;
-    border-radius:50%;
   }
   .maintext {
     position: absolute;
@@ -209,7 +199,7 @@ header,
     position: relative;
     left: 10%;
   }
-  .card,
+  .prod-container-card,
   .prod-card{
     position: relative;
     width: 80%;
@@ -292,29 +282,6 @@ header,
 
 
 
-  /* CUSTOMIZE THE CAROUSEL
-  -------------------------------------------------- */
-
-  .carousel {
-    margin-bottom: 4rem;
-  }
-  .carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-  }
-
-  .carousel-item {
-    height: 32rem;
-    background-color: #777;
-  }
-  .carousel-item > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 32rem;
-  }
-
   .marketing .col-lg-4 {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -335,12 +302,6 @@ header,
     font-weight: 300;
     line-height: 1;
     letter-spacing: -0.05rem;
-  }
-
-  .carousel-caption p {
-    margin-bottom: 1.25rem;
-    font-size: 1.25rem;
-    line-height: 1.4;
   }
 
   .featurette-heading {
@@ -440,15 +401,9 @@ header,
     color: black;
     font-size: 1rem;
   }
-
-  .cak-text{
-    position: relative;
-    color: black;
-    font-size: 1rem;
-  }
 }
 
-@media only screen and (min-width: 601px){
+@media only screen and (min-width: 601px) and (max-width:991px){
   /* For tablets: */
   .spe-ord{
     position: absolute;
@@ -472,22 +427,7 @@ header,
     padding: 17px 20px;
     align-items: center;
     justify-content: space-between;
-    background-color: #BF9000;
-    border-radius: 50%;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    opacity: 0.8;
-  }
-  .kissa-text{
-    position: relative;
-    font-size: 20px;
-    font-weight: 600;
-    bottom:26px;
-    background-color:#BF9000;
-    color:white;
-    padding: 5px 10px;
-    border-radius:50%;
-
   }
   .maintext {
     position: absolute;
@@ -556,17 +496,16 @@ header,
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
-  .card,
+  .prod-container-card,
   .prod-card {
     position: relative;
     width:25%;
     left:0%;
-    box-shadow: 0 2px 9px 	rgb(191, 144, 0), 0 2px 4px 	rgb(191, 144, 0);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+
   }
   .card-2{
     width:100%;
-    height: 45vh;
+    height: 40vh;
     box-shadow: 0 2px 9px 	rgb(191, 144, 0), 0 2px 4px 	rgb(191, 144, 0);
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   }
@@ -588,10 +527,6 @@ header,
     height: 40vh;
     object-fit: cover;
   }
-  /* .card{
-    width: 28%;
-    left:1%;
-  } */
   .check-card{
     width:100%;
   }
@@ -679,28 +614,6 @@ header,
     transform: scaleX(1);
     transform-origin: bottom left;
   }
-  /* CUSTOMIZE THE CAROUSEL
-  -------------------------------------------------- */
-
-  .carousel {
-    margin-bottom: 4rem;
-  }
-  .carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-  }
-
-  .carousel-item {
-    height: 32rem;
-    background-color: #777;
-  }
-  .carousel-item > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 32rem;
-  }
 
   .marketing .col-lg-4 {
     margin-bottom: 1.5rem;
@@ -725,11 +638,6 @@ header,
     letter-spacing: -0.05rem;
   }
 
-  .carousel-caption p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1;
-  }
 
   .featurette-heading {
     font-size: 40px;
@@ -825,12 +733,6 @@ header,
     color: black;
     font-size: 2rem;
   }
-
-  .cak-text{
-    position: relative;
-    color: black;
-    font-size: 2rem;
-  }
   .par-text{
     font-family: 'Pacifico', cursive;
     color:#BF9000;
@@ -856,14 +758,34 @@ header,
   .item-text.scrolled  {
     color: black !important;
   }
-  .navico{
-    margin:5px 0px 2px 5px;
-    width: fit-content;
-    display: inline;
-    top:2px;
-    font-family: 'Lato', sans-serif;
+  .navico {
+    position: absolute;
     text-align: center;
-    font-size: 16px;
+    font-size: 12px;
+    font-family: 'Lato', sans-serif;
+    top:10px;
+    padding: 10px 8px;
+    display: inline-block;
+    position: relative;
+    color: hsl(222, 25%, 14%);
+  }
+
+  .navico::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #BF9000;
+    transform-origin: bottom right;
+    transition: transform 0.4s cubic-bezier(0.86, 0, 0.07, 1);
+  }
+
+  .navico:hover::after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
   }
   .spe-ord{
     position: absolute;
@@ -904,28 +826,24 @@ header,
   .kissa{
     position: fixed;
     bottom: 35px;
-    left: 94%;
-    right: 2%;
-    padding: 17px 18px;
+    right: 0px;
     align-items: center;
     justify-content: space-between;
-    background-color: #BF9000;
-    border-radius: 50%;
-    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    opacity: 0.9;
     cursor: pointer;
+    animation: border-transform 9s linear infinite;
   }
-  .kissa-text{
-    position: relative;
-    font-size: 20px;
-    font-weight: 600;
-    bottom:28px;
-    background-color:#BF9000;
-    color:white;
-    padding: 5px 10px;
-    border-radius:50%;
+
+  @keyframes border-transform{
+    0%,100% { background-color: #EDF1F2;border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
+    14% { background-color: #BF9000;border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
+    28% { background-color: #EDF1F2;border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; }
+    42% { background-color: #BF9000;border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; }
+    56% { background-color: #EDF1F2;border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
+    70% { background-color: #BF9000;border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
+    84% { background-color: #EDF1F2;border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
   }
+
   .maintext {
     position: absolute;
     font-size: 4vw;
@@ -998,7 +916,7 @@ header,
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
-  .card{
+  .prod-container-card{
     width:22%;
   }
   .check-card{
@@ -1010,6 +928,12 @@ header,
     width:22%;
     height:37vh;
     border-radius: 10px;
+    box-shadow: 0px 1px 5px 	#BF9000, 0px 1px 7px 	#BF9000;
+    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  }
+  .prod-card:hover{
+    transform: translateY(-0.5rem) scale(1.0125);
+	box-shadow: 0 0.5em 3rem -1rem #BF9000;
   }
   .imgcard {
     position: relative;
@@ -1111,30 +1035,6 @@ header,
     color: white;
   }
 
-
-  /* CUSTOMIZE THE CAROUSEL
-  -------------------------------------------------- */
-
-  .carousel {
-    margin-bottom: 4rem;
-  }
-  .carousel-caption {
-    bottom: 3rem;
-    z-index: 10;
-  }
-
-  .carousel-item {
-    height: 32rem;
-    background-color: #777;
-  }
-  .carousel-item > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    min-width: 100%;
-    height: 32rem;
-  }
-
   .marketing .col-lg-4 {
     margin-bottom: 1.5rem;
     text-align: center;
@@ -1156,12 +1056,6 @@ header,
     font-weight: 300;
     line-height: 1.3;
     letter-spacing: -0.05rem;
-  }
-
-  .carousel-caption p {
-    margin-bottom: 1rem;
-    font-size: 1rem;
-    line-height: 1;
   }
 
   .featurette-heading {
@@ -1293,7 +1187,7 @@ header,
   }
 
   /* price color */
-  .pricing-wrap{
+  /* .pricing-wrap{
   position: relative;
   left:90px;
   bottom: 33px;
@@ -1343,16 +1237,18 @@ header,
   56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
   70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
   84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
-}
+} */
 .prod-text{
   position: relative;
   background-color: #BF9000;
   padding: 5px 25px;
   color: white;
   right: 60px;
-  border-radius: 0 6px 6px 0;
+  top:7%;
+  left:98%;
+  border-radius:  6px;
   transform: translate(-50%, -50%);
-  box-shadow: 0 6px 10px 0 #BF9000;
+  z-index:-1;
 }
 .mid-card{
   position: relative;
@@ -1367,14 +1263,4 @@ header,
   color: white;
   font-size: 5rem;
 }
-
-.cak-text{
-  position: relative;
-  bottom: 180px;
-  float: right;
-  left:5%;
-  color: white;
-  font-size: 5rem;
-}
-
 }

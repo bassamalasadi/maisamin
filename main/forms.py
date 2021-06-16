@@ -1,7 +1,7 @@
-from django import forms
 import datetime
 from django import forms
 from allauth.account.forms import LoginForm, PasswordField , SignupForm
+from django.contrib.auth.models import User
 
 CITIES = (
     ('Jämsä', 'Jämsä'),
@@ -18,7 +18,7 @@ CITIES = (
 
 PAYMENT_CHOICES = (
     ('Cash', 'Käteinen'),
-    ('Invoice', 'lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)')
+    ('Invoice', 'lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)'),
 )
 
 x = datetime.datetime.now() + datetime.timedelta(days=3)
@@ -52,15 +52,15 @@ class CheckoutForm(forms.Form):
     date = forms.DateTimeField(required=True,
                                input_formats=['%d/%m/%Y %H:%M'],
                                label='',
-                               widget=forms.TextInput(attrs={'placeholder': 'Valitse noutopäivä',
+                               widget=forms.TextInput(attrs={
+                                                             'placeholder': 'Valitse noutopäivä',
                                                              'start_date': x,
-                                                             'readonly':'readonly'}))
-
-
+                                                             'readonly':'readonly',
+                                                             }),
+                                                      )
     payment_option = forms.ChoiceField(required=True,
                                        label='',
                                        widget=forms.RadioSelect(), choices=PAYMENT_CHOICES)
-
 
 
 

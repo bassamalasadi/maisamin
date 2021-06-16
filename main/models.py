@@ -51,7 +51,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     slug = models.SlugField()
     image1 = models.TextField(null=True, blank=True)
-    size = MultiSelectField(choices=SIZE)
+    size = MultiSelectField(choices=SIZE, null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -103,8 +103,6 @@ class OrderItem(models.Model):
     # to get the prices of the total product if has a discount on it or no
     @property
     def get_final_price(self):
-        print(self.get_total_product_price)
-        print("{:.2f}".format(self.get_total_product_price))
         return "{:.2f}".format(self.get_total_product_price)
 
     @property

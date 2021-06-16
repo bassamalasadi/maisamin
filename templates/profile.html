@@ -2,9 +2,10 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
 {% load static %}
 {% include "navbar0.html" %}
-      <div class="pt-5">
+      <div style="background-color:#FAF9F6">
+        <br><br><br>
         <div class="mt-5">
-          <img src="{% static 'img/logo2.jpg' %}" alt="Untitled"  class="logo2">
+          <img src="{% static 'img/logo12.jpg' %}" alt="Untitled"  class="logo2">
         </div>
         <br>
         <div class="form-s">
@@ -26,13 +27,40 @@
                 Tallenna muutokset
             </button>
             <br>
-            <button class="btn text-white float-right" style="background-color:black ;'; font-family: 'Prompt', sans-serif;" name="delete"type="submit">
-                Poista tilisi
-            </button>
+            <br>
+            <hr>
+            <a class="d-flex justify-content-center" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
+              + Poista tilisi
+            </a>
+            <hr>
+
+
+            <div class="collapse" id="collapseExample">
+              <div class="card card-body">
+                <p>Kirjoita " <span style="color:red;font-weight:bold;"> poista </span> " ja napsauta sitten Poista tilisi -painiketta &nbsp;</p>
+                <input class="form-control w-25 deleteaccount" type="text" id="deleteaccount" name="deleteaccount" value="" pattern="[a-z]{6}" validator="poista" placeholder="poista" onchange="deleteAccount()">
+                <br>
+
+                <button id="delete-button" class="btn text-white w-25" style="background-color:black ;'; font-family: 'Prompt', sans-serif;" name="delete"type="submit" disabled>
+                    Poista tilisi
+                </button>
+              </div>
+            </div>
           </form>
           <br>
         </div>
         <br><br>
       </div>
-
+      <script>
+        $(document).ready(function () {
+        $('#deleteaccount').change(function () {
+            if ($('#deleteaccount').val() === 'poista'){
+              $('#deleteaccount').fadeOut(1000)
+              $('#delete-button').removeAttr('disabled')
+            } else {
+              $('#delete-button').attr('disabled', '')
+            }
+        });
+    });
+      </script>
 {% endblock %}

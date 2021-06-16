@@ -1,5 +1,5 @@
 import os
-
+import random
 from datetime import datetime, timedelta
 
 from django.core.mail import send_mail, EmailMessage
@@ -410,8 +410,12 @@ class ItemDetailView(View):
     def get(self, *args, **kwargs):
         try:
             product = get_object_or_404(Product, slug=kwargs['slug'])
+            num_entities = Product.objects.all().count()
+            rand_entities = random.sample(range(num_entities), 3)
+            sample_entities = Product.objects.filter(id__in=rand_entities)
             context = {
-                'product': product
+                'product': product,
+                'sample':sample_entities,
             }
             return render(self.request, "product.html", context)
         except ObjectDoesNotExist:

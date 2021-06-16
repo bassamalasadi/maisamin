@@ -1,27 +1,12 @@
 {% extends "base.html" %} {% load crispy_forms_tags %}
 {% load static %}{% block content %}
 {% include "navbar0.html" %}
-<style>
-        /* Media query for mobile viewport */
-        @media screen and (max-width: 400px) {
-            #paypal-button-container {
-                width: 100%;
-            }
-        }
-
-        /* Media query for desktop viewport */
-        @media screen and (min-width: 400px) {
-            #paypal-button-container {
-                width: 250px;
-            }
-        }
-    </style>
-<main class="pt-5">
-  <br>
+<main style="background-color:#FAF9F6">
+  <br><br>
   <br><br>
   <div class="container-fluid" >
     <div class="row pt-5" >
-      <div class="col mb-4 checkout-list" >
+      <div class="col mb-4" >
         <div class="card check-card" style="border-radius:10px">
           <p class="text-center pt-4 checks-text h3"style="font-family: 'Prompt', sans-serif;color:#535353">Laskutustiedot</p>
           <hr>
@@ -31,15 +16,16 @@
             {% for error in form.non_field_errors %}
                <p class="help is-danger">{{  error }}</p>
             {% endfor %}
-
             {{ form.firstName | as_crispy_field }}
             {{ form.lastName | as_crispy_field }}
-            {{ form.city | as_crispy_field }}
-            {{ form.street_address | as_crispy_field }}
-            {{ form.apartment_address | as_crispy_field }}
-            {{ form.postal | as_crispy_field }}
             {{ form.email | as_crispy_field }}
             {{ form.phone | as_crispy_field }}
+            {{ form.city | as_crispy_field }}
+            {{ form.street_address | as_crispy_field }}
+            {{ form.postal | as_crispy_field }}
+            {{ form.apartment_address | as_crispy_field }}
+
+
             <hr>
             <label class="h6">Päivämäärä &nbsp; <i class="fas fa-calendar-day text-danger"></i> &nbsp;&nbsp;Tee tilauksesi kolme päivää ennen</label>
             {{ form.date | as_crispy_field  }}
@@ -63,7 +49,7 @@
             <div id="delivery-policy" class="delivery-policy" hidden>
               <br>
               <input type="checkbox" id="agree_delivery" name="agree_delivery" value="agree_delivery" onchange="deliverySend()"> &nbsp
-              <span class="" for="agree">Valitse ruutu, jos hyväksyt &nbsp;<a href="{% url 'main:delivery_policy' %}" style="color:#BF9000;font-weight:800;">toimituskäytännön</a></span>
+              <span class="" for="agree">Valitse ruutu, jos hyväksyt &nbsp;<a href="{% url 'main:delivery_policy' %}" style="color:#BF9000;font-weight:800;">Toimituskäytännön</a></span>
               <br>
             </div>
             <hr />
@@ -77,15 +63,10 @@
                 <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
               </div>
               {% endfor %}
-
-              <div class="paypal-container" id="paypal-container"hidden>
-                <hr>
-                <div id="paypal-button-container"></div>
-              </div>
             </div>
             <hr>
             <br>
-            <button class="btn btn-lg btn-block" id="send-order" style="background-color:#BF9000 ;color:black;"  type="submit">
+            <button class="btn w-50" id="send-order" style="background-color:black ;color:white;"  type="submit">
              <b> Lähetä Tilaus</b>
             </button>
           </form>
@@ -101,42 +82,5 @@
   <br>
 </main>
 <script>
-  function choose(){
-    if (document.querySelector('#paypal').checked){
-      $(".paypal-container").removeAttr('hidden')
-      $('#send-order').attr('disabled', '')
-    }else{
-      $(".paypal-container").attr('hidden', '')
-      $('#send-order').removeAttr('disabled')
-    }
-  }
-</script>
-<script>
-  var total = '{{object}}'
-    // Render the PayPal button into #paypal-button-container
-    paypal.Buttons({
-
-        // Set up the transaction
-        createOrder: function(data, actions) {
-            return actions.order.create({
-                purchase_units: [{
-                    amount: {
-                        value: parseFloat(total).toFixed(2)
-                    }
-                }]
-            });
-        },
-
-        // Finalize the transaction
-        onApprove: function(data, actions) {
-            return actions.order.capture().then(function(details) {
-                // Show a success message to the buyer
-                alert('Transaction completed by ' + details.payer.name.given_name + '!');
-                $('#send-order').removeAttr('disabled')
-            });
-        }
-
-
-    }).render('#paypal-button-container');
 </script>
 {% endblock content %}

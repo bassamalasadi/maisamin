@@ -1,7 +1,7 @@
 {% extends "base.html" %} {% block content %}
 {% load static %}
 {% include "navbar.html" %}
-<main>
+<main style="background-color:#FAF9F6">
   <div class="">
     <img class="bgimg" src="{% static 'img/cake1.jpg' %}" alt="">
   </div>
@@ -33,8 +33,7 @@
       </div>
     </section>
 
-    Handling multiple pages-->
-    <!-- {% if is_paginated %}
+  {% if is_paginated %}
     <nav class="d-flex justify-content-center wow fadeIn ">
       <ul class="pagination">
         {% if page_obj.has_previous %}
@@ -76,4 +75,6 @@
   </div>
   <br>
 </main>
+{% include "kissa.html" %}
+
 {% endblock content %}

@@ -1,10 +1,11 @@
 {% load cart_template_tags %}
+{% load static %}
 <main>
   {% if user.is_authenticated %}
   {% if user|cart_item_count > 0 %}
     <a href="{% url 'main:order-summary' %}">
       <div class="kissa">
-        <i class="fas fa-shopping-basket fa-2x text-white"></i>
+        <img class="" src="{% static 'img/cart-bag.png' %}" alt="Generic placeholder image" width="70" height="70">
       </div>
     </a>
   {% endif %}

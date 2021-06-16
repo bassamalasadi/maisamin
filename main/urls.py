@@ -13,6 +13,7 @@ from .views import (
     ManakishView,
     MezeView,
     Privacy,
+    Delivery,
     Profile,
     add_to_cart,
     testView,
@@ -48,5 +49,6 @@ urlpatterns = [
     path('remove_from_order_page/<int:pk>/',
          remove_from_order_page, name="remove_from_order_page"),
     path('privacy-policy/', Privacy.as_view(), name="privacy"),
+    path('delivery-policy/', Delivery.as_view(), name="delivery_policy"),
     path('accounts/profile/', Profile.as_view(), name="profile")
 ]

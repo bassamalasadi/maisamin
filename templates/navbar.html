@@ -29,7 +29,7 @@
       {% if user.is_authenticated %}
       {% if user|cart_item_count > 0 %}
         <li class="nav-item navico">
-            <a href="{% url 'main:order-summary' %}"  class="item-text">
+            <a href="{% url 'main:order-summary' %}"  class="item-text" style="font-size:16px;">
               Ostoskori &nbsp;
               <span class="badge badge-pill black px-3 py-1 " style="background-color:#BF9000;color:white;">{{ user|cart_item_count }}</span> &nbsp;
               <i class="fas fa-shopping-cart pl-1"></i>
@@ -37,18 +37,18 @@
           </li>
         {% endif %}
         <li class="nav-item navico ">
-          <a href="{% url 'main:profile' %}" class="item-text">
+          <a href="{% url 'main:profile' %}" class="item-text" style="font-size:16px;">
           <i class="far fa-user-circle ">&nbsp; &nbsp;</i>Hei, {{ user }}</a>
         </li>
         <li class="nav-item navico">
-          <a href="{% url 'account_logout' %}" class="item-text">
+          <a href="{% url 'account_logout' %}" class="item-text" style="font-size:16px;">
             Kirjaudu ulos &nbsp; <i class="fas fa-sign-out-alt"></i>
           </a>
         </li>
         <li><br></li>
         {% if user.is_superuser %}
         <li class="nav-item navico">
-            <a href="{% url 'main:client-order' %}" class="item-text">
+            <a href="{% url 'main:client-order' %}" class="item-text" style="font-size:16px;">
               Admin
             </a>
           </li>
@@ -56,7 +56,7 @@
       {% else %}
           <li class="nav-item navico">
             <a href="{% url 'account_login' %}"
-            class="item-text"> Kirjaudu sisään </a>
+            class="item-text" style="font-size:16px;"> Kirjaudu sisään </a>
           </li>
       {% endif %}
       <li></li>

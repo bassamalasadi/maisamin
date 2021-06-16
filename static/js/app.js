@@ -15,6 +15,7 @@ $(function () {
     monthsShort: ['tammikuu', 'helmikuu', 'maaliskuu', 'huhtikuu', 'toukokuu', 'kesäkuu', 'heinäkuu', 'elokuu', 'syyskuu', 'lokakuu', 'marraskuu', 'joulukuu'],
     autoHide:true,
   });
+  var newdate = $("#id_date").datepicker('getDate')
 });
 
 // control messages
@@ -37,14 +38,27 @@ function onToggle() {
  }
 }
 
+function deliverySend(){
+  if ($('#agree_delivery').is(':checked')){
+    $('#send-order').removeAttr('disabled')
+  } else {
+    $('#send-order').attr('disabled', '')
+  }
+}
+
 // control delivery changes
-function myFunction() {
-  var x = parseInt(document.getElementById("delivery").value);
+function delivery_func() {
+  var x = parseInt(document.querySelector("#delivery").value);
   x = parseFloat(x).toFixed(2).toString()
   if (x > 0){
-    document.getElementById("delv_price").innerHTML = '+ ' + x + ' Euro';
+    document.querySelector("#delv_price").innerHTML = '+ ' + x + ' Euro';
+    $('#delivery-policy').removeAttr('hidden')
+    $('#send-order').attr('disabled', '')
   }else{
-    document.getElementById("delv_price").innerHTML = '';
+    document.querySelector("#delv_price").innerHTML = '';
+    $('#delivery-policy').attr('hidden', '')
+    $('#send-order').removeAttr('disabled')
+
   }
 }
 
