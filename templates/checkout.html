@@ -1,14 +1,29 @@
 {% extends "base.html" %} {% load crispy_forms_tags %}
 {% load static %}{% block content %}
 {% include "navbar0.html" %}
+<style>
+        /* Media query for mobile viewport */
+        @media screen and (max-width: 400px) {
+            #paypal-button-container {
+                width: 100%;
+            }
+        }
+
+        /* Media query for desktop viewport */
+        @media screen and (min-width: 400px) {
+            #paypal-button-container {
+                width: 250px;
+            }
+        }
+    </style>
 <main class="pt-5">
   <br>
   <br><br>
-  <div class="container-fluid check-width" >
+  <div class="container-fluid" >
     <div class="row pt-5" >
       <div class="col mb-4 checkout-list" >
-        <div class="card check-card" style="border-radius:24px">
-          <p class="text-center pt-4 checks-text"style="font-family: 'Prompt', sans-serif;color:#636363">Laskutustiedot</p>
+        <div class="card check-card" style="border-radius:10px">
+          <p class="text-center pt-4 checks-text h3"style="font-family: 'Prompt', sans-serif;color:#535353">Laskutustiedot</p>
           <hr>
           <form method="POST" class="card-body">
             {% csrf_token %}
@@ -26,12 +41,12 @@
             {{ form.email | as_crispy_field }}
             {{ form.phone | as_crispy_field }}
             <hr>
-            <label for="">Päivämäärä &nbsp; <i class="fas fa-calendar-day"></i> &nbsp;&nbsp; <b style="background-color:black;color:white;padding:3px 10px; border-radius:5px;">Tee tilauksesi kolme päivää ennen</b></label>
-            {{ form.date | as_crispy_field }}
+            <label class="h6">Päivämäärä &nbsp; <i class="fas fa-calendar-day text-danger"></i> &nbsp;&nbsp;Tee tilauksesi kolme päivää ennen</label>
+            {{ form.date | as_crispy_field  }}
             <hr>
             <br>
-            <p>Toimitamme &nbsp;<i class="fas fa-truck"></i> &nbsp; &nbsp;<span id="delv_price"></span></p>
-            <select name="delivery" id="delivery" class="browser-default custom-select" onchange="myFunction()">
+            <p>Toimitamme &nbsp;<i class="fas fa-truck text-info"></i> &nbsp; &nbsp;<span id="delv_price"></span></p>
+            <select name="delivery" id="delivery" class="browser-default custom-select" onchange="delivery_func()">
               <option value="0" id="0">Nouto (maksuton)</option>
               <option value="5.00" id="1">Jämsä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -45,6 +60,12 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 9.00 &euro;</option>
             </select>
+            <div id="delivery-policy" class="delivery-policy" hidden>
+              <br>
+              <input type="checkbox" id="agree_delivery" name="agree_delivery" value="agree_delivery" onchange="deliverySend()"> &nbsp
+              <span class="" for="agree">Valitse ruutu, jos hyväksyt &nbsp;<a href="{% url 'main:delivery_policy' %}" style="color:#BF9000;font-weight:800;">toimituskäytännön</a></span>
+              <br>
+            </div>
             <hr />
             <br>
             <h3>Maksuvaihtoehdot &nbsp; <i class="fas fa-file-invoice"></i></h3>
@@ -52,14 +73,19 @@
             <div class="d-block my-3">
               {% for value, name in form.fields.payment_option.choices %}
               <div class="custom-control custom-radio">
-                <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input" required>
+                <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input {{ name }}" required onchange="choose()">
                 <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
               </div>
               {% endfor %}
+
+              <div class="paypal-container" id="paypal-container"hidden>
+                <hr>
+                <div id="paypal-button-container"></div>
+              </div>
             </div>
             <hr>
             <br>
-            <button class="btn btn-lg btn-block"  style="background-color:#BF9000 ;color:black;"  type="submit">
+            <button class="btn btn-lg btn-block" id="send-order" style="background-color:#BF9000 ;color:black;"  type="submit">
              <b> Lähetä Tilaus</b>
             </button>
           </form>
@@ -74,4 +100,43 @@
   </div>
   <br>
 </main>
+<script>
+  function choose(){
+    if (document.querySelector('#paypal').checked){
+      $(".paypal-container").removeAttr('hidden')
+      $('#send-order').attr('disabled', '')
+    }else{
+      $(".paypal-container").attr('hidden', '')
+      $('#send-order').removeAttr('disabled')
+    }
+  }
+</script>
+<script>
+  var total = '{{object}}'
+    // Render the PayPal button into #paypal-button-container
+    paypal.Buttons({
+
+        // Set up the transaction
+        createOrder: function(data, actions) {
+            return actions.order.create({
+                purchase_units: [{
+                    amount: {
+                        value: parseFloat(total).toFixed(2)
+                    }
+                }]
+            });
+        },
+
+        // Finalize the transaction
+        onApprove: function(data, actions) {
+            return actions.order.capture().then(function(details) {
+                // Show a success message to the buyer
+                alert('Transaction completed by ' + details.payer.name.given_name + '!');
+                $('#send-order').removeAttr('disabled')
+            });
+        }
+
+
+    }).render('#paypal-button-container');
+</script>
 {% endblock content %}
