@@ -293,7 +293,7 @@ class FatayerView(ListView):
     template_name = "fatayer.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='fatayer')
+        return Product.objects.filter(category='pastry')
 
 
 class ManakishView(ListView):
