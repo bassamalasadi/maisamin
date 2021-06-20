@@ -131,9 +131,16 @@ class CheckoutView(View):
                 address = str(city) + ' - ' + str(street_address) + '   ' + str(apartment_address)
                 if req.get('date'):
                     year, month, day = modify_date(req.get('date'))
-                    date = datetime(year, month, day)
-                    delivery_date = date - timedelta(days=2)
+                    date_pick = datetime(year, month, day)
+                    delivery_date = date_pick - timedelta(days=2)
                     due_date = delivery_date.strftime('%Y-%m-%d')
+                    due_date = due_date.split('-')
+                    due_date = due_date[::-1]
+                    due_date = '.'.join(due_date)
+                    date = str(date_pick)[0:10]
+                    date = date.split('-')
+                    date = date[::-1]
+                    date = '.'.join(date)
                 else:
                     messages.warning(self.request, "Valitse noutopäivä")
                     return redirect("main:checkout")
@@ -164,7 +171,7 @@ class CheckoutView(View):
                         email=email,
                         order=order_list,
                         create=datetime.now(),
-                        delivery=date,
+                        delivery=date_pick,
                         delivery_price=delivery,
                     )
                     if req.get('payment_option') == 'Invoice':
@@ -201,7 +208,7 @@ Eräpäivä:<b> {due_date}</b> <br>
                     text_content = f"Moi, {lastName}"
                     html_content = f""" <h4>Kiitos, että valitsit Maisamin Herkun.</h4> <br>
 Tilauksesi numero : <b>{req_order.id}</b><br>
-Toimitetaan : <b>{str(date)[0:10]}</b> <br>
+Toimitetaan : <b>{date}</b> <br>
 Osoitteeseen : <b>{address}</b> <br>
 
 <br>

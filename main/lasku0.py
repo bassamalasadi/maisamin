@@ -301,6 +301,10 @@ EUR\n
 
 
 def create_invoice(**kwargs):
+    date_of_invoic = date.today()
+    date_of_invoic = str(date_of_invoic).split('-')
+    date_of_invoic = date_of_invoic[::-1]
+    date_of_invoic = '.'.join(date_of_invoic)
     pdf = GenerateInvoice('P', 'mm', 'Letter', **kwargs)
     pdf.add_page()
 
@@ -320,7 +324,7 @@ def create_invoice(**kwargs):
     pdf.set_font('courier', '', 10)
     pdf.cell(0,5, f'Asiakasnumero                    {pdf.user_id}', ln=1)
     pdf.cell(0,5, f'Laskunumero                      {pdf.lasku_id}', ln=1)
-    pdf.cell(0, 5, f'Laskunpäivämäärä                 {date.today()}', ln=1)
+    pdf.cell(0, 5, f'Laskunpäivämäärä                 {date_of_invoic}', ln=1)
     pdf.cell(0, 5, f'Maksutapa                        Lasku', ln=1)
     pdf.cell(0, 5, f'Eräpäivä                         {pdf.delivery_date}', ln=1)
     pdf.ln()
