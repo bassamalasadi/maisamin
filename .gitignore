@@ -2,3 +2,6 @@ env
 .env
 webshop/.env
 db.sqlite3
+__pycache__
+**/__pycache__
+**main/__pycache__/
