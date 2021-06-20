@@ -192,7 +192,10 @@ Eräpäivä:<b> {due_date}</b> <br>
                             # vat=vat,
                             # final=final
                         )
-
+                     # <br>
+                     # Tilaus:
+                     # <hr>
+                     # {tabulate(order_email,headers=["Kuvaus","G&L", "Lisää tiedot","Määrä","Yhteensä"], tablefmt='html')}
 
                     subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
                     text_content = f"Moi, {lastName}"
@@ -200,10 +203,7 @@ Eräpäivä:<b> {due_date}</b> <br>
 Tilauksesi numero : <b>{req_order.id}</b><br>
 Toimitetaan : <b>{str(date)[0:10]}</b> <br>
 Osoitteeseen : <b>{address}</b> <br>
-<br>
-Tilaus:
-<hr>
-{tabulate(order_email,headers=["Kuvaus","G&L", "Lisää tiedot","Määrä","Yhteensä"], tablefmt='html')}
+
 <br>
 {deliv}
 <br>
