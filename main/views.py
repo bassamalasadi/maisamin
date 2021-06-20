@@ -210,6 +210,7 @@ Eräpäivä:<b> {due_date}</b> <br>
 Tilauksesi numero : <b>{req_order.id}</b><br>
 Toimitetaan : <b>{date}</b> <br>
 Osoitteeseen : <b>{address}</b> <br>
+Verkkolaskutusosoite : <b>{email}</b> <br>
 
 <br>
 {deliv}
