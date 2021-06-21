@@ -15,8 +15,8 @@ from .views import (
     Privacy,
     Delivery,
     Profile,
+    delete_model,
     add_to_cart,
-    testView,
     remove_from_cart,
     remove_single_item_from_cart,
     remove_from_order_page,
@@ -26,7 +26,6 @@ app_name = 'main'
 
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
-    path('test/', testView, name="test"),
     path('cake/', CakeView.as_view(), name='cake'),
     path('cupcake', CupcakeView.as_view(), name='cupcake'),
     path('cheesecake/', CheeseCakeView.as_view(), name='cheesecake'),
@@ -50,5 +49,6 @@ urlpatterns = [
          remove_from_order_page, name="remove_from_order_page"),
     path('privacy-policy/', Privacy.as_view(), name="privacy"),
     path('delivery-policy/', Delivery.as_view(), name="delivery_policy"),
-    path('accounts/profile/', Profile.as_view(), name="profile")
+    path('accounts/profile/', Profile.as_view(), name="profile"),
+    path('delete/<pk>/', delete_model, name='delete_model')
 ]

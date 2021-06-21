@@ -83,3 +83,52 @@ function myFunction() {
     document.getElementById("hinta").innerHTML = res;
   }
 }
+
+
+
+function deleteFunc(item){
+  var totalPrice = Number.parseFloat(document.getElementById('totalPrice').innerHTML).toFixed(2);
+  $('table > tbody  > tr').each(function(index, tr) {
+    var trNumber = parseInt(tr.id)
+    if (trNumber === item){
+      itemPrice = parseFloat($(tr).find('td')[3].id).toFixed(2)
+      totalPrice = (totalPrice - itemPrice).toFixed(2).toString()
+      navCount = parseInt(document.getElementById("cart-count").innerHTML) - 1
+      document.getElementById('totalPrice').value = totalPrice
+      document.getElementById('totalPrice').innerHTML = totalPrice
+      document.getElementById("cart-count").innerHTML = navCount
+      if (navCount === 0){
+        $("#cart-row").fadeOut(1000)
+      }
+      $(tr).hide(1000);
+      var endpoint = $(".comfirm-delete").attr('data-url')
+              $.ajax({
+                  method: 'GET',
+                  url: endpoint,
+                  success: function (data) {
+                      $.notify({
+                          title: '<b>Message<b> ',
+                          message: data.message,
+                      }, {
+                          type: 'success',
+                          delay: 3000,
+                          allow_dismiss: true,
+
+                      });
+                      $("#item" + data.ref).hide(1000)
+                  },
+                  error: function (error_data) {
+                      console.log(error_data);
+                      $.notify({
+              title: '<b>Error</b><br>',
+              message: 'Anteeksi, jotain meni pieleen'
+          }, {
+              type: 'danger',
+              delay: 3000,
+          })
+                  }
+              })
+
+    }
+  });
+}

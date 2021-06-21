@@ -121,6 +121,9 @@ class OrderItem(models.Model):
         if self.ordered:
             return True
 
+    def delete_url(self):
+        return reverse('main:delete_model', kwargs={'pk': self.id})
+
 
 # handle all the order data
 # To calculate all final prices and saving for the order

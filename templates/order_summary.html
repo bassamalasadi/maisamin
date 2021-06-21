@@ -20,14 +20,9 @@
           {% endif %}
           <tbody>
             {% for order_product in product %}
-            <tr>
+            <tr id={{order_product.id}}>
               <td class="h6">
-                <a
-                  style="color: red"
-                  href="{% url 'main:remove-from-cart' order_product.pk %}"
-                >
-                  <i class="fas fa-trash"></i>
-                </a>
+                <a data-url="{{order_product.delete_url}}" class="comfirm-delete"> <button type="button" name="button" style="cursor: pointer; border: 0px; background-color:transparent" onclick="deleteFunc({{order_product.id}})"><i class="fas fa-trash text-danger"></i></button></a>
                 &nbsp;&nbsp;
                 {{ order_product.product.name }}
                 &nbsp;&nbsp;
@@ -54,7 +49,7 @@
               <td class="">
                 <span class="h6 pl-3">{{ order_product.quantity }}</span> &nbsp;
               </td>
-                <td class="pl-5 h5">
+                <td class="pl-5 h5" id="{{ order_product.get_final_price }}" value="{{ order_product.get_final_price }}">
                   {{ order_product.get_final_price }} &nbsp;&euro;
               </td>
             </tr>
@@ -69,7 +64,7 @@
         {% if object %}
         <hr>
           <span  class="h5 pt-4 px-3"><b>Yhteensä</b></span>
-          <span class="badge px-3 total-price">{{ object }}&nbsp;&euro;</span>
+          <span class="badge px-3 total-price" > <span id="totalPrice">{{ object }}</span>  &nbsp;&euro;</span>
           <br>
           <hr>
         <span class="order-but">
@@ -89,4 +84,8 @@
 </main>
 <br>
 <br><br><br><br><br>
+
+<script>
+
+</script>
 {% endblock content %}

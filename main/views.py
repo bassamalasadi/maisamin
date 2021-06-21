@@ -34,7 +34,7 @@ from tabulate import tabulate
 from barcode import EAN13, Code39
 from barcode.writer import ImageWriter
 
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from allauth.account.adapter import DefaultAccountAdapter
 
 from django.core.mail import EmailMultiAlternatives
@@ -594,9 +594,10 @@ class MyAccountAdapter(DefaultAccountAdapter):
         return HttpResponseRedirect(redirect_to)
 
 
-
-def testView(request):
-    current_user = request.user
-    context = {'username': current_user.username,
-               'current_user': current_user}
-    return render(request, 'test.html', context)
+def delete_model(request, pk):
+    item = get_object_or_404(OrderItem, id=pk)
+    if item:
+        ref = item.id
+        item.delete()
+        data = {'ref': ref, 'message': 'Object with id %s has been deleted' %ref}
+        return JsonResponse(data)
