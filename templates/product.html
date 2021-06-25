@@ -5,23 +5,22 @@
 
 <main class="" style="background-color:#FAF9F6">
   <br><br><br><br><br>
-  <div class="container dark-grey-text ">
+  <div class="container dark-grey-text">
     <div class="row">
-
       <div class="col-md-6" style="z-index:1;">
-
         <div class="card-2">
-          <img src="{{ product.image1 }}" class="prod-img"/>
+          <img src="{{ product.image1 }}" data-zoom-image="{{ product.image1 }}" class="prod-img"/>
         </div>
         <br>
-        <span class="">{% ratings product %}</span>
-
       </div>
       <div class="col-md-6 mb-4">
         <div class="p-4 bg-white">
           <br><br>
-          <span class="h4 font-weight-bold prod-text" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
+          <span class="h4 font-weight-bold prod-text" style="font-family: 'Staatliches', cursive;">{{product.name}} </span>
           <br><br>
+          {% if product.category == 'cake' or product.category == 'cheesecake' %}
+            <p class="d-flex justify-content-center" style=" text-transform: uppercase;margin-top:-10px; font-size:16px; color:gray;">alkaen &nbsp;&euro;{{ product.price }}</p>
+          {% endif %}
           <p class="font-weight-bold pt-3" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
           <div style="font-family: 'Acme', sans-serif;background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
           <br>
@@ -48,13 +47,13 @@
                   {% if product.is_gluteen_free %}
                     <span class="text-dark rounded">
                       <input type="checkbox" id="gluteen" name="gluteen" value="5" onchange="myFunction()">
-                      <label class="swingHorizontal" for="gluteen">Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <label class="" for="gluteen">Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
                     </span>
                   {% endif %}
                   {% if product.is_loctose_free %}
                     <span class="text-dark rounded">
                       <input type="checkbox" id="laktoos" name="laktoos" value="5" onchange="myFunction()">
-                      <label class="swingHorizontal" for="laktoos">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <label class="" for="laktoos">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
                     </span>
                   {% endif %}
                   <br>
@@ -126,7 +125,7 @@
 
     <div class="row d-flex justify-content-center wow fadeIn rounded">
       <div class="col-md-6 text-center bg-white">
-        <h4 class="my-4 h4" style="font-family: 'Indie Flower', cursive;">Ravintosisältö</h4>
+        <!-- <h4 class="my-4 h4" style="font-family: 'Indie Flower', cursive;">Ravintosisältö</h4> -->
         <!-- <p style="font-family: 'Indie Flower', cursive;">{{product.additional_info}}</p> -->
       </div>
     </div>
@@ -161,6 +160,11 @@
     }
   });
 </script>
-
+<script>
+  $('.prod-img').ezPlus({
+    zoomType: 'inner',
+    cursor: 'crosshair'
+});
+</script>
 {% include "kissa.html" %}
 {% endblock content %}

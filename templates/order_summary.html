@@ -1,55 +1,106 @@
 {% extends "base.html" %} {% block content %}
 {% include "navbar0.html" %}
 <main class="pt-5 pl-2">
-  <div class="order-table">
-    <div class="table text-nowrap pt-5">
-      <h2 style="background-color:black ;color:#BF9000; display: inline-block; padding:2px 15px; border-radius:5px; font-family: 'Prompt', sans-serif;">Ostoskori</h2>
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="container_6">
+      {% for sample in sample %}
+        <div class="content" style="border-radius:4px;">
+          <a href="{{sample.get_absolute_url}}" target="_blank">
+            <div class="content-overlay"></div>
+            <img class="content-image" src="{{sample.image1}}"height="190">
+            <div class="content-details fadeIn-bottom">
+              <h3 class="content-title">{{sample.name}}</h3>
+              <h5 class="content-text text-white">{{sample.price}}</h5>
+            </div>
+          </a>
+        </div>
+      <br><br>
+      {% endfor %}
+    </div>
+
+    </div>
+  <div class="order-table col-lg-8">
+    <div class="text-nowrap pt-5">
       <br>
       <br>
       <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover w-75">
+        <table class="table">
           {% if product %}
-          <thead class="order-prod-text thead-dark">
+          <thead class="order-prod-text">
             <tr>
-              <th scope="col" class="h6">Tuote</th>
-              <th scope="col" class="h6 table-col">Hinta</th>
-              <th scope="col" class="h6 ">Määrä</th>
-              <th scope="col" class="h6" class="px-4">Kokonaishinta</th>
+              <th scope="col" class="">Tuote</th>
+              <th scope="col" class="table-col">Hinta</th>
+              <th scope="col" class=" ">Määrä</th>
+              <th scope="col" class="" class="px-4">Kokonaishinta</th>
             </tr>
           </thead>
           {% endif %}
           <tbody>
             {% for order_product in product %}
             <tr id={{order_product.id}}>
-              <td class="h6">
-                <a data-url="{{order_product.delete_url}}" class="comfirm-delete"> <button type="button" name="button" style="cursor: pointer; border: 0px; background-color:transparent" onclick="deleteFunc({{order_product.id}})"><i class="fas fa-trash text-danger"></i></button></a>
-                &nbsp;&nbsp;
-                {{ order_product.product.name }}
-                &nbsp;&nbsp;
-                {% if order_product.is_gluteen_free %}
-                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Gluteeniton">
-                <span class="gluteen">G</span>
-                </span>
-                {% endif %}
-                &nbsp;
-                {% if order_product.is_loctose_free %}
-                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Laktoositon">
-                <span class="loctose">L</span>
-                </span>
-                {% endif %}
-                &nbsp;
-                {% if order_product.additional_info %}
-                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Lisää tiedot">
-                <span class="addinfo">A</span>
-                </span>
-                {% endif %}
-                &nbsp;
+              <td class=>
+                <div class="row">
+                  <div class="col-lg-2">
+                    <a href="{{order_product.product.get_absolute_url}}">
+                    <img src="{{order_product.product.image1}}" alt="" width="80" height="70" class="" style="border-radius:6px;">
+                    </a>
+                  </div>
+
+                  <div class="col-sm-3" class="p-3">
+                    <span class="">{{ order_product.product.name }}</span>
+                    <br>
+                    {% if order_product.is_gluteen_free %}
+                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Gluteeniton">
+                    <span class="gluteen">G</span>
+                    </span>
+                    {% endif %}
+                    &nbsp;
+                    {% if order_product.is_loctose_free %}
+                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Laktoositon">
+                    <span class="loctose">L</span>
+                    </span>
+                    {% endif %}
+                    &nbsp;
+                    {% if order_product.additional_info %}
+                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Lisää tiedot">
+                    <span class="addinfo">A</span>
+                    </span>
+                    {% endif %}
+                    &nbsp;
+                  </div>
+                  <div class="col-sm-2">
+
+                  </div>
+                  <div class="col-sm-3 pt-5">
+                    <div class="">
+                      <a data-url="{{order_product.delete_url}}" class="comfirm-delete deletebutton">
+                        <button type="button" name="button" style="cursor: pointer; border: 0px; background-color:transparent" onclick="deleteFunc({{order_product.id}})">
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </a>
+                      <a data-url="{{order_product.increment_url}}" class="increment incrementbutton">
+                        <button  type="button" name="button" style="cursor: pointer; border: 0px; background-color:transparent" onclick="increment({{order_product.id}})">
+                          +
+                        </button>
+                      </a>
+                      <a data-url="{{order_product.decrement_url}}" class="decrement decrementbutton">&nbsp;
+                        <button class="mr-1" type="button" name="button" style="cursor: pointer; border: 0px; background-color:transparent" onclick="decrement({{order_product.id}})">
+                          -
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+
+
+
               </td>
-              <td class="h6 table-col">{{ order_product.price }}&nbsp;&euro;</td>
+              <td class=" table-col" id="{{order_product.price}}">{{ order_product.price }}&nbsp;&euro;</td>
               <td class="">
-                <span class="h6 pl-3">{{ order_product.quantity }}</span> &nbsp;
+                <span class=" pl-3" id="{{ order_product.quantity }}">{{ order_product.quantity }}</span> &nbsp;
               </td>
-                <td class="pl-5 h5" id="{{ order_product.get_final_price }}" value="{{ order_product.get_final_price }}">
+                <td class="pl-5 " id="{{ order_product.get_final_price }}">
                   {{ order_product.get_final_price }} &nbsp;&euro;
               </td>
             </tr>
@@ -63,7 +114,7 @@
         </div>
         {% if object %}
         <hr>
-          <span  class="h5 pt-4 px-3"><b>Yhteensä</b></span>
+          <span  class=" pt-4 px-3"><b>Yhteensä</b></span>
           <span class="badge px-3 total-price" > <span id="totalPrice">{{ object }}</span>  &nbsp;&euro;</span>
           <br>
           <hr>
@@ -81,11 +132,9 @@
 
         </div>
     </div>
+  </div>
+
 </main>
 <br>
 <br><br><br><br><br>
-
-<script>
-
-</script>
 {% endblock content %}

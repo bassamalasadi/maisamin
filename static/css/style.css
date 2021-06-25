@@ -3,6 +3,11 @@ body,
 header {
   height: 60vh;
   font-size:14;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+button:focus {
+    border: none;
+    outline: none;
 }
 .page-link{
   background-color: black;
@@ -21,6 +26,25 @@ header {
 {
     animation: swingHorizontal 1s ease;
     animation-iteration-count: 1;
+}
+.deletebutton{
+  background-color: #D8DCD6;
+  padding: 4px 7px;
+  border-radius: 20px 0 0 20px;
+  border-right: 1px solid;
+  border-color: #BF9000;
+  outline: none;
+}
+.incrementbutton{
+  background-color: #D8DCD6;
+  padding: 4px 7px;
+}
+.decrementbutton{
+  background-color: #D8DCD6;
+  padding: 4px 7px;
+  border-radius: 0 20px 20px 0 ;
+  border-left: 1px solid;
+  border-color: #BF9000;
 }
 
 @keyframes swingHorizontal
@@ -319,7 +343,11 @@ header {
   }
   .order-table{
     position: relative;
+    width: 95%;
     left: 0%;
+  }
+  .container_6{
+    display: none;
   }
   .table-col,
   .table-col-2{
@@ -327,11 +355,11 @@ header {
   }
   .total-price{
     position: relative;
-    left:28%;
+    left:20%;
     background: black;
     color: white;
     padding: 4px;
-    font-size: 25px;
+    font-size: 20px;
     border-radius:4px;
   }
   .snippet{
@@ -660,12 +688,11 @@ header {
     position: relative;
     width: 70%;
     top:50px;
-    left: 10%;
   }
   .snippet{
     position: relative;
-    width: 100%;
-    z-index: -1;
+    width: 90%;
+    z-index: 999;
   }
   .check-text{
     font-size: 30px;
@@ -747,7 +774,9 @@ header {
     font-family: 'Pacifico', cursive;
     color:#BF9000;
   }
-
+  .container_6{
+    display: none;
+  }
 }
 
 
@@ -756,6 +785,15 @@ header {
 
   .container_5{
     width: 33.33333%;
+  }
+  .container_6{
+    position: relative;
+    background: rgb(255,255,255);
+    background: linear-gradient(223deg, rgba(255,255,255,0.9500175070028011) 50%, rgba(191,144,0,1) 100%);
+    border-radius: 5px;
+    left:15px;
+    top:19%;
+    padding: 20px 10px;
   }
   .bg-white {
       background:transparent !important;
@@ -930,11 +968,13 @@ header {
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
+
   .prod-container-card{
     width:22%;
   }
   .check-card{
-    width:90%;
+    left:20%;
+    width:80%;
   }
   .prod-card{
     position: relative;
@@ -942,12 +982,13 @@ header {
     width:22%;
     height:37vh;
     border-radius: 10px;
-    box-shadow: 0px 1px 5px 	#BF9000, 0px 1px 7px 	#BF9000;
+    /* box-shadow: 0px 1px 3px 	#BF9000, 0px 1px 3px 	#BF9000; */
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   }
   .prod-card:hover{
-    transform: translateY(-0.5rem) scale(1.0125);
-	box-shadow: 0 0.5em 3rem -1rem #BF9000;
+    transform: translateY(-0.1rem) scale(1.01);
+    transition-duration: 1s;
+	  /* box-shadow: 0 0.5em 3rem -1rem #BF9000; */
   }
   .imgcard {
     position: relative;
@@ -969,8 +1010,6 @@ header {
   .card-2{
     width:100%;
     height: 60vh;
-    box-shadow: 0 3px 12px 	rgb(191, 144, 0), 0 3px 9px 	rgb(191, 144, 0);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     border-radius: 10px;
   }
 
@@ -978,13 +1017,12 @@ header {
     width: 100%;
     height: 60vh;
     object-fit: cover;
-    border-radius: 10px;
   }
   .mainimg {
     width: 100%;
     height: 30vh;
     object-fit: cover;
-    border-radius: 10px 10px 0 0 ;
+    border-radius: 4px ;
   }
   .overlay {
     position: absolute;
@@ -1081,9 +1119,8 @@ header {
   }
   .order-table{
     position: relative;
-    width: 80%;
+    width: 70%;
     top:50px;
-    left: 20%;
   }
 
   .check-text{
@@ -1093,17 +1130,13 @@ header {
   .table-col-2{
 
   }
-  .total-price{
-    position: relative;
-    left:260px;
-  }
   .order-but{
     position: relative;
     margin-left: 30px;
   }
   .snippet{
     position: fixed;
-    width: 40%;
+    width: 30%;
   }
   .check-text{
     font-size: 50px;
@@ -1113,7 +1146,7 @@ header {
   }
   .total-price{
     position: relative;
-    left:45%;
+    left:73%;
     background: black;
     color: white;
     padding: 5px;
@@ -1200,67 +1233,23 @@ header {
     color:#BF9000;
   }
 
-  /* price color */
-  /* .pricing-wrap{
-  position: relative;
-  left:90px;
-  bottom: 33px;
-  width: 100%;
-  display: block;
-  z-index: 1;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-  }
-.pricing-wrap span{
-  position: relative;
-  width: 100%;
-  display: block;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  letter-spacing: 3px;
-  font-size: 16px;
-  line-height: 0.1;
-  color: #3C0008;
-  transform: translate3d(0, 0, 35px) perspective(100px);
-}
-.pricing-wrap span:before{
-  position: absolute;
-  content: '';
-  z-index: -1;
-  background: linear-gradient(217deg, #BF9000, #FFF);
+.gluteen-1{
   width: 80px;
-  height: 70px;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 6px 20px 0 rgba(16, 39, 112,.3);
-  animation: border-transform 9s linear infinite;
+    height: 80px;
+    border: 1px solid #2c2c2c;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+    margin: 0 auto 14px;
+    background-color: #fff;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
 }
-
-@keyframes border-transform{
-  0%,100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
-  14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
-  28% { border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; }
-  42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; }
-  56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
-  70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
-  84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
-} */
 .prod-text{
   position: relative;
-  background-color: #BF9000;
-  padding: 5px 25px;
-  color: white;
-  right: 60px;
-  top:10%;
-  border-radius:  6px;
-  transform: translate(-50%, -50%);
+  margin: auto;
+  letter-spacing: 0.1em;
 }
 .mid-card{
   position: relative;
@@ -1278,10 +1267,6 @@ header {
 }
 
 @import url(https://fonts.googleapis.com/css?family=Raleway);
-
-
-
-
 
 @media screen and (min-width: 900px){
 .container_5{

@@ -124,6 +124,12 @@ class OrderItem(models.Model):
     def delete_url(self):
         return reverse('main:delete_model', kwargs={'pk': self.id})
 
+    def increment_url(self):
+        return reverse('main:increment', kwargs={'pk': self.id})
+
+    def decrement_url(self):
+        return reverse('main:decrement', kwargs={'pk': self.id})
+
 
 # handle all the order data
 # To calculate all final prices and saving for the order

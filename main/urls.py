@@ -16,6 +16,8 @@ from .views import (
     Delivery,
     Profile,
     delete_model,
+    increment,
+    decrement,
     add_to_cart,
     remove_from_cart,
     remove_single_item_from_cart,
@@ -27,9 +29,9 @@ app_name = 'main'
 urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('cake/', CakeView.as_view(), name='cake'),
-    path('cupcake', CupcakeView.as_view(), name='cupcake'),
+    path('cupcake/', CupcakeView.as_view(), name='cupcake'),
     path('cheesecake/', CheeseCakeView.as_view(), name='cheesecake'),
-    path('fatayer', FatayerView.as_view(), name='fatayer'),
+    path('fatayer/', FatayerView.as_view(), name='fatayer'),
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('manakish/', ManakishView.as_view(), name='manakish'),
     path('meze/', MezeView.as_view(), name='meze'),
@@ -50,5 +52,7 @@ urlpatterns = [
     path('privacy-policy/', Privacy.as_view(), name="privacy"),
     path('delivery-policy/', Delivery.as_view(), name="delivery_policy"),
     path('accounts/profile/', Profile.as_view(), name="profile"),
-    path('delete/<pk>/', delete_model, name='delete_model')
+    path('delete/<pk>/', delete_model, name="delete_model"),
+    path('increment/<pk>/', increment, name="increment"),
+    path('decrement/<pk>/', decrement, name="decrement"),
 ]

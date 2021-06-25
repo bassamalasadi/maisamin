@@ -7,6 +7,7 @@
   </div>
   <div class="container-fluid marketing pt-1 mt-1">
     <h1 class="cap-text" style="font-family: 'Pacifico', cursive;">Kakut</h1>
+    <p class="text-muted"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp; Kakut</p>
     <section class="text-center mt-1">
       <div class="row">
         {% for item in object_list %}
@@ -16,14 +17,8 @@
             <a href="{{ item.get_absolute_url }}">
             <div>
               <img src="{{ item.image1}}" class="mainimg" />
-              <div class="row">
-                <div class="col-sm-7">
-                  <h6 class="p-2" style="font-family: 'Pacifico', cursive;">{{ item.name }}</h6>
-                </div>
-                <div class="col-sm-5">
-                  <p class="" style="font-family: 'Pacifico', cursive; background-color:#BF9000; border-radius:0 0 0 15px; padding:5px 10px; color:white;">&euro;{{ item.price }}</p>
-                </div>
-              </div>
+              <p class="p-2" style="font-family: 'Staatliches', cursive; text-transform: uppercase;margin:0; font-size:18px;">{{ item.name }}</p>
+              <p class="" style=" text-transform: uppercase;margin-top:-10px; font-size:12px; color:gray;">alkaen &nbsp;&euro;{{ item.price }}</p>
             </div>
           </a>
           </div>

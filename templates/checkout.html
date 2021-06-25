@@ -1,77 +1,91 @@
 {% extends "base.html" %} {% load crispy_forms_tags %}
 {% load static %}{% block content %}
 {% include "navbar0.html" %}
-<main style="background-color:#FAF9F6">
-  <br><br>
-  <br><br>
-  <div class="container-fluid" >
-    <div class="row pt-5" >
-      <div class="col mb-4" >
-        <div class="card check-card" style="border-radius:10px">
-          <p class="text-center pt-4 checks-text h3"style="font-family: 'Prompt', sans-serif;color:#535353">Laskutustiedot</p>
-          <hr>
-          <form method="POST" class="card-body">
-            {% csrf_token %}
+<main >
+  <div class="row">
+    <div class="col-lg-7" style="background-color:#FDFDFE;border-right:1px solid #BF9000">
+      <br><br><br><br><br>
 
-            {% for error in form.non_field_errors %}
-               <p class="help is-danger">{{  error }}</p>
-            {% endfor %}
-            {{ form.firstName | as_crispy_field }}
-            {{ form.lastName | as_crispy_field }}
-            {{ form.email | as_crispy_field }}
-            {{ form.phone | as_crispy_field }}
-            {{ form.city | as_crispy_field }}
-            {{ form.street_address | as_crispy_field }}
-            {{ form.postal | as_crispy_field }}
-            {{ form.apartment_address | as_crispy_field }}
+      <div class="container-fluid" >
+        <div class="row pt-5" >
+          <div class="col mb-4"  >
+            <div class="card check-card" style="border:none;background-color:transparent">
+              <p class="text-center pt-4 checks-text h3"style="font-family: 'Prompt', sans-serif;color:#535353">Laskutustiedot</p>
+              <hr>
+              <form method="POST" class="card-body">
+                {% csrf_token %}
+
+                {% for error in form.non_field_errors %}
+                   <p class="help is-danger">{{  error }}</p>
+                {% endfor %}
+                <p>Yhteystiedot</p>
+                {{ form.firstName | as_crispy_field }}
+                {{ form.lastName | as_crispy_field }}
+                {{ form.email | as_crispy_field }}
+                {{ form.phone | as_crispy_field }}
+                <hr>
+                <br>
+                <p>Toimitusosoite</p>
+                {{ form.city | as_crispy_field }}
+                {{ form.street_address | as_crispy_field }}
+                {{ form.postal | as_crispy_field }}
+                {{ form.apartment_address | as_crispy_field }}
 
 
-            <hr>
-            <label class="h6">Päivämäärä &nbsp; <i class="fas fa-calendar-day text-danger"></i> &nbsp;&nbsp;Tee tilauksesi kolme päivää ennen</label>
-            {{ form.date | as_crispy_field  }}
-            <hr>
-            <br>
-            <p>Toimitamme &nbsp;<i class="fas fa-truck text-info"></i> &nbsp; &nbsp;<span id="delv_price"></span></p>
-            <select name="delivery" id="delivery" class="browser-default custom-select" onchange="delivery_func()">
-              <option value="0" id="0">Nouto (maksuton)</option>
-              <option value="5.00" id="1">Jämsä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                5.00 &euro;</option>
-              <option value="7.00" id="2">Jämsänkoski / Kaipola /Himos   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.00 &euro;</option>
-              <option value="9.00" id="3">Halli / Koskenpää / Länkipohja / Korpilahti &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                9.00 &euro;</option>
-            </select>
-            <div id="delivery-policy" class="delivery-policy" hidden>
-              <br>
-              <input type="checkbox" id="agree_delivery" name="agree_delivery" value="agree_delivery" onchange="deliverySend()"> &nbsp
-              <span class="" for="agree">Valitse ruutu, jos hyväksyt &nbsp;<a href="{% url 'main:delivery_policy' %}" style="color:#BF9000;font-weight:800;">Toimituskäytännön</a></span>
-              <br>
+                <hr>
+                <br>
+                <label class="h6 pb-3">Päivämäärä &nbsp; <i class="fas fa-calendar-day text-danger"></i> &nbsp;&nbsp;Tee tilauksesi kolme päivää ennen</label>
+                {{ form.date | as_crispy_field  }}
+                <hr>
+                <br>
+                <p>Toimitamme &nbsp;<i class="fas fa-truck text-info"></i> &nbsp; &nbsp;<span id="delv_price"></span></p>
+                <select name="delivery" id="delivery" class="browser-default custom-select" onchange="delivery_func()">
+                  <option value="0" id="0">Nouto (maksuton)</option>
+                  <option value="5.00" id="1">Jämsä &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    5.00 &euro;</option>
+                  <option value="7.00" id="2">Jämsänkoski / Kaipola /Himos   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;7.00 &euro;</option>
+                  <option value="9.00" id="3">Halli / Koskenpää / Länkipohja / Korpilahti &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    9.00 &euro;</option>
+                </select>
+                <div id="delivery-policy" class="delivery-policy" hidden>
+                  <br>
+                  <input type="checkbox" id="agree_delivery" name="agree_delivery" value="agree_delivery" onchange="deliverySend()"> &nbsp
+                  <span class="" for="agree">Valitse ruutu, jos hyväksyt &nbsp;<a href="{% url 'main:delivery_policy' %}" style="color:#BF9000;font-weight:800;">Toimituskäytännön</a></span>
+                  <br>
+                </div>
+                <hr />
+                <br>
+                <h3>Maksuvaihtoehdot &nbsp; <i class="fas fa-file-invoice"></i></h3>
+
+                <div class="d-block my-3">
+                  {% for value, name in form.fields.payment_option.choices %}
+                  <div class="custom-control custom-radio">
+                    <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input {{ name }}" required onchange="choose()">
+                    <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
+                  </div>
+                  {% endfor %}
+                </div>
+                <hr>
+                <br>
+                <button class="btn w-50" id="send-order" style="background-color:black ;color:white;"  type="submit">
+                 <b> Lähetä Tilaus</b>
+                </button>
+              </form>
             </div>
-            <hr />
-            <br>
-            <h3>Maksuvaihtoehdot &nbsp; <i class="fas fa-file-invoice"></i></h3>
+          </div>
 
-            <div class="d-block my-3">
-              {% for value, name in form.fields.payment_option.choices %}
-              <div class="custom-control custom-radio">
-                <input id="{{ name }}" name="payment_option" value="{{ value }}" type="radio" class="custom-control-input {{ name }}" required onchange="choose()">
-                <label class="custom-control-label" for="{{ name }}">{{ name }}</label>
-              </div>
-              {% endfor %}
-            </div>
-            <hr>
-            <br>
-            <button class="btn w-50" id="send-order" style="background-color:black ;color:white;"  type="submit">
-             <b> Lähetä Tilaus</b>
-            </button>
-          </form>
         </div>
       </div>
+    </div>
+    <div class="col-lg-5" style="background-color:#FFFDFE">
+      <br><br><br><br><br>
+
       <div class="col">
         <div class="snippet">
           {% include "order_snippet.html" %}
@@ -79,7 +93,6 @@
       </div>
     </div>
   </div>
-  <br>
 </main>
 <script>
 </script>

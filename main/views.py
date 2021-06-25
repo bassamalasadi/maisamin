@@ -316,6 +316,9 @@ class OrderSummaryView(LoginRequiredMixin, View):
     def get(self, *args, **kwargs):
         try:
             order_item = OrderItem.objects.filter(user=self.request.user)
+            num_entities = Product.objects.all().count()
+            rand_entities = random.sample(range(1, num_entities), 3)
+            sample_entities = Product.objects.filter(id__in=rand_entities)
             total = 0
             for order in order_item:
                 total += float(order.get_final_price)
@@ -323,6 +326,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
             context = {
                 'object': total,
                 'product': order_item,
+                'sample':sample_entities,
             }
             return render(self.request, 'order_summary.html', context)
         except ObjectDoesNotExist:
@@ -600,4 +604,22 @@ def delete_model(request, pk):
         ref = item.id
         item.delete()
         data = {'ref': ref, 'message': 'Object with id %s has been deleted' %ref}
+        return JsonResponse(data)
+
+def increment(request, pk):
+    item = get_object_or_404(OrderItem, id=pk)
+    if item:
+        ref = item.id
+        item.quantity += 1
+        item.save()
+        data = {'ref': ref, 'message': 'Object with id %s has been update' %ref}
+        return JsonResponse(data)
+
+def decrement(request, pk):
+    item = get_object_or_404(OrderItem, id=pk)
+    if item:
+        ref = item.id
+        item.quantity -= 1
+        item.save()
+        data = {'ref': ref, 'message': 'Object with id %s has been update' %ref}
         return JsonResponse(data)
