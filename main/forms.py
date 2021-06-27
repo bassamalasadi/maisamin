@@ -18,7 +18,7 @@ CITIES = (
 
 PAYMENT_CHOICES = (
     ('Cash', 'Käteinen'),
-    ('Invoice', 'lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)'),
+    ('Invoice', 'Lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)'),
 )
 
 x = datetime.datetime.now() + datetime.timedelta(days=3)

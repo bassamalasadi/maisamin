@@ -271,21 +271,21 @@ class CakeView(ListView):
     template_name = "cake.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='cake')
+        return Product.objects.filter(category='Kakut')
 
 class CupcakeView(ListView):
     paginate_by = 20
     template_name = "cupcake.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='cupcake')
+        return Product.objects.filter(category='Kuppikakut')
 
 class CheeseCakeView(ListView):
     paginate_by = 20
     template_name = "cheesecake.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='cheesecake')
+        return Product.objects.filter(category='Juustokakut')
 
 
 class FatayerView(ListView):
@@ -293,7 +293,7 @@ class FatayerView(ListView):
     template_name = "fatayer.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='pastry')
+        return Product.objects.filter(category='Fatayer')
 
 
 class ManakishView(ListView):
@@ -301,7 +301,7 @@ class ManakishView(ListView):
     template_name = "manakish.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='manakish')
+        return Product.objects.filter(category='Manakish')
 
 
 class MezeView(ListView):
@@ -309,7 +309,7 @@ class MezeView(ListView):
     template_name = "meze.html"
 
     def get_queryset(self):
-        return Product.objects.filter(category='meze')
+        return Product.objects.filter(category='Alkuruoat')
 
 
 class OrderSummaryView(LoginRequiredMixin, View):
@@ -317,7 +317,7 @@ class OrderSummaryView(LoginRequiredMixin, View):
         try:
             order_item = OrderItem.objects.filter(user=self.request.user)
             num_entities = Product.objects.all().count()
-            rand_entities = random.sample(range(1, num_entities), 3)
+            rand_entities = random.sample(range(1, num_entities), 2)
             sample_entities = Product.objects.filter(id__in=rand_entities)
             total = 0
             for order in order_item:
