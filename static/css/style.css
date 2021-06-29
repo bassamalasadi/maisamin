@@ -5,6 +5,16 @@ header {
   font-size:14;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+.order-image{
+  position: absolute;
+  width:5%;
+  height:10%;
+  left:45%;
+  top:10%;
+  opacity:0.3;
+  z-index:-1;
+
+}
 button:focus {
     border: none;
     outline: none;

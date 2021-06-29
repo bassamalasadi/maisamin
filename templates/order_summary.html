@@ -1,6 +1,7 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% load static %}
 {% include "navbar0.html" %}
 <main class="pt-5 pl-2">
+  <img class="order-image" src="{% static 'img/order.png' %}"  alt="">
   <div class="row">
     <div class="col-lg-2">
       <div class="container_6">
@@ -46,18 +47,14 @@
                   </div>
 
                   <div class="col-sm-3 ml-3" class="p-3">
-                    <span class="h6 p-3" style="font-family: 'Acme', sans-serif;">{{ order_product.product.name }}</span>
+                    <span class="h3 p-3" style="font-family: 'Acme', sans-serif;">{{ order_product.product.name }}</span>
                     <br>
                     {% if order_product.is_gluteen_free %}
-                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Gluteeniton">
                     <span class="m-3 text-muted" style="font-family: 'Acme', sans-serif;">Gluteeniton</span>
-                    </span>
                     {% endif %}
                     &nbsp;
                     {% if order_product.is_loctose_free %}
-                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Laktoositon">
                     <span class="m-1 text-muted" style="font-family: 'Acme', sans-serif;">Laktoositon</span>
-                    </span>
                     {% endif %}
                     &nbsp;
                     {% if order_product.additional_info %}

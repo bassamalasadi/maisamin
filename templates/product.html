@@ -85,7 +85,9 @@
                           </div>
                         </div>
                       </div>
-                      <label class="p-2" for="gluteen" style="position:relative;top:4px;">Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <label class="p-2 h3" for="gluteen" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                        Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
+                      </label><br>
 
                     </span>
 
@@ -102,7 +104,9 @@
                             </div>
                           </div>
                         </div>
-                        <label class="p-2" for="laktoos" style="position:relative;top:4px;">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                        <label class="p-2 h3" for="laktoos" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                          Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small>
+                        </label><br>
 
                     </span>
                   {% endif %}
@@ -130,7 +134,7 @@
               </div>
               <div class="row ml-2">
                 <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3">Koko</span>
-                <select class="browser-default custom-select custom-select-sm col-sm-2" name="price" id="price" onchange="myFunction()" style="background-color:#ebf7fc">
+                <select class="browser-default custom-select custom-select-sm col-sm-3" name="price" id="price" onchange="myFunction()" style="background-color:#ebf7fc">
                   <option value="" id="disableitem" disabled selected>Valitse</option>
                   {% for item in product.variation_set.all %}
                     <option value="{{item.price}}" > {{item.size}}</option>
