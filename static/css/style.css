@@ -257,11 +257,11 @@ button:focus {
   }
   .spe-ord{
     position: absolute;
-    font-size: 10px;
+    font-size: 9px;
     font-weight: 700;
     color: white;
-    left: 76%;
-    top: 23%;
+    right:0;
+    top: 16%;
     font-family: 'Lato', sans-serif;
     line-height: 0;
   }
@@ -281,12 +281,12 @@ button:focus {
   }
   .maintext {
     position: absolute;
-    font-size: 6vw;
+    font-size: 5vw;
     font-weight: 200;
     color: white;
     font-family: "Nosifer", cursive;
-    width: 50%;
-    left: 12%;
+    width: 40%;
+    left: 10%;
     top: 16%;
     margin: 0 auto;
   }
@@ -582,8 +582,8 @@ button:focus {
     font-size: 16px;
     font-weight: 700;
     color: white;
-    left: 80%;
-    top: 25%;
+    right:0;
+    top: 20%;
     font-family: 'Lato', sans-serif;
     line-height: 0.3;
   }
@@ -607,9 +607,9 @@ button:focus {
     font-weight: 200;
     color: white;
     font-family: "Nosifer", cursive;
-    width: 50%;
-    left: 25%;
-    top: 20%;
+    width: 30%;
+    left: 18%;
+    top: 16%;
     margin: 0 auto;
   }
   .bgimg, .maimg{
@@ -978,7 +978,7 @@ button:focus {
     font-size: 30px;
     font-weight: 900;
     color: white;
-    left: 80%;
+    right:0;
     top: 66.2%;
     font-family: 'Lato', sans-serif;
     line-height: 0.5;

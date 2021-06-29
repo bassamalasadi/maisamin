@@ -2,27 +2,65 @@
     <dic class="container">
       <br />
       <div class=" foo-l">
-        <div class="">
+        <div>
           <a class="fab fa-facebook-f fa-2x px-5" style="color:#BF9000" href="https://www.facebook.com/maisamin.herkku/"></a>
           <a class="fab fa-instagram fa-2x" style="color:#BF9000" href="https://www.instagram.com/maysamherkku/"></a>
           <a class="fab fa-youtube fa-2x pl-5" style="color:#BF9000" href="https://www.youtube.com/channel/UCw9o5p1ge-AivDbJafat5Bw"></a>
         </div>
       </div>
       <br>
-      <div class="foo-c">
-        <p class="d-flex justify-content-center h6" style="color:#BF9000; font-size:10px;">MAISAMIN HERKKU, Jämsä</p>
-      </div>
-      <div class="foo-c">
-        <p class="d-flex justify-content-center h6 foo-email" style="color:#BF9000; font-size:10px;">Puh 050 3367788</p>
-      </div>
-      <div class="foo-c">
-        <p class="d-flex justify-content-center h6 foo-email" style="color:#BF9000; font-size:10px;">info@maisaminherkku.fi</p>
-      </div>
-      <div class="foo-c">
-        <p class="d-flex justify-content-center h6 foo-email"> <a href="{% url 'main:privacy' %}"style="color:#BF9000; font-size:10px;">Tietosuojaseloste</a> </p>
-      </div>
-      <div class="foo-c">
-        <p class="d-flex justify-content-center h6 foo-email" style="color:#BF9000; font-size:10px;">&copy;2021</p>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-4">
+          </div>
+          <div class="col-md-3">
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:home' %}">Etusivu</a></p>
+            </div>
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:cake' %}">Kakut</a></p>
+            </div>
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:cupcake' %}">Kuppikakut</a></p>
+            </div>
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:cheesecake' %}">Juustokakut</a></p>
+            </div>
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:fatayer' %}">Fatayer</a></p>
+            </div>
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:manakish' %}">Manakish</a></p>
+            </div>
+            <div>
+              <p style="color:#BF9000; font-size:10px;"><a style="color:#BF9000; font-size:12px;"  href="{% url 'main:meze' %}">Alkuruoat ja salaatit</a></p>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div>
+              <p style="color:#BF9000; font-size:12px;">MAISAMIN HERKKU, Jämsä</p>
+            </div>
+            <div>
+              <p class=" foo-email" style="color:#BF9000; font-size:12px;">Puh 050 3367788</p>
+            </div>
+            <div>
+              <p class=" foo-email" style="color:#BF9000; font-size:12px;">info@maisaminherkku.fi</p>
+            </div>
+            <div>
+              <p class=" foo-email"> <a href="{% url 'main:privacy' %}"style="color:#BF9000; font-size:12px;">Tietosuojaseloste</a> </p>
+            </div>
+            <div
+              <p class=" foo-email"> <a href="{% url 'main:delivery_policy' %}"style="color:#BF9000; font-size:12px;">Toimitusehdot</a> </p>
+            </div>
+            <div>
+              <p class=" foo-email" style="color:#BF9000; font-size:12px;">&copy;2021</p>
+            </div>
+          </div>
+          <div class="col-md-3">
+
+          </div>
+        </div>
+
       </div>
       <br>
     </dic>

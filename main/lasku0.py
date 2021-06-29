@@ -38,7 +38,7 @@ Mottagren \n
     \n
 Maisamin Herkku \n
 \n
-Asessorintie 2 11 \n
+Asessorintie 2 as 11 \n
 \n
 42100 Jämsä\n
 \n
@@ -301,17 +301,21 @@ EUR\n
 
 
 def create_invoice(**kwargs):
+    date_of_invoic = date.today()
+    date_of_invoic = str(date_of_invoic).split('-')
+    date_of_invoic = date_of_invoic[::-1]
+    date_of_invoic = '.'.join(date_of_invoic)
     pdf = GenerateInvoice('P', 'mm', 'Letter', **kwargs)
     pdf.add_page()
 
     pdf.line(10, 30, 210, 30)
     pdf.set_font('courier', '', 8)
     pdf.cell(0, 3, 'Maisamin Herkku', ln=1)
-    pdf.cell(0, 3, 'Asessorintie 2 11', ln=1)
-    pdf.cell(0, 3, '32100 Jämsä', ln=1)
+    pdf.cell(0, 3, 'Asessorintie 2 as 11', ln=1)
+    pdf.cell(0, 3, '42100 Jämsä', ln=1)
     pdf.cell(0, 3, 'maisaminherkku.fi', ln=1)
     pdf.cell(0, 3, 'info@maisamin.com', ln=1)
-    pdf.cell(0, 3, '0405177444', ln=1)
+    pdf.cell(0, 3, '0503367788', ln=1)
     pdf.ln()
 
     pdf.set_font('courier', 'B', 11)
@@ -320,7 +324,7 @@ def create_invoice(**kwargs):
     pdf.set_font('courier', '', 10)
     pdf.cell(0,5, f'Asiakasnumero                    {pdf.user_id}', ln=1)
     pdf.cell(0,5, f'Laskunumero                      {pdf.lasku_id}', ln=1)
-    pdf.cell(0, 5, f'laskunpäivämäärä                 {date.today()}', ln=1)
+    pdf.cell(0, 5, f'Laskunpäivämäärä                 {date_of_invoic}', ln=1)
     pdf.cell(0, 5, f'Maksutapa                        Lasku', ln=1)
     pdf.cell(0, 5, f'Eräpäivä                         {pdf.delivery_date}', ln=1)
     pdf.ln()
