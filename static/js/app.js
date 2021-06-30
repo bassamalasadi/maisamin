@@ -6,7 +6,7 @@ $(window).scroll(function(){
 
 // control datepicker in checkout
 $(function () {
-  var date = new Date()
+  let date = new Date()
   date.setDate(date.getDate() + 3)
   $("#id_date").datepicker({
     format:'dd/mm/yyyy',
@@ -15,7 +15,7 @@ $(function () {
     monthsShort: ['tammikuu', 'helmikuu', 'maaliskuu', 'huhtikuu', 'toukokuu', 'kesäkuu', 'heinäkuu', 'elokuu', 'syyskuu', 'lokakuu', 'marraskuu', 'joulukuu'],
     autoHide:true,
   });
-  var newdate = $("#id_date").datepicker('getDate')
+  let newdate = $("#id_date").datepicker('getDate')
 });
 
 // control messages
@@ -48,7 +48,7 @@ function deliverySend(){
 
 // control delivery changes
 function delivery_func() {
-  var x = parseInt(document.querySelector("#delivery").value);
+  let x = parseInt(document.querySelector("#delivery").value);
   x = parseFloat(x).toFixed(2).toString()
   if (x > 0){
     document.querySelector("#delv_price").innerHTML = '+ ' + x + ' Euro';
@@ -66,20 +66,141 @@ function delivery_func() {
 function myFunction() {
   g = 0
   l = 0
-  var x = document.getElementById("price").value;
-  var y = parseInt(document.getElementById("amount").value);
+  let x = document.getElementById("price").value;
+  let y = parseInt(document.getElementById("amount").value);
   x = x.replace(',', '.')
   x = Number.parseFloat(x)
   if (document.getElementById("gluteen")){
-    var g = (document.getElementById("gluteen").checked) ? 5.00 : 0
+    g = (document.getElementById("gluteen").checked) ? 5 : 0
   }
   if (document.getElementById("laktoos")){
-    var l = (document.getElementById("laktoos").checked) ? 5.00 : 0
+    l = (document.getElementById("laktoos").checked) ? 5 : 0
   }
   if (Number.isNaN(x) == false){
     x = x + g + l
     res = parseFloat(x * y).toFixed(2)
+    console.log(res)
     document.getElementById("addtocart").removeAttribute("disabled");
     document.getElementById("hinta").innerHTML = res;
   }
 }
+
+// new update for delete, increment, and decrement buttons
+function increment(id){
+  let totalPrice = document.getElementById('totalPrice').innerHTML;
+  $('table > tbody  > tr').each(function(index, tr) {
+    let trNumber = parseInt(tr.id)
+    if (trNumber === id){
+      apiUrl(`/increment/${id}/`)
+
+      quantity = $($(tr).find('td')[2]).find('span')[0].id
+      quantity = parseInt(quantity) + 1
+      $($(tr).find('td')[2]).find('span')[0].id = quantity
+      $($($(tr).find('td')[2]).find('span')[0]).html(quantity)
+
+      itemPrice = $(tr).find('td')[1].id
+      itemPrice = itemPrice.replace(',', '.')
+      itemTotalPrice = $(tr).find('td')[3].id
+      totalItemPrice = (parseFloat(itemTotalPrice) + parseFloat(itemPrice)).toFixed(2)
+      totalItemPrice = totalItemPrice.concat(' €')
+      $(tr).find('td')[3].id = totalItemPrice
+      $($(tr).find('td')[3]).html(totalItemPrice)
+
+      totalPrice = (parseFloat(totalPrice) + parseFloat(itemPrice)).toFixed(2)
+      document.getElementById('totalPrice').innerHTML = totalPrice
+    }
+})
+}
+function decrement(id){
+  let totalPrice = document.getElementById('totalPrice').innerHTML;
+  $('table > tbody  > tr').each(function(index, tr) {
+    let trNumber = parseInt(tr.id)
+    if (trNumber === id){
+      apiUrl(`/decrement/${id}`)
+      quantity = $($(tr).find('td')[2]).find('span')[0].id
+      quantity = parseInt(quantity) - 1
+      $($(tr).find('td')[2]).find('span')[0].id = quantity
+      $($($(tr).find('td')[2]).find('span')[0]).html(quantity)
+
+      itemPrice = $(tr).find('td')[1].id
+      itemPrice = itemPrice.replace(',', '.')
+      itemTotalPrice = $(tr).find('td')[3].id
+      totalItemPrice = (parseFloat(itemTotalPrice) - parseFloat(itemPrice)).toFixed(2)
+      totalItemPrice = totalItemPrice.concat(' €')
+      $(tr).find('td')[3].id = totalItemPrice
+      $($(tr).find('td')[3]).html(totalItemPrice)
+
+      totalPrice = (parseFloat(totalPrice) - parseFloat(itemPrice)).toFixed(2)
+      document.getElementById('totalPrice').innerHTML = totalPrice
+      if (quantity <= 0){
+        deleteFunc(id)
+        $(tr).remove();
+        navCount = parseInt(document.getElementById("cart-count").innerHTML) - 1
+        document.getElementById("cart-count").innerHTML = navCount
+        if (navCount <= 0){
+          $("#cart-row").fadeOut(1000)
+          // document.location.href = "https://www.maisaminherkku.fi"
+        }
+      }
+    }
+  })
+}
+function deleteFunc(item){
+  let totalPrice = Number.parseFloat(document.getElementById('totalPrice').innerHTML).toFixed(2);
+  $('table > tbody  > tr').each(function(index, tr) {
+    let trNumber = parseInt(tr.id)
+    if (trNumber === item){
+      itemPrice = parseFloat($(tr).find('td')[3].id).toFixed(2)
+      totalPrice = (totalPrice - itemPrice).toFixed(2).toString()
+      navCount = parseInt(document.getElementById("cart-count").innerHTML) - 1
+      document.getElementById('totalPrice').value = totalPrice
+      document.getElementById('totalPrice').innerHTML = totalPrice
+      document.getElementById("cart-count").innerHTML = navCount
+      if (navCount === 0){
+        $("#cart-row").fadeOut(1000)
+      }
+      apiUrl(`/delete/${item}`);
+      $(tr).remove();
+    }
+  });
+}
+function apiUrl(item){
+  let endpoint = item
+  console.log(endpoint)
+    $.ajax({
+        method: 'GET',
+        url: endpoint,
+        success: function (data) {},
+        error: function (error_data) {
+            console.log(error_data);
+        }
+    })
+}
+
+
+// let endpoint = $(".comfirm-delete").attr('data-url')
+//         $.ajax({
+//             method: 'GET',
+//             url: endpoint,
+//             success: function (data) {
+//                 $.notify({
+//                     title: '<b>Message<b> ',
+//                     message: data.message,
+//                 }, {
+//                     type: 'success',
+//                     delay: 3000,
+//                     allow_dismiss: true,
+//
+//                 });
+//             },
+//             error: function (error_data) {
+//                 console.log(error_data);
+//                 $.notify({
+//         title: '<b>Error</b><br>',
+//         message: 'Anteeksi, jotain meni pieleen'
+//     }, {
+//         type: 'danger',
+//         delay: 3000,
+//     })
+//             }
+//         })

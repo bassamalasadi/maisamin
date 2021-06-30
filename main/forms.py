@@ -2,6 +2,7 @@ import datetime
 from django import forms
 from allauth.account.forms import LoginForm, PasswordField , SignupForm
 from django.contrib.auth.models import User
+from django.core import validators
 
 CITIES = (
     ('Jämsä', 'Jämsä'),
@@ -18,7 +19,7 @@ CITIES = (
 
 PAYMENT_CHOICES = (
     ('Cash', 'Käteinen'),
-    ('Invoice', 'lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)'),
+    ('Invoice', 'Lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)'),
 )
 
 x = datetime.datetime.now() + datetime.timedelta(days=3)
@@ -63,7 +64,13 @@ class CheckoutForm(forms.Form):
                                        widget=forms.RadioSelect(), choices=PAYMENT_CHOICES)
 
 
-
+    def clean_date(self):
+        date = self.cleaned_data.get('date')
+        if date:
+            return date
+        else:
+            raise forms.ValidationError("you need to enter a date")
+            
 class SelfLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

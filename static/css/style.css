@@ -3,6 +3,24 @@ body,
 header {
   height: 60vh;
   font-size:14;
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+hr{
+  z-index: -1;
+}
+.order-image{
+  position: absolute;
+  width:5%;
+  height:10%;
+  left:45%;
+  top:10%;
+  opacity:0.3;
+  z-index:-1;
+
+}
+button:focus {
+    border: none;
+    outline: none;
 }
 .page-link{
   background-color: black;
@@ -21,6 +39,25 @@ header {
 {
     animation: swingHorizontal 1s ease;
     animation-iteration-count: 1;
+}
+.deletebutton{
+  background-color: #BF900080;
+  padding: 4px 7px;
+  border-radius: 50px 0 0 50px;
+  border-right: 1px solid;
+  border-color: #BF9000;
+  outline: none;
+}
+.incrementbutton{
+  background-color: #BF900080;
+  padding: 4px 7px;
+}
+.decrementbutton{
+  background-color: #BF900080;
+  padding: 4px 7px;
+  border-radius: 0 50px 50px 0 ;
+  border-left: 1px solid;
+  border-color: #BF9000;
 }
 
 @keyframes swingHorizontal
@@ -82,15 +119,140 @@ header {
   opacity: 0.9;
 }
 
+.toggle-button-cover
+{
+    display: table-cell;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    box-sizing: border-box;
+}
 
+.button-cover
+{
+    height: 0px;
+    margin: 0px;
+    background-color: #fff;
+}
+
+.button-cover:before
+{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    color: #d7e3e3;
+    font-size: 12px;
+    line-height: 0;
+    padding: 0px;
+}
+
+.button-cover, .knobs, .layer
+{
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}
+
+.button
+{
+    position: relative;
+    top: 50%;
+    width: 74px;
+    height: 36px;
+    margin: -20px auto 0 auto;
+    overflow: hidden;
+}
+
+.button.r, .button.r .layer
+{
+    border-radius: 100px;
+}
+
+.button.b2
+{
+    border-radius: 2px;
+}
+
+.checkbox
+{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 3;
+}
+
+.knobs
+{
+    z-index: 2;
+}
+
+.layer
+{
+    width: 100%;
+    background-color: #ebf7fc;
+    transition: 0.3s ease all;
+    z-index: 1;
+}
+/* Button 1 */
+#button-1 .knobs:before
+{
+    content: 'Ei';
+    position: absolute;
+    top: 4px;
+    left: 4px;
+    width: 30px;
+    height: 30px;
+    color: white;
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 1;
+    padding: 9px 4px;
+    background-color: black;
+    border-radius: 50%;
+    transition: 0.3s cubic-bezier(0.18, 0.89, 0.35, 1.15) all;
+}
+
+#button-1 .checkbox:checked + .knobs:before
+{
+    content: 'Kyllä';
+    left: 42px;
+    background-color: #BF9000;
+    color:white;
+}
+
+#button-1 .checkbox:checked ~ .layer
+{
+    background-color: #ebf7fc;
+}
+
+#button-1 .knobs, #button-1 .knobs:before, #button-1 .layer
+{
+    transition: 0.3s ease all;
+}
+
+
+
+
+
+
+
+
+
+
+/* ------------------------------ */
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
 
-  .container_5{
-  padding: 1em 0;
-  float: left;
-  width: 50%;
+  .container-5{
+  display: none;
   }
   .par-text{
     font-family: 'Pacifico', cursive;
@@ -319,7 +481,11 @@ header {
   }
   .order-table{
     position: relative;
+    width: 95%;
     left: 0%;
+  }
+  .container_6{
+    display: none;
   }
   .table-col,
   .table-col-2{
@@ -327,11 +493,11 @@ header {
   }
   .total-price{
     position: relative;
-    left:28%;
+    left:20%;
     background: black;
     color: white;
     padding: 4px;
-    font-size: 25px;
+    font-size: 20px;
     border-radius:4px;
   }
   .snippet{
@@ -349,23 +515,23 @@ header {
     visibility: hidden;
   }
   .gluteen{
-    padding: 3px 4px;
-    background-color:#669474;
+    padding: 3px 6px;
+    background-color:black;
     font-style: italic;
     font-size: 10px;
     font-weight: bold;
-    color: white;
-    border-radius: 30%;
+    color: #BF9000;
+    border-radius: 14px;
     cursor: pointer;
   }
   .loctose{
-    padding: 3px 5px;
-    background-color: #817640;
+    padding: 3px 7px;
+    background-color: #BF9000;
     font-style: italic;
     font-size: 10px;
     font-weight: bold;
-    color:white;
-    border-radius: 30%;
+    color:Black;
+    border-radius: 14px;
     cursor: pointer;
   }
   .addinfo{
@@ -411,9 +577,8 @@ header {
 
 @media only screen and (min-width: 601px) and (max-width:991px){
   /* For tablets: */
-  .container_5{
-    display: block;
-    width: 100%;
+  .container-5{
+    display: none;
   }
   .spe-ord{
     position: absolute;
@@ -660,12 +825,11 @@ header {
     position: relative;
     width: 70%;
     top:50px;
-    left: 10%;
   }
   .snippet{
     position: relative;
-    width: 100%;
-    z-index: -1;
+    width: 90%;
+    z-index: 999;
   }
   .check-text{
     font-size: 30px;
@@ -683,23 +847,23 @@ header {
     visibility: hidden;
   }
   .gluteen{
-    padding: 3px 4px;
-    background-color:#669474;
+    padding: 3px 6px;
+    background-color:black;
     font-style: italic;
     font-size: 13px;
     font-weight: bold;
-    color: white;
-    border-radius: 30%;
+    color: #BF9000;
+    border-radius: 14px;
     cursor: pointer;
   }
   .loctose{
-    padding: 3px 5px;
-    background-color: #817640;
+    padding: 3px 7px;
+    background-color: #BF9000;
     font-style: italic;
     font-size: 13px;
     font-weight: bold;
-    color:white;
-    border-radius: 30%;
+    color:Black;
+    border-radius: 14px;
     cursor: pointer;
   }
   .addinfo{
@@ -747,15 +911,25 @@ header {
     font-family: 'Pacifico', cursive;
     color:#BF9000;
   }
-
+  .container_6{
+    display: none;
+  }
 }
 
 
 @media only screen and (min-width: 992px){
   /* For desktop: */
 
-  .container_5{
+  .container-5{
     width: 33.33333%;
+  }
+  .container_6{
+    position: relative;
+    background-color: #FAF9F6;
+    border-radius: 5px;
+    left:15px;
+    top:19%;
+    padding: 20px 10px;
   }
   .bg-white {
       background:transparent !important;
@@ -803,6 +977,7 @@ header {
   }
   .spe-ord{
     position: absolute;
+    float: right;
     font-size: 30px;
     font-weight: 900;
     color: white;
@@ -811,34 +986,73 @@ header {
     font-family: 'Lato', sans-serif;
     line-height: 0.5;
   }
+
   .par-text{
     position: relative;
     display:inline-block;
-    padding: 15px 60px;
-    bottom :40px;
     background-color: white;
-    color:#BF9000;
-    font-family: 'Pacifico', cursive;
-    font-size: 31px;
-    /* box-shadow: 0 6px 18px 	rgb(191, 144, 0), 0 6px 12px 	rgb(191, 144, 0);
-    transition: all 0.3s cubic-bezier(.25,.2,.25,1);
-    border-radius: 14px; */
+    color:black;
+    font-family: 'Great Vibes', cursive;
+    font-size: 45px;
+    font-weight: 800;
+    background-color: transparent;
+    z-index: 1;
   }
+  .cake-par-text,
+  .chess-par-text,
+  .cupcake-par-text,
+  .manakish-par-text,
+  .fatayer-par-text,
+  .salaat-par-text{
+    position: absolute;
+    display:inline-block;
+    left:39%;
+    width: 140px;
+    height: 140px;
+    padding: 0 90px;
+    top:50px;
+    border-radius: 50%;
+    z-index:0;
+  }
+  .cake-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #922B05 0%, rgba(255,255,255,1) 53%);
+  }
+  .chess-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #BF9000 0%, rgba(255,255,255,1) 53%);
+  }
+  .cupcake-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #FF0000 0%, rgba(255,255,255,1) 53%);
+  }
+  .manakish-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #BB3F3F 0%, rgba(255,255,255,1) 53%);
+  }
+  .fatayer-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #FCC006 0%, rgba(255,255,255,1) 53%);
+  }
+  .salaat-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #6B8E23 0%, rgba(255,255,255,1) 53%);
+  }
+
   .dec-text{
     position: relative;
     text-align: center;
     font-family: 'Lato', sans-serif;
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='14' ry='14' stroke='%23BF9000FF' stroke-width='7' stroke-dasharray='17' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
     border-radius: 14px;
-    margin: 8% 2%;
-    padding: 0 0 7% 0;
-    top: 20px;
+    padding: 10% 0;
+    top:20px;
   }
   .container-fluid{
         max-width: 80%;
     }
   .kissa{
     position: fixed;
+    background-color: black;
     bottom: 35px;
     right: 0px;
     align-items: center;
@@ -930,11 +1144,13 @@ header {
     color: rgb(0, 0, 0);
     text-decoration: none;
   }
+
   .prod-container-card{
     width:22%;
   }
   .check-card{
-    width:90%;
+    left:20%;
+    width:80%;
   }
   .prod-card{
     position: relative;
@@ -942,12 +1158,13 @@ header {
     width:22%;
     height:37vh;
     border-radius: 10px;
-    box-shadow: 0px 1px 5px 	#BF9000, 0px 1px 7px 	#BF9000;
+    /* box-shadow: 0px 1px 3px 	#BF9000, 0px 1px 3px 	#BF9000; */
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
   }
   .prod-card:hover{
-    transform: translateY(-0.5rem) scale(1.0125);
-	box-shadow: 0 0.5em 3rem -1rem #BF9000;
+    transform: translateY(-0.1rem) scale(1.01);
+    transition-duration: 1s;
+	  /* box-shadow: 0 0.5em 3rem -1rem #BF9000; */
   }
   .imgcard {
     position: relative;
@@ -969,8 +1186,6 @@ header {
   .card-2{
     width:100%;
     height: 60vh;
-    box-shadow: 0 3px 12px 	rgb(191, 144, 0), 0 3px 9px 	rgb(191, 144, 0);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     border-radius: 10px;
   }
 
@@ -978,13 +1193,12 @@ header {
     width: 100%;
     height: 60vh;
     object-fit: cover;
-    border-radius: 10px;
   }
   .mainimg {
     width: 100%;
     height: 30vh;
     object-fit: cover;
-    border-radius: 10px 10px 0 0 ;
+    border-radius: 4px ;
   }
   .overlay {
     position: absolute;
@@ -1081,9 +1295,8 @@ header {
   }
   .order-table{
     position: relative;
-    width: 80%;
+    width: 70%;
     top:50px;
-    left: 20%;
   }
 
   .check-text{
@@ -1093,17 +1306,13 @@ header {
   .table-col-2{
 
   }
-  .total-price{
-    position: relative;
-    left:260px;
-  }
   .order-but{
     position: relative;
     margin-left: 30px;
   }
   .snippet{
     position: fixed;
-    width: 40%;
+    width: 30%;
   }
   .check-text{
     font-size: 50px;
@@ -1113,7 +1322,7 @@ header {
   }
   .total-price{
     position: relative;
-    left:45%;
+    left:73%;
     background: black;
     color: white;
     padding: 5px;
@@ -1122,22 +1331,22 @@ header {
   }
   .gluteen{
     padding: 3px 6px;
-    background-color:#669474;
+    background-color:black;
     font-style: italic;
     font-size: 18px;
     font-weight: bold;
-    color: white;
-    border-radius: 30%;
+    color: #BF9000;
+    border-radius: 14px;
     cursor: pointer;
   }
   .loctose{
     padding: 3px 7px;
-    background-color: #817640;
+    background-color: #BF9000;
     font-style: italic;
     font-size: 18px;
     font-weight: bold;
-    color:white;
-    border-radius: 30%;
+    color:Black;
+    border-radius: 14px;
     cursor: pointer;
   }
   .addinfo{
@@ -1200,67 +1409,23 @@ header {
     color:#BF9000;
   }
 
-  /* price color */
-  /* .pricing-wrap{
-  position: relative;
-  left:90px;
-  bottom: 33px;
-  width: 100%;
-  display: block;
-  z-index: 1;
-  -webkit-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  -o-backface-visibility: hidden;
-  backface-visibility: hidden;
-  }
-.pricing-wrap span{
-  position: relative;
-  width: 100%;
-  display: block;
-  text-align: center;
-  font-family: 'Poppins', sans-serif;
-  font-weight: 700;
-  letter-spacing: 3px;
-  font-size: 16px;
-  line-height: 0.1;
-  color: #3C0008;
-  transform: translate3d(0, 0, 35px) perspective(100px);
-}
-.pricing-wrap span:before{
-  position: absolute;
-  content: '';
-  z-index: -1;
-  background: linear-gradient(217deg, #BF9000, #FFF);
+.gluteen-1{
   width: 80px;
-  height: 70px;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  box-shadow: 0 6px 20px 0 rgba(16, 39, 112,.3);
-  animation: border-transform 9s linear infinite;
+    height: 80px;
+    border: 1px solid #2c2c2c;
+    border-radius: 50%;
+    background-size: cover;
+    background-position: center center;
+    margin: 0 auto 14px;
+    background-color: #fff;
+    -webkit-transition: all .3s;
+    -o-transition: all .3s;
+    transition: all .3s;
 }
-
-@keyframes border-transform{
-  0%,100% { border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
-  14% { border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
-  28% { border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; }
-  42% { border-radius: 61% 39% 55% 45% / 61% 38% 62% 39%; }
-  56% { border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
-  70% { border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
-  84% { border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
-} */
 .prod-text{
   position: relative;
-  background-color: #BF9000;
-  padding: 5px 25px;
-  color: white;
-  right: 60px;
-  top:10%;
-  border-radius:  6px;
-  transform: translate(-50%, -50%);
+  margin: auto;
+  letter-spacing: 0.1em;
 }
 .mid-card{
   position: relative;
@@ -1279,17 +1444,13 @@ header {
 
 @import url(https://fonts.googleapis.com/css?family=Raleway);
 
-
-
-
-
 @media screen and (min-width: 900px){
-.container_5{
+.container-5{
   width: 33.33333%;
 }
 }
 
-.container_5 .title{
+.container-5 .title{
 color: #1a1a1a;
 text-align: center;
 margin-bottom: 10px;

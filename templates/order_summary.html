@@ -1,60 +1,98 @@
-{% extends "base.html" %} {% block content %}
+{% extends "base.html" %} {% block content %} {% load static %}
 {% include "navbar0.html" %}
 <main class="pt-5 pl-2">
-  <div class="order-table">
-    <div class="table text-nowrap pt-5">
-      <h2 style="background-color:black ;color:#BF9000; display: inline-block; padding:2px 15px; border-radius:5px; font-family: 'Prompt', sans-serif;">Ostoskori</h2>
+  <img class="order-image" src="{% static 'img/order.png' %}"  alt="">
+  <div class="row">
+    <div class="col-lg-2">
+      <div class="container_6">
+      {% for sample in sample %}
+        <div class="" style="border-radius:4px;">
+          <a href="{{sample.get_absolute_url}}">
+            <div class=""></div>
+            <img class="content-image" src="{{sample.image1}}"height="190">
+            <div class="">
+              <p class="d-flex justify-content-center p-2" style="font-family: 'Staatliches', cursive; text-transform: uppercase;margin:0; font-size:18px;">{{ sample.name }}</p>
+            </div>
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+
+    </div>
+  <div class="order-table col-lg-8">
+    <div class="text-nowrap pt-5">
       <br>
       <br>
       <div class="table-responsive">
-        <table class="table table-striped table-bordered table-hover w-75">
+        <table class="table">
           {% if product %}
-          <thead class="order-prod-text thead-dark">
+          <thead class="order-prod-text">
             <tr>
-              <th scope="col" class="h6">Tuote</th>
-              <th scope="col" class="h6 table-col">Hinta</th>
-              <th scope="col" class="h6 ">Määrä</th>
-              <th scope="col" class="h6" class="px-4">Kokonaishinta</th>
+              <th scope="col" class="">Tuote</th>
+              <th scope="col" class="table-col">Hinta</th>
+              <th scope="col" class=" ">Määrä</th>
+              <th scope="col" class="" class="px-4">Kokonaishinta</th>
             </tr>
           </thead>
           {% endif %}
           <tbody>
             {% for order_product in product %}
-            <tr>
-              <td class="h6">
-                <a
-                  style="color: red"
-                  href="{% url 'main:remove-from-cart' order_product.pk %}"
-                >
-                  <i class="fas fa-trash"></i>
-                </a>
-                &nbsp;&nbsp;
-                {{ order_product.product.name }}
-                &nbsp;&nbsp;
-                {% if order_product.is_gluteen_free %}
-                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Gluteeniton">
-                <span class="gluteen">G</span>
-                </span>
-                {% endif %}
-                &nbsp;
-                {% if order_product.is_loctose_free %}
-                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Laktoositon">
-                <span class="loctose">L</span>
-                </span>
-                {% endif %}
-                &nbsp;
-                {% if order_product.additional_info %}
-                <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Lisää tiedot">
-                <span class="addinfo">A</span>
-                </span>
-                {% endif %}
-                &nbsp;
+            <tr id={{order_product.id}}>
+              <td class=>
+                <div class="row">
+                  <div class="col-sm-2">
+                    <a href="{{order_product.product.get_absolute_url}}">
+                    <img src="{{order_product.product.image1}}" alt="" width="80" height="70" class="" style="border-radius:6px;">
+                    </a>
+                  </div>
+
+                  <div class="col-sm-3 ml-3" class="p-3">
+                    <span class="h3 p-3" style="font-family: 'Acme', sans-serif;">{{ order_product.product.name }}</span>
+                    <br>
+                    {% if order_product.is_gluteen_free %}
+                    <span class="m-3 text-muted" style="font-family: 'Acme', sans-serif;">Gluteeniton</span>
+                    {% endif %}
+                    &nbsp;
+                    {% if order_product.is_loctose_free %}
+                    <span class="m-1 text-muted" style="font-family: 'Acme', sans-serif;">Laktoositon</span>
+                    {% endif %}
+                    &nbsp;
+                    {% if order_product.additional_info %}
+                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Lisää tiedot">
+                    <span class="addinfo">A</span>
+                    </span>
+                    {% endif %}
+                    &nbsp;
+                  </div>
+                  <div class="col-sm-2">
+
+                  </div>
+                  <div class="col-sm-3 pt-5">
+                    <div class="">
+                      <a data-url="{{order_product.delete_url}}" class="comfirm-delete deletebutton" onclick="deleteFunc({{order_product.id}})" style="cursor:pointer">
+                        <button class="ml-1" type="button" name="button" style=" border: 0px; background-color:transparent" >
+                          <i class="fas fa-trash"></i>
+                        </button>
+                      </a>
+                      <a data-url="{{order_product.increment_url}}" class="increment incrementbutton" onclick="increment({{order_product.id}})" style="cursor:pointer">
+                        <button  type="button" name="button" style=" border: 0px; background-color:transparent" >
+                          <b>&plus;</b>
+                        </button>
+                      </a>
+                      <a data-url="{{order_product.decrement_url}}" class="decrement decrementbutton" onclick="decrement({{order_product.id}})" style="cursor:pointer">
+                        <button class="mr-1" type="button" name="button" style="border: 0px; background-color:transparent" >
+                           <b>&ndash;</b>
+                        </button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </td>
-              <td class="h6 table-col">{{ order_product.price }}&nbsp;&euro;</td>
+              <td class=" table-col" id="{{order_product.price}}">{{ order_product.price }}&nbsp;&euro;</td>
               <td class="">
-                <span class="h6 pl-3">{{ order_product.quantity }}</span> &nbsp;
+                <span class=" pl-3" id="{{ order_product.quantity }}">{{ order_product.quantity }}</span> &nbsp;
               </td>
-                <td class="pl-5 h5">
+                <td class="pl-5 " id="{{ order_product.get_final_price }}">
                   {{ order_product.get_final_price }} &nbsp;&euro;
               </td>
             </tr>
@@ -68,8 +106,8 @@
         </div>
         {% if object %}
         <hr>
-          <span  class="h5 pt-4 px-3"><b>Yhteensä</b></span>
-          <span class="badge px-3 total-price">{{ object }}&nbsp;&euro;</span>
+          <span  class=" pt-4 px-3"><b>Yhteensä</b></span>
+          <span class="badge px-3 total-price" > <span id="totalPrice">{{ object }}</span>  &nbsp;&euro;</span>
           <br>
           <hr>
         <span class="order-but">
@@ -86,7 +124,16 @@
 
         </div>
     </div>
+  </div>
+
 </main>
 <br>
+<input type="hidden" id="refresh" value="no">
 <br><br><br><br><br>
+<script>
+  $(document).ready(function(e) {
+    var $input = $('#refresh');
+    $input.val() == 'yes' ? location.reload(true) : $input.val('yes');
+  });
+</script>
 {% endblock content %}

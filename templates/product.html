@@ -2,27 +2,31 @@
 {% load static %}
 {% block content %}
 {% include "navbar0.html" %}
+<style>
 
+
+</style>
 <main class="" style="background-color:#FAF9F6">
   <br><br><br><br><br>
-  <div class="container dark-grey-text ">
+  <div class="container dark-grey-text">
+    <p class="text-muted"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp;<a href="{{ product.previous_url }}" class="text-muted"> {{product.category}}</a> &nbsp; / &nbsp; {{product.name}} </p>
+
     <div class="row">
-
       <div class="col-md-6" style="z-index:1;">
-
         <div class="card-2">
-          <img src="{{ product.image1 }}" class="prod-img"/>
+          <img src="{{ product.image1 }}" data-zoom-image="{{ product.image1 }}" class="prod-img"/>
         </div>
         <br>
-        <span class="">{% ratings product %}</span>
-
       </div>
       <div class="col-md-6 mb-4">
         <div class="p-4 bg-white">
           <br><br>
-          <span class="h4 font-weight-bold prod-text" style="font-family: 'Indie Flower', cursive;">{{product.name}} </span>
+          <span class="h4 font-weight-bold prod-text" style="font-family: 'Staatliches', cursive;">{{product.name}} </span>
           <br><br>
-          <p class="font-weight-bold pt-3" style="font-family: 'Indie Flower', cursive;">Ainesosat</p>
+          {% if product.category == 'Kakut' or product.category == 'Juustokakut' %}
+            <p class="d-flex justify-content-center" style=" text-transform: uppercase;margin-top:-10px; font-size:16px; color:gray;">alkaen &nbsp;&euro;{{ product.price }}</p>
+          {% endif %}
+          <p class="font-weight-bold pt-3" style="font-family: 'Acme', sans-serif;">AINESOSAT</p>
           <div style="font-family: 'Acme', sans-serif;background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
           <br>
           <hr>
@@ -33,76 +37,113 @@
 
       <div class="col-md-6">
         {% if product.additional_info %}
-        <p class="font-weight-bold" style="font-family: 'Indie Flower', cursive;">HUOM!!!</p>
+        <p class="font-weight-bold" style="font-family: 'Acme', sans-serif;">HUOM!!!</p>
         <div style="font-family: 'Acme', sans-serif; background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
         {% endif%}
       </div>
       <div class="col-md-6">
           <form method="POST" action="{% url 'main:product' product.slug %}">
             <div class="" style="background-color:white; padding:45px; border-radius:10px;">
-
-
             {% csrf_token %}
+
+            {% if product.category == 'Kakut' or product.category == 'Juustokakut' %}
+              <span class="float-right badge bg-dark" style="font-size: 1.3em; color:white" >
+              <span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
+            {% else %}
+              <span class="badge bg-dark float-right" style="font-size: 1.3em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
+              <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
+              <br><br>
+            {% endif %}
+            {% if product.category != 'Kakut' and product.category != 'Juustokakut' %}
+            <div class="row ">
+              <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3 pt-1">Määrä</span>
+              <input
+                class="form-control col-sm-2"
+                type="number"
+                name="amount-2"
+                value="1"
+                min="1"
+                step="1"
+                max=50
+                oninput="validity.valid||(value='');"
+                placeholder="1"
+                style="background-color:#ebf7fc"
+                >
+            </div>
+            <br>
+            {% endif %}
             {% if product.is_gluteen_free or product.is_loctose_free %}
               <div>
                   {% if product.is_gluteen_free %}
                     <span class="text-dark rounded">
-                      <input type="checkbox" id="gluteen" name="gluteen" value="5" onchange="myFunction()">
-                      <label class="swingHorizontal" for="gluteen">Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <div class="toggle-button-cover">
+                        <div class="button-cover">
+                          <div class="button r" id="button-1">
+                            <input type="checkbox" class="checkbox" id="gluteen" name="gluteen" value="5" onchange="myFunction()">
+                            <div class="knobs"></div>
+                            <div class="layer"></div>
+                          </div>
+                        </div>
+                      </div>
+                      <label class="p-2 h3" for="gluteen" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                        Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
+                      </label><br>
+
                     </span>
+
                   {% endif %}
                   {% if product.is_loctose_free %}
                     <span class="text-dark rounded">
-                      <input type="checkbox" id="laktoos" name="laktoos" value="5" onchange="myFunction()">
-                      <label class="swingHorizontal" for="laktoos">Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small></label><br>
+                      <span class="text-dark rounded">
+                        <div class="toggle-button-cover">
+                          <div class="button-cover">
+                            <div class="button r" id="button-1">
+                              <input type="checkbox" class="checkbox" id="laktoos" name="laktoos" value="5" onchange="myFunction()">
+                              <div class="knobs"></div>
+                              <div class="layer"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <label class="p-2 h3" for="laktoos" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                          Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small>
+                        </label><br>
+
                     </span>
                   {% endif %}
                   <br>
               </div>
             {% endif %}
           <div class="">
-            <br>
-            {% if product.category != 'cake' and product.category != 'cheesecake' %}
-            <span style="font-family: 'Lato', sans-serif;">Määrä</span>
-              <input class="form-control w-25" type="number" name="amount-2" value="1" min="1" step="1" max=50 oninput="validity.valid||(value='');" placeholder="1">
-            {% endif %}
-            {% if product.category == 'cake' or product.category == 'cheesecake' %}
-              <span class="float-right badge bg-dark" style="font-size: 2em; color:white" >
-              <span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
-            {% else %}
-            <br>
-              <span class="badge bg-dark" style="font-size: 2em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
-              <br>
-              <br><br>
-              <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
-            {% endif %}
-            {% if product.category == 'cake' or product.category == 'cheesecake' %}
+            {% if product.category == 'Kakut' or product.category == 'Juustokakut' %}
               {% if product.variation_set.all %}
-                <span style="font-family: 'Lato', sans-serif; position:relative; bottom:6px;">Määrä&nbsp;&nbsp;</span>
-              <select class="browser-default custom-select custom-select-sm mb-3 w-25" name="amount" id="amount" onchange="myFunction()">
-                <option value="1" selected>1</option>
-                <option value="2" >2</option>
-                <option value="3" >3</option>
-                <option value="4" >4</option>
-                <option value="5" >5</option>
-                <option value="6" >6</option>
-                <option value="7" >7</option>
-                <option value="8" >8</option>
-                <option value="9" >9</option>
-                <option value="10" >10</option>
-                <option value="20" >20</option>
-              </select>
-
-              <br>
-              <span style="font-family: 'Lato', sans-serif;">KOKO</span>
-                <select class="browser-default custom-select custom-select-sm mb-3" name="price" id="price" onchange="myFunction()">
+              <div class="row ml-2">
+                <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3">Määrä</span>
+                <select class="browser-default custom-select custom-select-sm mb-3 col-sm-2" name="amount" id="amount" onchange="myFunction()" style="background-color:#ebf7fc">
+                  <option value="1" selected>1</option>
+                  <option value="2" >2</option>
+                  <option value="3" >3</option>
+                  <option value="4" >4</option>
+                  <option value="5" >5</option>
+                  <option value="6" >6</option>
+                  <option value="7" >7</option>
+                  <option value="8" >8</option>
+                  <option value="9" >9</option>
+                  <option value="10" >10</option>
+                  <option value="20" >20</option>
+                </select>
+              </div>
+              <div class="row ml-2">
+                <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3">Koko</span>
+                <select class="browser-default custom-select custom-select-sm col-sm-3" name="price" id="price" onchange="myFunction()" style="background-color:#ebf7fc">
                   <option value="" id="disableitem" disabled selected>Valitse</option>
                   {% for item in product.variation_set.all %}
                     <option value="{{item.price}}" > {{item.size}}</option>
                   {% endfor %}
                 </select>
+              </div>
+              <br>
               {% endif %}
-              <textarea class="form-control" id="lisaa" rows="3" name="lisaa" placeholder="Lisätiedot"></textarea>
+              <textarea class="form-control" id="lisaa" rows="3" name="lisaa" placeholder="Lisätiedot (Valinnainen)"></textarea>
 
               <br>
               <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
@@ -126,16 +167,16 @@
 
     <div class="row d-flex justify-content-center wow fadeIn rounded">
       <div class="col-md-6 text-center bg-white">
-        <h4 class="my-4 h4" style="font-family: 'Indie Flower', cursive;">Ravintosisältö</h4>
-        <!-- <p style="font-family: 'Indie Flower', cursive;">{{product.additional_info}}</p> -->
+        <!-- <h4 class="my-4 h4" style="font-family: 'Acme', sans-serif;">Ravintosisältö</h4> -->
+        <!-- <p style="font-family: 'Acme', sans-serif;">{{product.additional_info}}</p> -->
       </div>
     </div>
     <hr>
     <div class="row" >
     {% for sample in sample %}
-    <div class="container_5 ">
+    <div class="container-5 ">
       <div class="content" style="border-radius:4px;">
-        <a href="{{sample.get_absolute_url}}" target="_blank">
+        <a href="{{sample.get_absolute_url}}">
           <div class="content-overlay"></div>
           <img class="content-image" src="{{sample.image1}}" width="300" height="300">
           <div class="content-details fadeIn-bottom">
@@ -151,16 +192,10 @@
   </div>
   <br>
 </main>
-<script type="text/javascript">
-  $( document ).ready(function() {
-  if (document.cookie.indexOf('visited=true') == -1){
-    $('#myModal').modal({show:true});
-    var year = 1000*60*60*24*365;
-    var expires = new Date((new Date()).valueOf() + year);
-    document.cookie = "visited=false;expires=" + expires.toUTCString();
-    }
-  });
+<script>
+  $('.prod-img').ezPlus({
+    zoomType: 'inner',
+    cursor: 'crosshair'
+});
 </script>
-
-{% include "kissa.html" %}
 {% endblock content %}

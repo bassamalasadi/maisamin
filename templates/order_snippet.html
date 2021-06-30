@@ -1,6 +1,6 @@
 
 <div class="" >
-  <p class=" h3 mt-5 py-2" style="background-color:black; color:white; display:inline-block; padding:3px 30px; border-radius:3px;"><i class="fas fa-sign text-warning"></i> &nbsp;<b>Tee tilauksesi kolme päivää ennen</b></p>
+  <p class=" h4 mt-5 py-2" style="background-color:black; color:white; display:inline-block; padding:3px 30px; border-radius:3px;"><i class="fas fa-sign text-warning"></i> &nbsp;<b>Tee tilauksesi kolme päivää ennen</b></p>
   <br><br><br>
   <h4 class="d-flex justify-content-between align-items-center mb-3">
     <span class="text-muted" style="font-family: 'Prompt', sans-serif;">Ostoskorisi</span>
@@ -13,14 +13,16 @@
         <span class="text-muted ">
           {{ order_item.quantity }}  &nbsp;
         </span>
-        <small class="text-muted "><i>{{ order_item.product}}</i></small>
+        <small class="text-muted pl-3"><i>{{ order_item.product}}</i></small>
         &nbsp;&nbsp;&nbsp;&nbsp;
         {% if order_item.is_gluteen_free %}
-        <span class="gluteen">G</span>
+        <br>
+        <span class="pl-5 text-muted" style="font-size:10px;">Gluteeniton</span>
         {% endif %}
         &nbsp;
         {% if order_item.is_loctose_free %}
-        <span class="loctose">L</span>
+        <br>
+        <span class="pl-5 text-muted" style="font-size:10px;">Laktoositon</span>
         {% endif %}
         &nbsp;
         {% if order_item.additional_info %}

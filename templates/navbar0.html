@@ -32,10 +32,10 @@
     <ul class="navbar-nav ml-auto">
       {% if user.is_authenticated %}
       {% if user|cart_item_count > 0 %}
-        <li class="nav-item navico">
+        <li class="nav-item navico" id="cart-row">
             <a href="{% url 'main:order-summary' %}"  class="text-dark" style="font-size:16px;">
               Ostoskori &nbsp;
-              <span class="badge badge-pill black px-3 py-1 " style="background-color:#BF9000;color:white;">{{ user|cart_item_count }}</span> &nbsp;
+              <span class="badge badge-pill black px-3 py-1 " style="background-color:#BF9000;color:white;" id="cart-count">{{ user|cart_item_count }}</span> &nbsp;
               <i class="fas fa-shopping-cart pl-1"></i>
             </a>
           </li>

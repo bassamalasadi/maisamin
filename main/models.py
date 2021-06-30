@@ -7,6 +7,7 @@ from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from django.contrib.auth.models import AbstractUser
 from multiselectfield import MultiSelectField
+from .choices import category
 SIZE = (
     ('6 People', '6 People'),
     ('8 People', '8 People'),
@@ -16,12 +17,12 @@ SIZE = (
 )
 
 CATEGORY = (
-    ('cake', 'cake'),
-    ('pastry', 'pastry'),
-    ('cheesecake', 'cheesecake'),
-    ('manakish', 'manakish'),
-    ('meze', 'meze'),
-    ('cupcake', 'cupcake'),
+    ('Kakut', 'Kakut'),
+    ('Fatayer', 'Fatayer'),
+    ('Juustokakut', 'Juustokakut'),
+    ('Manakish', 'Manakish'),
+    ('Alkuruoat', 'Alkuruoat'),
+    ('Kuppikakut', 'Kuppikakut'),
 )
 
 User._meta.get_field('email')._unique = True
@@ -55,6 +56,10 @@ class Product(models.Model):
 
     def __str__(self):
         return self.name
+
+    def previous_url(self):
+        _category = category[self.category]
+        return reverse(f"main:{_category}")
 
     # Get the product by it's Slug
     def get_absolute_url(self):
@@ -120,6 +125,15 @@ class OrderItem(models.Model):
     def is_ordered(self):
         if self.ordered:
             return True
+
+    def delete_url(self):
+        return reverse('main:delete_model', kwargs={'pk': self.id})
+
+    def increment_url(self):
+        return reverse('main:increment', kwargs={'pk': self.id})
+
+    def decrement_url(self):
+        return reverse('main:decrement', kwargs={'pk': self.id})
 
 
 # handle all the order data
