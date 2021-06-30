@@ -5,6 +5,9 @@ header {
   font-size:14;
   font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+hr{
+  z-index: -1;
+}
 .order-image{
   position: absolute;
   width:5%;
@@ -38,7 +41,7 @@ button:focus {
     animation-iteration-count: 1;
 }
 .deletebutton{
-  background-color: #D8DCD6;
+  background-color: #BF900080;
   padding: 4px 7px;
   border-radius: 50px 0 0 50px;
   border-right: 1px solid;
@@ -46,11 +49,11 @@ button:focus {
   outline: none;
 }
 .incrementbutton{
-  background-color: #D8DCD6;
+  background-color: #BF900080;
   padding: 4px 7px;
 }
 .decrementbutton{
-  background-color: #D8DCD6;
+  background-color: #BF900080;
   padding: 4px 7px;
   border-radius: 0 50px 50px 0 ;
   border-left: 1px solid;
@@ -983,34 +986,73 @@ button:focus {
     font-family: 'Lato', sans-serif;
     line-height: 0.5;
   }
+
   .par-text{
     position: relative;
     display:inline-block;
-    padding: 15px 60px;
-    bottom :40px;
     background-color: white;
-    color:#BF9000;
-    font-family: 'Pacifico', cursive;
-    font-size: 31px;
-    /* box-shadow: 0 6px 18px 	rgb(191, 144, 0), 0 6px 12px 	rgb(191, 144, 0);
-    transition: all 0.3s cubic-bezier(.25,.2,.25,1);
-    border-radius: 14px; */
+    color:black;
+    font-family: 'Great Vibes', cursive;
+    font-size: 45px;
+    font-weight: 800;
+    background-color: transparent;
+    z-index: 1;
   }
+  .cake-par-text,
+  .chess-par-text,
+  .cupcake-par-text,
+  .manakish-par-text,
+  .fatayer-par-text,
+  .salaat-par-text{
+    position: absolute;
+    display:inline-block;
+    left:39%;
+    width: 140px;
+    height: 140px;
+    padding: 0 90px;
+    top:50px;
+    border-radius: 50%;
+    z-index:0;
+  }
+  .cake-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #922B05 0%, rgba(255,255,255,1) 53%);
+  }
+  .chess-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #BF9000 0%, rgba(255,255,255,1) 53%);
+  }
+  .cupcake-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #FF0000 0%, rgba(255,255,255,1) 53%);
+  }
+  .manakish-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #BB3F3F 0%, rgba(255,255,255,1) 53%);
+  }
+  .fatayer-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #FCC006 0%, rgba(255,255,255,1) 53%);
+  }
+  .salaat-par-text{
+    background: rgb(191,144,0);
+    background: radial-gradient(circle, #6B8E23 0%, rgba(255,255,255,1) 53%);
+  }
+
   .dec-text{
     position: relative;
     text-align: center;
     font-family: 'Lato', sans-serif;
-    background-image: url("data:image/svg+xml,%3csvg width='100%25' height='100%25' xmlns='http://www.w3.org/2000/svg'%3e%3crect width='100%25' height='100%25' fill='none' rx='14' ry='14' stroke='%23BF9000FF' stroke-width='7' stroke-dasharray='17' stroke-dashoffset='0' stroke-linecap='round'/%3e%3c/svg%3e");
     border-radius: 14px;
-    margin: 8% 2%;
-    padding: 0 0 7% 0;
-    top: 20px;
+    padding: 10% 0;
+    top:20px;
   }
   .container-fluid{
         max-width: 80%;
     }
   .kissa{
     position: fixed;
+    background-color: black;
     bottom: 35px;
     right: 0px;
     align-items: center;
