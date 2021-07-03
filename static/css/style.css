@@ -125,7 +125,6 @@ button:focus {
     position: relative;
     width: 100px;
     height: 30px;
-    box-sizing: border-box;
 }
 
 .button-cover

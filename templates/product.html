@@ -76,18 +76,24 @@
               <div>
                   {% if product.is_gluteen_free %}
                     <span class="text-dark rounded">
-                      <div class="toggle-button-cover">
-                        <div class="button-cover">
-                          <div class="button r" id="button-1">
-                            <input type="checkbox" class="checkbox" id="gluteen" name="gluteen" value="5" onchange="myFunction()">
-                            <div class="knobs"></div>
-                            <div class="layer"></div>
+                      <div class="row">
+                        <div class="col-sm-3 pt-3">
+                          <div class="toggle-button-cover">
+                            <div class="button-cover">
+                              <div class="button r" id="button-1">
+                                <input type="checkbox" class="checkbox" id="gluteen" name="gluteen" value="5" onchange="myFunction()">
+                                <div class="knobs"></div>
+                                <div class="layer"></div>
+                              </div>
+                            </div>
                           </div>
                         </div>
+                      <div class="col-sm-7">
+                        <label class="h3" for="gluteen" style="position:relative;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                          Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
+                        </label><br>
                       </div>
-                      <span class="pl-2 h3" for="gluteen" style="position:relative;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
-                        Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
-                      </span><br>
+                  </div>
 
                     </span>
 
