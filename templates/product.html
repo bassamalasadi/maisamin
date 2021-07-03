@@ -6,7 +6,7 @@
 
 
 </style>
-<main class="" style="background-color:#FAF9F6">
+<main class="" style="background-color:white">
   <br><br><br><br><br>
   <div class="container dark-grey-text">
     <p class="text-muted"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp;<a href="{{ product.previous_url }}" class="text-muted"> {{product.category}}</a> &nbsp; / &nbsp; {{product.name}} </p>
@@ -27,7 +27,7 @@
             <p class="d-flex justify-content-center" style=" text-transform: uppercase;margin-top:-10px; font-size:16px; color:gray;">alkaen &nbsp;&euro;{{ product.price }}</p>
           {% endif %}
           <p class="font-weight-bold pt-3" style="font-family: 'Acme', sans-serif;">AINESOSAT</p>
-          <div style="font-family: 'Acme', sans-serif;background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
+          <div style="font-family: 'Acme', sans-serif;background-color:white; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
           <br>
           <hr>
         </div>
@@ -38,7 +38,7 @@
       <div class="col-md-6">
         {% if product.additional_info %}
         <p class="font-weight-bold" style="font-family: 'Acme', sans-serif;">HUOM!!!</p>
-        <div style="font-family: 'Acme', sans-serif; background-color:#FAF9F6; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
+        <div style="font-family: 'Acme', sans-serif; background-color:white; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
         {% endif%}
       </div>
       <div class="col-md-6">
@@ -85,9 +85,9 @@
                           </div>
                         </div>
                       </div>
-                      <label class="pl-2 h3" for="gluteen" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                      <span class="pl-2 h3" for="gluteen" style="position:relative;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
                         Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
-                      </label><br>
+                      </span><br>
 
                     </span>
 

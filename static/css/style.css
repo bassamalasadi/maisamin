@@ -239,7 +239,13 @@ button:focus {
 
 
 
+.footer{
+  position: absolute;
+  width: 100%;
+  background-image: url('../img/footer.svg');
+  background-color: transparent;
 
+}
 
 
 
@@ -936,7 +942,7 @@ button:focus {
       transition:0.75s ease;
   }
   .bg-white.scrolled{
-      background:#FFF !important;
+      background:#FFFFFF !important;
   }
   .item-text {
     color: white !important;

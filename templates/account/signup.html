@@ -2,7 +2,7 @@
 {% block head_title %}{% trans "Signup" %}{% endblock %} {% block content %}
 {% load static %}
 {% include "navbar0.html" %}
-      <div class="pt-5" style="background-color:#FAF9F6">
+      <div class="pt-5" style="background-color:white">
         <div class="mt-5">
           <img src="{% static 'img/logo12.jpg' %}" alt="Untitled"  class="logo2">
         </div>
@@ -10,6 +10,12 @@
         <div class="form-s">
           <h1 style="font-family: 'Pacifico', cursive;" >Rekisteröidy</h1>
           <br>
+          <div class="float-right">
+            <a href="{% url 'account_login' %}" type="button" class="" >
+            <span class="">Onko sinulla tili? Kirjaudu sisään </span> &nbsp;
+            <i class="fas fa-sign-in-alt fa-2x"  style="color:#BF9000"></i></a>
+          </div>
+          <br><br><br><br>
           <form class="signup" id="signup_form" method="POST">
             {% csrf_token %}
             {{ form|crispy }}

@@ -52,6 +52,7 @@ class Product(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2)
     slug = models.SlugField()
     image1 = models.TextField(null=True, blank=True)
+    image2 = models.TextField(null=True, blank=True)
     size = MultiSelectField(choices=SIZE, null=True, blank=True)
 
     def __str__(self):

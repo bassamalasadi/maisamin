@@ -2,9 +2,7 @@
 {% load static %}
 {% load static i18n %}
 
-<nav class="navbar fixed-top navbar-expand-lg bg-white navbar-light" style="background-color: rgb(253, 253, 253);" >
-
-
+<nav class="navbar fixed-top navbar-expand-lg bg-white navbar-light">
   <a class="logo" href="{% url 'main:home' %}">
     <img src="{% static 'img/11.png' %}" alt="Untitled" style="position: relative; width: 70%;">
   </a>
@@ -55,7 +53,7 @@
         {% endif %}
       {% else %}
           <li class="nav-item navico">
-            <a href="{% url 'account_login' %}"
+            <a href="{% url 'account_signup' %}"
             class="item-text" style="font-size:16px;"> Kirjaudu sisään </a>
           </li>
       {% endif %}

@@ -1,7 +1,10 @@
 {% extends "base.html" %} {% block content %} {% load static %}
 {% include "navbar0.html" %}
-<main class="pt-5 pl-2">
-  <img class="order-image" src="{% static 'img/order.png' %}"  alt="">
+<main class="pt-5">
+  <div class="container" style="position:relative; top:125px; right:20px;font-family: 'Aclonica', sans-serif;">
+    <h1 class="d-flex justify-content-center">MaisaminHerkku</h1>
+    <p class="d-flex justify-content-center">Maukkaat käsintehdyt herkkumme voidaan toimittaa suoraan kotiovellenne 30 km säteellä Jämsän kerkustasta.</p>
+  </div>
   <div class="row">
     <div class="col-lg-2">
       <div class="container_6">
@@ -26,7 +29,7 @@
       <div class="table-responsive">
         <table class="table">
           {% if product %}
-          <thead class="order-prod-text">
+          <thead class="order-prod-text" style="background-color:#BF9000; color:white;">
             <tr>
               <th scope="col" class="">Tuote</th>
               <th scope="col" class="table-col">Hinta</th>

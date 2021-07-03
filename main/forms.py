@@ -70,7 +70,7 @@ class CheckoutForm(forms.Form):
             return date
         else:
             raise forms.ValidationError("you need to enter a date")
-            
+
 class SelfLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -85,4 +85,3 @@ class SelfSignUpForm(SignupForm):
         self.fields["email"].label = ""
         self.fields["username"].label = ""
         self.fields["password1"].label = ""
-        self.fields["password2"].label = ""

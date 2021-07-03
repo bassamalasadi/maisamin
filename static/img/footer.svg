@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg preserveAspectRatio="none" viewBox="0 0 3500 1903" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient gradientUnits="userSpaceOnUse" x1="1750" y1="4.431" x2="1750" y2="1939" id="gradient-0">
+      <stop offset="0" style="stop-color: rgba(0, 0, 0, 1)"/>
+      <stop offset="1" style="stop-color: rgba(0, 0, 0, 1)"/>
+    </linearGradient>
+  </defs>
+  <path d="M 3500 253.079 C 3500 579.369 3500 1188.599 3500 1939 C 3079.1 1939 966.26 1939 665.902 1939 C 321.92 1939 142.908 1939 0 1939 C 0 1779.266 0 711.387 0 329.428 C 458.5 -51.915 381.039 166.145 575.48 321.388 C 675.98 401.628 1075.646 250.496 1189.646 209.488 C 1418.936 127.006 1477.044 399.903 1518.854 333.779 C 1560.664 267.654 1744.338 62.557 1974.338 62.557 C 2204.338 62.557 2286.829 391.977 2542.369 290.373 C 2682.369 234.708 2689.49 225.276 2824.5 98.401 C 2925 3.958 3218 -108.299 3500 253.079 Z" style="fill-rule: nonzero; fill: url(#gradient-0);"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" d="M 1147.56 60.8"/>
+</svg>
