@@ -2,10 +2,10 @@
 {% include "navbar0.html" %}
 <main class="pt-5">
   <div class="container" style="position:relative; top:125px; right:20px;font-family: 'Aclonica', sans-serif;">
-    <h1 class="d-flex justify-content-center">MaisaminHerkku</h1>
-    <p class="d-flex justify-content-center">Maukkaat käsintehdyt herkkumme voidaan toimittaa suoraan kotiovellenne 30 km säteellä Jämsän kerkustasta.</p>
+    <p class="d-flex justify-content-center order-summary-note">MaisaminHerkku</p>
+    <p class="d-flex justify-content-center order-summary-text">Maukkaat käsintehdyt herkkumme voidaan toimittaa suoraan kotiovellenne 30 km säteellä Jämsän kerkustasta.</p>
   </div>
-  <div class="row">
+  <div class="row pt-3 m-2 order-summary-table">
     <div class="col-lg-2">
       <div class="container_6">
       {% for sample in sample %}
@@ -43,21 +43,21 @@
             <tr id={{order_product.id}}>
               <td class=>
                 <div class="row">
-                  <div class="col-sm-2">
+                  <div class="col-sm-2 order-product-image">
                     <a href="{{order_product.product.get_absolute_url}}">
                     <img src="{{order_product.product.image1}}" alt="" width="80" height="70" class="" style="border-radius:6px;">
                     </a>
                   </div>
 
                   <div class="col-sm-3 ml-3" class="p-3">
-                    <span class="h3 p-3" style="font-family: 'Acme', sans-serif;">{{ order_product.product.name }}</span>
+                    <span class="order-summary-product-name" style="font-family: 'Acme', sans-serif;">{{ order_product.product.name }}</span>
                     <br>
                     {% if order_product.is_gluteen_free %}
-                    <span class="m-3 text-muted" style="font-family: 'Acme', sans-serif;">Gluteeniton</span>
+                    <span class="m-3 text-muted order-product-extra" style="font-family: 'Acme', sans-serif;">Gluteeniton</span>
                     {% endif %}
                     &nbsp;
                     {% if order_product.is_loctose_free %}
-                    <span class="m-1 text-muted" style="font-family: 'Acme', sans-serif;">Laktoositon</span>
+                    <span class="m-1 text-muted order-product-extra" style="font-family: 'Acme', sans-serif;">Laktoositon</span>
                     {% endif %}
                     &nbsp;
                     {% if order_product.additional_info %}
@@ -72,7 +72,7 @@
                   </div>
                   <div class="col-sm-3 pt-5">
                     <div class="">
-                      <a data-url="{{order_product.delete_url}}" class="comfirm-delete deletebutton" onclick="deleteFunc({{order_product.id}})" style="cursor:pointer">
+                      <a data-url="{{order_product.delete_url}}" class="deletebutton" onclick="deleteFunc({{order_product.id}})" style="cursor:pointer">
                         <button class="ml-1" type="button" name="button" style=" border: 0px; background-color:transparent" >
                           <i class="fas fa-trash"></i>
                         </button>
@@ -91,11 +91,11 @@
                   </div>
                 </div>
               </td>
-              <td class=" table-col" id="{{order_product.price}}">{{ order_product.price }}&nbsp;&euro;</td>
+              <td class="table-col" id="{{order_product.price}}">{{ order_product.price }}&nbsp;&euro;</td>
               <td class="">
-                <span class=" pl-3" id="{{ order_product.quantity }}">{{ order_product.quantity }}</span> &nbsp;
+                <span class="d-flex justify-content-center order-summary-product-quantity" id="{{ order_product.quantity }}">{{ order_product.quantity }}</span> &nbsp;
               </td>
-                <td class="pl-5 " id="{{ order_product.get_final_price }}">
+                <td class="d-flex justify-content-center order-summary-product-price" id="{{ order_product.get_final_price }}">
                   {{ order_product.get_final_price }} &nbsp;&euro;
               </td>
             </tr>

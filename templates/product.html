@@ -8,8 +8,8 @@
 </style>
 <main class="" style="background-color:white">
   <br><br><br><br><br>
-  <div class="container dark-grey-text">
-    <p class="text-muted"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp;<a href="{{ product.previous_url }}" class="text-muted"> {{product.category}}</a> &nbsp; / &nbsp; {{product.name}} </p>
+  <div class="container dark-grey-text" >
+    <p class="text-muted" style="font-family: cursive;"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp;<a href="{{ product.previous_url }}" class="text-muted"> {{product.category}}</a> &nbsp; / &nbsp; {{product.name}} </p>
 
     <div class="row">
       <div class="col-md-6" style="z-index:1;">
@@ -21,13 +21,17 @@
       <div class="col-md-6 mb-4">
         <div class="p-4 bg-white">
           <br><br>
-          <span class="h4 font-weight-bold prod-text" style="font-family: 'Staatliches', cursive;">{{product.name}} </span>
+          <span class="h4 font-weight-bold prod-text d-flex justify-content-center" style="font-family: 'Staatliches', cursive;">{{product.name}} </span>
           <br><br>
           {% if product.category == 'Kakut' or product.category == 'Juustokakut' %}
-            <p class="d-flex justify-content-center" style=" text-transform: uppercase;margin-top:-10px; font-size:16px; color:gray;">alkaen &nbsp;&euro;{{ product.price }}</p>
+            <p
+              class="d-flex justify-content-center"
+              style=" text-transform: uppercase;margin-top:-10px; font-size:14px; color:gray; font-family: 'Acme', sans-serif;">
+              alkaen &nbsp;&euro;&nbsp;{{ product.price }}
+            </p>
           {% endif %}
           <p class="font-weight-bold pt-3" style="font-family: 'Acme', sans-serif;">AINESOSAT</p>
-          <div style="font-family: 'Acme', sans-serif;background-color:white; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
+          <div class="text-muted" style="font-family: 'Acme', sans-serif;background-color:white; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
           <br>
           <hr>
         </div>
@@ -38,7 +42,7 @@
       <div class="col-md-6">
         {% if product.additional_info %}
         <p class="font-weight-bold" style="font-family: 'Acme', sans-serif;">HUOM!!!</p>
-        <div style="font-family: 'Acme', sans-serif; background-color:white; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
+        <div class="text-muted" style="font-family: 'Acme', sans-serif; background-color:white; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
         {% endif%}
       </div>
       <div class="col-md-6">
@@ -150,16 +154,24 @@
               <br>
               {% endif %}
               <textarea class="form-control" id="lisaa" rows="3" name="lisaa" placeholder="Lisätiedot (Valinnainen)"></textarea>
-
               <br>
-              <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" disabled id="addtocart">Lisää ostoskoriin
+              <button
+                class="btn btn-md my-0 p float-right"
+                style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;"
+                type="submit"
+                disabled id="addtocart">
+                Lisää ostoskoriin
                 <i class="fas fa-cart-plus ml-1"></i>
               </button>
             {% else %}
             <textarea class="form-control" id="lisaa-2" rows="3" name="lisaa-2" placeholder="Lisätiedot"></textarea>
-
               <br>
-              <button class="btn btn-md my-0 p float-right" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" type="submit" id="addtocart-2">Lisää ostoskoriin
+              <button
+                class="btn btn-md my-0 p float-right"
+                style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;"
+                type="submit"
+                id="addtocart-2">
+                Lisää ostoskoriin
                 <i class="fas fa-cart-plus ml-1"></i>
               </button>
             {% endif%}
@@ -168,9 +180,7 @@
           </div>
         </form>
         </div>
-
       </div>
-
     <div class="row d-flex justify-content-center wow fadeIn rounded">
       <div class="col-md-6 text-center bg-white">
         <!-- <h4 class="my-4 h4" style="font-family: 'Acme', sans-serif;">Ravintosisältö</h4> -->
@@ -186,7 +196,7 @@
           <div class="content-overlay"></div>
           <img class="content-image" src="{{sample.image1}}" width="300" height="300">
           <div class="content-details fadeIn-bottom">
-            <h3 class="content-title">{{sample.name}}</h3>
+            <h4 class="content-title text-white">{{sample.name}}</h4>
             <h5 class="content-text text-white">{{sample.price}}</h5>
           </div>
         </a>

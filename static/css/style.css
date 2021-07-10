@@ -255,7 +255,51 @@ button:focus {
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
-
+  .order-summary-note{
+    font-size: 12px;
+  }
+  .order-summary-text{
+    font-size:9px;
+    text-align: center;
+  }
+  .order-summary-product-name{
+    font-size: 9px;
+  }
+  .order-summary-table{
+    position: relative;
+    width: 90%;
+  }
+  .order-summary-product-quantity{
+    font-size: 9px;
+  }
+  .order-summary-product-price{
+    font-size: 9px;
+  }
+  .order-product-image{
+    display: none;
+  }
+  .order-product-extra{
+    font-size: 7px;
+  }
+  .deletebutton{
+    background-color: #BF900080;
+    padding: 1px 3px;
+    border-radius: 50px 0 0 50px;
+    border-right: 1px solid;
+    border-color: #BF9000;
+    outline: none;
+  }
+  .incrementbutton{
+    background-color: #BF900080;
+    padding: 1px 3px;
+  }
+  .decrementbutton{
+    background-color: #BF900080;
+    padding: 1px 3px;
+    border-radius: 0 50px 50px 0 ;
+    border-left: 1px solid;
+    border-color: #BF9000;
+  }
   .container-5{
   display: none;
   }
@@ -582,6 +626,33 @@ button:focus {
 
 @media only screen and (min-width: 601px) and (max-width:991px){
   /* For tablets: */
+  .order-summary-note{
+    font-size: 18px;
+  }
+  .order-summary-text{
+    font-size:15px;
+    text-align: center;
+  }
+  .order-summary-product-name{
+    position: relative;
+    font-size: 15px;
+  }
+  .order-summary-table{
+    position: relative;
+    width: 130%;
+  }
+  .order-summary-product-quantity{
+    font-size: 15px;
+  }
+  .order-summary-product-price{
+    font-size: 15px;
+  }
+  .order-product-image{
+    display: none;
+  }
+  .order-product-extra{
+    font-size: 12px;
+  }
   .container-5{
     display: none;
   }
@@ -924,9 +995,27 @@ button:focus {
 
 @media only screen and (min-width: 992px){
   /* For desktop: */
-
+  .order-summary-note{
+    font-size: 24px;
+  }
+  .order-summary-text{
+    font-size:18px;
+    text-align: center;
+  }
+  .order-summary-product-name{
+    font-size: 18px;
+  }
   .container-5{
     width: 33.33333%;
+  }
+  .order-summary-product-quantity{
+    font-size: 18px;
+  }
+  .order-summary-product-price{
+    font-size: 18px;
+  }
+  .order-product-extra{
+    font-size: 14px;
   }
   .container_6{
     position: relative;

@@ -7,10 +7,13 @@ $(window).scroll(function(){
 // control datepicker in checkout
 $(function () {
   let date = new Date()
+  let endDate = new Date()
   date.setDate(date.getDate() + 3)
+  endDate.setDate(endDate.getDate() + 90)
   $("#id_date").datepicker({
     format:'dd/mm/yyyy',
     startDate:date,
+    endDate:endDate,
     daysMin: ['Su', 'Ma', 'Ti', 'Ke', 'To', 'Pe', 'La'],
     monthsShort: ['tammikuu', 'helmikuu', 'maaliskuu', 'huhtikuu', 'toukokuu', 'kesäkuu', 'heinäkuu', 'elokuu', 'syyskuu', 'lokakuu', 'marraskuu', 'joulukuu'],
     autoHide:true,

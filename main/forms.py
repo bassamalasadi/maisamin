@@ -56,20 +56,13 @@ class CheckoutForm(forms.Form):
                                widget=forms.TextInput(attrs={
                                                              'placeholder': 'Valitse noutopäivä',
                                                              'start_date': x,
-                                                             'readonly':'readonly',
+                                                             'pattern':'^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$'
                                                              }),
                                                       )
     payment_option = forms.ChoiceField(required=True,
                                        label='',
                                        widget=forms.RadioSelect(), choices=PAYMENT_CHOICES)
 
-
-    def clean_date(self):
-        date = self.cleaned_data.get('date')
-        if date:
-            return date
-        else:
-            raise forms.ValidationError("you need to enter a date")
 
 class SelfLoginForm(LoginForm):
     def __init__(self, *args, **kwargs):

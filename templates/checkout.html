@@ -40,7 +40,14 @@
                 <br>
                 <label class="h5 pb-3" style="font-family: 'Acme', sans-serif;">Päivämäärä &nbsp; <i class="fas fa-calendar-day" style="color:#BF9000;"></i></label>
                 <span class="float-right h5" style="font-family: 'Acme', sans-serif;">Tee tilauksesi kolme päivää ennen</span>
-                {{ form.date | as_crispy_field  }}
+                <div class="row">
+                  <div class="col-sm-9">
+                    {{ form.date | as_crispy_field  }}
+                  </div>
+                  <div class="col-sm-3">
+                    <p class="pt-2 pl-3 text-muted" style="padding:3px; background:#EEE;" disabled>PP/KK/VVVV</p>
+                  </div>
+                </div>
                 <hr>
                 <br>
                 <h5 style="font-family: 'Acme', sans-serif;">Toimitamme &nbsp;<i class="fas fa-truck" style="color:#BF9000;"></i> &nbsp; &nbsp;<span id="delv_price"></span></h5>
