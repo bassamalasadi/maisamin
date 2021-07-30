@@ -35,10 +35,20 @@
             <div class="collapse" id="collapseExample">
               <div class="card card-body">
                 <p>Kirjoita " <span style="color:red;font-weight:bold;"> poista </span> " ja napsauta sitten Poista tilisi -painiketta &nbsp;</p>
-                <input class="form-control w-25 deleteaccount" type="text" id="deleteaccount" name="deleteaccount" value="" pattern="[a-z]{6}" validator="poista" placeholder="poista" onchange="deleteAccount()">
+                <input
+                  class="form-control w-25 deleteaccount"
+                  type="text"
+                  id="deleteaccount"
+                  name="deleteaccount"
+                  value=""
+                  pattern="[a-z]{6}"
+                  validator="poista"
+                  placeholder="poista"
+                  onchange="deleteAccount()"
+                  autocomplete="off"
+                  >
                 <br>
-
-                <button id="delete-button" class="btn text-white w-25" style="background-color:black ;'; font-family: 'Prompt', sans-serif;" name="delete"type="submit" disabled>
+                <button id="delete-button" class="btn text-white w-25" style="background-color:black ;'; font-family: 'Prompt', sans-serif;" name="delete"type="submit">
                     Poista tilisi
                 </button>
               </div>
@@ -48,16 +58,4 @@
         </div>
         <br><br>
       </div>
-      <script>
-        $(document).ready(function () {
-        $('#deleteaccount').change(function () {
-            if ($('#deleteaccount').val() === 'poista'){
-              $('#deleteaccount').fadeOut(1000)
-              $('#delete-button').removeAttr('disabled')
-            } else {
-              $('#delete-button').attr('disabled', '')
-            }
-        });
-    });
-      </script>
 {% endblock %}

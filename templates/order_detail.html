@@ -5,20 +5,22 @@
     <main class="pt-5">
         <div class="container p-5" style="position: relative; background-color: white; border-radius: 16px; ">
             <div class="row pt-5">
-                <div class="col-sm">
+                <div class="col-sm-6" style="border:0.5 solid #333; padding:51px;">
                     <div><h1><span class="badge bg-dark text-white">New Order</span></h1></div>
-                    <div><h5><span class="badge bg-dark text-white">Name  </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.name}}</h5></div>
-                    <div><h5><span class="badge bg-dark text-white">Order Date  </span> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.create}}</h5></div>
-                    <div><h5><span class="badge bg-dark text-white">Delivery Time  </span>&nbsp; {{ object.delivery}}</h5></div>
-                    <div><h5><span class="badge bg-dark text-white">Address  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {{ object.address}}</h5></div>
-                    <div><h5><span class="badge bg-dark text-white">Phone  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.phone}}</h5></div>
-                    <div><h5><span class="badge bg-dark text-white">Email  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.email}}</h5></div>
-                    <div><h5><span class="badge bg-dark text-white">Delivery  </span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ object.delivery_price}}</h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Name  </span>  <span class="float-right">{{ object.name}}</span></h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Order Date  </span>  <span class="float-right">{{ object.create}}</span></h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Delivery Time  </span> <span class="float-right"> {{ object.delivery}}</span></h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Address  </span> <span class="float-right"> {{ object.address}}</span></h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Phone  </span> <span class="float-right">{{ object.phone}}</span></h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Email  </span> <span class="float-right">{{ object.email}}</span></h5></div>
+                    <div><h5><span class="badge bg-dark text-white">Delivery  </span> <span class="float-right">{{ object.delivery_price}}</span></h5></div>
                 </div>
-                <div class="col-sm">
-                    <div><h1><span class="badge bg-danger">Order Descriptions</span></h1></div>
 
-                    {% with object.order|split:"-" as items %}
+                <div class="col-sm-6">
+                    <div><h1><span class="badge bg-danger">Order Descriptions</span></h1></div>
+                    <hr>
+
+                    <!-- {% with object.order|split:"-" as items %}
 
                     <table class="table">
                       <thead>
@@ -35,7 +37,15 @@
                         {% endfor %}
                       </tbody>
                     </table>
-                    {% endwith %}
+                    {% endwith %} -->
+                  <div class="" style="background-color:#EEE; padding:10px; border-radius:8px;">
+                    {% for order in object.get_order_detail %}
+                      <div class="h5">
+                        {{order}}
+                      </div>
+                    {% endfor %}
+                  </div>
+
                 </div>
             </div>
         </div>

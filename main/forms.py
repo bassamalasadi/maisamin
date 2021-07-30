@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 from django.core import validators
 
 CITIES = (
+    ('Kaupunki', 'Kaupunki'),
     ('Jämsä', 'Jämsä'),
     ('Jämsänkoski', 'Jämsänkoski'),
     ('Kaipola', 'Kaipola'),
@@ -18,7 +19,7 @@ CITIES = (
 )
 
 PAYMENT_CHOICES = (
-    ('Cash', 'Käteinen'),
+    ('Cash', 'Käteinen / MobilePay'),
     ('Invoice', 'Lasku  (Tilaus maksettava viimeistään 2 päivää ennen toimitusta)'),
 )
 
@@ -35,13 +36,13 @@ class CheckoutForm(forms.Form):
                                widget=forms.TextInput(attrs={'placeholder': 'Sukunimi'}))
     city = forms.ChoiceField(choices=CITIES,
                              label='')
-    street_address = forms.CharField(required=True,
+    street_address = forms.CharField(required=False,
                                      label='',
                                      widget=forms.TextInput(attrs={'placeholder': 'Osoite'}))
     apartment_address = forms.CharField(required=False,
                                         label='',
                                         widget=forms.TextInput(attrs={'placeholder': 'Huoneisto, Yksikkö jne. (valinnainen)'}))
-    postal = forms.CharField(required=True,
+    postal = forms.CharField(required=False,
                              label='',
                              widget=forms.TextInput(attrs={'placeholder': 'Postinumero'}))
     email = forms.EmailField(required=True,

@@ -1,7 +1,15 @@
 // control navbar changes
 $(window).scroll(function(){
-  $('nav').toggleClass('scrolled', $(this).scrollTop() > 200);
+  $('.main-nav').toggleClass('scrolled', $(this).scrollTop() > 200);
+  $('.sec-nav').toggleClass('scrolled', $(this).scrollTop()> 100);
   $('.item-text').toggleClass('scrolled', $(this).scrollTop() > 200);
+  if ($(this).scrollTop() > 200){
+    $('.brand-img-1').removeAttr('hidden').show(2000);
+    $('.brand-img-2').attr('hidden', '')
+  }else{
+    $('.brand-img-2').removeAttr('hidden').show(2000);
+    $('.brand-img-1').attr('hidden', '')
+  }
 });
 
 // control datepicker in checkout
@@ -56,10 +64,14 @@ function delivery_func() {
   if (x > 0){
     document.querySelector("#delv_price").innerHTML = '+ ' + x + ' Euro';
     $('#delivery-policy').removeAttr('hidden')
+    $('#delivery_address').removeAttr('disabled')
+    $('#delivery_address').removeAttr('hidden')
     $('#send-order').attr('disabled', '')
   }else{
     document.querySelector("#delv_price").innerHTML = '';
     $('#delivery-policy').attr('hidden', '')
+    $('#delivery_address').attr('hidden', '')
+    $('#delivery_address').attr('disabled', '')
     $('#send-order').removeAttr('disabled')
 
   }
@@ -82,11 +94,22 @@ function myFunction() {
   if (Number.isNaN(x) == false){
     x = x + g + l
     res = parseFloat(x * y).toFixed(2)
-    console.log(res)
+    res = res.replace('.', ',')
     document.getElementById("addtocart").removeAttribute("disabled");
+    document.getElementById("gluteen-field").removeAttribute("hidden");
+    document.getElementById("amount-field").removeAttribute("hidden");
     document.getElementById("hinta").innerHTML = res;
   }
 }
+
+// contorl delete account
+$(document).ready(function () {
+  $('#deleteaccount').change(function () {
+      if ($('#deleteaccount').val() === 'poista'){
+        $('#deleteaccount').fadeOut(1000)
+      }
+  });
+});
 
 // new update for delete, increment, and decrement buttons
 function increment(id){
@@ -142,7 +165,6 @@ function decrement(id){
         document.getElementById("cart-count").innerHTML = navCount
         if (navCount <= 0){
           $("#cart-row").fadeOut(1000)
-          // document.location.href = "https://www.maisaminherkku.fi"
         }
       }
     }
@@ -169,13 +191,11 @@ function deleteFunc(item){
 }
 function apiUrl(item){
   let endpoint = item
-  console.log(endpoint)
     $.ajax({
         method: 'GET',
         url: endpoint,
         success: function (data) {},
         error: function (error_data) {
-            console.log(error_data);
         }
     })
 }

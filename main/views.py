@@ -1,6 +1,7 @@
 import os
 import random
 from datetime import datetime, timedelta
+from dateutil.relativedelta import relativedelta
 
 from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
@@ -24,12 +25,11 @@ from rest_framework import viewsets
 from .serializers import ItemSerializer
 
 from .forms import CheckoutForm
+from . import helper
 from django.utils.formats import sanitize_separators
 from django.contrib.auth.models import User
 from .models import Product, OrderItem, Order, Request
 from .lasku0 import create_invoice
-
-from tabulate import tabulate
 
 from barcode import EAN13, Code39
 from barcode.writer import ImageWriter
@@ -48,43 +48,6 @@ class ItemView(viewsets.ModelViewSet):
     serializer_class = ItemSerializer
     queryset = Product.objects.all()
 
-
-def modify_date(value):
-    year = int(value[6:11])
-    month = int(value[3:5])
-    day = int(value[0:2])
-
-    return (year, month, day)
-
-def is_valid_form(values):
-    for field in values:
-        if field == '' or len(str(field)) < 3:
-            return False
-    return True
-
-def queryset_to_list(values):
-    new_str = ""
-    for value in values:
-        value = str(value)
-        new_str = new_str + value + ' - ' + '\n'
-    return new_str
-
-def order_list_for_email(order_item):
-    order_email =[]
-    for order in list(order_item):
-        g = "Gluteeniton" if order.is_gluteen_free else ""
-        l = "Laktoositon" if order.is_loctose_free else ""
-        add_info = order.additional_info if order.additional_info else ""
-        res = [str(order.product), g + " "+ l , add_info, order.quantity, "{:.2f}".format(order.get_total_product_price)]
-        order_email.append(res)
-    return order_email
-
-def get_total_price(items):
-    total = 0
-    for order in items:
-        total += float(order.get_final_price)
-    total = "{:.2f}".format(total)
-    return total
 
 class CheckoutView(View):
     def get(self, *args, **kwargs):
@@ -113,7 +76,7 @@ class CheckoutView(View):
         try:
             order_item = OrderItem.objects.filter(user=self.request.user, ordered=False)
             user = User.objects.get(username=self.request.user)
-            amount = get_total_price(order_item)
+            amount = helper.get_total_price(order_item)
             if float(amount) <= 0:
                 messages.warning(self.request, "Tyhjä ostoskori")
                 return redirect("main:home")
@@ -122,25 +85,27 @@ class CheckoutView(View):
                 req = request.POST
                 firstName = req.get('firstName')
                 lastName = req.get('lastName')
-                city = req.get('city')
-                street_address = req.get('street_address')
-                apartment_address = req.get('apartment_address')
-                postal = req.get('postal')
+                city = req.get('city', '')
+                city = 'Osoite ei ole käytettävissä' if city == 'Kaupunki' else city
+                street_address = req.get('street_address', '')
+                apartment_address = req.get('apartment_address', '')
+                postal = req.get('postal', '')
                 phone = req.get('phone')
                 email = req.get('email')
                 address = str(city) + ' - ' + str(street_address) + '   ' + str(apartment_address)
-                if req.get('date'):
-                    year, month, day = modify_date(req.get('date'))
-                    date_pick = datetime(year, month, day)
-                    delivery_date = date_pick - timedelta(days=2)
-                    due_date = delivery_date.strftime('%Y-%m-%d')
-                    due_date = due_date.split('-')
-                    due_date = due_date[::-1]
-                    due_date = '.'.join(due_date)
-                    date = str(date_pick)[0:10]
-                    date = date.split('-')
-                    date = date[::-1]
-                    date = '.'.join(date)
+                payment_option = req.get('payment_option')
+                date = req.get('date')
+                if date:
+                    picking_date = helper.validating_date(date)
+                    validate_date = datetime.now() + relativedelta(days=3)
+                    validate_date = validate_date.strftime("%d/%m/%Y")
+                    validate_date = helper.validating_date(validate_date)
+                    if (picking_date < validate_date):
+                        messages.warning(self.request, "date are not right")
+                        return redirect("main:checkout")
+                    delivery_date = picking_date - timedelta(days=2)
+                    due_date = helper.modify_due_date(delivery_date)
+                    date = helper.get_picking_date_in_str(picking_date)
                 else:
                     messages.warning(self.request, "Valitse noutopäivä")
                     return redirect("main:checkout")
@@ -152,18 +117,12 @@ class CheckoutView(View):
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
                         float(req.get('delivery'))
-                # vat = float(amount) * 0.24
-                # final = amount + vat
-                # final = "{:.2f}".format(final)
-                # vat = "{:.2f}".format(vat)
                 amount = "{:.2f}".format(amount)
-                deliv = 'Toimitus : ' + delivery + ' EURO' if float(delivery) > 0 else ''
+                deliv = 'Toimitus : ' + delivery + ' EURO' if float(delivery) > 0 else f''
 
-                if is_valid_form([firstName, lastName, city, street_address,
-                                  postal, phone, email,
-                                  date, pay]):
-                    order_list = queryset_to_list(list(order_item))
-                    order_email = order_list_for_email(order_item)
+                if helper.is_valid_form([firstName, lastName, phone, email, date, pay]):
+                    order_list = helper.queryset_to_list(list(order_item))
+                    order_email = helper.order_list_for_email(order_item)
                     req_order = Request.objects.create(
                         name=firstName,
                         address=address,
@@ -171,85 +130,75 @@ class CheckoutView(View):
                         email=email,
                         order=order_list,
                         create=datetime.now(),
-                        delivery=date_pick,
+                        delivery=picking_date,
                         delivery_price=delivery,
                     )
-                    if req.get('payment_option') == 'Invoice':
-                        pay = f"""<br>
-Saajan IBAN: <b> FI32 3939 0054 3954 05</b>  <br>
-Viitenumero: <b>{refrence}</b> <br>
-Yhteensä: <b>{amount} EUR </b><br>
-Eräpäivä:<b> {due_date}</b> <br>
-                        """
-                        with open(f'{firstName} {lastName}.svg', 'wb') as f:
-                            Code39(f'{refrence}', writer=ImageWriter()).write(f)
-                        create_invoice(
-                            delivery_date=due_date,
-                            user_id=user.id,
-                            lasku_id=req_order.id,
-                            fname=firstName,
-                            lname= lastName,
-                            address=address,
-                            postal=postal,
-                            email=email,
-                            store=order_email,
-                            total=amount,
-                            refrence=refrence,
-                            delivery_way=delivery,
-                            # vat=vat,
-                            # final=final
-                        )
-                     # <br>
-                     # Tilaus:
-                     # <hr>
-                     # {tabulate(order_email,headers=["Kuvaus","G&L", "Lisää tiedot","Määrä","Yhteensä"], tablefmt='html')}
+                    req_order_id = req_order.id
+                    invoice_dict = {
+                        'refrence':refrence,
+                        'amount':amount,
+                        'due_date': due_date
+                    }
 
+                    if payment_option == 'Invoice':
+                        pay = helper.get_invoice_option(**invoice_dict)
+                        pay_method = 'Lasku'
+                    else:
+                        pay = 'Maksu käteisellä tai Mobile Paylla (040 5177444) tilauksen toimituksen/noudon yhteydessä.'
+                        pay_method = 'Käteinen / MobilePay'
+                        due_date = f'{date}'
+
+                    with open(f'{firstName} {lastName}.svg', 'wb') as f:
+                        Code39(f'{refrence}', writer=ImageWriter()).write(f)
+                    # create pdf invoice
+                    create_invoice(
+                        pay_date=due_date,
+                        user_id=user.id,
+                        lasku_id=req_order_id,
+                        fname=firstName,
+                        lname= lastName,
+                        address=address,
+                        postal=postal,
+                        email=email,
+                        store=order_email,
+                        total=amount,
+                        refrence=refrence,
+                        delivery_way=delivery,
+                        pay=pay,
+                        pay_method=pay_method,
+                    )
+                    html_dict = {
+                        'req_order': req_order_id,
+                        'date': date,
+                        'address': address,
+                        'email': email,
+                        'order_email': order_email,
+                        'deliv': deliv,
+                        'amount': amount,
+                        'pay': pay,
+                    }
                     subject = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
                     text_content = f"Moi, {lastName}"
-                    html_content = f""" <h4>Kiitos, että valitsit Maisamin Herkun.</h4> <br>
-Tilauksesi numero : <b>{req_order.id}</b><br>
-Toimitetaan : <b>{date}</b> <br>
-Osoitteeseen : <b>{address}</b> <br>
-Verkkolaskutusosoite : <b>{email}</b> <br>
-
-<br>
-{deliv}
-<br>
-<b>Yhteensä: {amount} EURO</b>
-<hr>
-{pay}
-<br>
-<hr>
-<h4>HUOM!</h4> Peruutus on suoritettava vähintään kaksi vuorokautta ennen tilauksen toimituspäivää.
-Jos haluat peruuttaa tilauksesi, Lähetä viesti "Peruuta ja tilauksen numero "<b>{req_order.id}</b> "numeroon 0503367788 tai sähköpostia osoitteeseen <b>Info@maisaminherkku.fi</b>  <br>
-Kiitos
-                    """
-
+                    html_content = helper.html_response_invoice(**html_dict)
                     email_to_us = EmailMultiAlternatives(
-                        subject, text_content, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER],
+                        subject, text_content, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER, email],
                     )
                     email_to_us.attach_alternative(html_content, "text/html")
-                    if req.get('payment_option') == 'Invoice':
-                        email_to_us.attach_file(f'{firstName} {lastName}.pdf')
+                    email_to_us.attach_file(f'{firstName} {lastName}.pdf')
                     email_to_us.send(fail_silently=False)
 
-                    subject_to_user = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
-                    text_content_to_user = f"Moi, {lastName}"
-                    confirmation_email_to_user = f"""
-<h4>Kiitos, että valitsit Maisamin Herkun.</h4> <br>
-<h4>Tilauksesi käsitellään pian. Saat vahvistussähköpostin mahdollisimman pian.</h4><br>
-<img src="https://www.maisaminherkku.fi/static/img/brand2.jpg" alt="M">
-                    """
-                    email_to_user = EmailMultiAlternatives(
-                        subject_to_user, text_content_to_user, settings.EMAIL_HOST_USER, [email],
-                    )
-                    email_to_user.attach_alternative(confirmation_email_to_user, "text/html")
-                    email_to_user.send(fail_silently=False)
+                    # subject_to_user = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
+                    # text_content_to_user = f"Moi, {lastName}"
+                    # confirmation_email_to_user = helper.confirmation_email_to_user()
+                    # email_to_user = EmailMultiAlternatives(
+                    #     subject_to_user, text_content_to_user, settings.EMAIL_HOST_USER, [email],
+                    # )
+                    # email_to_user.attach_alternative(confirmation_email_to_user, "text/html")
+                    # email_to_user.send(fail_silently=False)
 
                     try:
-                        if req.get('payment_option') == 'Invoice':
-                            os.remove(f'{firstName} {lastName}.pdf')
-                            os.remove(f'{firstName} {lastName}.svg')
+                        os.remove(f'{firstName} {lastName}.pdf')
+                        os.remove(f'{firstName} {lastName}.svg')
                         OrderItem.objects.filter(user=self.request.user).delete()
                     except:
                         HttpResponseBadRequest()
@@ -386,18 +335,24 @@ class Profile(LoginRequiredMixin, View):
                         self.request, "Käyttäjän tietoja ei muutettu.")
                 return redirect("main:profile")
             if 'delete' in request.POST:
-                try:
-                    user = User.objects.get(username=self.request.user)
-                    user.delete()
-                    messages.success(self.request, "Käyttäjä on poistettu")
-                    return redirect("/")
-                except User.DoesNotExist:
-                    messages.warning(
-                        self.request, "Virhe. Anteeksi, yritä lähettää sähköpostia osoitteeseen info@maisaminherkku.com"
-                    )
-                    return redirect("main:profile")
+                delete = request.POST.get('deleteaccount')
+                if (delete == 'poista'):
+                    try:
+                        user = User.objects.get(username=self.request.user)
+                        user.delete()
+                        messages.success(self.request, "Käyttäjä on poistettu")
+                        return redirect("/")
+                    except User.DoesNotExist:
+                        messages.warning(
+                            self.request, "Virhe. Anteeksi, yritä lähettää sähköpostia osoitteeseen info@maisaminherkku.com"
+                        )
+                        return redirect("main:profile")
 
-                return render(self.request, '/')
+                    return render(self.request, '/')
+                else:
+                    messages.warning(
+                        self.request, 'Kirjoita " poista " ja napsauta sitten Poista tilisi -painiketta.')
+                    return redirect("main:profile")
 
 class ClientOrder(LoginRequiredMixin,
                   SuperUserCheck,

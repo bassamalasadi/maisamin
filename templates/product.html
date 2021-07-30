@@ -8,8 +8,9 @@
 </style>
 <main class="" style="background-color:white">
   <br><br><br><br><br>
+
   <div class="container dark-grey-text" >
-    <p class="text-muted" style="font-family: cursive;"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp;<a href="{{ product.previous_url }}" class="text-muted"> {{product.category}}</a> &nbsp; / &nbsp; {{product.name}} </p>
+    <p class="text-muted" style="font-family: 'Prompt', sans-serif;"><a href="{% url 'main:home' %}" class="text-muted">Etusivu</a> &nbsp; /  &nbsp;<a href="{{ product.previous_url }}" class="text-muted"> {{product.category}}</a> &nbsp; / &nbsp; {{product.name}} </p>
 
     <div class="row">
       <div class="col-md-6" style="z-index:1;">
@@ -30,29 +31,33 @@
               alkaen &nbsp;&euro;&nbsp;{{ product.price }}
             </p>
           {% endif %}
-          <p class="font-weight-bold pt-3" style="font-family: 'Acme', sans-serif;">AINESOSAT</p>
-          <div class="text-muted" style="font-family: 'Acme', sans-serif;background-color:white; padding:10px; border-radius:10px;">{{ product.contents|linebreaks }}</div>
-          <br>
-          <hr>
+          <p class="font-weight-bold pl-3" style="font-family: 'Acme', sans-serif;">AINESOSAT</p>
+          <div class="text-muted" style="font-family: 'Acme', sans-serif;background-color:white; padding:10px; border-radius:10px; border:0.3px solid #EEE;">{{ product.contents|linebreaks }}</div>
         </div>
       </div>
     </div>
     <div class="row">
 
       <div class="col-md-6">
+        {% ratings product 15 15 %}
+
+        <br>
+        <hr>
         {% if product.additional_info %}
-        <p class="font-weight-bold" style="font-family: 'Acme', sans-serif;">HUOM!!!</p>
-        <div class="text-muted" style="font-family: 'Acme', sans-serif; background-color:white; padding:10px; border-radius:10px;">{{ product.additional_info|linebreaks }}</div>
+        <p class="font-weight-bold pl-3" style="font-family: 'Acme', sans-serif;">HUOM!!!</p>
+        <div class="text-muted" style="font-family: 'Acme', sans-serif; background-color:white; padding:10px; border-radius:10px; border:0.3px solid #EEE">{{ product.additional_info|linebreaks }}</div>
         {% endif%}
       </div>
+
       <div class="col-md-6">
           <form method="POST" action="{% url 'main:product' product.slug %}">
             <div class="" style="background-color:white; padding:45px; border-radius:10px;">
             {% csrf_token %}
 
             {% if product.category == 'Kakut' or product.category == 'Juustokakut' %}
-              <span class="float-right badge bg-dark" style="font-size: 1.3em; color:white" >
-              <span id="hinta"style="font-family: 'Prompt', sans-serif;">Hinta</span>&nbsp;&euro;</span>
+              <span class="float-right" style="font-size: 2em; color:#BF9000" >
+              <span id="hinta"style="font-family: 'Prompt', sans-serif;">{{product.price}}</span>&nbsp;&euro;</span>
+              <br><br>
             {% else %}
               <span class="badge bg-dark float-right" style="font-size: 1.3em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
               <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
@@ -79,9 +84,10 @@
             {% if product.is_gluteen_free or product.is_loctose_free %}
               <div>
                   {% if product.is_gluteen_free %}
-                    <span class="text-dark rounded">
+                  <br>
+                    <span class="text-dark rounded" id="gluteen-field" hidden>
                       <div class="row">
-                        <div class="col-sm-3 pt-3">
+                        <div class="float-left pt-3">
                           <div class="toggle-button-cover">
                             <div class="button-cover">
                               <div class="button r" id="button-1">
@@ -92,32 +98,37 @@
                             </div>
                           </div>
                         </div>
-                      <div class="col-sm-7">
-                        <label class="h3" for="gluteen" style="position:relative;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
-                          Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
-                        </label><br>
+                        <div class="float-right">
+                          <label class="h3 ml-3 pl-3" for="gluteen" style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                            Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
+                          </label><br>
+                        </div>
+                        <div class="col-md-4">
+                        </div>
                       </div>
-                  </div>
-
                     </span>
-
                   {% endif %}
                   {% if product.is_loctose_free %}
                     <span class="text-dark rounded">
-                      <span class="text-dark rounded">
-                        <div class="toggle-button-cover">
-                          <div class="button-cover">
-                            <div class="button r" id="button-1">
-                              <input type="checkbox" class="checkbox" id="laktoos" name="laktoos" value="5" onchange="myFunction()">
-                              <div class="knobs"></div>
-                              <div class="layer"></div>
+                      <div class="row">
+                        <div class="float-left pt-3">
+                          <div class="toggle-button-cover">
+                            <div class="button-cover">
+                              <div class="button r" id="button-1">
+                                <input type="checkbox" class="checkbox" id="laktoos" name="laktoos" value="5" onchange="myFunction()">
+                                <div class="knobs"></div>
+                                <div class="layer"></div>
+                              </div>
                             </div>
                           </div>
                         </div>
-                        <label class="pl-2 h3" for="laktoos" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
-                          Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small>
-                        </label><br>
-
+                        <div class="float-right">
+                          <label class="h3 ml-3 pl-3" for="laktoos" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                            Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small>
+                          </label>
+                        </div>
+                      </div>
+                      <br>
                     </span>
                   {% endif %}
                   <br>
@@ -126,9 +137,10 @@
           <div class="">
             {% if product.category == 'Kakut' or product.category == 'Juustokakut' %}
               {% if product.variation_set.all %}
-              <div class="row ml-2">
-                <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3">Määrä</span>
-                <select class="browser-default custom-select custom-select-sm ml-3 pl-3 col-sm-2" name="amount" id="amount" onchange="myFunction()" style="background-color:#ebf7fc">
+              <div class="row ml-2" id="amount-field" hidden>
+                <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="float-left h3">Määrä</span>
+                <select class="browser-default custom-select custom-select-sm ml-3 pl-3 float-right w-25"
+                name="amount" id="amount" onchange="myFunction()" style="background-color:#ebf7fc">
                   <option value="1" selected>1</option>
                   <option value="2" >2</option>
                   <option value="3" >3</option>
@@ -138,13 +150,12 @@
                   <option value="7" >7</option>
                   <option value="8" >8</option>
                   <option value="9" >9</option>
-                  <option value="10" >10</option>
-                  <option value="20" >20</option>
                 </select>
               </div>
               <div class="row ml-2">
-                <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3">Koko</span>
-                <select class="browser-default custom-select custom-select-sm col-sm-3" name="price" id="price" onchange="myFunction()" style="background-color:#ebf7fc">
+                <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="float-left h3">Koko</span>
+                <select class="browser-default custom-select custom-select-sm ml-3 pl-3 float-right w-50"
+                        name="price" id="price" onchange="myFunction()" style="background-color:#ebf7fc">
                   <option value="" id="disableitem" disabled selected>Valitse</option>
                   {% for item in product.variation_set.all %}
                     <option value="{{item.price}}" > {{item.size}}</option>
@@ -159,7 +170,8 @@
                 class="btn btn-md my-0 p float-right"
                 style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;"
                 type="submit"
-                disabled id="addtocart">
+                id="addtocart"
+                disabled>
                 Lisää ostoskoriin
                 <i class="fas fa-cart-plus ml-1"></i>
               </button>
@@ -207,6 +219,7 @@
 
   </div>
   <br>
+{% include 'kissa.html' %}
 </main>
 <script>
   $('.prod-img').ezPlus({
@@ -214,4 +227,5 @@
     cursor: 'crosshair'
 });
 </script>
+
 {% endblock content %}

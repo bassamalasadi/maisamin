@@ -2,7 +2,7 @@
 {% include "navbar0.html" %}
 <main class="pt-5">
   <div class="container" style="position:relative; top:125px; right:20px;font-family: 'Aclonica', sans-serif;">
-    <p class="d-flex justify-content-center order-summary-note">MaisaminHerkku</p>
+    <p class="d-flex justify-content-center order-summary-note order_summary_logo"><img src="{% static 'img/order-summary-logo.png' %}" alt="" width="150" height="150"></p>
     <p class="d-flex justify-content-center order-summary-text">Maukkaat käsintehdyt herkkumme voidaan toimittaa suoraan kotiovellenne 30 km säteellä Jämsän kerkustasta.</p>
   </div>
   <div class="row pt-3 m-2 order-summary-table">
@@ -27,25 +27,25 @@
       <br>
       <br>
       <div class="table-responsive">
-        <table class="table">
+        <table class="table"style="broder-radius:20px;">
           {% if product %}
-          <thead class="order-prod-text" style="background-color:#BF9000; color:white;">
-            <tr>
+          <thead class="order-prod-text">
+            <tr style="background-color:#BF900090; color:white;">
               <th scope="col" class="">Tuote</th>
               <th scope="col" class="table-col">Hinta</th>
               <th scope="col" class=" ">Määrä</th>
-              <th scope="col" class="" class="px-4">Kokonaishinta</th>
+              <th scope="col" class="">Kokonaishinta</th>
             </tr>
           </thead>
           {% endif %}
           <tbody>
             {% for order_product in product %}
-            <tr id={{order_product.id}}>
+            <tr id={{order_product.id}} bgcolor="#FFE">
               <td class=>
                 <div class="row">
                   <div class="col-sm-2 order-product-image">
                     <a href="{{order_product.product.get_absolute_url}}">
-                    <img src="{{order_product.product.image1}}" alt="" width="80" height="70" class="" style="border-radius:6px;">
+                    <img src="{{order_product.product.image1}}" alt="" width="100" height="90" class="" style="border-radius:6px;">
                     </a>
                   </div>
 
@@ -61,7 +61,7 @@
                     {% endif %}
                     &nbsp;
                     {% if order_product.additional_info %}
-                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="Lisää tiedot">
+                    <span class="d-inline-block" data-placement="top" data-trigger="hover" data-toggle="popover" data-content="{{order_product.additional_info}}">
                     <span class="addinfo">A</span>
                     </span>
                     {% endif %}
@@ -91,7 +91,7 @@
                   </div>
                 </div>
               </td>
-              <td class="table-col" id="{{order_product.price}}">{{ order_product.price }}&nbsp;&euro;</td>
+              <td class="table-col" id="{{order_product.price}}">{{ order_product.get_price }}&nbsp;&euro;</td>
               <td class="">
                 <span class="d-flex justify-content-center order-summary-product-quantity" id="{{ order_product.quantity }}">{{ order_product.quantity }}</span> &nbsp;
               </td>
@@ -114,12 +114,12 @@
           <br>
           <hr>
         <span class="order-but">
-          <a class="btn mt-3" style="background-color:black ;color:#BF9000; font-family: 'Prompt', sans-serif;" href="/"
+          <a class="btn mt-3" style="background-color:#000000 ;color:white; font-family: 'Prompt', sans-serif;" href="/"
             >Jatka ostoksia</a
           >
         </span>
         <span class="order-but">
-          <a class="btn mt-3 order-but pulseBtn" style="background-color:#BF9000 ;color:black; font-family: 'Prompt', sans-serif;" href="/checkout/"
+          <a class="btn mt-3 order-but pulseBtn" style="background-color:#BF9000 ;color:white; font-family: 'Prompt', sans-serif;" href="/checkout/"
             >Maksamaan</a
           >
         </span>
@@ -131,12 +131,5 @@
 
 </main>
 <br>
-<input type="hidden" id="refresh" value="no">
 <br><br><br><br><br>
-<script>
-  $(document).ready(function(e) {
-    var $input = $('#refresh');
-    $input.val() == 'yes' ? location.reload(true) : $input.val('yes');
-  });
-</script>
 {% endblock content %}

@@ -43,7 +43,14 @@ Asessorintie 2 as 11 \n
 42100 Jämsä\n
 \n
     """
-
+    TEXT5_5 = """
+\n
+Maksu käteisellä tai Mobile Paylla  \n
+\n
+(040 5177444) tilauksen toimituksen/noudon\n
+\n
+yhteydessä.
+    """
     TEXT6 = """
 \n
 \n
@@ -92,7 +99,7 @@ FÖrfallodag \n
 
     def __init__(self, *args, **kwargs):
         self.date = date.today()
-        self.delivery_date = kwargs.get('delivery_date', 'Error')
+        self.pay_date = kwargs.get('pay_date', 'Error')
         self.user_id = kwargs.get('user_id', 'Error')
         self.lasku_id = kwargs.get('lasku_id', 'Error')
         self.fname = kwargs.get('fname', 'Error')
@@ -106,11 +113,15 @@ FÖrfallodag \n
         self.vat = kwargs.get('vat', 'Error')
         self.final = kwargs.get('final', 'Error')
         self.refrence = kwargs.get('refrence', 'Error')
+        self.pay = kwargs.get('pay', 'Error')
+        self.pay_method = kwargs.get('pay_method', 'Error')
+        if self.pay_method == 'Lasku':
+            TEXT5_5 = ''
         super().__init__()
 
 
     def header(self):
-        self.image('static/img/logo2.jpg', 10, 8, 25)
+        self.image('static/img/brand_logo.JPG', 10, 8, 25)
         self.set_font('courier', 'B', 20)
         self.cell(0, 10, 'Maisamin Herkku', border=False, ln=1, align='C')
         self.image(f'{self.fname} {self.lname}.svg', 150, 72, 45)
@@ -133,7 +144,7 @@ FÖrfallodag \n
         date = f"""
 \n
 \n
-{self.delivery_date} \n
+{self.pay_date} \n
 \n
         """
         price = f"""
@@ -193,7 +204,7 @@ EUR\n
         self.set_x(110)
         top = self.y
         offset = self.x + 40
-        self.multi_cell(95, 1, self.TEXT6, '', 'l', ln=1)
+        self.multi_cell(95, 1, self.TEXT5_5, '', 'l', ln=1)
         self.y = top
         self.x = offset
         # #############
@@ -301,10 +312,12 @@ EUR\n
 
 
 def create_invoice(**kwargs):
+
     date_of_invoic = date.today()
     date_of_invoic = str(date_of_invoic).split('-')
     date_of_invoic = date_of_invoic[::-1]
     date_of_invoic = '.'.join(date_of_invoic)
+
     pdf = GenerateInvoice('P', 'mm', 'Letter', **kwargs)
     pdf.add_page()
 
@@ -314,7 +327,7 @@ def create_invoice(**kwargs):
     pdf.cell(0, 3, 'Asessorintie 2 as 11', ln=1)
     pdf.cell(0, 3, '42100 Jämsä', ln=1)
     pdf.cell(0, 3, 'maisaminherkku.fi', ln=1)
-    pdf.cell(0, 3, 'info@maisamin.com', ln=1)
+    pdf.cell(0, 3, 'info@maisamin.fi', ln=1)
     pdf.cell(0, 3, '0503367788', ln=1)
     pdf.ln()
 
@@ -325,8 +338,8 @@ def create_invoice(**kwargs):
     pdf.cell(0,5, f'Asiakasnumero                    {pdf.user_id}', ln=1)
     pdf.cell(0,5, f'Laskunumero                      {pdf.lasku_id}', ln=1)
     pdf.cell(0, 5, f'Laskunpäivämäärä                 {date_of_invoic}', ln=1)
-    pdf.cell(0, 5, f'Maksutapa                        Lasku', ln=1)
-    pdf.cell(0, 5, f'Eräpäivä                         {pdf.delivery_date}', ln=1)
+    pdf.cell(0, 5, f'Maksutapa                        {pdf.pay_method}', ln=1)
+    pdf.cell(0, 5, f'Eräpäivä                         {pdf.pay_date}', ln=1)
     pdf.ln()
 
     # payer
@@ -348,7 +361,7 @@ def create_invoice(**kwargs):
     pdf.set_fill_color(250, 250, 250)
     pdf.set_font('courier', 'B', 10)
     pdf.cell(75, 7, 'TUOTE', border=1, fill=1)
-    pdf.cell(50, 7 , 'G&L', border=1, fill=1)
+    pdf.cell(50, 7 , 'Gluteeniton', border=1, fill=1)
     pdf.cell(15, 7, ' KPL', border=1, fill=1)
     pdf.cell(30, 7, ' Yhteensä', border=1, ln=1, align='C', fill=1)
     pdf.set_font('courier', '', 9)

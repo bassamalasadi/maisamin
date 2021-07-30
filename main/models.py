@@ -99,8 +99,19 @@ class OrderItem(models.Model):
     additional_info = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.product.name} : qunatity = ({self.quantity}) : price = ({self.price}) : is_G = ({self.is_gluteen_free}) : is_L = ({self.is_loctose_free}) : add_info=({self.additional_info})"
+        return f"{self.product.name} {self.quantity} {self.price} Gluteen={self.is_gluteen_free} Loctose={self.is_loctose_free} {self.additional_info}"
 
+    @property
+    def get_product(self):
+        return self.product.name
+
+    @property
+    def get_quantity(self):
+        return self.quantity
+
+    @property
+    def get_price(self):
+        return str(self.price).replace(',', '.')
     # to calculate the sum of the price for a specified quantity for a single product
     @property
     def get_total_product_price(self):
@@ -112,16 +123,8 @@ class OrderItem(models.Model):
         return "{:.2f}".format(self.get_total_product_price)
 
     @property
-    def get_product(self):
-        return self.product.name
-
-    @property
-    def get_quantity(self):
-        return self.quantity
-
-    @property
     def get_item_detail(self):
-        return [self.get_product, self.get_quantity, self.get_total_product_price, self.is_gluteen_free, self.is_loctose_free]
+        return [self.get_product, self.get_quantity, self.get_total_product_price, self.is_gluteen_free, self.is_loctose_free, self.additional_info]
 
     def is_ordered(self):
         if self.ordered:
@@ -201,6 +204,11 @@ class Request(models.Model):
 
     def __str__(self):
         return str(self.create)
+
+    @property
+    def get_order_detail(self):
+
+        return self.order.split()
 
     def get_absolute_url(self):
         return reverse("main:order-detail", kwargs={'pk': self.pk})

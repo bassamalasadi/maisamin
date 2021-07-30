@@ -8,6 +8,14 @@ header {
 hr{
   z-index: -1;
 }
+.brand_logo{
+  position: absolute;
+  right:25%;
+  width: 50%;
+  opacity: 0.1;
+  z-index: -1;
+
+}
 .order-image{
   position: absolute;
   width:5%;
@@ -248,9 +256,6 @@ button:focus {
 
 
 
-
-
-
 /* ------------------------------ */
 @media only screen and (max-width: 600px){
 
@@ -323,14 +328,16 @@ button:focus {
   }
   .kissa{
     position: fixed;
-    bottom: 35px;
-    left: 76%;
-    right: 4%;
-    padding: 17px 18px;
+    bottom: 45px;
+    right: 0px;
     align-items: center;
     justify-content: space-between;
     z-index: 2;
+    cursor: pointer;
+    background-color: white;
+    border-radius: 50%;
   }
+
   .maintext {
     position: absolute;
     font-size: 5vw;
@@ -559,6 +566,10 @@ button:focus {
   }
   .order-prod-text{
     font-size: 10px;
+    background-color:#BF900090;
+    border:0.5 solid #333;
+    color:white;
+    border-radius:20px;
   }
   .gl{
     visibility: hidden;
@@ -596,14 +607,14 @@ button:focus {
   .alert{
    position: absolute;
    z-index: 999;
-   top: 14%;
-   font-size: 16px;
-   color:#BF9000;
-   background-color: black;
-   border-color:#BF9000;
-   border:solid;
-   padding:30px;
-   opacity:0.9
+   top: 20%;
+   font-size: 12px;
+   font-family: 'Prompt', sans-serif;
+   color:#333;
+   background-color: #EEE;
+   border-color:#BF900050;
+   border:0.5 solid;
+   padding:10px 20px;
   }
   .par-1{
     position:relative;
@@ -672,13 +683,13 @@ button:focus {
   }
   .kissa{
     position: fixed;
-    bottom: 15%;
-    left: 84%;
-    right: 6%;
-    padding: 17px 20px;
+    bottom: 45px;
+    right: 0px;
     align-items: center;
     justify-content: space-between;
     z-index: 2;
+    background-color: white;
+    border-radius: 50%;
   }
   .maintext {
     position: absolute;
@@ -953,17 +964,18 @@ button:focus {
     cursor: pointer;
   }
   .alert{
-   position: absolute;
+   position: relative;
    z-index: 999;
-   font-size: 18;
+   font-size: 14px;
    float: right;
+   font-family: 'Prompt', sans-serif;
    top: 20%;
-   color:#BF9000;
-   background-color: black;
-   border-color:#BF9000;
-   border:solid;
-   padding:30px;
-   opacity:0.9;
+   color:#333;
+   background-color: #EEE;
+   border-color:#BF900050;
+   border:0.5 solid;
+   padding:10px;
+   margin: 10px;
   }
   .par-1{
     position:relative;
@@ -1092,6 +1104,7 @@ button:focus {
     background-color: transparent;
     z-index: 1;
   }
+
   .cake-par-text,
   .chess-par-text,
   .cupcake-par-text,
@@ -1146,17 +1159,18 @@ button:focus {
     }
   .kissa{
     position: fixed;
-    background-color: black;
     bottom: 35px;
     right: 0px;
     align-items: center;
     justify-content: space-between;
     z-index: 2;
     cursor: pointer;
-    animation: border-transform 9s linear infinite;
+    background-color: white;
+    border-radius: 50%;
+    /* animation: border-transform 9s linear infinite; */
   }
 
-  @keyframes border-transform{
+  /* @keyframes border-transform{
     0%,100% { background-color: #EDF1F2;border-radius: 63% 37% 54% 46% / 55% 48% 52% 45%; }
     14% { background-color: #BF9000;border-radius: 40% 60% 54% 46% / 49% 60% 40% 51%; }
     28% { background-color: #EDF1F2;border-radius: 54% 46% 38% 62% / 49% 70% 30% 51%; }
@@ -1164,7 +1178,7 @@ button:focus {
     56% { background-color: #EDF1F2;border-radius: 61% 39% 67% 33% / 70% 50% 50% 30%; }
     70% { background-color: #BF9000;border-radius: 50% 50% 34% 66% / 56% 68% 32% 44%; }
     84% { background-color: #EDF1F2;border-radius: 46% 54% 50% 50% / 35% 61% 39% 65%; }
-  }
+  } */
 
   .maintext {
     position: absolute;
@@ -1456,15 +1470,16 @@ button:focus {
   .alert{
    position: relative;
    z-index: 999;
-   font-size: 22px;
+   font-size: 18px;
    float: right;
+   font-family: 'Prompt', sans-serif;
    top: 20%;
-   color:#BF9000;
-   background-color: black;
-   border-color:#BF9000;
-   border:solid;
-   padding:30px;
-   opacity:0.9;
+   color:#333;
+   background-color: #EEE;
+   border-color: #BF900050;
+   border:0.5 solid;
+   padding:10px 20px;
+   margin: 10px;
   }
   .cart{
     position: absolute;

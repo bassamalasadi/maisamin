@@ -62,17 +62,37 @@
         </div>
     {% endblock %}
     {% block rating_detail %}
-    <!-- {% block rating_average %}
-    <div class="star-ratings-rating-average">{% trans 'Average: ' %} <span class='star-ratings-rating-value'>{{ rating.average|floatformat:"-2" }}</span></div>
+
+    {% block rating_average %}
+    <div class="star-ratings-rating-average p-1" style="font-size:13px; font-family: 'Prompt', sans-serif;">
+      {% trans 'Keskiverto: ' %}
+      <span class='star-ratings-rating-value'>
+        <span class="ml-5 badge bg-dark text-white">{{ rating.average|floatformat:"-2" }}</span>
+      </span>
+    </div>
     {% endblock rating_average %}
+
     {% block rating_count %}
-    <div class="star-ratings-rating-count">{% trans 'Rating Count: ' %} <span class='star-ratings-rating-value'>{{ rating.count }}</span></div>
-    {% endblock rating_count %} -->
-    <!-- {% block rating_user %}
-    <div class="star-ratings-rating-user">{% trans 'You Rated: ' %} <span class='star-ratings-rating-value'>{% if user_rating %}{{ user_rating.score }}{% else %}{% trans 'Not rated' %}{% endif %}</span></div> -->
-    <!-- {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
-        <p>{% trans 'Please log in to rate.' %}</p>
-    {% endif %} -->
+    <div class="star-ratings-rating-count p-1 " style="font-size:13px; font-family: 'Prompt', sans-serif;">
+      {% trans 'Luokituksen määrä: ' %}
+      <span class='star-ratings-rating-value'>
+        <span class="ml-2 badge bg-dark text-white">{{ rating.count }}</span>
+      </span>
+    </div>
+    {% endblock rating_count %}
+
+    {% block rating_user %}
+    <div class="star-ratings-rating-user p-1" style="font-size:13px; font-family: 'Prompt', sans-serif;">
+      {% trans 'Annoit arvion: ' %}
+      <span class='star-ratings-rating-value'>
+        {% if user_rating %}
+          &nbsp;&nbsp;<span class="ml-4 badge bg-dark text-white">{{ user_rating.score }}</span>
+        {% else %}
+          &nbsp;&nbsp;<span class="ml-4 badge bg-dark text-white">{% trans 'Ei arvioitu' %}</span>
+        {% endif %}</span></div>
+    {% if not user.is_authenticated and not anonymous_ratings and not read_only %}
+    <span class="d-flex justify-content-center badge bg-dark text-white">{% trans 'Kirjaudu sisään arvioidaksesi.' %}</span>
+    {% endif %}
     {% endblock rating_user %}
     <div class="star-ratings-errors"></div>
     {% endblock rating_detail %}
