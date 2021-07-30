@@ -99,7 +99,7 @@ class OrderItem(models.Model):
     additional_info = models.TextField(null=True, blank=True)
 
     def __str__(self):
-        return f"{self.product.name} {self.quantity} {self.price} Gluteen={self.is_gluteen_free} Loctose={self.is_loctose_free} {self.additional_info}"
+        return f"{self.product.name},{self.quantity},{self.price},Gluteen={self.is_gluteen_free},{self.additional_info}"
 
     @property
     def get_product(self):
@@ -208,7 +208,7 @@ class Request(models.Model):
     @property
     def get_order_detail(self):
 
-        return self.order.split()
+        return self.order.split(',')
 
     def get_absolute_url(self):
         return reverse("main:order-detail", kwargs={'pk': self.pk})
