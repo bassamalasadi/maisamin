@@ -59,15 +59,17 @@
               <span id="hinta"style="font-family: 'Prompt', sans-serif;">{{product.price}}</span>&nbsp;&euro;</span>
               <br><br>
             {% else %}
-              <span class="badge bg-dark float-right" style="font-size: 1.3em; color:white"><label>{{ product.price }}</label>&nbsp;&euro;</span>
+              <span class="float-right" style="font-size: 2em; color:#BF9000" >
+              <span id="hinta"style="font-family: 'Prompt', sans-serif;">{{product.price}}</span>&nbsp;&euro;</span>
               <input id="hinta-2" name="hinta-2" value="{{ product.price }}" hidden></input>
               <br><br>
             {% endif %}
             {% if product.category != 'Kakut' and product.category != 'Juustokakut' %}
             <div class="row ">
-              <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;" class="col-sm-2 h3 pt-1">Määrä</span>
+              <span style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;"
+              class="h3 pt-1 float-left">Määrä</span>&nbsp;&nbsp;
               <input
-                class="form-control col-sm-2"
+                class="form-control w-25 float-right"
                 type="number"
                 name="amount-2"
                 value="1"
@@ -99,7 +101,7 @@
                           </div>
                         </div>
                         <div class="float-right">
-                          <label class="h3 ml-3 pl-3" for="gluteen" style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                          <label class="h4 ml-3 pl-3" for="gluteen" style="font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
                             Gluteeniton &nbsp;<small class="text-muted ">(+5.00€)</small>
                           </label><br>
                         </div>
@@ -123,7 +125,7 @@
                           </div>
                         </div>
                         <div class="float-right">
-                          <label class="h3 ml-3 pl-3" for="laktoos" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
+                          <label class="h4 ml-3 pl-3" for="laktoos" style="position:relative;top:4px;font-family: 'Jomhuria', cursive; letter-spacing: 0.03em;">
                             Laktoositon &nbsp;<small class="text-muted ">(+5.00€)</small>
                           </label>
                         </div>
