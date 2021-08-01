@@ -1,17 +1,29 @@
 // control navbar changes
 $(window).scroll(function(){
-  $('.main-nav').toggleClass('scrolled', $(this).scrollTop() > 200);
-  $('.sec-nav').toggleClass('scrolled', $(this).scrollTop()> 100);
-  $('.item-text').toggleClass('scrolled', $(this).scrollTop() > 200);
-  if ($(this).scrollTop() > 200){
-    $('.brand-img-1').removeAttr('hidden').show(2000);
-    $('.brand-img-2').attr('hidden', '')
-  }else{
-    $('.brand-img-2').removeAttr('hidden').show(2000);
-    $('.brand-img-1').attr('hidden', '')
+  if ($(this).width() > 960){
+    $('.main-nav').toggleClass('scrolled', $(this).scrollTop() > 200);
+    $('.sec-nav').toggleClass('scrolled', $(this).scrollTop()> 100);
+    $('.item-text').toggleClass('scrolled', $(this).scrollTop() > 200);
+    if ($(this).scrollTop() > 200){
+      $('.brand-img-1').removeAttr('hidden').show(2000);
+      $('.brand-img-2').attr('hidden', '')
+    }else{
+      $('.brand-img-2').removeAttr('hidden').show(2000);
+      $('.brand-img-1').attr('hidden', '')
+    }
   }
 });
 
+setTimeout(
+    function(){
+      if (window.innerWidth < 906 ){
+        if(document.getElementById('brand-img-1') && document.getElementById('brand-img-2')){
+          document.getElementById('brand-img-1').removeAttribute("hidden")
+          document.getElementById('brand-img-2').setAttribute("hidden", "")
+        }
+      }
+    }, 300
+)
 // control datepicker in checkout
 $(function () {
   let date = new Date()

@@ -260,6 +260,15 @@ button:focus {
 @media only screen and (max-width: 600px){
 
   /* For mobile phones: */
+  .logo{
+    position: relative;
+    width: 20%;
+  }
+  .brand-img-1,
+  .brand-img-2{
+    position: relative;
+    width:100%
+  }
   .order-summary-note{
     font-size: 12px;
   }
@@ -637,6 +646,15 @@ button:focus {
 
 @media only screen and (min-width: 601px) and (max-width:991px){
   /* For tablets: */
+  .logo{
+    position: relative;
+    width: 13%;
+  }
+  .brand-img-1,
+  .brand-img-2{
+    position: relative;
+    width:100%
+  }
   .order-summary-note{
     font-size: 18px;
   }
@@ -1005,8 +1023,18 @@ button:focus {
 }
 
 
-@media only screen and (min-width: 992px){
+@media only screen and (min-width: 960px){
   /* For desktop: */
+  .logo{
+    position: relative;
+    width: 10%;
+    padding-right: 5%;
+  }
+  .brand-img-1,
+  .brand-img-2{
+    position: relative;
+    width:100%;
+  }
   .order-summary-note{
     font-size: 24px;
   }
