@@ -410,18 +410,20 @@ class ItemDetailView(View):
                 price = str(float(price) + 5.00)
             if laktoos:
                 price = str(float(price) + 5.00)
-            product = get_object_or_404(Product, slug=slug)
 
+            product = get_object_or_404(Product, slug=slug)
             try:
                 order_qs = OrderItem.objects.get(
                     user=self.request.user,
                     ordered=False,
+                    product=product,
                     price=price,
                     is_gluteen_free=isinstance(gluteen ,str),
                     is_loctose_free=isinstance(laktoos ,str),
-                    additional_info=add_info
+                    additional_info=add_info,
                     )
                 order_qs.quantity += int(amount)
+
                 if gluteen:
                     order_qs.is_gluteen_free = True
                 if laktoos:
