@@ -160,7 +160,7 @@
                         name="price" id="price" onchange="myFunction()" style="background-color:#ebf7fc">
                   <option value="" id="disableitem" disabled selected>Valitse</option>
                   {% for item in product.variation_set.all %}
-                    <option value="{{item.price}}" > {{item.size}}</option>
+                    <option value="{{item.price}}" id="itemprice"> {{item.size}}</option>
                   {% endfor %}
                 </select>
               </div>
