@@ -14,7 +14,6 @@ urlpatterns = [
          name="password_reset"),
     path('', include('main.urls', namespace='main')),
     path('ratings/', include('star_ratings.urls', namespace='ratings')),
-    url(r'^\.well-known/', include('letsencrypt.urls'))
 ]
 
 if settings.DEBUG:
