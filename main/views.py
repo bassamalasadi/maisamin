@@ -390,7 +390,6 @@ class ItemDetailView(View):
             return redirect("main:home")
 
     def post(self, request, slug):
-        print("###############", request.POST.all())
         add_info = ""
         if request.user.is_anonymous:
             return redirect('account_login')
