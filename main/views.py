@@ -113,7 +113,8 @@ class CheckoutView(View):
                 delivery = req.get('delivery')
                 refrence = str(datetime.timestamp(
                     datetime.now())).replace(".", "")
-
+                refrence = refrence[1:]
+                print(refrence)
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
                         float(req.get('delivery'))
