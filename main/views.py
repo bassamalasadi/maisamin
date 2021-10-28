@@ -3,7 +3,6 @@ import random
 from datetime import datetime, timedelta
 from dateutil.relativedelta import relativedelta
 
-from django.core.mail import send_mail, EmailMessage
 from django.conf import settings
 
 from django.contrib.auth.mixins import UserPassesTestMixin
@@ -114,12 +113,10 @@ class CheckoutView(View):
                     return redirect("main:checkout")
 
                 delivery = req.get('delivery')
-                # refrence = str(datetime.timestamp(
-                #     datetime.now())).replace(".", "")
-                # refrence = refrence[10:]
                 refrence = str(REFRENCE_LIST[0])
                 print(refrence)
                 REFRENCE_LIST.pop(0)
+                helper.send_email_if_reference_number_list_empty(REFRENCE_LIST, settings.EMAIL_HOST_USER, "bassamalasadi@gmail.com")
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
                         float(req.get('delivery'))
@@ -192,15 +189,6 @@ class CheckoutView(View):
                     email_to_us.attach_alternative(html_content, "text/html")
                     email_to_us.attach_file(f'{firstName} {lastName}.pdf')
                     email_to_us.send(fail_silently=False)
-
-                    # subject_to_user = f'Tervetuloa {firstName} {lastName} Maisamin Herkkuun'
-                    # text_content_to_user = f"Moi, {lastName}"
-                    # confirmation_email_to_user = helper.confirmation_email_to_user()
-                    # email_to_user = EmailMultiAlternatives(
-                    #     subject_to_user, text_content_to_user, settings.EMAIL_HOST_USER, [email],
-                    # )
-                    # email_to_user.attach_alternative(confirmation_email_to_user, "text/html")
-                    # email_to_user.send(fail_silently=False)
 
                     try:
                         os.remove(f'{firstName} {lastName}.pdf')

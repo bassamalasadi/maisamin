@@ -1,5 +1,16 @@
 from datetime import datetime, timedelta
 from tabulate import tabulate
+from django.core.mail import EmailMultiAlternatives
+
+def send_email_if_reference_number_list_empty(value, sender, receiver ):
+    if (len(value) <= 5):
+         subject = f'Warning Maisamin Herkkuun'
+         text_content = "Change refrence number"
+         email_to_bassam = EmailMultiAlternatives(
+             subject, text_content, sender, [receiver,],
+         )
+         email_to_bassam.send(fail_silently=False)
+
 def is_valid_form(values):
     for field in values:
         if field == '' or len(str(field)) < 3:
