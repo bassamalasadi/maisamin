@@ -18,6 +18,7 @@ SIZE = (
 )
 
 CATEGORY = (
+    ('NoCategory', 'NoCategory'),
     ('Kakut', 'Kakut'),
     ('Fatayer', 'Fatayer'),
     ('Juustokakut', 'Juustokakut'),
