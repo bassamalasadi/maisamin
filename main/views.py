@@ -39,6 +39,9 @@ from allauth.account.adapter import DefaultAccountAdapter
 
 from django.core.mail import EmailMultiAlternatives
 
+from .choices import REFRENCE_LIST
+
+
 class SuperUserCheck(UserPassesTestMixin, View):
     def test_func(self):
         return self.request.user.is_superuser
@@ -111,10 +114,12 @@ class CheckoutView(View):
                     return redirect("main:checkout")
 
                 delivery = req.get('delivery')
-                refrence = str(datetime.timestamp(
-                    datetime.now())).replace(".", "")
-                refrence = refrence[1:]
+                # refrence = str(datetime.timestamp(
+                #     datetime.now())).replace(".", "")
+                # refrence = refrence[10:]
+                refrence = str(REFRENCE_LIST[0])
                 print(refrence)
+                REFRENCE_LIST.pop(0)
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
                     amount = float(amount) + \
                         float(req.get('delivery'))
