@@ -2,6 +2,8 @@
 {% include "navbar0.html" %}
 <main>
   <div class="container p-5 m-5" style="position: relative ; background-color: white; border-radius: 16px; left: 15%;">
+    <a  href="{% url 'main:generate' %}" type="button" name="button" class="float-right btn btn-primary">Generate Invoice</a>
+
     <div class="table-responsive text-nowrap pt-5">
       <h2>Orders</h2>
       <table class="table">

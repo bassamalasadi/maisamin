@@ -23,7 +23,7 @@ from django.views.generic import ListView, DetailView, View
 from rest_framework import viewsets
 from .serializers import ItemSerializer
 
-from .forms import CheckoutForm
+from .forms import CheckoutForm, GenerateInvoiceForm
 from . import helper
 from django.utils.formats import sanitize_separators
 from django.contrib.auth.models import User
@@ -114,7 +114,6 @@ class CheckoutView(View):
 
                 delivery = req.get('delivery')
                 refrence = str(REFRENCE_LIST[0])
-                print(refrence)
                 REFRENCE_LIST.pop(0)
                 helper.send_email_if_reference_number_list_empty(REFRENCE_LIST, settings.EMAIL_HOST_USER, "bassamalasadi@gmail.com")
                 if req.get('deliver') != 0 or req.get('delivery') != 1:
@@ -125,7 +124,10 @@ class CheckoutView(View):
 
                 if helper.is_valid_form([firstName, lastName, phone, email, date, pay]):
                     order_list = helper.queryset_to_list(list(order_item))
+                    print("order_item ###################", order_item)
                     order_email = helper.order_list_for_email(order_item)
+                    print('')
+                    print("order_email ##################", order_email)
                     req_order = Request.objects.create(
                         name=firstName,
                         address=address,
@@ -546,15 +548,68 @@ class Privacy(View):
     def get(self, *args, **kwargs):
         return render(self.request, "privacy-policy.html")
 
+
 class Delivery(View):
     def get(self, *args, **kwargs):
         return render(self.request, "delivery_policy.html")
+
+class Generate( LoginRequiredMixin,
+                SuperUserCheck,
+                View):
+    def get(self, *args, **kwargs):
+        form = GenerateInvoiceForm()
+        context = {
+            'form' : form
+        }
+        return render(self.request, "generate.html", context)
+
+    def post(self, request, *args, **kwargs):
+        order_list = helper.geneartepdf(request)
+        firstName = request.POST.get('firstName')
+        lastName = request.POST.get('lastName')
+        print(order_list)
+        refrence = str(REFRENCE_LIST[0])
+        REFRENCE_LIST.pop(0)
+        with open(f'{firstName} {lastName}.svg', 'wb') as f:
+            Code39(f'{refrence}', writer=ImageWriter()).write(f)
+        print(request.POST)
+        create_invoice(
+            pay_date=request.POST.get('date'),
+            user_id=request.POST.get('user_id'),
+            lasku_id=request.POST.get('invoice_id'),
+            fname=firstName,
+            lname=lastName,
+            address=request.POST.get('address'),
+            postal=request.POST.get('postal'),
+            email=request.POST.get('email'),
+            store=order_list,
+            total=request.POST.get('amount'),
+            refrence=refrence,
+        )
+
+        subject = f'Generated INvoice for {firstName} {lastName}'
+        text_content = f"Private Invoice"
+        email_to_us = EmailMultiAlternatives(
+            subject, text_content, settings.EMAIL_HOST_USER, [settings.EMAIL_HOST_USER, 'bassamalasadi@gmail.com'],
+        )
+        email_to_us.attach_file(f'{firstName} {lastName}.pdf')
+        email_to_us.send(fail_silently=False)
+
+        try:
+            os.remove(f'{firstName} {lastName}.pdf')
+            os.remove(f'{firstName} {lastName}.svg')
+        except:
+            HttpResponseBadRequest()
+
+        messages.warning(self.request, "Success pdf process")
+        return redirect("main:generate")
 
 class MyAccountAdapter(DefaultAccountAdapter):
 
     def get_login_redirect_url(self, request):
         redirect_to = request.GET.get('next', '')
         return HttpResponseRedirect(redirect_to)
+
 
 
 def delete_model(request, pk):

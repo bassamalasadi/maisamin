@@ -15,6 +15,7 @@ from .views import (
     Privacy,
     Delivery,
     Profile,
+    Generate,
     delete_model,
     increment,
     decrement,
@@ -35,6 +36,7 @@ urlpatterns = [
     path('checkout/', CheckoutView.as_view(), name='checkout'),
     path('manakish/', ManakishView.as_view(), name='manakish'),
     path('meze/', MezeView.as_view(), name='meze'),
+
     path('order-summary/', OrderSummaryView.as_view(), name='order-summary'),
     path('product/<slug>/', ItemDetailView.as_view(), name='product'),
     path('remove-from-cart/<pk>/', remove_from_cart, name='remove-from-cart'),
@@ -47,6 +49,7 @@ urlpatterns = [
          name='remove-single-item-from-cart'),
     path('clientorder/', ClientOrder.as_view(), name="client-order"),
     path('order-detail/<int:pk>/', OrderDetail.as_view(), name="order-detail"),
+    path('generate/', Generate.as_view(), name="generate"),
     path('remove_from_order_page/<int:pk>/',
          remove_from_order_page, name="remove_from_order_page"),
     path('privacy-policy/', Privacy.as_view(), name="privacy"),

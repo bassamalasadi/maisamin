@@ -2,6 +2,14 @@ from datetime import datetime, timedelta
 from tabulate import tabulate
 from django.core.mail import EmailMultiAlternatives
 
+def geneartepdf(value):
+    order = []
+    count = 0
+    for x in range(1, 5):
+        if (value.POST.get(f"product_{x}")):
+            order.append([(value.POST.get(f"product_{x}")), '', '', (value.POST.get(f"quantity_{x}")),(value.POST.get(f"price_{x}"))])
+    return order
+
 def send_email_if_reference_number_list_empty(value, sender, receiver ):
     if (len(value) <= 5):
          subject = f'Warning Maisamin Herkkuun'

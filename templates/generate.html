@@ -1,0 +1,92 @@
+{% extends "base.html" %} {% block content %}
+{% load crispy_forms_tags %}
+{% include "navbar0.html" %}
+
+<main>
+  <br><br><br><br>
+  <div class="container" style="position: relative ; background-color: white; border-radius: 16px;">
+    <h1>Generate Invoice</h1>
+    <div class="card">
+      <form method="POST" class="card-body form-group">
+        {% csrf_token %}
+        <div class="row">
+          <span class="col-sm-3">{{ form.firstName | as_crispy_field }}</span>
+          <span class="col-sm-3">{{ form.lastName | as_crispy_field }}</span>
+          <span class="col-sm-3">{{ form.address| as_crispy_field }}</span>
+          <span class="col-sm-3">{{ form.email | as_crispy_field }}</span>
+        </div>
+        <div class="row">
+          <span class="col-sm-3">{{ form.user_id | as_crispy_field }}</span>
+          <span class="col-sm-3">{{ form.invoice_id | as_crispy_field }}</span>
+          <span class="col-sm-3">{{ form.date | as_crispy_field }}</span>
+          <span class="col-sm-3">{{ form.postal | as_crispy_field }}</span>
+        </div>
+        <hr>
+
+        <div class="row">
+          <span class="col-sm-7 my-3">{{ form.product_1 | as_crispy_field }}</span>
+          <input type="Number" class="col-sm-2 form-control m-3" name="quantity_1" value="" id="quantity1" placeholder="Quantity" min="1" max="20">
+          <input type="text" class="col-sm-2 form-control m-3" name="price_1" value="" id="price1" placeholder="Price">
+        </div>
+        <div class="row">
+          <span class="col-sm-7 my-3">{{ form.product_2 | as_crispy_field }}</span>
+          <input type="Number" class="col-sm-2 form-control m-3" name="quantity_2" value="" id="quantity2"  placeholder="Quantity" min="1" max="20">
+          <input type="text" class="col-sm-2 form-control m-3" name="price_2" value="" id="price2" placeholder="Price">
+        </div>
+        <div class="row">
+          <span class="col-sm-7 my-3">{{ form.product_3 | as_crispy_field }}</span>
+          <input type="Number" class="col-sm-2 form-control m-3" name="quantity_3" value="" id="quantity3"  placeholder="Quantity" min="1" max="20">
+          <input type="text" class="col-sm-2 form-control m-3" name="price_3" value="" id="price3" placeholder="Price">
+        </div>
+        <div class="row">
+          <span class="col-sm-7 my-3">{{ form.product_4 | as_crispy_field }}</span>
+          <input type="Number" class="col-sm-2 form-control m-3" name="quantity_4" value="" id="quantity4"  placeholder="Quantity" min="1" max="20">
+          <input type="text" class="col-sm-2 form-control m-3" name="price_4" value="" id="price4" placeholder="Price">
+        </div>
+        <div class="row">
+          <span class="col-sm-3"></span>
+          <span class="col-sm-4"></span>
+          <span class="col-sm-2 h2 m-3 btn btn-dark">Total Price</span>
+          <input type="text" class="col-sm-2 form-control m-3" name="amount" value="" id="amount">
+        </div>
+        <hr>
+
+        <button class="btn w-50" id="send-order" style="background-color:black ;color:white;"  type="submit">
+         <b>Genearte Invoice</b>
+        </button>
+
+      </form>
+    </div>
+
+  </div>
+  <br><br>
+</main>
+<script type="text/javascript">
+  let count1 = 0;
+  let count2 = 0;
+  let count3 = 0;
+  let count4 = 0;
+
+  document.getElementById("price1").addEventListener("input", function(){
+    count1 = parseFloat(this.value)
+    let count = count1.toFixed(2)
+    document.getElementById("amount").value = count;
+  })
+  document.getElementById("price2").addEventListener("input", function(){
+    count2 = parseFloat(this.value) + count1
+    let count = count2.toFixed(2)
+    document.getElementById("amount").value =  count;
+  })
+  document.getElementById("price3").addEventListener("input", function(){
+    count3 = parseFloat(this.value) + count2
+    let count = count3.toFixed(2)
+    document.getElementById("amount").value =  count;
+  })
+  document.getElementById("price4").addEventListener("input", function(){
+    count4 = parseFloat(this.value) + count3
+    let count = count4.toFixed(2)
+    document.getElementById("amount").value =  count;
+  })
+
+</script>
+{% endblock content %}
