@@ -121,7 +121,8 @@ class CheckoutView(View):
                         float(req.get('delivery'))
                 amount = "{:.2f}".format(amount)
                 deliv = 'Toimitus : ' + delivery + ' EURO' if float(delivery) > 0 else f''
-
+                timestamp = str(datetime.timestamp(
+                    datetime.now())).replace(".", "")
                 if helper.is_valid_form([firstName, lastName, phone, email, date, pay]):
                     order_list = helper.queryset_to_list(list(order_item))
                     print("order_item ###################", order_item)
@@ -154,7 +155,7 @@ class CheckoutView(View):
                         due_date = f'{date}'
 
                     with open(f'{firstName} {lastName}.svg', 'wb') as f:
-                        Code39(f'{refrence}', writer=ImageWriter()).write(f)
+                        Code39(f'{timestamp}', writer=ImageWriter()).write(f)
                     # create pdf invoice
                     create_invoice(
                         pay_date=due_date,
@@ -570,8 +571,10 @@ class Generate( LoginRequiredMixin,
         print(order_list)
         refrence = str(REFRENCE_LIST[0])
         REFRENCE_LIST.pop(0)
+        timestamp = str(datetime.timestamp(
+            datetime.now())).replace(".", "")
         with open(f'{firstName} {lastName}.svg', 'wb') as f:
-            Code39(f'{refrence}', writer=ImageWriter()).write(f)
+            Code39(f'{timestamp}', writer=ImageWriter()).write(f)
         print(request.POST)
         create_invoice(
             pay_date=request.POST.get('date'),
