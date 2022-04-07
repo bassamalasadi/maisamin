@@ -401,7 +401,7 @@ class ItemDetailView(View):
                 laktoos = sanitize_separators(request.POST.get('laktoos'))
                 add_info = sanitize_separators(request.POST.get('lisaa'))
             if gluteen:
-                price = str(float(price) + 5.00)
+                price = str(float(price) + 9.00)
             if laktoos:
                 price = str(float(price) + 5.00)
 

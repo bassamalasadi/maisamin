@@ -98,7 +98,7 @@ function myFunction() {
   x = x.replace(',', '.')
   x = Number.parseFloat(x)
   if (document.getElementById("gluteen")){
-    g = (document.getElementById("gluteen").checked) ? 5 : 0
+    g = (document.getElementById("gluteen").checked) ? 9 : 0
   }
   if (document.getElementById("laktoos")){
     l = (document.getElementById("laktoos").checked) ? 5 : 0
