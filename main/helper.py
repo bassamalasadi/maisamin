@@ -107,7 +107,7 @@ Verkkolaskutusosoite : <b>{email}</b> <br>
 <br>
 <hr>
 <h4>HUOM!</h4> Peruutus on suoritettava vähintään kaksi vuorokautta ennen tilauksen toimituspäivää.
-Jos haluat peruuttaa tilauksesi, Lähetä viesti "Peruuta ja tilauksen numero "<b>{req_order}</b> "numeroon 0503367788 tai sähköpostia osoitteeseen <b>Info@maisaminherkku.fi</b>  <br>
+Jos haluat peruuttaa tilauksesi, Lähetä viesti "Peruuta ja tilauksen numero "<b>{req_order}</b> "numeroon 0405177444 tai sähköpostia osoitteeseen <b>Info@maisaminherkku.fi</b>  <br>
 Kiitos
     """
 

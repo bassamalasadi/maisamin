@@ -328,7 +328,7 @@ def create_invoice(**kwargs):
     pdf.cell(0, 3, '42100 Jämsä', ln=1)
     pdf.cell(0, 3, 'maisaminherkku.fi', ln=1)
     pdf.cell(0, 3, 'info@maisamin.fi', ln=1)
-    pdf.cell(0, 3, '0503367788', ln=1)
+    pdf.cell(0, 3, '0405177444', ln=1)
     pdf.ln()
 
     pdf.set_font('courier', 'B', 11)
