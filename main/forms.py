@@ -26,6 +26,51 @@ PAYMENT_CHOICES = (
 x = datetime.datetime.now() + datetime.timedelta(days=3)
 
 
+class GenerateInvoiceForm(forms.Form):
+    firstName = forms.CharField(required=True,
+                                label='',
+                                widget=forms.TextInput(attrs={'placeholder': 'FirstName'}))
+    lastName = forms.CharField(required=True,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'LastName'}))
+
+    user_id  = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'User ID'}))
+    invoice_id  = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Invoice ID'}))
+    date = forms.DateTimeField(required=True,
+                               input_formats=['%d/%m/%Y %H:%M'],
+                               label='',
+                               widget=forms.TextInput(attrs={
+                                                             'placeholder': 'Date',
+                                                             'start_date': x,
+                                                             'pattern':'^(0[1-9]|[12][0-9]|3[01])[/](0[1-9]|1[012])[/](19|20)\d\d$'
+                                                             }),
+                                                      )
+    address = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Address'}))
+    postal = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Postal'}))
+    email = forms.EmailField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'email'}))
+    product_1  = forms.CharField(required=True,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Product'}))
+    product_2  = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Product'}))
+    product_3  = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Product'}))
+    product_4  = forms.CharField(required=False,
+                               label='',
+                               widget=forms.TextInput(attrs={'placeholder': 'Product'}))
+
 
 class CheckoutForm(forms.Form):
     firstName = forms.CharField(required=True,
